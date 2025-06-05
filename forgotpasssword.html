@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forgot Password - Hitaishi Trainings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom right, #3498db, #85c1e9); min-height: 100vh; display: flex; justify-content: center; align-items: center; animation: fadeIn 1s ease-in; background-image: url('https://cdn.pixabay.com/photo/2017/01/31/13/14/classroom-2021865_1280.png'); background-repeat: no-repeat; background-position: bottom right; background-size: 180px;">
+
+  <div style="max-width: 420px; width: 90%; background: white; border-radius: 12px; padding: 30px 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); animation: slideUp 0.7s ease;">
+    
+    <div style="text-align: center; margin-bottom: 25px;">
+      <img src="https://img.icons8.com/ios-filled/50/3498db/graduation-cap.png" alt="Logo" style="width: 50px; height: 50px;">
+      <h2 style="margin: 10px 0; color: #3498db;">Forgot Password?</h2>
+      <p style="color: #555; font-size: 14px;">Enter your registered email to receive reset instructions.</p>
+    </div>
+
+    <form action="/reset-password" method="post" style="display: flex; flex-direction: column; gap: 16px;">
+      <input type="email" placeholder="Enter your email" required style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 15px;">
+
+      <button type="submit" style="padding: 12px; background-color: #3498db; color: white; font-size: 16px; border: none; border-radius: 8px; cursor: pointer;">
+        📩 Send Reset Link
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="login.html" style="font-size: 13px; color: #3498db; text-decoration: none;">Back to Login</a>
+    </div>
+  </div>
+
+  <!-- Inline Animations -->
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        background-size: 120px;
+      }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitaishi Trainings - Professional Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; background-color: #f8fafc;">
+    <!-- Main Content -->
+    <main style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+        <!-- Hero Banner -->
+        <section style="background: linear-gradient(135deg, #2563eb 0%, #1e40af8e 100%); color: white; padding: 80px 40px; border-radius: 12px; margin: 40px 0; text-align: center; position: relative; overflow: hidden;">
+            <div style="position: relative; z-index: 2;">
+                <h1 style="margin: 0; font-size: 2.8rem; font-weight: 700; line-height: 1.2;">Transform Your Career with <br>Industry-Ready Skills</h1>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 20px auto; opacity: 0.9;">Premium training programs designed by industry experts to bridge the gap between education and employment</p>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                    <a href="#courses" style="background-color: white; color: #2563eb; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease;">Explore Courses</a>
+                    <a href="#" style="background-color: transparent; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; border: 2px solid white; transition: all 0.3s ease;">Talk to Counselor</a>
+                </div>
+            </div>
+            <div style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') center/cover; opacity: 0.2; z-index: 1;"></div>
+        </section>
+
+        <!-- Stats Bar -->
+<!-- Stats Section -->
+<div id="stats-section" style="background-color: white; border-radius: 12px; padding: 30px; margin-bottom: 50px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+
+  <div class="fade-box" style="opacity: 0; transform: translateY(20px); transition: all 0.6s ease;">
+    <div class="counter" data-target="5000" data-suffix="+" style="font-size: 2.5rem; font-weight: 700; color: #2563eb; margin-bottom: 5px;">0+</div>
+    <div style="font-size: 0.9rem; color: #64748b; font-weight: 500;">Students Trained</div>
+  </div>
+
+  <div class="fade-box" style="opacity: 0; transform: translateY(20px); transition: all 0.6s ease;">
+    <div class="counter" data-target="50" data-suffix="+" style="font-size: 2.5rem; font-weight: 700; color: #2563eb; margin-bottom: 5px;">0+</div>
+    <div style="font-size: 0.9rem; color: #64748b; font-weight: 500;">Industry Experts</div>
+  </div>
+
+  <div class="fade-box" style="opacity: 0; transform: translateY(20px); transition: all 0.6s ease;">
+    <div class="counter" data-target="95" data-suffix="%" style="font-size: 2.5rem; font-weight: 700; color: #2563eb; margin-bottom: 5px;">0%</div>
+    <div style="font-size: 0.9rem; color: #64748b; font-weight: 500;">Placement Rate</div>
+  </div>
+
+  <div class="fade-box" style="opacity: 0; transform: translateY(20px); transition: all 0.6s ease;">
+    <div class="counter" data-target="100" data-suffix="+" style="font-size: 2.5rem; font-weight: 700; color: #2563eb; margin-bottom: 5px;">0+</div>
+    <div style="font-size: 0.9rem; color: #64748b; font-weight: 500;">Hiring Partners</div>
+  </div>
+
+</div>
+
+<!-- JavaScript: Counter Animation + Fade-In -->
+<script>
+  function animateCounter(el, target, suffix = "", speed = 30) {
+    let count = 0;
+    const increment = target / 80;
+    const update = () => {
+      count += increment;
+      if (count >= target) {
+        el.textContent = Math.floor(target) + suffix;
+      } else {
+        el.textContent = Math.floor(count) + suffix;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fadeBoxes = entry.target.querySelectorAll(".fade-box");
+        fadeBoxes.forEach((box, index) => {
+          setTimeout(() => {
+            box.style.opacity = 1;
+            box.style.transform = "translateY(0)";
+          }, index * 100); // Stagger fade-in
+
+          const counter = box.querySelector(".counter");
+          const target = parseInt(counter.getAttribute("data-target"));
+          const suffix = counter.getAttribute("data-suffix") || "";
+          counter.textContent = "0" + suffix;
+          animateCounter(counter, target, suffix);
+        });
+      }
+    });
+  }, { threshold: 0.6 });
+
+  observer.observe(document.getElementById("stats-section"));
+</script>
+
+
+
+        <!-- Courses Section -->
+        <section id="courses" style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="margin: 0; font-size: 2rem; color: #1e293b; position: relative; display: inline-block;">
+                    <span style="position: relative; z-index: 2; padding: 0 20px; background-color: #f8fafc;">Our Featured Courses</span>
+                    <span style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background-color: #e2e8f0; z-index: 1;"></span>
+                </h2>
+                <p style="max-width: 700px; margin: 20px auto; color: #64748b; font-size: 1.1rem;">Comprehensive programs designed to make you job-ready with hands-on training and industry projects</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px;">
+                <!-- Course 1 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-laptop-code" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #dbeafe; color: #1d4ed8; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Full Stack</span>
+                            <span style="font-weight: 700; color: #1e40af;">₹18,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">Full Stack Web Development</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Master MERN stack with React, Node.js, MongoDB and build real-world applications with deployment</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">12 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #2563eb; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-chart-line" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #d1fae5; color: #065f46; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Data Science</span>
+                            <span style="font-weight: 700; color: #065f46;">₹24,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">Data Science & Machine Learning</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Comprehensive training in Python, ML algorithms, data visualization and real-world analytics projects</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">16 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #059669; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-bullhorn" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #fef3c7; color: #92400e; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Marketing</span>
+                            <span style="font-weight: 700; color: #92400e;">₹14,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">Digital Marketing Certification</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Master SEO, SEM, Social Media, Content Marketing with live campaigns and analytics</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">8 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #d97706; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-mobile-alt" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #ede9fe; color: #5b21b6; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Mobile</span>
+                            <span style="font-weight: 700; color: #5b21b6;">₹19,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">Mobile App Development</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Build cross-platform apps with React Native and Flutter with backend integration</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">10 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #7c3aed; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 5 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-paint-brush" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #fce7f3; color: #9d174d; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Design</span>
+                            <span style="font-weight: 700; color: #9d174d;">₹16,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">UI/UX Design Mastery</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Learn user research, wireframing, prototyping with Figma and Adobe XD for web and mobile</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">8 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #db2777; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 6 -->
+                <div style="background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-cloud" style="font-size: 60px; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="background-color: #ccfbf1; color: #0f766e; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Cloud</span>
+                            <span style="font-weight: 700; color: #0f766e;">₹21,999</span>
+                        </div>
+                        <h3 style="margin: 0 0 15px; font-size: 1.4rem; color: #1e293b;">AWS Cloud Practitioner</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Comprehensive AWS training with EC2, S3, Lambda, and prepare for AWS certification</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="far fa-clock" style="color: #64748b; margin-right: 5px;"></i>
+                                <span style="font-size: 0.9rem; color: #64748b;">10 Weeks</span>
+                            </div>
+                            <a href="#" style="background-color: #0d9488; color: white; padding: 8px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USP Section -->
+       <section class="why-choose-section" style="margin-bottom: 80px; background-color: #ffffff; border-radius: 12px; padding: 10px 40px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); max-width:100%; width: 100%; box-sizing: border-box;">
+        <div class="section-header" style="text-align: center; margin-bottom: 50px; position: relative;">
+            <h2 style="margin: 0; font-size: 2.2rem; color: #1e293b; position: relative; display: inline-block; padding: 0 30px; background-color: #ffffff; z-index: 2;">
+                <span>Why Choose Hitaishi Trainings?</span>
+                <!-- <span style="position: absolute; top: 50%; left: 0; right: 0; height: 3px; background-color: #e2e8f0; z-index: 1; transform: translateY(-50%);"></span> -->
+            </h2>
+        </div>
+
+        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="feature-item" style="text-align: center; padding: 25px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                <div class="icon-wrapper" style="width: 90px; height: 90px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; background-color: #dbeafe; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 38px; color: #2563eb; transition: transform 0.3s ease;"></i>
+                </div>
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 1.5rem;">Industry Expert Trainers</h3>
+                <p style="color: #64748b; margin: 0; line-height: 1.6;">Learn from professionals with <strong>10+ years of real-world experience</strong> in top companies.</p>
+            </div>
+
+            <div class="feature-item" style="text-align: center; padding: 25px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                <div class="icon-wrapper" style="width: 90px; height: 90px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; background-color: #d1fae5; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+                    <i class="fas fa-briefcase" style="font-size: 38px; color: #059669; transition: transform 0.3s ease;"></i>
+                </div>
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 1.5rem;">Job Placement Support</h3>
+                <p style="color: #64748b; margin: 0; line-height: 1.6;">Dedicated placement cell with <strong>100+ hiring partners</strong> and comprehensive interview preparation.</p>
+            </div>
+
+            <div class="feature-item" style="text-align: center; padding: 25px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                <div class="icon-wrapper" style="width: 90px; height: 90px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; background-color: #fef3c7; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+                    <i class="fas fa-laptop-house" style="font-size: 38px; color: #d97706; transition: transform 0.3s ease;"></i>
+                </div>
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 1.5rem;">Flexible Learning Options</h3>
+                <p style="color: #64748b; margin: 0; line-height: 1.6;">Choose between <strong>classroom, online live, or self-paced</strong> learning modes to fit your schedule.</p>
+            </div>
+
+            <div class="feature-item" style="text-align: center; padding: 25px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                <div class="icon-wrapper" style="width: 90px; height: 90px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; background-color: #ede9fe; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+                    <i class="fas fa-project-diagram" style="font-size: 38px; color: #7c3aed; transition: transform 0.3s ease;"></i>
+                </div>
+                <h3 style="margin: 0 0 15px; color: #1e293b; font-size: 1.5rem;">Hands-on Projects</h3>
+                <p style="color: #64748b; margin: 0; line-height: 1.6;">Work on <strong>real-world projects</strong>, gaining practical skills and building a strong professional portfolio.</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Testimonials -->
+        <section style="margin-bottom: 80px;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="margin: 0; font-size: 2rem; color: #1e293b; position: relative; display: inline-block;">
+                    <span style="position: relative; z-index: 2; padding: 0 20px; background-color: #f8fafc;">Success Stories</span>
+                    <span style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background-color: #e2e8f0; z-index: 1;"></span>
+                </h2>
+                <p style="max-width: 700px; margin: 20px auto; color: #64748b; font-size: 1.1rem;">What our students say about their learning experience at Hitaishi Trainings</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background-color: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); position: relative;">
+                    <div style="position: absolute; top: -20px; left: 30px; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 4px solid white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                        </div>
+                        <p style="font-style: italic; color: #475569; margin-bottom: 20px;">"The Full Stack course gave me the confidence to switch careers. Within 2 months of completing the program, I got placed as a Junior Developer at a tech startup with 30% higher salary than my previous job."</p>
+                        <div>
+                            <div style="font-weight: 700; color: #1e293b;">Priya Sharma</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Full Stack Developer at TechNova</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); position: relative;">
+                    <div style="position: absolute; top: -20px; left: 30px; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 4px solid white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                        </div>
+                        <p style="font-style: italic; color: #475569; margin-bottom: 20px;">"The Data Science program exceeded my expectations. The capstone project helped me showcase my skills during interviews, and I received 3 job offers within a month of course completion."</p>
+                        <div>
+                            <div style="font-weight: 700; color: #1e293b;">Rahul Verma</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Data Analyst at AnalyticsPro</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06); position: relative;">
+                    <div style="position: absolute; top: -20px; left: 30px; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 4px solid white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                            <i class="fas fa-star" style="color: #f59e0b; margin-right: 3px;"></i>
+                        </div>
+                        <p style="font-style: italic; color: #475569; margin-bottom: 20px;">"As a working professional, the flexible weekend batches were perfect for me. The UI/UX course helped me transition from graphic design to product design with a 40% salary hike."</p>
+                        <div>
+                            <div style="font-weight: 700; color: #1e293b;">Ananya Patel</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Product Designer at DesignHub</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 60px 40px; border-radius: 12px; text-align: center; margin-bottom: 80px;">
+            <h2 style="margin: 0 0 20px; font-size: 2.2rem;">Ready to Launch Your Tech Career?</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px; font-size: 1.2rem; opacity: 0.9;">Limited seats available for upcoming batches. Enroll now to secure your spot!</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#" style="background-color: white; color: #1e293b; padding: 15px 40px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease;">Apply Now</a>
+                <a href="#" style="background-color: transparent; color: white; padding: 15px 40px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; border: 2px solid white; transition: all 0.3s ease;">Request Callback</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

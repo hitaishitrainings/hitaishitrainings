@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Now -Hitaishi Training Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --primary-dark: #0056b3;
+            --secondary-color: #6c757d;
+            --background-light: #f8f9fa;
+            --background-dark: #e9ecef;
+            --text-dark: #343a40;
+            --text-light: #ffffff;
+            --border-color: #ced4da;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--background-light), var(--background-dark));
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: var(--text-light);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            max-width: 900px;
+            width: 95%;
+            margin: 30px auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 700;
+            animation: slideInTop 0.8s ease-out;
+        }
+
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: var(--background-light);
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 4px 10px var(--shadow-light);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .form-section:nth-of-type(odd) {
+            animation: slideInRight 0.8s ease-out;
+            border-left: none;
+            border-right: 5px solid var(--primary-color);
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group label, .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        .checkbox-group input[type="checkbox"], .radio-group input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .checkbox-group input[type="checkbox"]:checked + label,
+        .radio-group input[type="radio"]:checked + label {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 30px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .submit-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow-medium);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 123, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+        }
+
+        .animated-icon {
+            display: inline-block;
+            margin-right: 10px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 20px auto;
+            }
+
+            .form-section {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .form-section h2 {
+                font-size: 1.4em;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group input[type="tel"],
+            .form-group textarea,
+            .form-group select {
+                padding: 10px;
+            }
+
+            .checkbox-group label, .radio-group label {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+
+            .submit-button {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .form-section h2 {
+                font-size: 1.2em;
+            }
+
+            .checkbox-group, .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .checkbox-group label, .radio-group label {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enroll Now for Your Future Success!</h1>
+        <form action="#" method="POST">
+            <div class="form-section">
+                <h2><span class="animated-icon">👤</span>Personal Details</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="e.g., you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., +91 9876543210" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="animated-icon">🎓</span>Academic & Address Details</h2>
+                <div class="form-group">
+                    <label for="qualification">Highest Qualification</label>
+                    <input type="text" id="qualification" name="qualification" placeholder="e.g., B.Tech, M.Sc, MBA" required>
+                </div>
+                <div class="form-group">
+                    <label for="currentStudy">Current Study/Profession (if applicable)</label>
+                    <input type="text" id="currentStudy" name="currentStudy" placeholder="e.g., Currently pursuing B.E. in CSE, Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="address">Full Address</label>
+                    <textarea id="address" name="address" placeholder="Enter your full residential address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="e.g., Hyderabad" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" placeholder="e.g., Telangana" required>
+                </div>
+                <div class="form-group">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" id="zipCode" name="zipCode" placeholder="e.g., 500001" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="animated-icon">🤝</span>Services You're Interested In</h2>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="classroomTraining" name="service" value="Classroom Training">
+                    <label for="classroomTraining">Classroom Training</label>
+
+                    <input type="checkbox" id="onlineTraining" name="service" value="Online Training">
+                    <label for="onlineTraining">Online Training</label>
+
+                    <input type="checkbox" id="corporateTraining" name="service" value="Corporate Training">
+                    <label for="corporateTraining">Corporate Training</label>
+
+                    <input type="checkbox" id="projectSupport" name="service" value="Project Support">
+                    <label for="projectSupport">Project Support</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="animated-icon">💻</span>Preferred Trainings</h2>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="javaTraining" name="training" value="Java Training">
+                    <label for="javaTraining">Java Training</label>
+
+                    <input type="checkbox" id="pythonTraining" name="training" value="Python Training">
+                    <label for="pythonTraining">Python Training</label>
+
+                    <input type="checkbox" id="webDevelopment" name="training" value="Web Development">
+                    <label for="webDevelopment">Web Development</label>
+
+                    <input type="checkbox" id="dataScience" name="training" value="Data Science">
+                    <label for="dataScience">Data Science</label>
+
+                     <input type="checkbox" id="otherTraining" name="training" value="Other">
+                    <label for="otherTraining">Other (Please specify below)</label>
+                </div>
+                <div class="form-group" id="otherTrainingSpecify" style="display: none; margin-top: 15px;">
+                    <label for="otherTrainingText">Specify Other Training</label>
+                    <input type="text" id="otherTrainingText" name="otherTrainingText" placeholder="e.g., Cloud Computing, Digital Marketing">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="animated-icon">✨</span>Do You Need Course With These Add-ons?</h2>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="needsAddonsYes" name="needsAddons" value="yes" required>
+                        <label for="needsAddonsYes">Yes, I need course with add-ons</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="needsAddonsNo" name="needsAddons" value="no">
+                        <label for="needsAddonsNo">No, I prefer without add-ons</label>
+                    </div>
+                </div>
+
+                <div id="addonsSelection" style="display: none; margin-top: 20px;">
+                    <label>Select Add-ons:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="resumePrep" name="addon" value="Resume Prep">
+                        <label for="resumePrep">Resume Prep</label>
+
+                        <input type="checkbox" id="interviewQnA" name="addon" value="Interview Q&A">
+                        <label for="interviewQnA">Interview Q&A</label>
+
+                        <input type="checkbox" id="jobAssistance" name="addon" value="Job Assistance">
+                        <label for="jobAssistance">Job Assistance</label>
+
+                        <input type="checkbox" id="certification" name="addon" value="Certification">
+                        <label for="certification">Certification</label>
+
+                        <input type="checkbox" id="corporatePlans" name="addon" value="Corporate Plans">
+                        <label for="corporatePlans">Corporate Plans</label>
+
+                        <input type="checkbox" id="plansPricing" name="addon" value="Plans & Pricing">
+                        <label for="plansPricing">Plans & Pricing</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Enrollment</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const needsAddonsYes = document.getElementById('needsAddonsYes');
+            const needsAddonsNo = document.getElementById('needsAddonsNo');
+            const addonsSelection = document.getElementById('addonsSelection');
+            const otherTrainingCheckbox = document.getElementById('otherTraining');
+            const otherTrainingSpecify = document.getElementById('otherTrainingSpecify');
+            const otherTrainingText = document.getElementById('otherTrainingText');
+
+            function toggleAddons() {
+                if (needsAddonsYes.checked) {
+                    addonsSelection.style.display = 'block';
+                } else {
+                    addonsSelection.style.display = 'none';
+                    // Uncheck all addon checkboxes when "No" is selected
+                    document.querySelectorAll('#addonsSelection input[type="checkbox"]').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                }
+            }
+
+            function toggleOtherTraining() {
+                if (otherTrainingCheckbox.checked) {
+                    otherTrainingSpecify.style.display = 'block';
+                    otherTrainingText.setAttribute('required', 'required');
+                } else {
+                    otherTrainingSpecify.style.display = 'none';
+                    otherTrainingText.removeAttribute('required');
+                    otherTrainingText.value = ''; // Clear the text when hidden
+                }
+            }
+
+            needsAddonsYes.addEventListener('change', toggleAddons);
+            needsAddonsNo.addEventListener('change', toggleAddons);
+            otherTrainingCheckbox.addEventListener('change', toggleOtherTraining);
+
+            // Initial call to set correct state on page load
+            toggleAddons();
+            toggleOtherTraining();
+        });
+    </script>
+</body>
+</html>
