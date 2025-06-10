@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Universities: Your Comprehensive Study Abroad Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .university-card {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .university-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .university-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-section {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: var(--animation-delay, 0s);
+        }
+
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid #e2e8f0;
+        }
+
+        .ranking-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .search-box {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cost-meter {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .cost-meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+        }
+
+        .cost-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .scholarship-tag {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600 flex items-center">
+                        <i class="fas fa-graduation-cap mr-2"></i>
+                        <span>GlobalEdu</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="#countries" class="nav-link text-gray-700 hover:text-blue-600">Countries</a>
+                    <a href="#universities" class="nav-link text-gray-700 hover:text-blue-600">Universities</a>
+                    <a href="#scholarships" class="nav-link text-gray-700 hover:text-blue-600">Scholarships</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600">Contact</a>
+                    <div class="relative">
+                        <input type="text" placeholder="Search universities..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm w-64 search-box">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">Your Global Education Journey Starts Here</h1>
+            <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-8">Discover 10,000+ universities across 50+ countries with comprehensive admission details and cost estimates</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#universities" class="btn-primary">
+                    <i class="fas fa-university"></i> Explore Universities
+                </a>
+                <a href="scholorship_eligibility.html" class="btn-secondary">
+                    <i class="fas fa-clipboard-check"></i> Free Eligibility Check
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">50+</div>
+                    <div class="text-gray-600">Countries</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">10K+</div>
+                    <div class="text-gray-600">Universities</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">500+</div>
+                    <div class="text-gray-600">Scholarships</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">1M+</div>
+                    <div class="text-gray-600">Students Helped</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow container mx-auto px-6 py-12">
+        <!-- Search and Filter Section -->
+        <section class="mb-16 bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Find Your Perfect University</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option>Any Country</option>
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>Canada</option>
+                        <option>Australia</option>
+                        <option>Germany</option>
+                        <option>France</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Degree Level</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option>Any Level</option>
+                        <option>Undergraduate</option>
+                        <option>Graduate</option>
+                        <option>PhD/Doctorate</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Field of Study</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option>Any Field</option>
+                        <option>Computer Science</option>
+                        <option>Business</option>
+                        <option>Engineering</option>
+                        <option>Medicine</option>
+                        <option>Arts & Humanities</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tuition Range</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option>Any Budget</option>
+                        <option>Under $10,000</option>
+                        <option>$10,000 - $20,000</option>
+                        <option>$20,000 - $30,000</option>
+                        <option>Over $30,000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="text-sm text-gray-500">Showing 1-12 of 10,452 universities</div>
+                <button class="btn-primary px-6">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- Popular Countries Section -->
+      <section class="mb-16 animated-section" style="--animation-delay: 0.2s;">
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Popular Study Destinations</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/us.png" alt="USA Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">United States</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">1,200+ Universities</div>
+            </div>
+        </div>
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">United Kingdom</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">800+ Universities</div>
+            </div>
+        </div>
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/ca.png" alt="Canada Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">Canada</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">600+ Universities</div>
+            </div>
+        </div>
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/au.png" alt="Australia Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">Australia</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">500+ Universities</div>
+            </div>
+        </div>
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/de.png" alt="Germany Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">Germany</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">400+ Universities</div>
+            </div>
+        </div>
+        <div class="country-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+            <img src="https://flagcdn.com/w320/fr.png" alt="France Flag" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-semibold text-center">France</h3>
+                <div class="text-sm text-gray-600 text-center mt-1">350+ Universities</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Top Universities Section -->
+        <section id="universities" class="mb-16 animated-section" style="--animation-delay: 0.4s;">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Top Ranked Universities</h2>
+                <a href="#more_universities" class="text-blue-600 hover:underline flex items-center">
+                    View all top universities <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                </a>
+            </div>
+            
+            <div  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- University Card 1: MIT -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#1 Worldwide</div>
+                    <div class="flex items-start mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/320px-MIT_logo.svg.png" alt="MIT Logo" class="w-16 h-16 object-contain mr-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-1 text-gray-800">Massachusetts Institute of Technology</h3>
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <img src="https://flagcdn.com/w20/us.png" class="country-flag" alt="USA Flag">
+                                <span>Cambridge, Massachusetts, USA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <span class="program-tag">Engineering</span>
+                        <span class="program-tag">Computer Science</span>
+                        <span class="program-tag">Business</span>
+                        <span class="program-tag">+42 more</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <div class="text-sm text-gray-600">Acceptance Rate</div>
+                            <div class="font-semibold">4.1%</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Avg. GPA</div>
+                            <div class="font-semibold">4.17</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Avg. SAT</div>
+                            <div class="font-semibold">1540</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Avg. ACT</div>
+                            <div class="font-semibold">35</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-600 mb-1">Estimated Annual Cost</div>
+                        <div class="font-bold text-xl">$78,000</div>
+                        <div class="cost-meter">
+                            <div class="cost-meter-fill" style="width: 100%"></div>
+                        </div>
+                        <div class="cost-label">
+                            <span>Low</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="https://www.mit.edu/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Visit Website
+                        </a>
+                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            <i class="far fa-bookmark"></i> Save
+                        </button>
+                    </div>
+                </div>
+
+                <!-- University Card 2: University of Oxford -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#2 Worldwide</div>
+                    <div class="flex items-start mb-4">
+                        <img src="img/oxfordlogo.png" alt="Oxford Logo" class="w-16 h-16 object-contain mr-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-1 text-gray-800">University of Oxford</h3>
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <img src="https://flagcdn.com/w20/gb.png" class="country-flag" alt="UK Flag">
+                                <span>Oxford, England, UK</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <span class="program-tag">Humanities</span>
+                        <span class="program-tag">Medicine</span>
+                        <span class="program-tag">Law</span>
+                        <span class="program-tag">+48 more</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <div class="text-sm text-gray-600">Acceptance Rate</div>
+                            <div class="font-semibold">17.5%</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Avg. A-Levels</div>
+                            <div class="font-semibold">A*A*A</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Students</div>
+                            <div class="font-semibold">24,000</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Founded</div>
+                            <div class="font-semibold">1096</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-600 mb-1">Estimated Annual Cost</div>
+                        <div class="font-bold text-xl">£35,000</div>
+                        <div class="cost-meter">
+                            <div class="cost-meter-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="cost-label">
+                            <span>Low</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <a href="https://www.ox.ac.uk/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Visit Website
+                        </a>
+                        <span class="scholarship-tag">
+                            <i class="fas fa-award"></i> 120+ Scholarships
+                        </span>
+                    </div>
+                </div>
+
+                <!-- University Card 3: ETH Zurich -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#7 Worldwide</div>
+                    <div class="flex items-start mb-4">
+                        <img src="img/ethzurich.png" alt="ETH Zurich Logo" class="w-16 h-16 object-contain mr-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-1 text-gray-800">ETH Zurich</h3>
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <img src="https://flagcdn.com/w20/ch.png" class="country-flag" alt="Switzerland Flag">
+                                <span>Zurich, Switzerland</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <span class="program-tag">Engineering</span>
+                        <span class="program-tag">Natural Sciences</span>
+                        <span class="program-tag">Architecture</span>
+                        <span class="program-tag">+16 more</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <div class="text-sm text-gray-600">Acceptance Rate</div>
+                            <div class="font-semibold">27%</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Language</div>
+                            <div class="font-semibold">German/English</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Nobel Laureates</div>
+                            <div class="font-semibold">21</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Founded</div>
+                            <div class="font-semibold">1855</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-600 mb-1">Estimated Annual Cost</div>
+                        <div class="font-bold text-xl">CHF 1,300</div>
+                        <div class="cost-meter">
+                            <div class="cost-meter-fill" style="width: 20%"></div>
+                        </div>
+                        <div class="cost-label">
+                            <span>Low</span>
+                            <span>High</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">*Very low tuition for international students</div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="https://ethz.ch/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Visit Website
+                        </a>
+                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            <i class="far fa-bookmark"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Country Sections with More Detailed Information -->
+        <section id="usa" class="mb-16 animated-section" style="--animation-delay: 0.6s;">
+            <div class="flex items-center mb-6">
+                <img src="https://flagcdn.com/w40/us.png" alt="USA Flag" class="mr-4">
+                <h2 class="text-3xl font-bold text-gray-800">Study in United States</h2>
+            </div>
+            
+            <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-blue-800">Why Study in USA?</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Home to 8 of top 10 global universities</li>
+                            <li>Flexible education system with diverse programs</li>
+                            <li>Strong research opportunities and funding</li>
+                            <li>Optional Practical Training (OPT) for work after graduation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-blue-800">Admission Process</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Standardized tests (SAT/ACT for UG, GRE/GMAT for PG)</li>
+                            <li>Strong emphasis on extracurricular activities</li>
+                            <li>Letters of recommendation required</li>
+                            <li>Personal essays or statements of purpose</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-blue-800">Visa Information</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>F-1 student visa required</li>
+                            <li>Proof of financial support needed</li>
+                            <li>SEVIS fee payment required</li>
+                            <li>Visa interview at US embassy/consulate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="more_universities" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Harvard University -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#3 Worldwide</div>
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">Harvard University</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <img src="https://flagcdn.com/w20/us.png" class="country-flag" alt="USA Flag">
+                        Cambridge, Massachusetts, USA
+                    </p>
+                    <img src="img/harvard.png" alt="Harvard Campus" class="w-full h-40 object-cover rounded-lg mb-4">
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Key Information:</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <div class="text-gray-600">Acceptance Rate</div>
+                                <div class="font-semibold">4.6%</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Avg. SAT</div>
+                                <div class="font-semibold">1520</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Students</div>
+                                <div class="font-semibold">23,000</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Founded</div>
+                                <div class="font-semibold">1636</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Popular Programs:</h4>
+                        <div class="flex flex-wrap">
+                            <span class="program-tag">Law</span>
+                            <span class="program-tag">Medicine</span>
+                            <span class="program-tag">Business</span>
+                            <span class="program-tag">Government</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Annual Costs (USD):</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="flex justify-between mb-1">
+                                <span>Tuition:</span>
+                                <span class="font-semibold">$54,000 - $60,000</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Housing:</span>
+                                <span class="font-semibold">$12,000 - $18,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Other Expenses:</span>
+                                <span class="font-semibold">$5,000 - $8,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <a href="https://www.harvard.edu/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Official Site
+                        </a>
+                        <span class="scholarship-tag">
+                            <i class="fas fa-award"></i> Need-blind
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Stanford University -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#5 Worldwide</div>
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">Stanford University</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <img src="https://flagcdn.com/w20/us.png" class="country-flag" alt="USA Flag">
+                        Stanford, California, USA
+                    </p>
+                    <img src="img/stanford.png" alt="Stanford Campus" class="w-full h-40 object-cover rounded-lg mb-4">
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Key Information:</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <div class="text-gray-600">Acceptance Rate</div>
+                                <div class="font-semibold">4.3%</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Avg. SAT</div>
+                                <div class="font-semibold">1505</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Students</div>
+                                <div class="font-semibold">17,000</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Founded</div>
+                                <div class="font-semibold">1885</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Popular Programs:</h4>
+                        <div class="flex flex-wrap">
+                            <span class="program-tag">Computer Science</span>
+                            <span class="program-tag">Engineering</span>
+                            <span class="program-tag">Business</span>
+                            <span class="program-tag">Humanities</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Annual Costs (USD):</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="flex justify-between mb-1">
+                                <span>Tuition:</span>
+                                <span class="font-semibold">$56,000 - $58,000</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Housing:</span>
+                                <span class="font-semibold">$16,000 - $18,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Other Expenses:</span>
+                                <span class="font-semibold">$5,000 - $7,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <a href="https://www.stanford.edu/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Official Site
+                        </a>
+                        <span class="scholarship-tag">
+                            <i class="fas fa-award"></i> 200+ Scholarships
+                        </span>
+                    </div>
+                </div>
+
+                              <!-- University of California, Berkeley -->
+                <div class="university-card bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="ranking-badge">#32 Worldwide</div>
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">University of California, Berkeley</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <img src="https://flagcdn.com/w20/us.png" class="country-flag" alt="USA Flag">
+                        Berkeley, California, USA
+                    </p>
+                    <img src="img/ucb.png" alt="UC Berkeley Campus" class="w-full h-40 object-cover rounded-lg mb-4">
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Key Information:</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <div class="text-gray-600">Acceptance Rate</div>
+                                <div class="font-semibold">14%</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Avg. SAT</div>
+                                <div class="font-semibold">1415</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Students</div>
+                                <div class="font-semibold">45,000</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Founded</div>
+                                <div class="font-semibold">1868</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Popular Programs:</h4>
+                        <div class="flex flex-wrap">
+                            <span class="program-tag">Computer Science</span>
+                            <span class="program-tag">Engineering</span>
+                            <span class="program-tag">Business</span>
+                            <span class="program-tag">Economics</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-600 mb-2">Annual Costs (USD):</h4>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="flex justify-between mb-1">
+                                <span>Tuition (Out-of-State):</span>
+                                <span class="font-semibold">$44,000</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Housing:</span>
+                                <span class="font-semibold">$17,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Other Expenses:</span>
+                                <span class="font-semibold">$6,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <a href="https://www.berkeley.edu/" target="_blank" class="btn-primary text-sm">
+                            <i class="fas fa-external-link-alt"></i> Official Site
+                        </a>
+                        <span class="scholarship-tag">
+                            <i class="fas fa-award"></i> 150+ Scholarships
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scholarships Section -->
+        <section id="scholarships" class="mb-16 animated-section" style="--animation-delay: 0.8s;">
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Featured Scholarships</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rhodes Scholarship -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">Rhodes Scholarship</h3>
+                                <p class="text-gray-600 text-sm flex items-center">
+                                    <img src="https://flagcdn.com/w20/gb.png" class="country-flag" alt="UK Flag">
+                                    University of Oxford, UK
+                                </p>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">Prestigious</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Coverage:</div>
+                            <div class="font-bold text-lg text-green-700">Full tuition + £18,180 stipend/year</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Eligibility:</div>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                <li>Outstanding academic achievement</li>
+                                <li>Leadership potential</li>
+                                <li>Commitment to service</li>
+                                <li>Age limit: 18-28 years</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Deadline:</div>
+                            <div class="font-semibold">October (varies by country)</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="rhodes_scholorship.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                <i class="fas fa-info-circle"></i> More Details
+                            </a>
+                            <a href="scholorship_eligibility.html" style="text-decoration: none;">
+                            <button class="btn-secondary text-sm">
+                                <i class="fas fa-check"></i> Check Eligibility
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fulbright Scholarship -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">Fulbright Program</h3>
+                                <p class="text-gray-600 text-sm flex items-center">
+                                    <img src="https://flagcdn.com/w20/us.png" class="country-flag" alt="USA Flag">
+                                    USA (Multiple Universities)
+                                </p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Government</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Coverage:</div>
+                            <div class="font-bold text-lg text-green-700">Tuition + Living Stipend + Airfare</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Eligibility:</div>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                <li>Bachelor's degree or equivalent</li>
+                                <li>Strong academic record</li>
+                                <li>Leadership qualities</li>
+                                <li>Varies by country</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Deadline:</div>
+                            <div class="font-semibold">Varies by country (typically Oct-Feb)</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="fulbright_scholorship.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                <i class="fas fa-info-circle"></i> More Details
+                            </a>
+                            <a href="scholorship_eligibility.html" style="text-decoration: none">
+                            <button class="btn-secondary text-sm">
+                                <i class="fas fa-check"></i> Check Eligibility
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAAD Scholarship -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">DAAD Scholarships</h3>
+                                <p class="text-gray-600 text-sm flex items-center">
+                                    <img src="https://flagcdn.com/w20/de.png" class="country-flag" alt="Germany Flag">
+                                    Germany (Multiple Universities)
+                                </p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">STEM Focus</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Coverage:</div>
+                            <div class="font-bold text-lg text-green-700">€850-1,200/month + Tuition</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Eligibility:</div>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                <li>Bachelor's degree (for Master's applicants)</li>
+                                <li>2+ years of work experience</li>
+                                <li>German/English proficiency</li>
+                                <li>Field-specific requirements</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-gray-600 text-sm mb-1">Deadline:</div>
+                            <div class="font-semibold">Varies by program (typically Oct-Nov)</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="daad_scholorship.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                <i class="fas fa-info-circle"></i> More Details
+                            </a>
+                             <a href="scholorship_eligibility.html" style="text-decoration: none">
+                            <button class="btn-secondary text-sm">
+                                <i class="fas fa-check"></i> Check Eligibility
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="register.html" class="btn-primary">
+                    <i class="fas fa-search"></i> Browse All Scholarships
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="contact" class="mb-16 animated-section" style="--animation-delay: 1s;">
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Get Personalized Guidance</h2>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="bg-blue-600 text-white p-8">
+                        <h3 class="text-2xl font-bold mb-4">Why Consult With Us?</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-3 text-blue-200"></i>
+                                <span>15+ years of experience in international education</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-3 text-blue-200"></i>
+                                <span>Personalized university shortlisting based on your profile</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-3 text-blue-200"></i>
+                                <span>Scholarship application assistance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-3 text-blue-200"></i>
+                                <span>Visa guidance and interview preparation</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-2">Contact Information</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope mr-3 text-blue-200"></i>
+                                    <span>info@globaledu.com</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone mr-3 text-blue-200"></i>
+                                    <span>+1 (800) 123-4567</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-3 text-blue-200"></i>
+                                    <span>123 Education St, Boston, MA 02115, USA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8">
+                        <form id="contactForm" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country of Interest</label>
+                                <select id="country" name="country" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="">Select a country</option>
+                                    <option value="USA">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Questions</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            
+                            <div class="pt-2">
+                                <button type="submit" class="btn-primary w-full">
+                                    <i class="fas fa-paper-plane mr-2"></i> Submit Inquiry
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-graduation-cap mr-2 text-blue-400"></i>
+                        <span>GlobalEdu</span>
+                    </h3>
+                    <p class="text-gray-400">Your trusted partner in global education since 2008. We've helped over 1 million students achieve their study abroad dreams.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Testimonials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Study Destinations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study in USA</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study in UK</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study in Canada</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study in Australia</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study in Europe</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to get updates on universities, scholarships, and deadlines.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-900">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-md">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="mt-4 flex items-center">
+                        <i class="fas fa-shield-alt text-blue-400 mr-2"></i>
+                        <span class="text-sm text-gray-400">We respect your privacy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 GlobalEdu. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.md\\:hidden button').addEventListener('click', function() {
+            const menu = document.querySelector('.md\\:flex.space-x-8');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+            menu.classList.toggle('flex-col');
+            menu.classList.toggle('absolute');
+            menu.classList.toggle('top-16');
+            menu.classList.toggle('left-0');
+            menu.classList.toggle('right-0');
+            menu.classList.toggle('bg-white');
+            menu.classList.toggle('shadow-lg');
+            menu.classList.toggle('p-4');
+            menu.classList.toggle('space-y-4');
+            menu.classList.toggle('space-x-0');
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Here you would typically send the data to a server
+            // For this example, we'll just show an alert
+            alert(`Thank you, ${name}! We've received your inquiry and will contact you at ${email} shortly.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Save university/bookmark functionality
+        document.querySelectorAll('.fa-bookmark').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.toggle('far');
+                this.classList.toggle('fas');
+                this.classList.toggle('text-blue-600');
+                
+                const universityName = this.closest('.university-card').querySelector('h3').textContent;
+                const action = this.classList.contains('fas') ? 'saved' : 'removed';
+                console.log(`${universityName} ${action} to your bookmarks`);
+            });
+        });
+
+        // Scholarship eligibility check
+        document.querySelectorAll('.btn-secondary').forEach(button => {
+            if (button.textContent.includes('Check Eligibility')) {
+                button.addEventListener('click', function() {
+                    const scholarshipName = this.closest('.bg-white').querySelector('h3').textContent;
+                    alert(`You'll now be redirected to the eligibility criteria for ${scholarshipName}`);
+                });
+            }
+        });
+
+        // Animation observer
+        const animatedSections = document.querySelectorAll('.animated-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedSections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

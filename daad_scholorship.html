@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAAD Scholarships | GlobalEdu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="sub_overseas.html" class="text-2xl font-bold text-blue-600 flex items-center">
+                        <i class="fas fa-graduation-cap mr-2"></i>
+                        <span>GlobalEdu</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="sub_overseas.html#home" class="text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="sub_overseas.html#countries" class="text-gray-700 hover:text-blue-600">Countries</a>
+                    <a href="sub_overseas.html#universities" class="text-gray-700 hover:text-blue-600">Universities</a>
+                    <a href="sub_overseas.html#scholarships" class="text-gray-700 hover:text-blue-600">Scholarships</a>
+                    <a href="sub_overseas.html#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scholarship Details Content -->
+    <main class="flex-grow container mx-auto px-6 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center mb-6">
+                <a href="sub_overseas.html#scholarships" class="text-blue-600 hover:text-blue-800 mr-2">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="text-gray-600">Back to Scholarships</span>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 mb-8">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-800 mb-2">DAAD Scholarships</h1>
+                            <p class="text-gray-600 flex items-center">
+                                <img src="https://flagcdn.com/w20/de.png" class="country-flag" alt="Germany Flag">
+                                Various Universities, Germany
+                            </p>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Fully Funded</span>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-blue-700 mb-3">About the Scholarship</h2>
+                        <p class="text-gray-700 mb-4">
+                            The DAAD (Deutscher Akademischer Austauschdienst) is the German Academic Exchange Service, offering funding
+                            for international students to study or research in Germany at various degree levels.
+                        </p>
+                        <p class="text-gray-700">
+                            DAAD scholarships are awarded to highly qualified graduate students, PhD candidates, and postdocs from
+                            developing and newly industrialized countries for study and research at German universities.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h2 class="text-xl font-bold text-blue-700 mb-3">Scholarship Benefits</h2>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Monthly stipend (€850 for graduates, €1,200 for doctoral candidates)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Payments towards health, accident, and personal liability insurance</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Travel allowance (unless covered by home country)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Tuition fees (in some cases)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Monthly rent subsidy and family allowances (where applicable)</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h2 class="text-xl font-bold text-blue-700 mb-3">Key Details</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Eligible Degrees:</h3>
+                                    <p class="text-gray-700">Master's, PhD, Postdoc, and Research Grants</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Duration:</h3>
+                                    <p class="text-gray-700">10-24 months for Master's, up to 4 years for PhD</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Application Deadline:</h3>
+                                    <p class="text-gray-700">Varies by program (typically August-October annually)</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Number of Awards:</h3>
+                                    <p class="text-gray-700">Over 100,000 scholars supported annually worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-blue-700 mb-3">Eligibility Criteria</h2>
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Applicants from developing and newly industrialized countries</li>
+                                <li>Bachelor's degree (usually a four-year program) completed within last 6 years</li>
+                                <li>For Master's: Minimum 2-3 years of professional experience</li>
+                                <li>For PhD: Master's degree completed within last 6 years</li>
+                                <li>Strong academic record and research proposal (for research grants)</li>
+                                <li>German or English language proficiency (depending on program)</li>
+                                <li>Not eligible if you've been in Germany for more than 15 months at application deadline</li>
+                                <li>Clear demonstration of motivation and future plans to contribute to home country's development</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-blue-700 mb-3">Application Process</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                                    1
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Find the Right Program</h3>
+                                    <p class="text-gray-700">
+                                        DAAD offers many different scholarship programs. Use their scholarship database to find the one that matches your qualifications and goals.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                                    2
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Prepare Application Documents</h3>
+                                    <p class="text-gray-700">
+                                        Typically includes: DAAD application form, CV, motivation letter, research proposal (if applicable), academic transcripts, language certificates, letters of recommendation.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                                    3
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Submit Application</h3>
+                                    <p class="text-gray-700">
+                                        Applications are typically submitted through the DAAD portal or through German embassies/DAAD offices in your home country.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                                    4
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Selection Process</h3>
+                                    <p class="text-gray-700">
+                                        Applications are reviewed by independent selection committees. Shortlisted candidates may be invited for interviews.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-blue-700 mb-3">Tips for Successful Application</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-semibold text-gray-800 mb-2">Research Proposal</h3>
+                                <p class="text-gray-700">
+                                    For research grants, clearly outline your research objectives, methodology, and how your work will benefit your home country.
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-semibold text-gray-800 mb-2">Motivation Letter</h3>
+                                <p class="text-gray-700">
+                                    Explain why you chose Germany, your specific program, and how this aligns with your career goals and home country's needs.
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-semibold text-gray-800 mb-2">Language Preparation</h3>
+                                <p class="text-gray-700">
+                                    Even for English programs, basic German skills strengthen your application and help with daily life in Germany.
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-semibold text-gray-800 mb-2">University Contacts</h3>
+                                <p class="text-gray-700">
+                                    For research grants, demonstrate contact with potential supervisors at German universities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="scholorship_eligibility.html" class="btn-primary">
+                            <i class="fas fa-clipboard-check"></i> Check Your Eligibility
+                        </a>
+                        <a href="https://www.daad.de/en/" target="_blank" class="bg-white text-blue-600 border border-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full font-medium text-center transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i> Official Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-200 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                                <span>Do I need to know German to apply for a DAAD scholarship?</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="mt-2 text-gray-700 hidden">
+                                It depends on the program. Many international programs are taught in English, but some require German proficiency. Even for English programs, basic German skills are recommended for daily life in Germany.
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                                <span>Can I apply for DAAD if I'm already studying in Germany?</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="mt-2 text-gray-700 hidden">
+                                Generally no, unless you've been in Germany for less than 15 months at the time of application. DAAD scholarships are primarily for students coming to Germany from abroad.
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                                <span>How competitive are DAAD scholarships?</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="mt-2 text-gray-700 hidden">
+                                DAAD scholarships are highly competitive, with acceptance rates varying by program and country of origin. Strong academic records, relevant experience, and a compelling research proposal (for research grants) are essential.
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                                <span>Can I bring my family with me on a DAAD scholarship?</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="mt-2 text-gray-700 hidden">
+                                Some DAAD programs offer family allowances and support for accompanying family members, particularly for longer-term PhD scholarships. You should check the specific program details.
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                                <span>What's the difference between DAAD and university-specific scholarships?</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="mt-2 text-gray-700 hidden">
+                                DAAD is a national organization that funds students across many German universities, while university-specific scholarships are offered by individual institutions. You can often apply for both simultaneously.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GlobalEdu</h3>
+                    <p class="text-gray-400">
+                        Helping students achieve their international education dreams since 2010.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="sub_overseas.html#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="sub_overseas.html#countries" class="text-gray-400 hover:text-white">Countries</a></li>
+                        <li><a href="sub_overseas.html#universities" class="text-gray-400 hover:text-white">Universities</a></li>
+                        <li><a href="sub_overseas.html#scholarships" class="text-gray-400 hover:text-white">Scholarships</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Application Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Visa Information</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Test Preparation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            info@globaledu.com
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            123 Education St, Boston, USA
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 GlobalEdu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for FAQ toggle functionality -->
+    <script>
+        document.querySelectorAll('.faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>

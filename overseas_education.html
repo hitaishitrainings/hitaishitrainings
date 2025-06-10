@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Futures - Your Gateway to Overseas Education</title>
+    <!-- Tailwind CSS CDN for responsive design and utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN for icons in the new section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for animations and specific styling for the main page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Keyframe for a subtle fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Apply fade-in to sections */
+        .animated-section {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0; /* Start invisible */
+        }
+
+        /* Delay for sequential animations */
+        .animated-section.delay-1 { animation-delay: 0.2s; }
+        .animated-section.delay-2 { animation-delay: 0.4s; }
+        .animated-section.delay-3 { animation-delay: 0.6s; }
+        .animated-section.delay-4 { animation-delay: 0.8s; }
+        .animated-section.delay-5 { animation-delay: 1.0s; }
+        .animated-section.delay-6 { animation-delay: 1.2s; }
+        .animated-section.delay-7 { animation-delay: 1.4s; }
+        .animated-section.delay-8 { animation-delay: 1.6s; }
+        .animated-section.delay-9 { animation-delay: 1.8s; }
+        .animated-section.delay-10 { animation-delay: 2.0s; } /* Added for new section */
+
+
+        /* Keyframe for button hover pulse */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-primary:hover {
+            animation: pulse 0.7s infinite;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4); /* Blue shadow */
+        }
+
+        /* Card hover effect */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        /* Hero section specific styling for background image/gradient */
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple to blue gradient */
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden; /* Hide overflow for decorative shapes */
+        }
+
+        /* Decorative animated shapes in hero */
+        .hero-bg::before, .hero-bg::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .hero-bg::before {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .hero-bg::after {
+            width: 150px;
+            height: 150px;
+            bottom: -30px;
+            right: -30px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Form input styling */
+        .form-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* light gray */
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* blue-500 with transparency */
+        }
+
+        /* Custom button styling for non-hero sections */
+        .btn-secondary {
+            background-color: #2563eb; /* blue-600 */
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* full rounded */
+            font-weight: 600; /* semibold */
+            font-size: 1.125rem; /* text-lg */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: #1d4ed8; /* blue-700 */
+            transform: translateY(-2px);
+        }
+
+        /* Styling for the application process step icons */
+        .step-icon {
+            background-color: #bfdbfe; /* blue-200 */
+            color: #1e40af; /* blue-800 */
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+
+        /* Accordion specific styling */
+        .accordion-item {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600; /* semibold */
+            font-size: 1.25rem; /* text-xl */
+            color: #374151; /* gray-700 */
+            border-bottom: 1px solid #e5e7eb; /* gray-200 */
+        }
+
+        .accordion-header:hover {
+            background-color: #f9fafb; /* gray-50 */
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem; /* padding for the content */
+            color: #4b5563; /* gray-600 */
+        }
+
+        .accordion-content.active {
+            max-height: 500px; /* Adjust based on expected content height */
+            padding-bottom: 1.5rem;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease-out;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Hero Section (UNCHANGED) -->
+    <header class="hero-bg text-center">
+        <div class="container mx-auto px-6 animated-section">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                Your Journey to Global Education Starts Here
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 max-w-2xl mx-auto">
+                Unlock world-class opportunities and pursue your academic dreams abroad with expert guidance.
+            </p>
+            <a href="#global_programs" style="text-decoration: none;">
+            <button class="btn-primary bg-white text-indigo-700 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition duration-300 ease-in-out">
+                Explore Programs
+            </button>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- About Us Section (Styling Updated) -->
+        <section class="mb-16 animated-section delay-1">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Why Choose Global Futures?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Card 1 -->
+                <div class="card bg-white p-8 rounded-xl shadow-md text-center">
+                    <img src="img/expert_guidence.png" alt="Expert Guidance Icon" class="mx-auto mb-4 rounded-full" style="height: 30%;width: 30%;">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Expert Guidance</h3>
+                    <p class="text-gray-600">Our experienced counselors provide personalized advice tailored to your ambitions.</p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="card bg-white p-8 rounded-xl shadow-md text-center">
+                    <img src="img/visa_support.png" alt="Visa Support Icon" class="mx-auto mb-4 rounded-full" style="height: 30%;width: 30%;">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Comprehensive Visa Support</h3>
+                    <p class="text-gray-600">Navigate the visa application process with ease and confidence.</p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div class="card bg-white p-8 rounded-xl shadow-md text-center">
+                    <img src="img/university_network.png" alt="University Network Icon" class="mx-auto mb-4 rounded-full "style="height: 30%;width: 30%;">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Vast University Network</h3>
+                    <p class="text-gray-600">Access top universities and colleges worldwide across diverse fields.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Abroad Going Process (NEW DETAILED SECTION) -->
+        <section class="mb-16 animated-section delay-2">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Your Step-by-Step Abroad Journey</h2>
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 text-gray-700">
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">1</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Research & Goal Setting</h3>
+                            <p class="text-sm">Identify your academic and career goals. Research countries, universities, and programs that align with your interests, considering factors like language, cost, and post-study opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">2</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Counselling & Shortlisting</h3>
+                            <p class="text-sm">Connect with our expert counselors for personalized guidance. We help you shortlist institutions that best fit your profile and aspirations.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">3</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Exams & Test Preparation</h3>
+                            <p class="text-sm">Prepare for and take required English proficiency tests (IELTS, TOEFL, PTE) and/or standardized tests (GRE, GMAT, SAT, ACT) based on your program and country.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">4</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Application Submission</h3>
+                            <p class="text-sm">Complete online application forms, write compelling Statements of Purpose (SOP) or essays, and gather all necessary academic documents and Letters of Recommendation (LORs).</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">5</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Offer Acceptance & Finances</h3>
+                            <p class="text-sm">Receive and review offers from universities. Secure funding, prepare financial documents, and manage tuition fee payments.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">6</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Visa Application</h3>
+                            <p class="text-sm">Apply for your student visa with our comprehensive support, including document checklist, form filling, and interview preparation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">7</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Pre-Departure & Travel</h3>
+                            <p class="text-sm">Attend pre-departure orientations, arrange accommodation, book flights, and prepare for your new life abroad.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="step-icon mr-4">8</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Arrival & Settling In</h3>
+                            <p class="text-sm">Arrive at your destination, settle into your accommodation, and begin your exciting academic journey!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exams Required Section (NEW DETAILED SECTION - Using Accordions) -->
+        <section class="mb-16 animated-section delay-3">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Exams Required for Overseas Study</h2>
+            <p class="text-center text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Depending on your chosen country, program, and level of study, you may need to take one or more of these standardized tests.
+            </p>
+            <div class="max-w-4xl mx-auto">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        English Proficiency Tests (IELTS, TOEFL, PTE, Duolingo)
+                        <span class="accordion-icon">&#9660;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">These tests assess your ability to read, write, listen, and speak in English. They are mandatory for non-native English speakers applying to universities in English-speaking countries.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>IELTS (International English Language Testing System):</strong> Widely accepted globally, especially in the UK, Australia, Canada, and New Zealand. Scores are from 0-9 band. Most universities require 6.0-7.5.</li>
+                            <li><strong>TOEFL (Test of English as a Foreign Language):</strong> Very popular in the USA and Canada, but also widely accepted elsewhere. Scores from 0-120. Most universities require 80-100+.</li>
+                            <li><strong>PTE Academic (Pearson Test of English):</strong> A computer-based test gaining popularity, accepted in many countries including the UK, USA, Canada, and Australia. Scores from 10-90.</li>
+                            <li><strong>Duolingo English Test:</strong> An accessible online test accepted by an increasing number of universities, especially for flexibility. Scores from 10-160.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Graduate Level Exams (GRE, GMAT)
+                        <span class="accordion-icon">&#9660;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">These aptitude tests are typically required for admission to postgraduate programs (Master's, PhD) in various fields.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>GRE (Graduate Record Examinations):</strong> Required for most Master's and PhD programs, particularly in the USA and Canada, across diverse fields like engineering, sciences, arts, and humanities. Assesses Verbal Reasoning, Quantitative Reasoning, and Analytical Writing.</li>
+                            <li><strong>GMAT (Graduate Management Admission Test):</strong> Primarily required for MBA and other business-related Master's programs worldwide. Focuses on Analytical Writing, Integrated Reasoning, Quantitative Reasoning, and Verbal Reasoning.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Undergraduate Level Exams (SAT, ACT)
+                        <span class="accordion-icon">&#9660;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">These are standardized admission tests for undergraduate programs, predominantly in the USA.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>SAT (Scholastic Assessment Test):</strong> Measures skills in Evidence-Based Reading and Writing, and Math.</li>
+                            <li><strong>ACT (American College Testing):</strong> Assesses skills in English, Math, Reading, and Science, with an optional Writing section.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fees and Costs Section (NEW DETAILED SECTION) -->
+        <section class="mb-16 animated-section delay-4">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Understanding Overseas Education Costs</h2>
+            <p class="text-center text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                The total cost of studying abroad comprises tuition fees and living expenses, which vary significantly by country, city, and university.
+            </p>
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-md">
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Average Annual Costs (Approximate Ranges)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Country 1: USA -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">USA</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> $25,000 - $55,000 USD (per year)</li>
+                            <li><strong>Living Costs:</strong> $10,000 - $18,000 USD (per year)</li>
+                            <li>*Larger cities generally higher costs.</li>
+                        </ul>
+                    </div>
+                    <!-- Country 2: UK -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">United Kingdom</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> £12,000 - £35,000 GBP (per year)</li>
+                            <li><strong>Living Costs:</strong> £10,000 - £15,000 GBP (per year)</li>
+                            <li>*London costs significantly higher.</li>
+                        </ul>
+                    </div>
+                    <!-- Country 3: Canada -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">Canada</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> CAD $15,000 - $35,000 CAD (per year)</li>
+                            <li><strong>Living Costs:</strong> CAD $10,000 - $15,000 CAD (per year)</li>
+                        </ul>
+                    </div>
+                    <!-- Country 4: Australia -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">Australia</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> AUD $20,000 - $45,000 AUD (per year)</li>
+                            <li><strong>Living Costs:</strong> AUD $15,000 - $22,000 AUD (per year)</li>
+                        </ul>
+                    </div>
+                    <!-- Country 5: Germany (Public Universities) -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">Germany (Public)</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> Often free/minimal (Semester Contribution €100-€350)</li>
+                            <li><strong>Living Costs:</strong> €10,000 - €12,000 EUR (per year)</li>
+                            <li>*Most programs require German language.</li>
+                        </ul>
+                    </div>
+                    <!-- Country 6: Ireland -->
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3">Ireland</h4>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li><strong>Tuition:</strong> €10,000 - €25,000 EUR (per year)</li>
+                            <li><strong>Living Costs:</strong> €7,000 - €12,000 EUR (per year)</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 text-sm mt-8 italic">
+                    Note: These are average estimates. Actual costs may vary. Scholarships and financial aid are available to help manage expenses.
+                </p>
+            </div>
+        </section>
+
+        <!-- Eligibility Criteria & Documents (NEW DETAILED SECTION) -->
+        <section class="mb-16 animated-section delay-5">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Eligibility & Document Checklist</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">General Eligibility Criteria</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>Academic Qualification:</strong> Minimum 10+2 for Bachelor's, Bachelor's degree for Master's/PhD. Specific GPA/percentage requirements vary by university and country.</li>
+                        <li><strong>English Language Proficiency:</strong> Required scores in IELTS/TOEFL/PTE/Duolingo (see Exams section).</li>
+                        <li><strong>Standardized Test Scores:</strong> GRE/GMAT for graduate, SAT/ACT for undergraduate (if applicable).</li>
+                        <li><strong>Financial Capability:</strong> Proof of sufficient funds to cover tuition and living expenses for at least the first year.</li>
+                        <li><strong>Age:</strong> Generally, 18+ for university admissions, but check specific program requirements.</li>
+                        <li><strong>Relevant Experience:</strong> For some postgraduate or specialized programs, work experience or a portfolio may be required.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Key Documents Required</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>Academic Transcripts:</strong> Mark sheets and degrees from all previous educational institutions.</li>
+                        <li><strong>Passport:</strong> Valid passport with sufficient validity (usually 6 months beyond intended stay).</li>
+                        <li><strong>Statement of Purpose (SOP) / Personal Statement:</strong> A compelling essay outlining your academic goals, reasons for choosing the program/university, and future aspirations.</li>
+                        <li><strong>Letters of Recommendation (LORs):</strong> From professors or employers, typically 2-3.</li>
+                        <li><strong>CV/Resume:</strong> Highlighting academic achievements, work experience, and extracurricular activities.</li>
+                        <li><strong>English Proficiency Test Scores:</strong> (IELTS, TOEFL, PTE, Duolingo) official score reports.</li>
+                        <li><strong>Standardized Test Scores:</strong> (GRE, GMAT, SAT, ACT) official score reports.</li>
+                        <li><strong>Financial Documents:</strong> Bank statements, loan sanction letters, scholarship letters, sponsor letters proving funds.</li>
+                        <li><strong>Passport-size Photographs:</strong> Recent, as per specific country/visa requirements.</li>
+                        <li><strong>Application Fee Payment Receipts.</strong></li>
+                        <li><strong>Any other country/university-specific documents.</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Programs Section (Styling Updated) -->
+      <section id="global_programs" class="mb-16 animated-section delay-6">
+    <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Explore Our Global Programs</h2>
+    <p class="text-center text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+        Discover a wide array of programs tailored to your academic interests and career aspirations across various popular fields.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Program Card 1 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-briefcase text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Business & Management</h3>
+            <p class="text-gray-600 text-sm">MBAs, Marketing, Finance, HR and more from leading business schools.</p>
+        </div>
+        <!-- Program Card 2 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-cogs text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Engineering & Technology</h3>
+            <p class="text-gray-600 text-sm">Computer Science, Mechanical, Civil, Electrical Engineering and IT courses.</p>
+        </div>
+        <!-- Program Card 3 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-heartbeat text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Health & Medical Sciences</h3>
+            <p class="text-gray-600 text-sm">Nursing, Medicine, Pharmacy, Public Health and allied health fields.</p>
+        </div>
+        <!-- Program Card 4 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-palette text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Arts & Humanities</h3>
+            <p class="text-gray-600 text-sm">Liberal Arts, Literature, History, Philosophy, and Creative Arts.</p>
+        </div>
+        <!-- Program Card 5 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-users text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Social Sciences</h3>
+            <p class="text-gray-600 text-sm">Psychology, Sociology, Political Science, and Economics.</p>
+        </div>
+        <!-- Program Card 6 -->
+        <div class="card bg-purple-50 p-6 rounded-xl shadow-md text-center">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                <i class="fas fa-graduation-cap text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Education & Teaching</h3>
+            <p class="text-gray-600 text-sm">Early Childhood, Primary, Secondary, and Higher Education degrees.</p>
+        </div>
+    </div>
+    <div class="text-center mt-10">
+        <a href="sub_overseas.html" style="text-decoration: none;">
+        <button class="btn-secondary px-8 py-3">View All Programs</button>
+        </a>
+    </div>
+</section>
+
+        <!-- Popular Study Destinations Section (Styling Updated) -->
+        <section class="mb-16 animated-section delay-7">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Popular Study Destinations</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Destination Card 1 -->
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="img/canada.png" alt="Canada Destination" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Canada</h3>
+                        <p class="text-gray-600">Renowned for its multicultural environment and excellent job prospects.</p>
+                    </div>
+                </div>
+                <!-- Destination Card 2 -->
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="img/uk.png" alt="United Kingdom Destination" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">United Kingdom</h3>
+                        <p class="text-gray-600">Home to world-leading universities and rich academic heritage.</p>
+                    </div>
+                </div>
+                <!-- Destination Card 3 -->
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="img/usa.png" alt="USA Destination" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">USA</h3>
+                        <p class="text-gray-600">Diverse educational options and cutting-edge research facilities.</p>
+                    </div>
+                </div>
+                <!-- Destination Card 4 -->
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="img/australia.png" alt="Australia Destination" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Australia</h3>
+                        <p class="text-gray-600">Vibrant student cities and a high quality of life.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section (Styling Updated) -->
+        <section class="mb-16 animated-section delay-8">
+            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">What Our Students Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial Card 1 -->
+                <div class="card bg-white p-8 rounded-xl shadow-md">
+                    <p class="italic text-gray-700 mb-4">"Global Futures made my dream of studying in Canada a reality. Their support throughout the application and visa process was invaluable!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/FCA5A5/ffffff?text=JD" alt="Student John Doe" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">John Doe</p>
+                            <p class="text-sm text-gray-500">Student, University of Toronto, Canada</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Card 2 -->
+                <div class="card bg-white p-8 rounded-xl shadow-md">
+                    <p class="italic text-gray-700 mb-4">"The team at Global Futures is incredibly knowledgeable. They helped me find the perfect program in the UK that matched my academic goals."</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/A7F3D0/ffffff?text=AS" alt="Student Aisha Sharma" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Aisha Sharma</p>
+                            <p class="text-sm text-gray-500">Student, London School of Economics, UK</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Global Futures. All rights reserved.</p>
+            <p class="mt-2">Connecting dreams with global opportunities.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedSections = document.querySelectorAll('.animated-section');
+
+            const observerOptions = {
+                root: null, /* relative to the viewport */
+                rootMargin: '0px',
+                threshold: 0.1 /* element is 10% visible */
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1; /* Make visible */
+                        observer.unobserve(entry.target); /* Stop observing once animated */
+                    }
+                });
+            }, observerOptions);
+
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Accordion functionality for "Exams Required" section
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+
+                    // Close all other accordions
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            otherHeader.nextElementSibling.classList.remove('active');
+                            otherHeader.nextElementSibling.style.maxHeight = 0;
+                            otherHeader.querySelector('.accordion-icon').classList.remove('rotate');
+                            otherHeader.style.borderBottom = '1px solid #e5e7eb'; /* Restore border */
+                        }
+                    });
+
+                    // Toggle current accordion
+                    content.classList.toggle('active');
+                    icon.classList.toggle('rotate');
+                    if (content.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        header.style.borderBottom = 'none'; /* Remove border when open */
+                    } else {
+                        content.style.maxHeight = 0;
+                        header.style.borderBottom = '1px solid #e5e7eb'; /* Restore border */
+                    }
+                });
+            });
+
+            // JavaScript for the new 'Software Tool Categories' section
+            const scrollContent = document.getElementById('scrollContent');
+            const scrollLeftBtn = document.getElementById('scrollLeft');
+            const scrollRightBtn = document.getElementById('scrollRight');
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            // Update scroll button states
+            function updateScrollButtons() {
+                scrollLeftBtn.disabled = scrollContent.scrollLeft <= 10;
+                scrollRightBtn.disabled = scrollContent.scrollLeft >= 
+                    (scrollContent.scrollWidth - scrollContent.clientWidth - 10);
+            }
+            
+            // Initial check
+            updateScrollButtons();
+            
+            // Scroll event listener
+            scrollContent.addEventListener('scroll', updateScrollButtons);
+            
+            // Button click handlers
+            scrollLeftBtn.addEventListener('click', () => {
+                scrollContent.scrollBy({
+                    left: -300,
+                    behavior: 'smooth'
+                });
+            });
+            
+            scrollRightBtn.addEventListener('click', () => {
+                scrollContent.scrollBy({
+                    left: 300,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Category card selection
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active class from all cards
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked card
+                    this.classList.add('active');
+                    
+                    // Get the category
+                    const category = this.getAttribute('data-category');
+                    
+                    // Filter tools by category (placeholder - implement your logic here)
+                    filterToolsByCategory(category);
+                });
+                
+                // Keyboard navigation
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+            
+            // Placeholder for filter function (you'll implement this based on your backend/data)
+            function filterToolsByCategory(category) {
+                console.log(`Filtering tools by category: ${category}`);
+                // Example: You would typically fetch data or show/hide elements here
+            }
+        });
+    </script>
+</body>
+</html>

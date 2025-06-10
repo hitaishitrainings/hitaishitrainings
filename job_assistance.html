@@ -15,6 +15,16 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333;">
@@ -23,16 +33,68 @@
     <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
         
         <!-- Hero Section -->
-        <div style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; padding: 80px 30px; text-align: center; border-radius: 10px; margin-bottom: 40px; animation: fadeIn 1s ease-out;">
-            <h1 style="font-size: 2.8rem; margin: 0 0 20px; font-weight: 700;">Launch Your Career with Hitaishi</h1>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px;">Our job assistance program has helped 2,500+ students land their dream jobs in top companies</p>
-            <button style="background-color: #e74c3c; color: white; border: none; padding: 15px 40px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 20px rgba(231, 76, 60, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(231, 76, 60, 0.4)'">
-                Get Started <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
-            </button>
+        <div style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; padding: 100px 30px; text-align: center; border-radius: 15px; margin-bottom: 40px; position: relative; overflow: hidden; animation: fadeIn 1s ease-out;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(231, 76, 60, 0.3), rgba(46, 134, 222, 0.3)); z-index: 1;"></div>
+            <div style="position: relative; z-index: 2;">
+                <h1 style="font-size: 3.2rem; margin: 0 0 20px; font-weight: 700; line-height: 1.2;">Launch Your Career with Hitaishi</h1>
+                <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 30px; line-height: 1.6;">Our job assistance program has helped 2,500+ students land their dream jobs in top companies worldwide</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button style="background-color: #e74c3c; color: white; border: none; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); display: flex; align-items: center; gap: 10px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 20px rgba(231, 76, 60, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(231, 76, 60, 0.4)'">
+                        Get Started <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </button>
+                    <button style="background-color: transparent; color: white; border: 2px solid white; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; gap: 10px;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <i class="fas fa-play-circle"></i> Watch Demo
+                    </button>
+                </div>
+            </div>
+             <a href="#job_assistance" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2; animation: float 3s ease-in-out infinite; text-decoration: none;">
+                <i class="fas fa-chevron-down" style="font-size: 2rem; color: white;"></i>
+             </a>
+
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px;">
+            <div style="background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; animation: fadeIn 1s ease-out 0.2s both;">
+                <div style="width: 50px; height: 50px; background-color: #e3f2fd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-users" style="font-size: 1.5rem; color: #3498db;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #2c3e50; line-height: 1;">2,500+</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d;">Students Placed</div>
+                </div>
+            </div>
+            <div style="background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; animation: fadeIn 1s ease-out 0.4s both;">
+                <div style="width: 50px; height: 50px; background-color: #fff8e1; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-handshake" style="font-size: 1.5rem; color: #f39c12;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #2c3e50; line-height: 1;">500+</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d;">Hiring Partners</div>
+                </div>
+            </div>
+            <div style="background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; animation: fadeIn 1s ease-out 0.6s both;">
+                <div style="width: 50px; height: 50px; background-color: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chart-line" style="font-size: 1.5rem; color: #27ae60;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #2c3e50; line-height: 1;">94%</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d;">Placement Rate</div>
+                </div>
+            </div>
+            <div style="background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; animation: fadeIn 1s ease-out 0.8s both;">
+                <div style="width: 50px; height: 50px; background-color: #f3e5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-clock" style="font-size: 1.5rem; color: #9b59b6;"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #2c3e50; line-height: 1;">3.5</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d;">Avg. Months to Hire</div>
+                </div>
+            </div>
         </div>
         
         <!-- How We Help Section -->
-        <div style="text-align: center; margin-bottom: 50px; animation: fadeIn 1s ease-out 0.2s both;">
+        <div id="job_assistance" style="text-align: center; margin-bottom: 50px; animation: fadeIn 1s ease-out 0.2s both;">
             <h2 style="font-size: 2.2rem; color: #2c3e50; position: relative; display: inline-block;">
                 <span style="display: inline-block; position: relative;">
                     Our Job Assistance Program
@@ -40,6 +102,140 @@
                 </span>
             </h2>
             <p style="font-size: 1.1rem; max-width: 800px; margin: 20px auto 0; line-height: 1.6;">We provide end-to-end career support to ensure you're job-ready and connected with the right opportunities</p>
+        </div>
+        
+        <!-- Process Timeline -->
+        <div style="margin-bottom: 60px; position: relative; padding: 40px 0;">
+            <div style="position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3498db, #e74c3c); z-index: 1;"></div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; position: relative; z-index: 2;">
+                <!-- Step 1 -->
+                <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; animation: fadeIn 1s ease-out 0.4s both;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: white; font-size: 2rem; font-weight: bold;">1</div>
+                    <h3 style="color: #2c3e50; margin-top: 0; font-size: 1.5rem;">Profile Assessment</h3>
+                    <p style="line-height: 1.6; color: #7f8c8d;">Our experts evaluate your skills, experience, and career goals to create a personalized plan.</p>
+                    <div style="margin-top: 20px;">
+                        <i class="fas fa-user-tie" style="font-size: 2rem; color: #3498db;"></i>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; animation: fadeIn 1s ease-out 0.6s both;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: white; font-size: 2rem; font-weight: bold;">2</div>
+                    <h3 style="color: #2c3e50; margin-top: 0; font-size: 1.5rem;">Skill Enhancement</h3>
+                    <p style="line-height: 1.6; color: #7f8c8d;">We identify skill gaps and provide targeted training to make you job-ready.</p>
+                    <div style="margin-top: 20px;">
+                        <i class="fas fa-graduation-cap" style="font-size: 2rem; color: #e74c3c;"></i>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; animation: fadeIn 1s ease-out 0.8s both;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: white; font-size: 2rem; font-weight: bold;">3</div>
+                    <h3 style="color: #2c3e50; margin-top: 0; font-size: 1.5rem;">Job Matching</h3>
+                    <p style="line-height: 1.6; color: #7f8c8d;">We connect you with the right opportunities based on your profile and aspirations.</p>
+                    <div style="margin-top: 20px;">
+                        <i class="fas fa-briefcase" style="font-size: 2rem; color: #2ecc71;"></i>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; animation: fadeIn 1s ease-out 1s both;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: white; font-size: 2rem; font-weight: bold;">4</div>
+                    <h3 style="color: #2c3e50; margin-top: 0; font-size: 1.5rem;">Career Success</h3>
+                    <p style="line-height: 1.6; color: #7f8c8d;">Ongoing support until you secure your dream job and beyond.</p>
+                    <div style="margin-top: 20px;">
+                        <i class="fas fa-trophy" style="font-size: 2rem; color: #9b59b6;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- New: Career Coaching Section -->
+        <div style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); padding: 50px; border-radius: 16px; margin: 30px 0; color: white; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-width:100%;">
+            <!-- Decorative Elements -->
+            <div style="position: absolute; top: -80px; right: -80px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%); border-radius: 50%;"></div>
+            
+            <!-- Main Content -->
+            <div style="position: relative; z-index: 2;">
+                <h2 style="font-size: 2rem; margin: 0 0 15px 0; font-weight: 700; line-height: 1.3;">🚀 Personalized Career Coaching</h2>
+                <p style="line-height: 1.6; margin-bottom: 25px; font-size: 1.05rem; opacity: 0.92;">Our certified career coaches provide one-on-one guidance to help you navigate your career path with confidence.</p>
+                
+                <ul style="padding-left: 0; list-style-type: none; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <li style="margin-bottom: 15px; position: relative; padding-left: 42px;">
+                        <div style="position: absolute; left: 0; top: 0; width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px; font-size: 0.95rem;">Career Planning</div>
+                            <div style="opacity: 0.85; font-size: 0.9rem;">Custom roadmap</div>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 15px; position: relative; padding-left: 42px;">
+                        <div style="position: absolute; left: 0; top: 0; width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px; font-size: 0.95rem;">Skill Analysis</div>
+                            <div style="opacity: 0.85; font-size: 0.9rem;">Identify gaps</div>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 15px; position: relative; padding-left: 42px;">
+                        <div style="position: absolute; left: 0; top: 0; width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px; font-size: 0.95rem;">Industry Insights</div>
+                            <div style="opacity: 0.85; font-size: 0.9rem;">Trends & knowledge</div>
+                        </div>
+                    </li>
+                    
+                    <li style="position: relative; padding-left: 42px;">
+                        <div style="position: absolute; left: 0; top: 0; width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M3 3v18h18"></path>
+                                <path d="M18 7V3"></path>
+                                <path d="M12 3v18"></path>
+                                <path d="M18 15v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h4"></path>
+                                <path d="M18 11h4"></path>
+                                <path d="M8 15h4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px; font-size: 0.95rem;">Long-term Strategy</div>
+                            <div style="opacity: 0.85; font-size: 0.9rem;">Sustainable growth</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button style="background-color: white; color: #2c3e50; border: none; padding: 14px 28px; font-size: 0.95rem; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.1);"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 12px rgba(0,0,0,0.15)'" 
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 8px rgba(0,0,0,0.1)'">
+                        <span>👩‍💼</span> Meet Our Coaches
+                    </button>
+                    
+                <a href="tel:8790170525" style="text-decoration: none;">
+                    <button style="background-color: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); padding: 14px 24px; font-size: 0.95rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;"
+                        onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(255,255,255,0.5)'"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(255,255,255,0.3)'">
+                        <span>📞</span> Free Call
+                    </button>
+                </a>
+
+                </div>
+            </div>
         </div>
         
         <!-- Services Grid -->
@@ -56,6 +252,7 @@
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Professional formatting</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Keyword optimization</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Industry-specific templates</li>
+                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Cover letter creation</li>
                 </ul>
             </div>
             
@@ -70,6 +267,7 @@
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Mock interview sessions</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Technical Q&A practice</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Body language training</li>
+                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Salary negotiation</li>
                 </ul>
             </div>
             
@@ -84,46 +282,69 @@
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Direct company referrals</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Premium job portal access</li>
                     <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> Career fairs & networking</li>
+                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><i class="fas fa-check-circle" style="color: #27ae60; position: absolute; left: 0;"></i> LinkedIn optimization</li>
                 </ul>
             </div>
         </div>
         
+        
         <!-- Success Stories with Images -->
-        <div style="background: linear-gradient(135deg, #3498db, #2c3e50); padding: 50px 30px; border-radius: 10px; color: white; margin-bottom: 60px; position: relative; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #3498db, #2c3e50); padding: 60px 30px; border-radius: 15px; color: white; margin-bottom: 60px; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
             <div style="position: absolute; bottom: -80px; left: -80px; width: 250px; height: 250px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
             
-            <h2 style="text-align: center; font-size: 2rem; margin-top: 0; margin-bottom: 40px; position: relative;">Our Success Stories</h2>
+            <h2 style="text-align: center; font-size: 2.2rem; margin-top: 0; margin-bottom: 40px; position: relative;">Our Success Stories</h2>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; position: relative;">
-                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 25px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
+                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
                         <div>
-                            <h4 style="margin: 0; font-size: 1.2rem;">Priya Patel</h4>
+                            <h4 style="margin: 0; font-size: 1.3rem;">Priya Patel</h4>
                             <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">Software Developer at TechSolutions</p>
+                            <div style="color: #f39c12; margin-top: 5px;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
                     <p style="font-style: italic; line-height: 1.6; margin-bottom: 0;">"Hitaishi's interview preparation was game-changing. I went from struggling in interviews to receiving three job offers within a month!"</p>
                 </div>
                 
-                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 25px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
+                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
                         <div>
-                            <h4 style="margin: 0; font-size: 1.2rem;">Rahul Sharma</h4>
+                            <h4 style="margin: 0; font-size: 1.3rem;">Rahul Sharma</h4>
                             <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">Data Analyst at DataInsights</p>
+                            <div style="color: #f39c12; margin-top: 5px;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
                         </div>
                     </div>
                     <p style="font-style: italic; line-height: 1.6; margin-bottom: 0;">"The resume building service helped me showcase my skills effectively. I landed interviews with all the top companies I applied to."</p>
                 </div>
                 
-                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 25px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
+                <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.backgroundColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='rgba(255,255,255,0.1)'">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Gupta" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Gupta" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin-right: 15px;">
                         <div>
-                            <h4 style="margin: 0; font-size: 1.2rem;">Ananya Gupta</h4>
+                            <h4 style="margin: 0; font-size: 1.3rem;">Ananya Gupta</h4>
                             <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">UX Designer at CreativeMinds</p>
+                            <div style="color: #f39c12; margin-top: 5px;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
                     <p style="font-style: italic; line-height: 1.6; margin-bottom: 0;">"Through Hitaishi's job placement program, I got connected with my dream company. The career counseling was invaluable."</p>
@@ -131,49 +352,129 @@
             </div>
         </div>
         
-        <!-- Stats Section -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; margin-bottom: 60px;">
-            <div style="padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-                <div style="font-size: 2.5rem; font-weight: bold; color: #e74c3c; margin-bottom: 10px;">2,500+</div>
-                <div style="font-size: 1rem; color: #7f8c8d;">Students Placed</div>
-            </div>
-            <div style="padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-                <div style="font-size: 2.5rem; font-weight: bold; color: #3498db; margin-bottom: 10px;">500+</div>
-                <div style="font-size: 1rem; color: #7f8c8d;">Hiring Partners</div>
-            </div>
-            <div style="padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-                <div style="font-size: 2.5rem; font-weight: bold; color: #27ae60; margin-bottom: 10px;">94%</div>
-                <div style="font-size: 1rem; color: #7f8c8d;">Placement Rate</div>
-            </div>
-            <div style="padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-                <div style="font-size: 2.5rem; font-weight: bold; color: #f39c12; margin-bottom: 10px;">3.5</div>
-                <div style="font-size: 1rem; color: #7f8c8d;">Avg. Months to Hire</div>
-            </div>
-        </div>
-        
-        <!-- CTA Section -->
-        <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); padding: 60px 30px; border-radius: 10px; color: white; text-align: center; margin-bottom: 60px; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-            <div style="position: absolute; bottom: -150px; left: -150px; width: 400px; height: 400px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+        <!-- New: FAQ Section -->
+        <div style="margin-bottom: 60px;">
+            <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: #2c3e50;">Frequently Asked Questions</h2>
             
-            <h2 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px; position: relative;">Ready to Transform Your Career?</h2>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; position: relative;">Join thousands of successful professionals who launched their careers with Hitaishi Training</p>
-            <button style="background-color: white; color: #e74c3c; border: none; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
-                Get Career Support <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
-            </button>
-        </div>
-        
-        <!-- Partners Section -->
-        <div style="margin-bottom: 60px; text-align: center;">
-            <h3 style="color: #7f8c8d; font-weight: normal; margin-bottom: 30px;">Trusted by leading companies worldwide</h3>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center;">
-                <img src="https://via.placeholder.com/150x60/eee/999?text=TechCorp" alt="TechCorp" style="height: 40px; filter: grayscale(100%) opacity(70%); transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0%) opacity(100%)'" onmouseout="this.style.filter='grayscale(100%) opacity(70%)'">
-                <img src="https://via.placeholder.com/150x60/eee/999?text=DataWorld" alt="DataWorld" style="height: 40px; filter: grayscale(100%) opacity(70%); transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0%) opacity(100%)'" onmouseout="this.style.filter='grayscale(100%) opacity(70%)'">
-                <img src="https://via.placeholder.com/150x60/eee/999?text=InnoTech" alt="InnoTech" style="height: 40px; filter: grayscale(100%) opacity(70%); transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0%) opacity(100%)'" onmouseout="this.style.filter='grayscale(100%) opacity(70%)'">
-                <img src="https://via.placeholder.com/150x60/eee/999?text=GlobalSoft" alt="GlobalSoft" style="height: 40px; filter: grayscale(100%) opacity(70%); transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0%) opacity(100%)'" onmouseout="this.style.filter='grayscale(100%) opacity(70%)'">
-                <img src="https://via.placeholder.com/150x60/eee/999?text=CloudNine" alt="CloudNine" style="height: 40px; filter: grayscale(100%) opacity(70%); transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0%) opacity(100%)'" onmouseout="this.style.filter='grayscale(100%) opacity(70%)'">
+            <div style="max-width: 100%; margin: 0 auto;">
+                <div style="background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 20px; animation: fadeIn 1s ease-out 1.2s both;">
+                                        <div style="padding: 20px 25px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: #2c3e50;">How long does the job placement process typically take?</h3>
+                        <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="padding: 0 25px; display: none;">
+                        <div style="padding: 20px 0; color: #7f8c8d; line-height: 1.6;">
+                            <p>The timeline varies based on your current skill level, experience, and the job market. On average, our students secure positions within 3-5 months of starting our program. We work at your pace to ensure you're fully prepared before applying for jobs.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 20px; animation: fadeIn 1s ease-out 1.4s both;">
+                    <div style="padding: 20px 25px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: #2c3e50;">Do you guarantee job placement?</h3>
+                        <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="padding: 0 25px; display: none;">
+                        <div style="padding: 20px 0; color: #7f8c8d; line-height: 1.6;">
+                            <p>While we can't guarantee employment (as the final hiring decision rests with employers), we do guarantee our support throughout your job search. Our 94% placement rate speaks to our effectiveness. We provide all the tools, training, and connections you need to succeed.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 20px; animation: fadeIn 1s ease-out 1.6s both;">
+                    <div style="padding: 20px 25px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: #2c3e50;">What industries do you specialize in?</h3>
+                        <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="padding: 0 25px; display: none;">
+                        <div style="padding: 20px 0; color: #7f8c8d; line-height: 1.6;">
+                            <p>We have strong placement networks in technology (software development, data science, cybersecurity), business (marketing, finance, HR), healthcare, and creative fields (design, content writing). Our career coaches have industry-specific expertise to guide you in your chosen field.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background-color: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 20px; animation: fadeIn 1s ease-out 1.8s both;">
+                    <div style="padding: 20px 25px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: #2c3e50;">Is there ongoing support after I get a job?</h3>
+                        <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="padding: 0 25px; display: none;">
+                        <div style="padding: 20px 0; color: #7f8c8d; line-height: 1.6;">
+                            <p>Absolutely! We provide 6 months of post-placement support including salary negotiation advice, onboarding guidance, and career progression planning. Many of our alumni continue to benefit from our network and resources throughout their careers.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- CTA Section -->
+        <div style="background: linear-gradient(135deg, #9f92e7, #82e6ff); padding: 80px 30px; border-radius: 15px; color: white; text-align: center; margin-bottom: 60px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <div style="position: absolute; bottom: -80px; right: -80px; width: 250px; height: 250px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            
+            <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-top: 0; margin-bottom: 20px;">Ready to Transform Your Career?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6; opacity: 0.9;">Join thousands of successful professionals who launched their dream careers with Hitaishi's job assistance program.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button style="background-color: white; color: #e74c3c; border: none; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+                        Apply Now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </button>
+                    <button style="background-color: transparent; color: white; border: 2px solid white; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; gap: 10px;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <i class="fas fa-phone-alt"></i> Schedule Call
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+       
     </div>
+
+    <script>
+        // Simple script to handle FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    // Close all other answers
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-answer').style.display = 'none';
+                            otherItem.querySelector('.faq-question i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    // Toggle current answer
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        question.querySelector('i').style.transform = 'rotate(0deg)';
+                    } else {
+                        answer.style.display = 'block';
+                        question.querySelector('i').style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('[data-animate]');
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        const animation = element.getAttribute('data-animate');
+                        element.style.animation = `${animation} 1s ease-out forwards`;
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on page load
+        });
+    </script>
 </body>
 </html>

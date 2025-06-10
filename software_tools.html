@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Tools - Hitaishi Trainings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height:1.6; color:#2d3748; background-color:#f7fafc; overflow-x:hidden;">
+    <!-- Animated Hero Section -->
+    <section style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color:white; padding:8rem 1rem; text-align:center; position:relative; overflow:hidden;">
+        <!-- Floating elements -->
+        <div style="position:absolute; top:20%; left:10%; width:40px; height:40px; background:rgba(255,255,255,0.1); border-radius:50%; animation:float 6s infinite ease-in-out;"></div>
+        <div style="position:absolute; top:60%; right:15%; width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; animation:float 8s infinite ease-in-out;"></div>
+        <div style="position:absolute; bottom:10%; left:20%; width:30px; height:30px; background:rgba(255,255,255,0.2); border-radius:50%; animation:float 5s infinite ease-in-out;"></div>
+        
+        <div style="max-width:1200px; margin:0 auto; position:relative; z-index:2; animation:fadeIn 1s ease-out;">
+            <h1 style="font-size:3.5rem; margin-bottom:1.5rem; font-weight:800; letter-spacing:-0.05em; animation:slideUp 0.8s ease-out;">Master Industry-Standard <br>Software Tools</h1>
+            <p style="font-size:1.25rem; max-width:700px; margin:0 auto 2.5rem; opacity:0.9; animation:slideUp 0.8s ease-out 0.2s forwards; opacity:0;">Hands-on training for the most in-demand development, data, and DevOps tools</p>
+            <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; animation:slideUp 0.8s ease-out 0.4s forwards; opacity:0;">
+                <a href="#tools" style="display:inline-flex; align-items:center; padding:1rem 2rem; background-color:white; color:#4f46e5; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-tools" style="margin-right:10px;"></i> Explore Tools
+                </a>
+                <a href="#contact" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:transparent; color:white; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; border:2px solid rgba(255,255,255,0.3);">
+                    <i class="fas fa-headset" style="margin-right:10px;"></i> Talk to an Expert
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Categories Section -->
+    <section id="tools" style="padding:6rem 1rem; background-color:white;">
+        <div style="max-width:1200px; margin:0 auto;">
+            <div style="text-align:center; margin-bottom:5rem;">
+                <h2 style="font-size:2.5rem; color:#1a202c; margin-bottom:1rem; font-weight:700; animation:fadeIn 1s ease-out;">Comprehensive Tool Training</h2>
+                <p style="font-size:1.125rem; color:#4a5568; max-width:700px; margin:0 auto; animation:fadeIn 1s ease-out 0.2s forwards; opacity:0;">Learn the tools that power modern tech teams with our expert-led courses</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+                <!-- Development Tools Card -->
+                <div style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05); transition:all 0.3s ease; border:1px solid #e2e8f0; transform:translateY(20px); opacity:0; animation:slideUp 0.6s ease-out 0.3s forwards;">
+                    <div style="padding:2rem; text-align:center;">
+                        <div style="width:80px; height:80px; background:linear-gradient(135deg, #3b82f6, #2563eb); border-radius:16px; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem; box-shadow:0 4px 6px rgba(59,130,246,0.2);">
+                            <i class="fas fa-code" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#1e40af; margin-top:0; font-size:1.5rem; font-weight:600;">Development Tools</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Essential tools for modern software development workflows</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#dbeafe; color:#1e40af; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Visual Studio Code & JetBrains IDEs</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#dbeafe; color:#1e40af; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Git, GitHub & GitLab</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#dbeafe; color:#1e40af; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Postman & API testing tools</span>
+                            </li>
+                        </ul>
+                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#eff6ff; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Science Card -->
+                <div style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05); transition:all 0.3s ease; border:1px solid #e2e8f0; transform:translateY(20px); opacity:0; animation:slideUp 0.6s ease-out 0.5s forwards;">
+                    <div style="padding:2rem; text-align:center;">
+                        <div style="width:80px; height:80px; background:linear-gradient(135deg, #10b981, #059669); border-radius:16px; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem; box-shadow:0 4px 6px rgba(16,185,129,0.2);">
+                            <i class="fas fa-chart-line" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#065f46; margin-top:0; font-size:1.5rem; font-weight:600;">Data Science</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Tools for data analysis, visualization, and machine learning</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#d1fae5; color:#065f46; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Python (Pandas, NumPy, Scikit-learn)</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#d1fae5; color:#065f46; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Jupyter Notebooks & VS Code</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#d1fae5; color:#065f46; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Tableau & Power BI</span>
+                            </li>
+                        </ul>
+                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#ecfdf5; color:#065f46; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cloud & DevOps Card -->
+                <div style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05); transition:all 0.3s ease; border:1px solid #e2e8f0; transform:translateY(20px); opacity:0; animation:slideUp 0.6s ease-out 0.7s forwards;">
+                    <div style="padding:2rem; text-align:center;">
+                        <div style="width:80px; height:80px; background:linear-gradient(135deg, #f59e0b, #d97706); border-radius:16px; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem; box-shadow:0 4px 6px rgba(245,158,11,0.2);">
+                            <i class="fas fa-cloud" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#92400e; margin-top:0; font-size:1.5rem; font-weight:600;">Cloud & DevOps</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Tools for infrastructure, deployment, and automation</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#fef3c7; color:#92400e; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>AWS, Azure & Google Cloud</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#fef3c7; color:#92400e; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Docker & Kubernetes</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span style="background:#fef3c7; color:#92400e; width:24px; height:24px; border-radius:6px; display:inline-flex; justify-content:center; align-items:center; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Terraform & Ansible</span>
+                            </li>
+                        </ul>
+                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#fffbeb; color:#92400e; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     <!-- Popular Tools Section -->
+    <section style="padding:5rem 1rem; background:linear-gradient(135deg, #f5f7fa, #e4e8eb);">
+        <div style="max-width:1200px; margin:0 auto;">
+            <div style="text-align:center; margin-bottom:4rem;">
+                <h2 style="font-size:2.5rem; color:#2c3e50; margin-bottom:1rem;">Most Popular Tools</h2>
+                <p style="font-size:1.1rem; color:#7f8c8d; max-width:700px; margin:0 auto;">Our students' top choices for career advancement</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:2rem;">
+                <!-- VS Code -->
+                <div style="background:white; padding:1.5rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" style="width:80px; height:80px; margin-bottom:1rem;">
+                    <h3 style="color:#2c3e50; margin-top:0;">Visual Studio Code</h3>
+                    <p style="color:#7f8c8d;">The most popular code editor with powerful extensions</p>
+                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:1rem;">
+                        <span style="background:#3498db; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Development</span>
+                        <span style="background:#2ecc71; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Beginner</span>
+                    </div>
+                </div>
+
+                <!-- Docker -->
+                <div style="background:white; padding:1.5rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker" style="width:80px; height:80px; margin-bottom:1rem; object-fit:contain;">
+                    <h3 style="color:#2c3e50; margin-top:0;">Docker</h3>
+                    <p style="color:#7f8c8d;">Containerization platform for modern applications</p>
+                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:1rem;">
+                        <span style="background:#e74c3c; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">DevOps</span>
+                        <span style="background:#f39c12; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Intermediate</span>
+                    </div>
+                </div>
+
+                <!-- Tableau -->
+                <div style="background:white; padding:1.5rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center;">
+                    <img src="https://logos-world.net/wp-content/uploads/2021/10/Tableau-Logo.png" alt="Tableau" style="width:80px; height:80px; margin-bottom:1rem; object-fit:contain;">
+                    <h3 style="color:#2c3e50; margin-top:0;">Tableau</h3>
+                    <p style="color:#7f8c8d;">Powerful data visualization and BI tool</p>
+                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:1rem;">
+                        <span style="background:#2ecc71; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Data</span>
+                        <span style="background:#9b59b6; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Advanced</span>
+                    </div>
+                </div>
+
+                <!-- AWS -->
+                <div style="background:white; padding:1.5rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style="width:80px; height:80px; margin-bottom:1rem; object-fit:contain;">
+                    <h3 style="color:#2c3e50; margin-top:0;">AWS</h3>
+                    <p style="color:#7f8c8d;">Leading cloud computing platform</p>
+                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:1rem;">
+                        <span style="background:#e74c3c; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">Cloud</span>
+                        <span style="background:#3498db; color:white; padding:0.3rem 0.8rem; border-radius:50px; font-size:0.8rem;">All Levels</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!-- Software Tool Categories Section (NEW SECTION - AS PROVIDED BY USER) -->
+        <section class="tools-section animated-section delay-9" aria-label="Software tool categories">
+            <!-- This style block is placed here to encapsulate the CSS for this specific section,
+                 as complex features like hover effects and pseudo-elements cannot be truly inlined
+                 onto individual HTML elements and still function correctly. -->
+            <style>
+                :root {
+                    /* Original variables, mapped to Tailwind/Inter palette */
+                    --primary: #4361ee; /* Matches indigo-600 / blue-600 for consistency */
+                    --primary-dark: #3f37c9; /* Darker blue */
+                    --accent: #4895ef; /* Lighter blue */
+                    --light: #f8f9fa; /* Light gray */
+                    --dark: #212529; /* Dark text */
+                    --gray: #4a5568; /* Mid gray */
+                    --light-gray: #e2e8f0; /* Very light gray */
+                    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    --transition: all 0.3s ease;
+                }
+                
+                /* Applying Font consistency with the rest of the page */
+                .tools-section {
+                    font-family: 'Inter', system-ui, sans-serif;
+                    line-height: 1.6;
+                    color: var(--dark);
+                    background-color: #f0f4f8; /* Match body background */
+                    padding: 3rem 0; /* Adjust padding for full width section */
+                }
+                
+                .tools-section .section-header {
+                    text-align: center;
+                    margin-bottom: 2.5rem;
+                }
+                
+                .tools-section .section-title {
+                    font-size: 2.25rem;
+                    font-weight: 700;
+                    margin-bottom: 0.75rem;
+                    position: relative;
+                    display: inline-block;
+                    color: #2563eb; /* Match page's section titles (blue-700) */
+                }
+                
+                .tools-section .section-title::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 80px;
+                    height: 4px;
+                    background: linear-gradient(90deg, var(--primary), var(--accent));
+                    border-radius: 2px;
+                }
+                
+                .tools-section .section-subtitle {
+                    font-size: 1.1rem;
+                    color: var(--gray);
+                    max-width: 700px;
+                    margin: 0 auto;
+                }
+                
+                /* Scrollable Categories Container */
+                .tools-section .scroll-container {
+                    position: relative;
+                    margin-top: 1.5rem;
+                    max-width: 1400px; /* Limit width */
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: 0 1.5rem; /* Add horizontal padding */
+                }
+                
+                .tools-section .scroll-content {
+                    display: flex;
+                    overflow-x: auto;
+                    gap: 1.5rem;
+                    padding: 1.5rem 0;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    scroll-behavior: smooth;
+                }
+                
+                .tools-section .scroll-content::-webkit-scrollbar {
+                    display: none;
+                }
+                
+                /* Category Card Styles */
+                .tools-section .category-card {
+                    flex: 0 0 300px;
+                    background: white;
+                    border-radius: 12px;
+                    padding: 1.75rem;
+                    border: 1px solid var(--light-gray);
+                    transition: var(--transition);
+                    box-shadow: var(--shadow);
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .tools-section .category-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                    border-color: var(--accent);
+                }
+                
+                .tools-section .category-card:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+                }
+                
+                .tools-section .category-card.active {
+                    background: var(--primary);
+                    color: white;
+                }
+                
+                .tools-section .category-card.active .category-icon {
+                    background: white !important;
+                    color: var(--primary) !important;
+                }
+                
+                .tools-section .category-icon {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 1.5rem;
+                    font-size: 1.75rem;
+                    color: white;
+                    transition: var(--transition);
+                }
+                
+                .tools-section .category-name {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    margin-bottom: 0.75rem;
+                }
+                
+                .tools-section .category-card.active .category-name {
+                    color: white;
+                }
+                
+                .tools-section .category-desc {
+                    font-size: 0.95rem;
+                    color: var(--gray);
+                    margin-bottom: 1.5rem;
+                    flex-grow: 1;
+                }
+                
+                .tools-section .category-card.active .category-desc {
+                    color: rgba(255, 255, 255, 0.9);
+                }
+                
+                .tools-section .tag-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    margin-bottom: 1.5rem;
+                }
+                
+                .tools-section .tag {
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 50px;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                }
+                
+                .tools-section .explore-link {
+                    display: inline-flex;
+                    align-items: center;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                    transition: var(--transition);
+                }
+                
+                .tools-section .explore-link i {
+                    margin-left: 6px;
+                    font-size: 0.8rem;
+                    transition: var(--transition);
+                }
+                
+                .tools-section .explore-link:hover {
+                    transform: translateX(3px);
+                }
+                
+                /* Scroll indicators */
+                .tools-section .scroll-container::after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 80px;
+                    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                    pointer-events: none;
+                }
+                
+                /* Navigation controls */
+                .tools-section .scroll-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-top: 1.5rem;
+                }
+                
+                .tools-section .scroll-btn {
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 50%;
+                    background: white;
+                    border: 1px solid var(--light-gray);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: var(--transition);
+                    box-shadow: var(--shadow);
+                }
+                
+                .tools-section .scroll-btn:hover {
+                    background: var(--light);
+                    transform: translateY(-2px);
+                    border-color: var(--accent);
+                }
+                
+                .tools-section .scroll-btn:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                    transform: none;
+                }
+                
+                /* Responsive adjustments */
+                @media (max-width: 1024px) {
+                    .tools-section .category-card {
+                        flex: 0 0 280px;
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .tools-section .section-title {
+                        font-size: 2rem;
+                    }
+                    
+                    .tools-section .section-subtitle {
+                        font-size: 1rem;
+                    }
+                    
+                    .tools-section .category-card {
+                        flex: 0 0 260px;
+                        padding: 1.5rem;
+                    }
+                    
+                    .tools-section .category-icon {
+                        width: 50px;
+                        height: 50px;
+                        font-size: 1.5rem;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .tools-section {
+                        padding: 0 1rem; /* Adjust padding for smaller screens */
+                    }
+                    
+                    .tools-section .section-title {
+                        font-size: 1.75rem;
+                    }
+                    
+                    .tools-section .category-card {
+                        flex: 0 0 240px;
+                    }
+                    
+                    .tools-section .category-name {
+                        font-size: 1.2rem;
+                    }
+                }
+            </style>
+
+            <div class="section-header">
+                <h2 class="section-title">Software Tool Categories</h2>
+                <p class="section-subtitle">Browse our comprehensive collection of development tools organized by category</p>
+            </div>
+            
+            <div class="scroll-container">
+                <div class="scroll-content" id="scrollContent">
+                    <!-- Code Editors & IDEs -->
+                    <div class="category-card" tabindex="0" data-category="editors">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="category-name">Code Editors & IDEs</h3>
+                        <p class="category-desc">Powerful editors and integrated development environments for all languages</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #eff6ff; color: #1e40af;">VS Code</span>
+                            <span class="tag" style="background: #eff6ff; color: #1e40af;">IntelliJ</span>
+                            <span class="tag" style="background: #eff6ff; color: #1e40af;">Sublime</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #3b82f6;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Version Control -->
+                    <div class="category-card" tabindex="0" data-category="version-control">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h3 class="category-name">Version Control</h3>
+                        <p class="category-desc">Git clients, repository managers, and collaboration platforms</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #ecfdf5; color: #065f46;">Git</span>
+                            <span class="tag" style="background: #ecfdf5; color: #065f46;">GitHub</span>
+                            <span class="tag" style="background: #ecfdf5; color: #065f46;">GitLab</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #10b981;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- API Tools -->
+                    <div class="category-card" tabindex="0" data-category="api">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3 class="category-name">API Tools</h3>
+                        <p class="category-desc">Development, testing and documentation of web APIs</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #f5f3ff; color: #5b21b6;">Postman</span>
+                            <span class="tag" style="background: #f5f3ff; color: #5b21b6;">Swagger</span>
+                            <span class="tag" style="background: #f5f3ff; color: #5b21b6;">Insomnia</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #8b5cf6;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Containers -->
+                    <div class="category-card" tabindex="0" data-category="containers">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h3 class="category-name">Containers</h3>
+                        <p class="category-desc">Containerization and orchestration platforms</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #fffbeb; color: #92400e;">Docker</span>
+                            <span class="tag" style="background: #fffbeb; color: #92400e;">Kubernetes</span>
+                            <span class="tag" style="background: #fffbeb; color: #92400e;">Podman</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #f59e0b;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Project Management -->
+                    <div class="category-card" tabindex="0" data-category="management">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="category-name">Project Management</h3>
+                        <p class="category-desc">Agile planning, task tracking and team coordination</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #fdf2f8; color: #9d174d;">Jira</span>
+                            <span class="tag" style="background: #fdf2f8; color: #9d174d;">Trello</span>
+                            <span class="tag" style="background: #fdf2f8; color: #9d174d;">Asana</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #ec4899;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Design Tools -->
+                    <div class="category-card" tabindex="0" data-category="design">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #14b8a6, #0d9488);">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="category-name">Design Tools</h3>
+                        <p class="category-desc">UI/UX design, prototyping and graphics software</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #ccfbf1; color: #115e59;">Figma</span>
+                            <span class="tag" style="background: #ccfbf1; color: #115e59;">Adobe XD</span>
+                            <span class="tag" style="background: #ccfbf1; color: #115e59;">Sketch</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #14b8a6;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Collaboration -->
+                    <div class="category-card" tabindex="0" data-category="collaboration">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="category-name">Collaboration</h3>
+                        <p class="category-desc">Team communication and pair programming tools</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #eef2ff; color: #4338ca;">Slack</span>
+                            <span class="tag" style="background: #eef2ff; color: #4338ca;">Discord</span>
+                            <span class="tag" style="background: #eef2ff; color: #4338ca;">Zoom</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #6366f1;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Build Tools -->
+                    <div class="category-card" tabindex="0" data-category="build">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="category-name">Build Tools</h3>
+                        <p class="category-desc">CI/CD pipelines, automation and deployment</p>
+                        <div class="tag-container">
+                            <span class="tag" style="background: #fff7ed; color: #9a3412;">Jenkins</span>
+                            <span class="tag" style="background: #fff7ed; color: #9a3412;">GitHub Actions</span>
+                            <span class="tag" style="background: #fff7ed; color: #9a3412;">CircleCI</span>
+                        </div>
+                        <a href="#" class="explore-link" style="color: #f97316;">
+                            Explore <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="scroll-controls">
+                    <button class="scroll-btn" id="scrollLeft" aria-label="Scroll left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn" id="scrollRight" aria-label="Scroll right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('[style*="flex: 0 0 240px"]');
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+        this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = 'none';
+      });
+    });
+  });
+</script>
+
+    <!-- CTA Section -->
+    <section id="contact" style="padding:6rem 1rem; background:linear-gradient(135deg, #1e40af, #1e3a8a); color:white;">
+        <div style="max-width:1200px; margin:0 auto; text-align:center;">
+            <h2 style="font-size:2.5rem; margin-bottom:1.5rem; font-weight:700;">Ready to Master These Tools?</h2>
+            <p style="font-size:1.25rem; max-width:700px; margin:0 auto 2.5rem; opacity:0.9;">Our expert instructors will help you become proficient in the tools that matter most</p>
+            
+            <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+                <a href="#" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:white; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); animation:pulse 2s infinite;">
+                    <i class="fas fa-calendar-alt" style="margin-right:10px;"></i> Schedule a Demo
+                </a>
+                <a href="#" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:transparent; color:white; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; border:2px solid rgba(255,255,255,0.3);">
+                    <i class="fas fa-envelope" style="margin-right:10px;"></i> Contact Admissions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Filter Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('[style*="animation:slideUp"]');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            };
+            
+            // Initial check
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('[style*="box-shadow:0 10px 15px -3px rgba(0,0,0,0.1)"]');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)';
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Responsiveness -->
+    <style>
+        @media (max-width: 768px) {
+            section { padding:4rem 1rem !important; }
+            h1 { font-size:2.5rem !important; line-height:1.2 !important; }
+            h2 { font-size:2rem !important; }
+            .flex-container { flex-direction:column !important; gap:1rem !important; }
+            .grid-container { grid-template-columns:1fr !important; }
+            .cta-buttons a { width:100%; text-align:center; }
+        }
+    </style>
+</body>
+</html>
