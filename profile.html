@@ -1,0 +1,1044 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Create and update your professional profile with Hitaishi Trainings. Showcase your skills, education, and experience.">
+  <meta name="keywords" content="profile, resume, skills, education, job experience, Hitaishi Trainings">
+  <meta name="author" content="Hitaishi Trainings">
+  <meta property="og:title" content="My Profile | Hitaishi Trainings">
+  <meta property="og:description" content="Create and update your professional profile with Hitaishi Trainings.">
+  <meta property="og:type" content="website">
+  <title>My Profile | Hitaishi Trainings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #3f37c9;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 850px;
+      background: white;
+      margin: 30px auto;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 30px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 3px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      background-color: var(--light);
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+    
+    input[readonly] {
+      background-color: #f1f3f5;
+      color: var(--gray);
+    }
+    
+    textarea { 
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    button, .add-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    button:hover, .add-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .section-title {
+      font-size: 1.2rem;
+      margin: 35px 0 20px;
+      color: var(--primary);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--light-gray);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .entry-wrapper {
+      border: 1px solid var(--light-gray);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+      background: var(--light);
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .entry-wrapper:hover {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    /* ======================= */
+    /* Enhanced Multi-Select with Tags */
+    /* ======================= */
+    .multi-select-container {
+      position: relative;
+      width: 100%;
+    }
+    
+    .select-input {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 48px;
+      padding: 8px 12px;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      background-color: var(--light);
+      cursor: pointer;
+      transition: var(--transition);
+      gap: 5px;
+    }
+    
+    .select-input.focused {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+    
+    .select-tag {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin: 2px;
+      font-size: 0.85rem;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .select-tag-remove {
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    
+    .select-tag-remove:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    
+    .select-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      max-height: 250px;
+      overflow-y: auto;
+      background: white;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      z-index: 100;
+      display: none;
+      margin-top: 5px;
+      animation: slideDown 0.2s ease;
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .select-dropdown.show {
+      display: block;
+    }
+    
+    .select-option {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .select-option:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+    
+    .select-option.selected {
+      background-color: var(--primary);
+      color: white;
+      position: relative;
+    }
+    
+    .select-option.selected::before {
+      content: '✓';
+      margin-right: 8px;
+    }
+    
+    .select-group {
+      padding: 5px 0;
+    }
+    
+    .select-group-label {
+      padding: 8px 15px;
+      font-weight: 600;
+      color: var(--primary);
+      background-color: rgba(67, 97, 238, 0.05);
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 1;
+    }
+    
+    .select-placeholder {
+      color: var(--gray);
+      padding: 8px 0;
+    }
+    
+    /* Custom scrollbar for dropdown */
+    .select-dropdown::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .select-dropdown::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    .select-dropdown::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    
+    .select-dropdown::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+    
+    /* File Input Styling */
+    input[type="file"] {
+      padding: 10px;
+      background: white;
+    }
+    
+    input[type="file"]::file-selector-button {
+      background: var(--light-gray);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-right: 15px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    input[type="file"]::file-selector-button:hover {
+      background: #dee2e6;
+    }
+    
+    /* Remove button for entries */
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .remove-btn:hover {
+      background: #c82333;
+      transform: scale(1.1);
+    }
+    
+    /* ======================= */
+    /* Responsive Design */
+    /* ======================= */
+    @media (max-width: 768px) {
+      .container {
+        padding: 25px;
+        margin: 15px auto;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+        padding-bottom: 10px;
+      }
+      
+      h2::after {
+        width: 60px;
+      }
+      
+      .section-title {
+        font-size: 1.1rem;
+        margin: 25px 0 15px;
+      }
+      
+      input, select, textarea, button, .add-btn {
+        padding: 10px 12px;
+      }
+      
+      .entry-wrapper {
+        padding: 15px;
+      }
+      
+      .select-tag {
+        padding: 3px 10px;
+        font-size: 0.8rem;
+      }
+      
+      .select-dropdown {
+        max-height: 200px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      .section-title {
+        font-size: 1rem;
+      }
+      
+      .select-group-label {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .select-option {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Print Styles */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        font-size: 12pt;
+      }
+      
+      .container {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+      
+      button, .add-btn, .remove-btn, input[type="file"] {
+        display: none !important;
+      }
+      
+      .entry-wrapper {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-user-circle"></i> My Profile - Hitaishi Trainings</h2>
+    <form id="profile-form">
+
+      <!-- Personal Info -->
+      <div class="section-title"><i class="fas fa-info-circle"></i> Personal Information</div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input id="fullname" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input id="email" type="email" readonly placeholder="Your email address" required>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input id="phone" type="tel" placeholder="Enter your phone number" required>
+      </div>
+      <div class="form-group">
+        <label>Date of Birth</label>
+        <input id="dob" type="date">
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+          <option value="">Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+      </div>
+      <!-- <div class="form-group">
+        <label>Highest Qualification</label>
+        <input id="qualification" placeholder="Enter your highest qualification">
+      </div>
+      <div class="form-group">
+        <label>Institution</label>
+        <input id="institution" placeholder="Where did you complete your qualification">
+      </div>
+      <div class="form-group">
+        <label>Graduation Year</label>
+        <select id="gradYear">
+          <option value="">Select year</option>
+          ${[...Array(30)].map((_, i) => {
+            const y = new Date().getFullYear() - i;
+            return `<option value="${y}">${y}</option>`;
+          }).join('')}
+        </select>
+      </div> -->
+      <div class="form-group">
+        <label>Course Enrolled</label>
+        <input id="course" placeholder="Enter your course name" required>
+      </div>
+      <div class="form-group">
+        <label>Upload Profile Image</label>
+        <input type="file" id="profileImage" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label>Upload Resume (PDF)</label>
+        <input type="file" id="resume" accept="application/pdf">
+      </div>
+
+      <!-- Education Section -->
+      <div class="section-title"><i class="fas fa-graduation-cap"></i> Education Details</div>
+      <div id="education-section"></div>
+      <button type="button" class="add-btn" onclick="addEducation()">
+        <i class="fas fa-plus"></i> Add More Education
+      </button>
+
+      <!-- Job Experience Section -->
+      <div class="section-title"><i class="fas fa-briefcase"></i> Job Experience</div>
+      <div id="job-section"></div>
+      <button type="button" class="add-btn" onclick="addJob()">
+        <i class="fas fa-plus"></i> Add More Job Experience
+      </button>
+
+      <!-- Skills and Languages -->
+      <div class="section-title"><i class="fas fa-code"></i> Skills & Languages</div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-cogs"></i> Skills</label>
+        <div class="multi-select-container" id="skills-container">
+          <div class="select-input" id="skills-input">
+            <div class="select-placeholder">Select skills...</div>
+          </div>
+          <div class="select-dropdown" id="skills-dropdown">
+            <div class="select-group">
+              <div class="select-group-label">Frontend</div>
+              <div class="select-option" data-value="HTML">HTML</div>
+              <div class="select-option" data-value="CSS">CSS</div>
+              <div class="select-option" data-value="JavaScript">JavaScript</div>
+              <div class="select-option" data-value="React">React</div>
+              <div class="select-option" data-value="Angular">Angular</div>
+              <div class="select-option" data-value="Vue.js">Vue.js</div>
+            </div>
+            <div class="select-group">
+              <div class="select-group-label">Backend</div>
+              <div class="select-option" data-value="Node.js">Node.js</div>
+              <div class="select-option" data-value="Express.js">Express.js</div>
+              <div class="select-option" data-value="Django">Django</div>
+              <div class="select-option" data-value="Flask">Flask</div>
+              <div class="select-option" data-value="Spring Boot">Spring Boot</div>
+            </div>
+            <div class="select-group">
+              <div class="select-group-label">Database</div>
+              <div class="select-option" data-value="MySQL">MySQL</div>
+              <div class="select-option" data-value="MongoDB">MongoDB</div>
+              <div class="select-option" data-value="PostgreSQL">PostgreSQL</div>
+            </div>
+            <div class="select-group">
+              <div class="select-group-label">Other</div>
+              <div class="select-option" data-value="Python">Python</div>
+              <div class="select-option" data-value="Java">Java</div>
+              <div class="select-option" data-value="C/C++">C/C++</div>
+              <div class="select-option" data-value="AWS">AWS</div>
+              <div class="select-option" data-value="Git/GitHub">Git/GitHub</div>
+              <div class="select-option" data-value="Linux">Linux</div>
+            </div>
+          </div>
+          <select id="skills" name="skills" multiple style="display: none;"></select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-language"></i> Languages Known</label>
+        <div class="multi-select-container" id="languages-container">
+          <div class="select-input" id="languages-input">
+            <div class="select-placeholder">Select languages...</div>
+          </div>
+          <div class="select-dropdown" id="languages-dropdown">
+            <div class="select-option" data-value="English">English</div>
+            <div class="select-option" data-value="Hindi">Hindi</div>
+            <div class="select-option" data-value="Telugu">Telugu</div>
+            <div class="select-option" data-value="Tamil">Tamil</div>
+            <div class="select-option" data-value="Kannada">Kannada</div>
+            <div class="select-option" data-value="Malayalam">Malayalam</div>
+            <div class="select-option" data-value="Bengali">Bengali</div>
+            <div class="select-option" data-value="Marathi">Marathi</div>
+            <div class="select-option" data-value="Punjabi">Punjabi</div>
+            <div class="select-option" data-value="Gujarati">Gujarati</div>
+            <div class="select-option" data-value="Urdu">Urdu</div>
+            <div class="select-option" data-value="Odia">Odia</div>
+          </div>
+          <select id="languages" name="languages" multiple style="display: none;"></select>
+        </div>
+      </div>
+
+      <!-- Extras -->
+      <div class="section-title"><i class="fas fa-certificate"></i> Certifications & Extra Courses</div>
+      <div class="form-group">
+        <label>Certifications & Awards</label>
+        <textarea id="certifications" rows="3" placeholder="List your certifications and awards"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Interested in Extra Courses?</label>
+        <input id="extraCourse" placeholder="Mention any extra courses you're interested in">
+      </div>
+
+      <button type="submit">
+        <i class="fas fa-save"></i> Save & Update Profile
+      </button>
+    </form>
+  </div>
+
+<script>
+    // Education Template
+    const eduTemplate = () => `
+      <div class="entry-wrapper edu-entry">
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="form-group">
+          <label>Education Level</label>
+          <select class="eduLevel" required>
+            <option value="">Select education level</option>
+            <option value="10th">10th</option>
+            <option value="12th">12th</option>
+            <option value="Diploma">Diploma</option>
+            <option value="UG">UG</option>
+            <option value="PG">PG</option>
+            <option value="PhD">PhD</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>University</label>
+          <input class="university" placeholder="Enter university name" required>
+        </div>
+        <div class="form-group">
+          <label>Year of Passing</label>
+          <select class="yop" required>
+            ${[...Array(20)].map((_, i) => {
+              const y = new Date().getFullYear() - i;
+              return `<option value="${y}" ${i === 0 ? 'selected' : ''}>${y}</option>`;
+            }).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>CGPA / Percentage</label>
+          <input class="cgpa" placeholder="Enter your score" required>
+        </div>
+      </div>`;
+
+    // Job Template
+    const jobTemplate = () => `
+      <div class="entry-wrapper job-entry">
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="form-group">
+          <label>Job Title</label>
+          <input class="jobTitle" placeholder="Enter job title" required>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input class="company" placeholder="Enter company name" required>
+        </div>
+        <div class="form-group">
+          <label>Years of Experience</label>
+          <select class="experience" required>
+            ${[...Array(21)].map((_, i) => `<option value="${i}">${i} ${i === 1 ? 'year' : 'years'}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Responsibilities</label>
+          <textarea class="responsibilities" rows="2" placeholder="Describe your responsibilities"></textarea>
+        </div>
+      </div>`;
+
+    // Add Education Entry
+    function addEducation(data = {}) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = eduTemplate();
+      const el = wrapper.firstElementChild;
+      
+      if (data.eduLevel) el.querySelector(".eduLevel").value = data.eduLevel;
+      if (data.university) el.querySelector(".university").value = data.university;
+      if (data.yop) el.querySelector(".yop").value = data.yop;
+      if (data.cgpa) el.querySelector(".cgpa").value = data.cgpa;
+      
+      document.getElementById("education-section").appendChild(el);
+    }
+
+    // Add Job Entry
+    function addJob(data = {}) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = jobTemplate();
+      const el = wrapper.firstElementChild;
+      
+      if (data.jobTitle) el.querySelector(".jobTitle").value = data.jobTitle;
+      if (data.company) el.querySelector(".company").value = data.company;
+      if (data.experience) el.querySelector(".experience").value = data.experience;
+      if (data.responsibilities) el.querySelector(".responsibilities").value = data.responsibilities;
+      
+      document.getElementById("job-section").appendChild(el);
+    }
+
+    // Initialize Multi-Select Component
+    function initMultiSelect(type) {
+      const container = document.getElementById(`${type}-container`);
+      const input = document.getElementById(`${type}-input`);
+      const dropdown = document.getElementById(`${type}-dropdown`);
+      const hiddenSelect = document.getElementById(type);
+      
+      if (!container || !input || !dropdown || !hiddenSelect) {
+        console.error(`Missing elements for ${type} multi-select`);
+        return;
+      }
+
+      let selectedValues = [];
+      const options = dropdown.querySelectorAll('.select-option');
+      
+      // Toggle dropdown
+      input.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+        input.classList.toggle('focused');
+        
+        // Close other open dropdowns
+        document.querySelectorAll('.select-dropdown.show').forEach(dd => {
+          if (dd !== dropdown) {
+            dd.classList.remove('show');
+            dd.previousElementSibling.classList.remove('focused');
+          }
+        });
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!container.contains(e.target)) {
+          dropdown.classList.remove('show');
+          input.classList.remove('focused');
+        }
+      });
+      
+      // Handle option selection
+      options.forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const value = this.getAttribute('data-value');
+          
+          if (selectedValues.includes(value)) {
+            // Remove if already selected
+            selectedValues = selectedValues.filter(v => v !== value);
+            this.classList.remove('selected');
+          } else {
+            // Add if not selected
+            selectedValues.push(value);
+            this.classList.add('selected');
+          }
+          
+          updateDisplay();
+          updateHiddenSelect();
+        });
+      });
+      
+      // Update the visible tags display
+      function updateDisplay() {
+        // Clear current display
+        input.innerHTML = '';
+        
+        if (selectedValues.length === 0) {
+          input.innerHTML = '<div class="select-placeholder">Select ' + type + '...</div>';
+          return;
+        }
+        
+        // Add tags for each selected value
+        selectedValues.forEach(value => {
+          const tag = document.createElement('div');
+          tag.className = 'select-tag';
+          tag.innerHTML = `
+            ${value}
+            <span class="select-tag-remove" data-value="${value}">&times;</span>
+          `;
+          input.appendChild(tag);
+        });
+        
+        // Add remove handlers
+        input.querySelectorAll('.select-tag-remove').forEach(removeBtn => {
+          removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const value = this.getAttribute('data-value');
+            selectedValues = selectedValues.filter(v => v !== value);
+            
+            // Update the option in dropdown
+            options.forEach(opt => {
+              if (opt.getAttribute('data-value') === value) {
+                opt.classList.remove('selected');
+              }
+            });
+            
+            updateDisplay();
+            updateHiddenSelect();
+          });
+        });
+      }
+      
+      // Update the hidden select element for form submission
+      function updateHiddenSelect() {
+        // Clear existing options
+        while (hiddenSelect.options.length > 0) {
+          hiddenSelect.remove(0);
+        }
+        
+        // Add current selections
+        selectedValues.forEach(value => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.selected = true;
+          option.textContent = value;
+          hiddenSelect.appendChild(option);
+        });
+      }
+      
+      // Initialize with any existing values
+      const initialOptions = hiddenSelect.options;
+      for (let i = 0; i < initialOptions.length; i++) {
+        if (initialOptions[i].selected) {
+          selectedValues.push(initialOptions[i].value);
+          // Mark corresponding option as selected
+          options.forEach(opt => {
+            if (opt.getAttribute('data-value') === initialOptions[i].value) {
+              opt.classList.add('selected');
+            }
+          });
+        }
+      }
+      
+      updateDisplay();
+    }
+
+ async function initializePage() {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (!user || !user.email) {
+    alert("Please log in.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  console.log("Using localStorage data:", user);
+
+  // Basic fields
+  document.getElementById("fullname").value = user.fullname || "";
+  document.getElementById("email").value = user.email || "";
+  document.getElementById("phone").value = user.phone || "";
+  document.getElementById("course").value = user.course || "";
+  document.getElementById("dob").value = user.dob ? new Date(user.dob).toISOString().split("T")[0] : "";
+  document.getElementById("gender").value = user.gender || "";
+  document.getElementById("address").value = user.address || "";
+  document.getElementById("certifications").value = user.certifications || user.certificates || "";
+  document.getElementById("extraCourse").value = user.extraCourse || "";
+
+  // Parse JSON safely
+  const skills = typeof user.skills === "string" ? JSON.parse(user.skills || "[]") : user.skills || [];
+  const languages = typeof user.languages === "string" ? JSON.parse(user.languages || "[]") : user.languages || [];
+  const education = typeof user.education === "string" ? JSON.parse(user.education || "[]") : user.education || [];
+  const jobs = typeof user.jobs === "string" ? JSON.parse(user.jobs || "[]") : user.jobs || [];
+
+  // Load skills & languages
+  initMultiSelect("skills");
+  initMultiSelect("languages");
+
+  setTimeout(() => {
+    skills.forEach(skill => {
+      const opt = document.querySelector(`#skills-dropdown .select-option[data-value="${skill}"]`);
+      if (opt) opt.click();
+    });
+
+    languages.forEach(lang => {
+      const opt = document.querySelector(`#languages-dropdown .select-option[data-value="${lang}"]`);
+      if (opt) opt.click();
+    });
+  }, 300);
+
+  // Education and Jobs
+  document.getElementById("education-section").innerHTML = "";
+  education.forEach(addEducation);
+
+  document.getElementById("job-section").innerHTML = "";
+  jobs.forEach(addJob);
+
+  // ✅ Show profile image
+  // if (user.profileImage) {
+  //   const imagePreview = document.createElement("div");
+  //   imagePreview.innerHTML = `
+  //     <p><strong>Profile Image:</strong></p>
+  //     <img src="/uploads/${user.profileImage}" alt="Profile" style="max-width: 150px; margin-top: 5px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+  //   `;
+  //   document.getElementById("profileImage").insertAdjacentElement("afterend", imagePreview);
+  // }
+
+  // Show profile image or default
+const imagePreview = document.createElement("div");
+
+const profileImgUrl = user.profileImage ? `/uploads/${user.profileImage}` : "/uploads/default-trainer.png";
+
+imagePreview.innerHTML = `
+  <p><strong>Profile Image:</strong></p>
+  <img src="${profileImgUrl}" 
+       onerror="this.onerror=null;this.src='/uploads/default-trainer.png';" 
+       alt="Profile" 
+       style="max-width: 150px; margin-top: 5px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+`;
+
+document.getElementById("profileImage").insertAdjacentElement("afterend", imagePreview);
+
+
+  // ✅ Show resume download link
+  if (user.resume) {
+    const resumePreview = document.createElement("div");
+    resumePreview.innerHTML = `
+      <p><strong>Resume:</strong> <a href="/uploads/${user.resume}" target="_blank">${user.resume}</a></p>
+    `;
+    document.getElementById("resume").insertAdjacentElement("afterend", resumePreview);
+  }
+}
+
+  
+  function setupFormSubmission() {
+    document.getElementById("profile-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const user = JSON.parse(localStorage.getItem("loggedInUser")) || {};
+      const email = user.email;
+
+      const formData = new FormData();
+
+      // Add basic fields
+      formData.append("fullname", document.getElementById("fullname").value);
+      formData.append("phone", document.getElementById("phone").value);
+      formData.append("dob", document.getElementById("dob").value);
+      formData.append("gender", document.getElementById("gender").value);
+      formData.append("address", document.getElementById("address").value);
+      formData.append("course", document.getElementById("course").value);
+      formData.append("certificates", document.getElementById("certifications").value);
+      formData.append("extraCourse", document.getElementById("extraCourse").value);
+      // Preserve old files if not replaced (only send filename)
+      function getFileName(filePath) {
+        if (!filePath) return "";
+        return filePath.split("\\").pop().split("/").pop();
+      }
+
+      formData.append("existingProfileImage", getFileName(user.profileImage));
+      formData.append("existingResume", getFileName(user.resume));
+
+
+
+      // Skills and Languages
+      const skills = [...document.getElementById("skills").options]
+        .filter(opt => opt.selected)
+        .map(opt => opt.value);
+      formData.append("skills", JSON.stringify(skills));
+
+      const languages = [...document.getElementById("languages").options]
+        .filter(opt => opt.selected)
+        .map(opt => opt.value);
+      formData.append("languages", JSON.stringify(languages));
+
+      // Education
+      const education = [...document.querySelectorAll(".edu-entry")].map(entry => ({
+        eduLevel: entry.querySelector(".eduLevel").value,
+        university: entry.querySelector(".university").value,
+        yop: entry.querySelector(".yop").value,
+        cgpa: entry.querySelector(".cgpa").value
+      }));
+      formData.append("education", JSON.stringify(education));
+
+      // Jobs
+      const jobs = [...document.querySelectorAll(".job-entry")].map(entry => ({
+        jobTitle: entry.querySelector(".jobTitle").value,
+        company: entry.querySelector(".company").value,
+        experience: entry.querySelector(".experience").value,
+        responsibilities: entry.querySelector(".responsibilities").value
+      }));
+      formData.append("jobs", JSON.stringify(jobs));
+
+      // Files
+      const profileImage = document.getElementById("profileImage").files[0];
+      if (profileImage) formData.append("profileImage", profileImage);
+
+      const resume = document.getElementById("resume").files[0];
+      if (resume) formData.append("resume", resume);
+
+      try {
+        // Send update to backend
+        const response = await fetch(`http://localhost:5000/api/profile/${email}`, {
+          method: "PUT",
+          body: formData
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Update failed");
+
+        alert("Profile updated successfully!");
+
+        // ✅ Re-fetch updated user data
+        const profileRes = await fetch(`http://localhost:5000/api/profile/${email}`);
+        const profileData = await profileRes.json();
+
+        if (!profileRes.ok) throw new Error("Failed to fetch updated profile");
+
+const oldUser = JSON.parse(localStorage.getItem("loggedInUser")) || {};
+const updatedUser = profileData.user;
+
+// ✅ Preserve previously selected plans
+if (oldUser.plans && Array.isArray(oldUser.plans)) {
+  updatedUser.plans = oldUser.plans;
+}
+
+localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+window.location.href = "StudentDashboard.html";  // or your actual dashboard file name
+
+      } catch (err) {
+        alert("Failed to update profile: " + err.message);
+        console.error(err);
+      }
+    });
+  }
+
+
+    // Initialize when DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      initializePage();
+      setupFormSubmission();
+    });
+</script>
+
+
+</body>
+</html>

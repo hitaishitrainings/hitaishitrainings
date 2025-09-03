@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Trainer Courses | Hitaishi Trainings</title>
+  <style>
+    :root {
+      --primary: #4a6bff;
+      --primary-light: #eef0ff;
+      --dark: #343a40;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --border: #dee2e6;
+      --shadow: 0 4px 6px rgba(0,0,0,0.05);
+      --radius: 8px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background-color: var(--dark);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .main {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 30px auto;
+      max-width: 1400px;
+      padding: 0 20px;
+      gap: 30px;
+    }
+
+    .filters {
+      flex: 1 1 280px;
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-size: 1.3rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 10px;
+    }
+
+    .courses {
+      flex: 3 1 800px;
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .course-card {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 3px solid var(--primary);
+    }
+
+    .course-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .course-card h3 {
+      margin-top: 0;
+      color: var(--dark);
+      font-size: 1.25rem;
+    }
+
+    .course-card p {
+      margin: 8px 0;
+      color: var(--gray);
+    }
+
+    .course-card p strong {
+      color: var(--dark);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      margin: 3px;
+      font-weight: 500;
+    }
+
+    .buy-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius);
+      margin-top: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    .buy-btn:hover {
+      background-color: #3a5bef;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .filter-checkbox {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .filter-checkbox input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .filter-checkbox label {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.2);
+    }
+
+    @media (max-width: 992px) {
+      .main {
+        flex-direction: column;
+        padding: 0 15px;
+      }
+
+      .filters {
+        position: static;
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .courses {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>All Trainer Courses</h1>
+  </div>
+
+  <div class="main">
+    <div class="filters">
+      <h3>Filter Courses</h3>
+
+      <div class="filter-group">
+        <label for="nameFilter">Course Name</label>
+        <input type="text" id="nameFilter" placeholder="Search by name" />
+      </div>
+
+      <div class="filter-group">
+        <label for="durationFilter">Duration (weeks)</label>
+        <select id="durationFilter">
+          <option value="">Any</option>
+          <option value="1-4">1–4 weeks</option>
+          <option value="5-8">5–8 weeks</option>
+          <option value="9+">9+ weeks</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="modeFilter">Mode</label>
+        <select id="modeFilter">
+          <option value="">Any</option>
+          <option value="Online">Online</option>
+          <option value="Offline">Offline</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Time Slots</label>
+        <div class="filter-checkbox"><input type="checkbox" name="slot" value="Morning" id="morning"><label for="morning"> Morning (08:00–12:00)</label></div>
+        <div class="filter-checkbox"><input type="checkbox" name="slot" value="Afternoon" id="afternoon"><label for="afternoon"> Afternoon (12:00–16:00)</label></div>
+        <div class="filter-checkbox"><input type="checkbox" name="slot" value="Evening" id="evening"><label for="evening"> Evening (16:00–20:00)</label></div>
+        <div class="filter-checkbox"><input type="checkbox" name="slot" value="Night" id="night"><label for="night"> Night (20:00–23:00)</label></div>
+      </div>
+
+      <div class="filter-group">
+        <label for="feeFilter">Maximum Fee (₹)</label>
+        <input type="number" id="feeFilter" placeholder="e.g. 5000" min="0" />
+      </div>
+    </div>
+
+    <div class="courses" id="courseList"></div>
+  </div>
+
+  <script>
+    const allCourses = [];
+    let profileName = "Trainer N/A";
+
+    // ✅ 1. Fetch Trainer Name from API
+    function loadTrainerProfile() {
+      const trainerId = localStorage.getItem("trainerId");
+      if (!trainerId) return;
+
+      fetch(`http://localhost:5000/api/trainer/profile?id=${trainerId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            profileName = data.name;
+            localStorage.setItem("trainerName", data.name);
+          }
+        })
+        .catch(err => console.error("Trainer profile error:", err));
+    }
+
+    // ✅ 2. Load All Courses
+    function loadCourses() {
+      fetch("http://localhost:5000/api/all-trainer-courses")
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            data.courses.forEach(course => {
+              try {
+                course.timeSlots = JSON.parse(course.timeSlots || "[]");
+              } catch {
+                course.timeSlots = [];
+              }
+
+              // Clean duration to numeric (e.g. "8 weeks" => 8)
+              course.duration = parseInt(course.duration.replace(/\D/g, "")) || 0;
+              course.fee = parseInt(course.fee) || 0;
+              course.trainer_name = course.trainer_name || localStorage.getItem("trainerName") || profileName;
+            });
+
+            allCourses.push(...data.courses);
+            displayCourses(allCourses);
+          }
+        });
+    }
+
+    // ✅ 3. Display Filtered Courses
+    function displayCourses(courses) {
+      const list = document.getElementById("courseList");
+      list.innerHTML = "";
+
+      if (courses.length === 0) {
+        list.innerHTML = '<div class="no-results" style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gray)">No courses match your filters</div>';
+        return;
+      }
+
+      courses.forEach(course => {
+        const card = document.createElement("div");
+        card.className = "course-card";
+        card.innerHTML = `
+          <h3>${course.title}</h3>
+          <p><strong>Trainer:</strong> ${course.trainer_name}</p>
+          <p><strong>Duration:</strong> ${course.duration} weeks</p>
+          <p><strong>Mode:</strong> ${course.mode}</p>
+          <p><strong>Description:</strong> ${course.description}</p>
+          <p><strong>Available Time Slots:</strong> ${
+            course.timeSlots.length > 0
+              ? course.timeSlots.map(s => `<span class="badge">${getSlotLabel(s)}</span>`).join(" ")
+              : "N/A"
+          }</p>
+          <p><strong>Fee:</strong> ₹${course.fee.toLocaleString()}</p>
+          <button class="buy-btn" onclick="buyCourse('${course.title}', ${course.fee})">Enroll Now</button>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function getSlotLabel(value) {
+      switch (value) {
+        case "Morning": return "Morning (08:00–12:00)";
+        case "Afternoon": return "Afternoon (12:00–16:00)";
+        case "Evening": return "Evening (16:00–20:00)";
+        case "Night": return "Night (20:00–23:00)";
+        default: return value;
+      }
+    }
+
+    function applyFilters() {
+      const name = document.getElementById("nameFilter").value.toLowerCase();
+      const duration = document.getElementById("durationFilter").value;
+      const mode = document.getElementById("modeFilter").value;
+      const maxFee = parseInt(document.getElementById("feeFilter").value);
+      const selectedSlots = Array.from(document.querySelectorAll('input[name="slot"]:checked')).map(cb => cb.value);
+
+      const filtered = allCourses.filter(course => {
+        const matchName = course.title.toLowerCase().includes(name);
+
+        const matchMode = !mode || course.mode.toLowerCase() === mode.toLowerCase();
+
+        let matchDuration = true;
+        if (duration === "1-4") matchDuration = course.duration >= 1 && course.duration <= 4;
+        else if (duration === "5-8") matchDuration = course.duration >= 5 && course.duration <= 8;
+        else if (duration === "9+") matchDuration = course.duration >= 9;
+
+        const matchSlots = selectedSlots.length === 0 || selectedSlots.some(slot => course.timeSlots.includes(slot));
+
+        const matchFee = isNaN(maxFee) || maxFee <= course.fee;
+
+        return matchName && matchMode && matchDuration && matchSlots && matchFee;
+      });
+
+      displayCourses(filtered);
+    }
+
+    // ✅ 5. Buy Button (Simulated)
+    function buyCourse(title, fee) {
+      alert(`🛒 You selected "${title}" for ₹${fee.toLocaleString()}.\n(Connect payment integration here)`);
+    }
+
+    // ✅ Event Listeners
+    document.getElementById("nameFilter").addEventListener("input", applyFilters);
+    document.getElementById("durationFilter").addEventListener("change", applyFilters);
+    document.getElementById("modeFilter").addEventListener("change", applyFilters);
+    document.getElementById("feeFilter").addEventListener("input", applyFilters);
+    document.querySelectorAll('input[name="slot"]').forEach(cb => cb.addEventListener("change", applyFilters));
+
+    // ✅ Init
+    loadTrainerProfile();
+    loadCourses();
+  </script>
+</body>
+</html>

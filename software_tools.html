@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Software Tools - Hitaishi Trainings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
     <style>
         /* Animation Keyframes */
         @keyframes fadeIn {
@@ -28,6 +29,297 @@
     </style>
 </head>
 <body style="margin:0; padding:0; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height:1.6; color:#2d3748; background-color:#f7fafc; overflow-x:hidden;">
+     <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+                <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items: center; order: 1; flex-shrink: 0;">
+                    <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/@hitaishitrained" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                
+                <!-- Search Box - Fixed -->
+                <!-- <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <div style="display: flex; position: relative; width: 100%;">
+                        <input type="text" placeholder="Search courses..." style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;">
+                        <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 3; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Logout Button (hidden by default) -->
+                    <button id="logout-button" style="display: none; background-color: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
+                        Logout
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="services.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="services.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="services.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="services.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                            </div>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="courses.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">AI agent</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    
     <!-- Animated Hero Section -->
     <section style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color:white; padding:8rem 1rem; text-align:center; position:relative; overflow:hidden;">
         <!-- Floating elements -->
@@ -86,7 +378,7 @@
                                 <span>Postman & API testing tools</span>
                             </li>
                         </ul>
-                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#eff6ff; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                        <a href="enroll.html" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#eff6ff; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
                             View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
                         </a>
                     </div>
@@ -120,7 +412,7 @@
                                 <span>Tableau & Power BI</span>
                             </li>
                         </ul>
-                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#ecfdf5; color:#065f46; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                        <a href="enroll.html" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#ecfdf5; color:#065f46; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
                             View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
                         </a>
                     </div>
@@ -154,7 +446,7 @@
                                 <span>Terraform & Ansible</span>
                             </li>
                         </ul>
-                        <a href="#" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#fffbeb; color:#92400e; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                        <a href="enroll.html" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#fffbeb; color:#92400e; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
                             View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
                         </a>
                     </div>
@@ -518,8 +810,8 @@
                             <span class="tag" style="background: #eff6ff; color: #1e40af;">IntelliJ</span>
                             <span class="tag" style="background: #eff6ff; color: #1e40af;">Sublime</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #3b82f6;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #3b82f6;">
+                            Enroll<i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -535,8 +827,8 @@
                             <span class="tag" style="background: #ecfdf5; color: #065f46;">GitHub</span>
                             <span class="tag" style="background: #ecfdf5; color: #065f46;">GitLab</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #10b981;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #10b981;">
+                            Enroll<i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -552,8 +844,8 @@
                             <span class="tag" style="background: #f5f3ff; color: #5b21b6;">Swagger</span>
                             <span class="tag" style="background: #f5f3ff; color: #5b21b6;">Insomnia</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #8b5cf6;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #8b5cf6;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -569,8 +861,8 @@
                             <span class="tag" style="background: #fffbeb; color: #92400e;">Kubernetes</span>
                             <span class="tag" style="background: #fffbeb; color: #92400e;">Podman</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #f59e0b;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #f59e0b;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -586,8 +878,8 @@
                             <span class="tag" style="background: #fdf2f8; color: #9d174d;">Trello</span>
                             <span class="tag" style="background: #fdf2f8; color: #9d174d;">Asana</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #ec4899;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #ec4899;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -603,8 +895,8 @@
                             <span class="tag" style="background: #ccfbf1; color: #115e59;">Adobe XD</span>
                             <span class="tag" style="background: #ccfbf1; color: #115e59;">Sketch</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #14b8a6;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #14b8a6;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -620,8 +912,8 @@
                             <span class="tag" style="background: #eef2ff; color: #4338ca;">Discord</span>
                             <span class="tag" style="background: #eef2ff; color: #4338ca;">Zoom</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #6366f1;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #6366f1;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                     
@@ -637,8 +929,8 @@
                             <span class="tag" style="background: #fff7ed; color: #9a3412;">GitHub Actions</span>
                             <span class="tag" style="background: #fff7ed; color: #9a3412;">CircleCI</span>
                         </div>
-                        <a href="#" class="explore-link" style="color: #f97316;">
-                            Explore <i class="fas fa-chevron-right"></i>
+                        <a href="enroll.html" class="explore-link" style="color: #f97316;">
+                            Enroll <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                 </div>
@@ -671,6 +963,35 @@
     });
   });
 </script>
+<script>
+    // Add scroll functionality to the buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollContent = document.getElementById('scrollContent');
+        const scrollLeft = document.getElementById('scrollLeft');
+        const scrollRight = document.getElementById('scrollRight');
+        
+        scrollLeft.addEventListener('click', () => {
+            scrollContent.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+        
+        scrollRight.addEventListener('click', () => {
+            scrollContent.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+        
+        // Make entire cards clickable
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on a link inside the card
+                if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+                    const link = this.querySelector('a.explore-link');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                }
+            });
+        });
+    });
+</script>
 
     <!-- CTA Section -->
     <section id="contact" style="padding:6rem 1rem; background:linear-gradient(135deg, #1e40af, #1e3a8a); color:white;">
@@ -679,10 +1000,10 @@
             <p style="font-size:1.25rem; max-width:700px; margin:0 auto 2.5rem; opacity:0.9;">Our expert instructors will help you become proficient in the tools that matter most</p>
             
             <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
-                <a href="#" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:white; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); animation:pulse 2s infinite;">
+                <a href="contact_us.html" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:white; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; box-shadow:0 4px 6px rgba(0,0,0,0.1); animation:pulse 2s infinite;">
                     <i class="fas fa-calendar-alt" style="margin-right:10px;"></i> Schedule a Demo
                 </a>
-                <a href="#" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:transparent; color:white; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; border:2px solid rgba(255,255,255,0.3);">
+                <a href="tel:+91 99087 93602" style="display:inline-flex; align-items:center; padding:1rem 2rem; background:transparent; color:white; text-decoration:none; border-radius:8px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; border:2px solid rgba(255,255,255,0.3);">
                     <i class="fas fa-envelope" style="margin-right:10px;"></i> Contact Admissions
                 </a>
             </div>
@@ -740,5 +1061,90 @@
             .cta-buttons a { width:100%; text-align:center; }
         }
     </style>
+    
+    
+
+    <!-- Footer -->
+<footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+    
+    <!-- Brand Info -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+        <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+        <div>
+          <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+          <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+        </div>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+      <div style="display: flex; gap: 10px; margin-top: 12px;">
+        <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="flex: 1 1 160px; min-width: 160px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+        <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+        <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+        <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+        <li><a href="courses.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+        <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Explore Links -->
+    <div style="flex: 1 1 200px; min-width: 200px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+        <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+        <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+        <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+        <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+        <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+        <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+        <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+        <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Details -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+      <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+      <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+      <p style="margin: 0 0 10px;">📧 <a href="mailto:info@hitaishitrainings.com" style="color: #ecf0f1; text-decoration: none;">info@hitaishitrainings.com</a></p>
+      <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+    </div>
+
+    <!-- Newsletter -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+      <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+      <form style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+        <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+    © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+    <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+    <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+  </div>
+
+  <!-- Auto Year Script -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</footer>
 </body>
 </html>

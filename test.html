@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-language Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    #languageSwitcher {
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dropdown -->
+  <select id="languageSwitcher">
+    <option value="en">English</option>
+    <option value="hi">हिंदी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="ml">മലയാളം</option>
+    <option value="mr">मराठी</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="bn">বাংলা</option>
+    <option value="ur">اردو</option>
+  </select>
+
+  <h1 id="title">Welcome to Hitaishi Trainings</h1>
+  <p id="description">Learn from the best trainers in your own language!</p>
+  <p>hello akhila</p>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en' },
+        'google_translate_element'
+      );
+    }
+
+    // Function to trigger translation
+    function translatePage(lang) {
+      var selectField = document.querySelector(".goog-te-combo");
+      if (selectField) {
+        selectField.value = lang;
+        selectField.dispatchEvent(new Event("change"));
+      } else {
+        setTimeout(() => translatePage(lang), 500); // retry until loaded
+      }
+    }
+
+    // Handle dropdown change
+    document.getElementById("languageSwitcher").addEventListener("change", function() {
+      translatePage(this.value);
+    });
+
+    // Auto-detect country and set default language
+    async function setDefaultLanguage() {
+      try {
+        let res = await fetch("https://ipapi.co/json/");
+        let data = await res.json();
+        console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+        let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+        if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+          document.getElementById("languageSwitcher").value = userLang;
+          translatePage(userLang);
+        }
+      } catch (e) {
+        console.error("Geo API error:", e);
+      }
+    }
+
+    // Run auto-detect after Google Translate loads
+    window.onload = () => {
+      setTimeout(setDefaultLanguage, 1500);
+    };
+  </script>
+
+  <!-- Load Google Translate Script -->
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

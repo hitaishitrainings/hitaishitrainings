@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+       
+
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            #main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #2c3e50;
+                flex-direction: column;
+                padding: 20px;
+            }
+            #main-nav.show {
+                display: flex;
+            }
+            #main-nav li {
+                margin: 10px 0;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                background-color: transparent;
+                border-left: 2px solid #3498db;
+                margin-left: 15px;
+            }
+            .dropdown-menu a {
+                color: white;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header-container" style="animation: fadeIn 0.5s ease-in-out;">
+    <!-- Top Bar with Social and Search -->
+   <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+    <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+        <!-- Main Container -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+            <!-- Social Icons -->
+            <div style="display: flex; gap: 12px; align-items: center; order: 1;">
+                <a href="https://www.facebook.com" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <!-- Search + Contact Container -->
+            <div style="display: flex; align-items: center; gap: 80px; order: 2; flex-grow: 1; justify-content: flex-end; max-width: 600px;">
+                <!-- Search Box -->
+                <div style="position: relative; flex-grow: 1; min-width: 20%; max-width: 40%;">
+                    <input type="text" placeholder="Search courses..." style="padding: 8px 15px; padding-right: 35px; border: none; border-radius: 20px; width: 100%; font-size: 14px;">
+                    <button style="position: absolute; right: -50px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Contact Info -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span style="font-size: 14px;">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span style="font-size: 14px;"> Chat On WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style media="screen and (max-width: 768px)">
+    /* Mobile Styles */
+    div[style*="background-color: #1a2a3a"] > div > div > div:last-child {
+        flex-direction: column;
+        gap: 10px !important;
+        width: 100%;
+        margin-top: 10px;
+    }
+    div[style*="background-color: #1a2a3a"] > div > div > div:last-child > div:first-child {
+        max-width: 100% !important;
+        width: 100%;
+    }
+    div[style*="background-color: #1a2a3a"] > div > div > div:last-child > div:last-child {
+        justify-content: center;
+        width: 100%;
+    }
+</style>
+
+    <!-- Header Section -->
+      <div style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div style="width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center;">
+            <a href="home.html" style="text-decoration: none; display: flex; align-items: center;">
+                <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                <div>
+                    <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;">
+                        <span style="color: #3498db;">Hitaishi</span> Trainings
+                    </h1>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                </div>
+            </a>
+        </div>
+        
+        <div style="display: flex; align-items: center;">
+            <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                ☰
+            </div>
+            <nav id="main-nav" style="display: flex; align-items: center;">
+                <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+                    <li style="position: relative; margin-left: 20px;">
+                        <a href="home.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                    </li>
+                    
+                    <li class="dropdown" style="position: relative; margin-left: 20px;">
+                        <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                            About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                        </a>
+                        <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                            <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                            <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                            <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown" style="position: relative; margin-left: 20px;">
+                        <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                            Services <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                        </a>
+                        <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                            <a href="services.html#classroom" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                            <a href="services.html#online" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                            <a href="services.html#corporate" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                            <a href="services.html#projects" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                        </div>
+                    </li>
+                    
+                    <li style="position: relative; margin-left: 20px;">
+                        <a href="tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                    </li>
+                    
+                    <li class="dropdown" style="position: relative; margin-left: 20px;">
+                        <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                            Trainings <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                        </a>
+                        <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                            <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                            <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                            <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                            <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                        </div>
+                    </li>
+                    
+                    <li style="position: relative; margin-left: 20px;">
+                        <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+    <div style="background-color: #3498db; color: white; padding: 10px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+            <div style="display: flex; gap: 20px; padding: 5px 0;">
+                <a href="#resume" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                <a href="#interview" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                <a href="#jobs" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance</a>
+                <a href="#certification" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                <a href="#corporate" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                <a href="#pricing" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Course | Hitaishi Trainings</title>
+  <meta name="description" content="Trainers can submit their courses including title, fee, mode, and schedule on Hitaishi Trainings." />
+  <meta name="keywords" content="Trainer Course Submission, Online Training, Hitaishi Trainings, Teach Courses" />
+  <meta name="author" content="Hitaishi Trainings" />
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+    }
+    .navbar {
+      background-color: #343a40;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+
+    .checkbox-group {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f1f1f1;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: normal;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 8px;
+   
+   
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 15px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">Hitaishi Trainings</div>
+
+  <div class="container">
+    <h2>📚 Submit a Course</h2>
+    <form id="courseForm">
+      <label for="title">Course Title</label>
+      <input type="text" id="title" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" rows="4" required></textarea>
+
+      <label for="mode">Mode</label>
+      <select id="mode" required>
+        <option value="">Select</option>
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
+      </select>
+
+      <label for="duration">Duration (in weeks)</label>
+      <input type="text" id="duration" required>
+
+      <label for="fee">Course Fee (₹)</label>
+      <input type="number" id="fee" required>
+
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate" required>
+
+      <label>Available Time Slots</label>
+      <div class="checkbox-group" id="timeSlotsContainer">
+        <label><input type="checkbox" name="timeSlots" value="Morning"> Morning (8AM - 12PM)</label>
+        <label><input type="checkbox" name="timeSlots" value="Afternoon"> Afternoon (12PM - 4PM)</label>
+        <label><input type="checkbox" name="timeSlots" value="Evening"> Evening (4PM - 8PM)</label>
+        <label><input type="checkbox" name="timeSlots" value="Night"> Night (8PM - 11PM)</label>
+      </div>
+
+      <label for="tags">Tags (comma separated)</label>
+      <input type="text" id="tags">
+
+      <label for="media">Course Image/Video URL (optional)</label>
+      <input type="url" id="media">
+
+      <button type="submit">Submit Course</button>
+    </form>
+  </div>
+
+  <script>
+    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+    if (!trainer || !trainer.id) {
+      alert("Login required");
+      window.location.href = "trainerlogin.html";
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get("id");
+
+    // Prefill form for edit
+    if (courseId) {
+      fetch(`http://localhost:5000/api/course/${courseId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.course) {
+            const course = data.course;
+            document.getElementById("title").value = course.title || "";
+            document.getElementById("description").value = course.description || "";
+            document.getElementById("mode").value = course.mode || "";
+            document.getElementById("duration").value = course.duration || "";
+            document.getElementById("fee").value = course.fee || "";
+            document.getElementById("startDate").value = course.startDate?.split("T")[0] || "";
+            document.getElementById("tags").value = course.tags || "";
+            document.getElementById("media").value = course.media || "";
+
+            // Set time slots if available
+            if (course.timeSlots && Array.isArray(course.timeSlots)) {
+              const checkboxes = document.querySelectorAll('input[name="timeSlots"]');
+              checkboxes.forEach(cb => {
+                if (course.timeSlots.includes(cb.value)) {
+                  cb.checked = true;
+                }
+              });
+            }
+          } else {
+            alert("Failed to load course details.");
+          }
+        })
+        .catch(err => {
+          console.error("Error loading course:", err);
+          alert("Something went wrong while loading the course.");
+        });
+    }
+
+    // Submit form
+    document.getElementById("courseForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const selectedTimeSlots = Array.from(document.querySelectorAll('input[name="timeSlots"]:checked'))
+        .map(cb => cb.value);
+
+      const course = {
+        trainerId: trainer.id,
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        mode: document.getElementById("mode").value,
+        duration: document.getElementById("duration").value,
+        fee: document.getElementById("fee").value,
+        startDate: document.getElementById("startDate").value,
+        timeSlots: selectedTimeSlots,
+        tags: document.getElementById("tags").value,
+        media: document.getElementById("media").value
+      };
+
+      const endpoint = courseId
+        ? `http://localhost:5000/api/course/${courseId}`
+        : `http://localhost:5000/api/submit-course`;
+
+      const method = courseId ? "PUT" : "POST";
+
+      const res = await fetch(endpoint, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(course)
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ Course submitted successfully!");
+        window.location.href = "trainercourses.html";
+      } else {
+        alert("❌ Failed to submit course: " + data.error);
+      }
+    });
+  </script>
+</body>
+</html>

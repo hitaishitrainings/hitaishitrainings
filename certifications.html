@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certification - Hitaishi Training</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -18,17 +19,309 @@
     </style>
 </head>
 <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333;">
+      <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+                <!-- Social Icons -->
+                  <div style="display: flex; gap: 12px; align-items: center; order: 1; flex-shrink: 0;">
+                    <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/@hitaishitrained" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                
+                <!-- Search Box - Fixed -->
+                <!-- <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <div style="display: flex; position: relative; width: 100%;">
+                        <input type="text" placeholder="Search courses..." style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;">
+                        <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div> -->
 
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 3; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Logout Button (hidden by default) -->
+                    <button id="logout-button" style="display: none; background-color: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
+                        Logout
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="services.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="services.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="services.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="services.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                            </div>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="courses.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">AI agent</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    
     <!-- Main Container -->
-    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <div style="width: 100%; margin: 0 auto; ">
         
         <!-- Hero Section -->
-        <div style="background: linear-gradient(rgba(41, 128, 185, 0.9), rgba(41, 128, 185, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; padding: 80px 30px; text-align: center; border-radius: 10px; margin-bottom: 40px; animation: fadeIn 1s ease-out;">
+        <div style="background: linear-gradient(rgba(41, 128, 185, 0.9), rgba(41, 128, 185, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; padding: 80px 20px; background-position: center; color: white;  text-align: center;  margin-bottom: 20px; animation: fadeIn 1s ease-out;">
             <h1 style="font-size: 2.8rem; margin: 0 0 20px; font-weight: 700;">Earn Industry-Recognized Certifications</h1>
             <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px;">Validate your skills with Hitaishi's accredited certification programs that employers trust</p>
+            <a href="courses.html" style="text-decoration: none;">
             <button style="background-color: #e74c3c; color: white; border: none; padding: 15px 40px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 20px rgba(231, 76, 60, 0.6)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(231, 76, 60, 0.4)'">
                 Explore Certifications <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
             </button>
+            </a>
         </div>
         
         <!-- Certification Benefits -->
@@ -81,7 +374,7 @@
             <h2 style="color: #2c3e50; margin-top: 0; margin-bottom: 30px;">Our Certification</h2>
             
             <div style="position: relative; max-width: 800px; margin: 0 auto; border: 20px solid #f5f5f5; box-shadow: 0 5px 15px rgba(0,0,0,0.1); animation: float 4s ease-in-out infinite;">
-                <img src="https://via.placeholder.com/800x600/f5f5f5/cccccc?text=Hitaishi+Certification+Sample" alt="Sample Certificate" style="width: 100%; display: block;">
+                <img src="img/hitaishi-trainning-certificate.png" alt="Sample Certificate" style="width: 100%; display: block;">
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; padding: 20px;">
                     <div style="background-color: rgba(255,255,255,0.8); padding: 20px; border-radius: 5px; display: inline-block;">
                         <i class="fas fa-certificate" style="font-size: 40px; color: #f39c12; margin-bottom: 10px;"></i>
@@ -111,7 +404,7 @@
         </div>
         
         <!-- Certification Programs -->
-        <div style="margin-bottom: 60px; animation: fadeIn 1s ease-out;">
+        <div style="margin:auto; animation: fadeIn 1s ease-out;max-width: 98%;">
             <h2 style="text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 40px;">Our Certification Programs</h2>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
@@ -135,9 +428,11 @@
                                 <div style="font-weight: bold;"><i class="fas fa-signal" style="margin-right: 5px;"></i> Advanced</div>
                             </div>
                         </div>
+                        <a href="enroll.html" style="text-decoration: none;">
                         <button style="width: 100%; background-color: #3498db; color: white; border: none; padding: 12px; font-size: 1rem; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="this.style.backgroundColor='#3498db'">
-                            View Details <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
+                            Enroll now <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
                         </button>
+                        </a>
                     </div>
                 </div>
                 
@@ -161,9 +456,11 @@
                                 <div style="font-weight: bold;"><i class="fas fa-signal" style="margin-right: 5px;"></i> Expert</div>
                             </div>
                         </div>
+                        <a href="enroll.html" style="text-decoration: none;">
                         <button style="width: 100%; background-color: #e74c3c; color: white; border: none; padding: 12px; font-size: 1rem; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#c0392b'" onmouseout="this.style.backgroundColor='#e74c3c'">
-                            View Details <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
+                            Enroll Now <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
                         </button>
+                        </a>
                     </div>
                 </div>
                 
@@ -187,16 +484,19 @@
                                 <div style="font-weight: bold;"><i class="fas fa-signal" style="margin-right: 5px;"></i> Intermediate</div>
                             </div>
                         </div>
+
+                        <a href="enroll.html" style="text-decoration: none;">   
                         <button style="width: 100%; background-color: #27ae60; color: white; border: none; padding: 12px; font-size: 1rem; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#219653'" onmouseout="this.style.backgroundColor='#27ae60'">
-                            View Details <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
+                            Enroll now <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
                         </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Verification Section -->
-        <div style="background: linear-gradient(135deg, #2c3e50, #34495e); padding: 50px; border-radius: 10px; color: white; margin-bottom: 60px; text-align: center;">
+        <!-- <div style="background: linear-gradient(135deg, #2c3e50, #34495e); padding: 50px; border-radius: 10px; color: white; margin-bottom: 60px; text-align: center;">
             <h2 style="margin-top: 0; font-size: 2rem; margin-bottom: 20px;">Verify a Certification</h2>
             <p style="max-width: 600px; margin: 0 auto 30px; line-height: 1.6;">Employers and institutions can verify the authenticity of Hitaishi certifications using our online verification system.</p>
             <div style="max-width: 500px; margin: 0 auto; background-color: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px;">
@@ -208,19 +508,410 @@
                 </div>
                 <p style="font-size: 0.9rem; opacity: 0.8;">Example Certificate ID: HIT-2023-ABCD-1234</p>
             </div>
-        </div>
+        </div> -->
         
-        <!-- CTA Section -->
-        <div style="background: linear-gradient(135deg, #9b59b6, #8e44ad); padding: 60px 30px; border-radius: 10px; color: white; text-align: center; margin-bottom: 40px; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-            <div style="position: absolute; bottom: -150px; left: -150px; width: 400px; height: 400px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-            
-            <h2 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px; position: relative;">Ready to Get Certified?</h2>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; position: relative;">Boost your career with a Hitaishi certification that employers recognize and respect</p>
-            <button style="background-color: white; color: #9b59b6; border: none; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
-                Enroll Now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
-            </button>
+<div style="padding: 60px 20px; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%); font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px; font-weight: 700; position: relative; padding-bottom: 15px;">
+      Insights from Hitaishi Blog
+      <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: #e74c3c; border-radius: 2px;"></span>
+    </h2>
+    <p style="text-align: center; color: #7f8c8d; font-size: 1.1rem; max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+      Stay updated with the latest trends, tips, and success stories in tech education
+    </p>
+    
+    <!-- Blog Cards Container -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px;">
+      <!-- Blog Card 1 -->
+      <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.08);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <img src="img/certification.png" alt="Career Blog" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; top: 15px; left: 15px; background: rgba(231, 76, 60, 0.9); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Career Guidance</div>
         </div>
+        <div style="padding: 25px;">
+          <h3 style="margin: 0 0 15px; color: #2c3e50; font-size: 1.3rem; line-height: 1.4; font-weight: 600;">How Certifications Help Land Your First Job</h3>
+          <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">See how students increase job chances with certified skills in our training programs.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="#blog1" onclick="showBlogContent('blog1'); return false;" style="color: #e74c3c; font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer;">Read More <span style="display: inline-block;">→</span></a>
+            <span style="color: #95a5a6; font-size: 0.85rem;">June 15, 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.08);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <img src="img/top5.png" alt="Tech Skills Blog" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; top: 15px; left: 15px; background: rgba(231, 76, 60, 0.9); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Tech Trends</div>
+        </div>
+        <div style="padding: 25px;">
+          <h3 style="margin: 0 0 15px; color: #2c3e50; font-size: 1.3rem; line-height: 1.4; font-weight: 600;">Top 5 In-Demand Tech Skills in 2025</h3>
+          <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">Discover what skills employers want the most and how we teach them at Hitaishi.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="#blog2" onclick="showBlogContent('blog2'); return false;" style="color: #e74c3c; font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer;">Read More <span style="display: inline-block;">→</span></a>
+            <span style="color: #95a5a6; font-size: 0.85rem;">June 8, 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.08);">
+        <div style="position: relative; height: 200px; overflow: hidden;">
+          <img src="img/softskills.png" alt="Soft Skills Blog" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; top: 15px; left: 15px; background: rgba(231, 76, 60, 0.9); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Professional Growth</div>
+        </div>
+        <div style="padding: 25px;">
+          <h3 style="margin: 0 0 15px; color: #2c3e50; font-size: 1.3rem; line-height: 1.4; font-weight: 600;">Why Soft Skills Matter as Much as Coding</h3>
+          <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">Learn why communication and teamwork are emphasized in our training curriculum.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="#blog3" onclick="showBlogContent('blog3'); return false;" style="color: #e74c3c; font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer;">Read More <span style="display: inline-block;">→</span></a>
+            <span style="color: #95a5a6; font-size: 0.85rem;">May 30, 2025</span>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <!-- Horizontal Content Panel (below all cards) -->
+    <div id="blogContentPanel" style="display: none; background: white; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.08);">
+      <!-- Content will be dynamically inserted here -->
+    </div>
+    
+    <!-- <div style="text-align: center; margin-top: 20px;">
+      <a href="#" style="display: inline-block; padding: 12px 30px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 30px; font-weight: 600; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);">View All Blog Articles</a>
+    </div> -->
+  </div>
+</div>
+
+<script>
+// Content for each blog
+const blogContents = {
+  blog1: `
+    <div style="border-top: 1px solid #eee; margin-top: -15px; padding-top: 20px;">
+      <h4 style="color: #2c3e50; margin-bottom: 15px;">Why Certifications Matter</h4>
+      <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">In today's competitive job market, certifications from recognized training programs like Hitaishi can give you the edge over other candidates.</p>
+      <ul style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding-left: 20px; margin-bottom: 15px;">
+        <li style="margin-bottom: 8px;">Validates your skills to employers</li>
+        <li style="margin-bottom: 8px;">Increases starting salary potential by 15-20%</li>
+        <li style="margin-bottom: 8px;">Shows commitment to professional development</li>
+        <li>Gives access to exclusive job portals</li>
+      </ul>
+      <a href="courses.html" style="display: inline-block; padding: 8px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; margin-top: 10px;">Explore Our Certification Programs</a>
+    </div>
+  `,
+  blog2: `
+    <div style="border-top: 1px solid #eee; margin-top: -15px; padding-top: 20px;">
+      <h4 style="color: #2c3e50; margin-bottom: 15px;">2025's Most Valuable Skills</h4>
+      <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">Based on our industry research and employer surveys, these are the skills that will dominate the tech landscape:</p>
+      <ol style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding-left: 20px; margin-bottom: 15px;">
+        <li style="margin-bottom: 8px;"><strong>AI & Machine Learning</strong> - Fundamentals and applications</li>
+        <li style="margin-bottom: 8px;"><strong>Cloud Computing</strong> - Multi-cloud deployment strategies</li>
+        <li style="margin-bottom: 8px;"><strong>Cybersecurity</strong> - Threat detection and prevention</li>
+        <li style="margin-bottom: 8px;"><strong>Data Science</strong> - Advanced analytics and visualization</li>
+        <li><strong>DevOps</strong> - CI/CD pipeline automation</li>
+      </ol>
+      <a href="courses.html" style="display: inline-block; padding: 8px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; margin-top: 10px;">View Our Course Catalog</a>
+    </div>
+  `,
+  blog3: `
+    <div style="border-top: 1px solid #eee; margin-top: -15px; padding-top: 20px;">
+      <h4 style="color: #2c3e50; margin-bottom: 15px;">The Human Edge in Tech</h4>
+      <p style="color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">While technical skills get you interviews, soft skills help you land and keep the job. Our training includes:</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+          <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">Communication</h5>
+          <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">Technical writing and presentation skills</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+          <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">Teamwork</h5>
+          <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">Agile collaboration techniques</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+          <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">Problem Solving</h5>
+          <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">Structured thinking approaches</p>
+        </div>
+      </div>
+      <a href="courses.html" style="display: inline-block; padding: 8px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; margin-top: 10px;">Learn About Our Soft Skills Training</a>
+    </div>
+  `
+};
+
+function showBlogContent(blogId) {
+  const panel = document.getElementById('blogContentPanel');
+  
+  // Update panel content
+  panel.innerHTML = blogContents[blogId];
+  
+  // Toggle panel visibility
+  if (panel.style.display === 'block') {
+    // If clicking the same blog that's already open, close it
+    if (panel.getAttribute('data-current') === blogId) {
+      panel.style.display = 'none';
+      panel.removeAttribute('data-current');
+      return;
+    }
+  }
+  
+  // Show the panel with new content
+  panel.style.display = 'block';
+  panel.setAttribute('data-current', blogId);
+  
+  // Scroll to the panel on mobile
+  if (window.innerWidth < 768) {
+    panel.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// Close panel when clicking outside
+document.addEventListener('click', function(event) {
+  const panel = document.getElementById('blogContentPanel');
+  if (panel.style.display === 'block' && 
+      !event.target.closest('[onclick^="showBlogContent"]') && 
+      !event.target.closest('#blogContentPanel')) {
+    panel.style.display = 'none';
+    panel.removeAttribute('data-current');
+  }
+});
+</script>
+
+<div style="padding: 60px 20px; background: #ffffff; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px; font-weight: 700; position: relative; padding-bottom: 15px;">
+      Frequently Asked Questions
+      <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: #e74c3c; border-radius: 2px;"></span>
+    </h2>
+    <p style="text-align: center; color: #7f8c8d; font-size: 1.1rem; max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+      Find answers to common questions about Hitaishi Software Trainings
+    </p>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+      <!-- FAQ Item 1 -->
+      <div style="border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <button onclick="toggleFAQ('faq1')" style="width: 100%; text-align: left; background: none; border: none; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem; font-weight: 600;">What courses do you offer for beginners?</h3>
+          <span id="faq1-icon" style="font-size: 1.2rem; color: #e74c3c;">+</span>
+        </button>
+        <div id="faq1" style="display: none; padding: 0 20px 20px 20px; color: #7f8c8d; line-height: 1.6; border-top: 1px solid #f5f5f5;">
+          <p>We offer several beginner-friendly courses including:</p>
+          <ul style="padding-left: 20px;">
+            <li>Introduction to Programming (Python/JavaScript)</li>
+            <li>Web Development Fundamentals</li>
+            <li>Data Science Basics</li>
+            <li>UI/UX Design Principles</li>
+          </ul>
+          <p>All beginner courses include hands-on projects and mentor support.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div style="border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <button onclick="toggleFAQ('faq2')" style="width: 100%; text-align: left; background: none; border: none; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem; font-weight: 600;">How long do the certification programs take?</h3>
+          <span id="faq2-icon" style="font-size: 1.2rem; color: #e74c3c;">+</span>
+        </button>
+        <div id="faq2" style="display: none; padding: 0 20px 20px 20px; color: #7f8c8d; line-height: 1.6; border-top: 1px solid #f5f5f5;">
+          <p>Program durations vary based on the course:</p>
+          <ul style="padding-left: 20px;">
+            <li><strong>Short courses:</strong> 4-6 weeks (part-time)</li>
+            <li><strong>Certification programs:</strong> 8-12 weeks</li>
+            <li><strong>Advanced specializations:</strong> 3-6 months</li>
+          </ul>
+          <p>Most programs offer flexible scheduling options for working professionals.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div style="border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <button onclick="toggleFAQ('faq3')" style="width: 100%; text-align: left; background: none; border: none; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem; font-weight: 600;">Do you provide job placement assistance?</h3>
+          <span id="faq3-icon" style="font-size: 1.2rem; color: #e74c3c;">+</span>
+        </button>
+        <div id="faq3" style="display: none; padding: 0 20px 20px 20px; color: #7f8c8d; line-height: 1.6; border-top: 1px solid #f5f5f5;">
+          <p>Yes! Our career services include:</p>
+          <ul style="padding-left: 20px;">
+            <li>Resume and LinkedIn profile reviews</li>
+            <li>Interview preparation workshops</li>
+            <li>Access to our employer partner network</li>
+            <li>Career coaching sessions</li>
+          </ul>
+          <p>85% of our certified students find relevant employment within 3 months of completion.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div style="border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <button onclick="toggleFAQ('faq4')" style="width: 100%; text-align: left; background: none; border: none; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem; font-weight: 600;">What payment options do you accept?</h3>
+          <span id="faq4-icon" style="font-size: 1.2rem; color: #e74c3c;">+</span>
+        </button>
+        <div id="faq4" style="display: none; padding: 0 20px 20px 20px; color: #7f8c8d; line-height: 1.6; border-top: 1px solid #f5f5f5;">
+          <p>We offer multiple payment options:</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+              <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">Full Payment</h5>
+              <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">5% discount when paying upfront</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+              <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">Installments</h5>
+              <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">Monthly payment plans available</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+              <h5 style="margin: 0 0 8px; color: #2c3e50; font-size: 0.95rem;">EMI Options</h5>
+              <p style="color: #7f8c8d; font-size: 0.85rem; margin: 0;">Through partner financial institutions</p>
+            </div>
+          </div>
+          <p>We accept credit/debit cards, net banking, UPI, and all major payment wallets.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div style="border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <button onclick="toggleFAQ('faq5')" style="width: 100%; text-align: left; background: none; border: none; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem; font-weight: 600;">Can I access course materials after completion?</h3>
+          <span id="faq5-icon" style="font-size: 1.2rem; color: #e74c3c;">+</span>
+        </button>
+        <div id="faq5" style="display: none; padding: 0 20px 20px 20px; color: #7f8c8d; line-height: 1.6; border-top: 1px solid #f5f5f5;">
+          <p>Yes, students enjoy ongoing access to:</p>
+          <ul style="padding-left: 20px;">
+            <li>All course materials and recordings</li>
+            <li>Updated content for 1 year after completion</li>
+            <li>Private alumni community</li>
+            <li>Exclusive webinars and workshops</li>
+          </ul>
+          <p>Our learning portal remains accessible even after you graduate.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <p style="color: #7f8c8d; margin-bottom: 20px;">Didn't find what you were looking for?</p>
+      <a href="contact_us.html" style="display: inline-block; padding: 12px 30px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 30px; font-weight: 600; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);">Contact Our Support Team</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFAQ(id) {
+  const faq = document.getElementById(id);
+  const icon = document.getElementById(id + '-icon');
+  
+  if (faq.style.display === 'block') {
+    faq.style.display = 'none';
+    icon.textContent = '+';
+  } else {
+    // Close any open FAQs first
+    document.querySelectorAll('[id^="faq"]').forEach(el => {
+      if (el.id !== id && el.id.length === 4) { // Only target FAQ content divs (faq1, faq2, etc.)
+        el.style.display = 'none';
+        document.getElementById(el.id + '-icon').textContent = '+';
+      }
+    });
+    
+    faq.style.display = 'block';
+    icon.textContent = '−';
+    
+    // Scroll to the FAQ if it's opening (especially helpful on mobile)
+    if (window.innerWidth < 768) {
+      faq.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+</script>
+        <!-- CTA Section -->
+        <div style="background: linear-gradient(135deg, #9b59b6, #8e44ad); padding: 60px 30px; border-radius: 10px; color: white; text-align: center;  position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -150px; left: -150px; width: 400px; height: 400px; background-color: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                
+                <h2 style="font-size: 2.2rem; margin-top: 0;  position: relative;">Ready to Get Certified?</h2>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; position: relative;">Boost your career with a Hitaishi certification that employers recognize and respect</p>
+                <a href="enroll.html" style="text-decoration: none;">
+                <button style="background-color: white; color: #9b59b6; border: none; padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 7px 25px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+                    Enroll Now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                </button>
+                </a>
+            </div>
+        </div>
+    
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="courses.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:info@hitaishitrainings.com" style="color: #ecf0f1; text-decoration: none;">info@hitaishitrainings.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        </div>
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
 </body>
 </html>

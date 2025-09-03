@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trainer Login | Hitaishi Trainings</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+    .container { max-width: 400px; margin: auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #28a745; color: #fff; border: none; cursor: pointer; }
+    button:hover { background-color: #1e7e34; }
+    .error { color: red; text-align: center; }
+    a { text-decoration: none; color: #28a745; }
+  </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-card">
+        <h2 class="login-title">Trainer Login</h2>
+        <div class="error" id="error"></div>
+        <form id="loginForm" class="login-form">
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email Address" required class="form-input">
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required class="form-input">
+                <i class="fas fa-lock input-icon"></i>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <div class="login-links">
+            <p>New trainer? <a href="trainerregistration.html" class="link">Register here</a></p>
+            <p><a href="trainerforgotpassword.html" class="link">Forgot Password?</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --primary-color: #4285f4;
+        --error-color: #ff4444;
+        --text-color: #333;
+        --light-gray: #f5f5f5;
+        --border-color: #ddd;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--light-gray);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--text-color);
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+    }
+    
+    .login-card {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+    }
+    
+    .login-title {
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+    
+    #error {
+        color: var(--error-color);
+        text-align: center;
+        margin-bottom: 15px;
+        min-height: 20px;
+    }
+    
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .input-group {
+        position: relative;
+    }
+    
+    .form-input {
+        width: 90%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+    
+    .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+    }
+    
+    .submit-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .submit-btn:hover {
+        background-color: #3367d6;
+    }
+    
+    .login-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    
+    .link {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    .link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<!-- Add Font Awesome for icons (optional) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value.trim();
+  const password = e.target.password.value;
+
+  try {
+    const res = await fetch("http://localhost:5000/api/login-trainer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    console.log("Trainer login response:", data); // Debugging log
+
+if (data.success) {
+  // ✅ Clear any old session first
+  localStorage.removeItem("loggedInUser");   // student
+  localStorage.removeItem("trainerUser");    // trainer
+
+  // ✅ Save new trainer
+  localStorage.setItem(
+    "trainerUser",
+    JSON.stringify({
+      id: data.id,
+      fullname: data.name || "Trainer",
+      email: data.email,
+      profileImage: data.profileImage || "http://localhost:5000/uploads/default-trainer.png"
+    })
+  );
+
+  alert("Login successful!");
+  window.location.href = "index.html"; // redirect
+} else {
+  document.getElementById("error").innerText = data.error || "Login failed.";
+}
+
+  } catch (err) {
+    console.error("Login request failed:", err);
+    document.getElementById("error").innerText = "Server error. Please try again.";
+  }
+});
+</script>
+
+
+
+</body>
+</html>

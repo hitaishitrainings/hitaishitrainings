@@ -5,8 +5,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scholarship Eligibility Check</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
 </head>
-<body style="font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; line-height: 1.6; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column;">
+<body style="font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; line-height: 1.6; margin: 0; padding: 0; min-height: 100vh; ">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+                <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items: center; order: 1; flex-shrink: 0;">
+                    <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/@hitaishitrained" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                
+                <!-- Search Box - Fixed -->
+                <!-- <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <div style="display: flex; position: relative; width: 100%;">
+                        <input type="text" placeholder="Search courses..." style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;">
+                        <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 3; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Logout Button (hidden by default) -->
+                    <button id="logout-button" style="display: none; background-color: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
+                        Logout
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="services.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="services.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="services.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="services.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                            </div>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="courses.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">AI agent</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    
     <main style="flex-grow: 1; max-width: 1200px; margin: 0 auto; width: 100%; padding: 20px; box-sizing: border-box;">
         <div style="margin-bottom: 20px;">
             <h1 style="font-size: 2rem; font-weight: bold; color: #1e40af; margin-bottom: 10px; text-align: center;">Scholarship Eligibility Checker</h1>
@@ -90,18 +382,20 @@
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Full Name</label>
-                            <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your full name">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Full Name <span style="color: #ef4444;">*</span></label>
+                            <input type="text" id="full-name" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your full name" required>
+                            <div id="name-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter your full name</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Email Address</label>
-                            <input type="email" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your email">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Email Address <span style="color: #ef4444;">*</span></label>
+                            <input type="email" id="email" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your email" required>
+                            <div id="email-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter a valid email address</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Country of Citizenship</label>
-                            <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Country of Citizenship <span style="color: #ef4444;">*</span></label>
+                            <select id="country" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" required>
                                 <option value="">Select your country</option>
                                 <option value="US">United States</option>
                                 <option value="GB">United Kingdom</option>
@@ -110,16 +404,18 @@
                                 <option value="CN">China</option>
                                 <option value="other">Other</option>
                             </select>
+                            <div id="country-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please select your country</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Date of Birth</label>
-                            <input type="date" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Date of Birth <span style="color: #ef4444;">*</span></label>
+                            <input type="date" id="dob" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" required>
+                            <div id="dob-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter your date of birth</div>
                         </div>
                     </div>
                     
                     <div style="display: flex; justify-content: flex-end;">
-                        <button onclick="nextStep(1)" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
+                        <button onclick="validateStep1()" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
                             Next <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -131,171 +427,90 @@
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Highest Degree Completed</label>
-                            <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Highest Degree Completed <span style="color: #ef4444;">*</span></label>
+                            <select id="degree" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" required>
                                 <option value="">Select your degree</option>
                                 <option value="bachelor">Bachelor's Degree</option>
                                 <option value="master">Master's Degree</option>
                                 <option value="phd">PhD</option>
                                 <option value="other">Other</option>
                             </select>
+                            <div id="degree-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please select your highest degree</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">GPA (or equivalent)</label>
-                            <input type="number" step="0.01" min="0" max="4" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your GPA">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">GPA (or equivalent) <span style="color: #ef4444;">*</span></label>
+                            <input type="number" id="gpa" step="0.01" min="0" max="4" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your GPA" required>
+                            <div id="gpa-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter a valid GPA (0-4)</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Institution Name</label>
-                            <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your university name">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Institution Name <span style="color: #ef4444;">*</span></label>
+                            <input type="text" id="institution" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your university name" required>
+                            <div id="institution-error"
+
+                                                        <div id="institution-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter your institution name</div>
                         </div>
                         
                         <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Field of Study</label>
-                            <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your field of study">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 8px;">Have you received any academic honors or awards?</label>
-                            <div style="display: flex; gap: 16px;">
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="radio" name="honors" value="yes" style="width: 16px; height: 16px; accent-color: #2563eb;">
-                                    <span>Yes</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="radio" name="honors" value="no" style="width: 16px; height: 16px; accent-color: #2563eb;">
-                                    <span>No</span>
-                                </label>
-                            </div>
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Field of Study <span style="color: #ef4444;">*</span></label>
+                            <input type="text" id="field-of-study" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your field of study" required>
+                            <div id="field-error" style="color: #ef4444; font-size: 0.75rem; margin-top: 4px; display: none;">Please enter your field of study</div>
                         </div>
                     </div>
                     
                     <div style="display: flex; justify-content: space-between;">
-                        <button onclick="prevStep(2)" style="background-color: white; color: #2563eb; border: 2px solid #2563eb; padding: 12px 24px; border-radius: 9999px; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                            <i class="fas fa-arrow-left"></i> Back
+                        <button onclick="backToStep1()" style="background-color: white; color: #3b82f6; border: 2px solid #3b82f6; padding: 12px 24px; border-radius: 9999px; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Back
                         </button>
-                        <button onclick="nextStep(2)" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
+                        <button onclick="validateStep2()" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
                             Next <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Form Step 3: Scholarship Specific Questions -->
+                <!-- Form Step 3: Additional Information -->
                 <div id="step3" class="form-step" style="display: none;">
-                    <h3 style="font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 16px;" id="step3-title">Scholarship Specific Questions</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 16px;">Additional Information</h3>
                     
-                    <div id="rhodes-questions" style="display: none;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Preferred Program at Oxford</label>
-                                <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
-                                    <option value="">Select program</option>
-                                    <option value="mphil">MPhil</option>
-                                    <option value="msc">MSc</option>
-                                    <option value="dphil">DPhil (PhD)</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Specific Course of Study</label>
-                                <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your course of interest">
-                            </div>
-                            
-                            <div style="grid-column: 1 / -1;">
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Leadership Experience</label>
-                                <textarea rows="3" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Describe your leadership roles"></textarea>
-                            </div>
-                            
-                            <div style="grid-column: 1 / -1;">
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Personal Statement</label>
-                                <textarea rows="5" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Why Oxford and how it aligns with your goals"></textarea>
-                            </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                        <div>
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">English Proficiency Test Score (IELTS/TOEFL)</label>
+                            <input type="number" id="english-score" step="0.5" min="0" max="120" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Enter your score">
+                            <div id="english-error" style="color: #64748b; font-size: 0.75rem; margin-top: 4px;">Leave blank if not applicable</div>
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Work Experience (years)</label>
+                            <input type="number" id="work-exp" min="0" max="50" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Years of experience">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Research Publications (if any)</label>
+                            <input type="number" id="publications" min="0" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Number of publications">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Leadership Experience</label>
+                            <select id="leadership" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
+                                <option value="none">None</option>
+                                <option value="some">Some experience</option>
+                                <option value="significant">Significant experience</option>
+                            </select>
                         </div>
                     </div>
                     
-                    <div id="daad-questions" style="display: none;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Preferred Program in Germany</label>
-                                <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
-                                    <option value="">Select program</option>
-                                    <option value="master">Master's Degree</option>
-                                    <option value="phd">PhD</option>
-                                    <option value="research">Research Grant</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Field of Study/Research</label>
-                                <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your field of study/research">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">German Language Proficiency</label>
-                                <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
-                                    <option value="">Select level</option>
-                                    <option value="none">None</option>
-                                    <option value="basic">Basic</option>
-                                    <option value="intermediate">Intermediate</option>
-                                    <option value="advanced">Advanced</option>
-                                    <option value="fluent">Fluent</option>
-                                </select>
-                            </div>
-                            
-                            <div style="grid-column: 1 / -1;">
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Research Proposal (if applicable)</label>
-                                <textarea rows="5" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Describe your research objectives and methodology"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="fulbright-questions" style="display: none;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;">
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Preferred Program in U.S.</label>
-                                <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
-                                    <option value="">Select program</option>
-                                    <option value="master">Master's Degree</option>
-                                    <option value="phd">PhD</option>
-                                    <option value="research">Research Grant</option>
-                                    <option value="teaching">Teaching Assistantship</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Field of Study</label>
-                                <input type="text" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Your field of study">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">English Proficiency</label>
-                                <select style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;">
-                                    <option value="">Select level</option>
-                                    <option value="basic">Basic</option>
-                                    <option value="intermediate">Intermediate</option>
-                                    <option value="advanced">Advanced</option>
-                                    <option value="fluent">Fluent</option>
-                                    <option value="native">Native</option>
-                                </select>
-                            </div>
-                            
-                            <div style="grid-column: 1 / -1;">
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Study/Research Objectives</label>
-                                <textarea rows="5" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease;" placeholder="Describe your study/research goals in the U.S."></textarea>
-                            </div>
-                        </div>
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 4px;">Additional Information</label>
+                        <textarea id="additional-info" style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; color: #334155; outline: none; transition: border-color 0.3s ease; min-height: 100px;" placeholder="Any other relevant information about your achievements, awards, or special circumstances"></textarea>
                     </div>
                     
                     <div style="display: flex; justify-content: space-between;">
-                        <button onclick="prevStep(3)" style="background-color: white; color: #2563eb; border: 2px solid #2563eb; padding: 12px 24px; border-radius: 9999px; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                            <i class="fas fa-arrow-left"></i> Back
+                        <button onclick="backToStep2()" style="background-color: white; color: #3b82f6; border: 2px solid #3b82f6; padding: 12px 24px; border-radius: 9999px; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Back
                         </button>
-                        <button onclick="submitForm()" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
-                            Submit <i class="fas fa-check"></i>
+                        <button onclick="checkEligibility()" style="background-color: #10b981; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
+                            Check Eligibility <i class="fas fa-check"></i>
                         </button>
                     </div>
                 </div>
@@ -303,71 +518,206 @@
         </div>
 
         <!-- Results Section (hidden initially) -->
-        <div id="results-section" style="display: none; background-color: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0; padding: 32px; text-align: center;">
-            <div style="width: 60px; height: 60px; background-color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                <i class="fas fa-check" style="color: white; font-size: 24px;"></i>
+        <div id="results-section" style="display: none; background-color: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0; margin-bottom: 24px; overflow: hidden;">
+            <div style="padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 id="results-title" style="font-size: 1.5rem; font-weight: bold; color: #1e293b;">Eligibility Results</h2>
+                    <button onclick="backToForm()" style="background-color: white; color: #3b82f6; border: 2px solid #3b82f6; padding: 8px 16px; border-radius: 9999px; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center;">
+                        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Back
+                    </button>
+                </div>
+                
+                <div id="results-content">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+                
+                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
+                    <h3 style="font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 16px;">Next Steps</h3>
+                    <p style="color: #64748b; margin-bottom: 16px;">Based on your eligibility results, here are your recommended next steps:</p>
+                    <div id="next-steps">
+                        <!-- Next steps will be dynamically inserted here -->
+                    </div>
+                </div>
             </div>
-            <h2 style="font-size: 1.5rem; font-weight: bold; color: #1e293b; margin-bottom: 12px;">Eligibility Check Complete!</h2>
-            <p style="color: #64748b; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Thank you for completing the eligibility check. Based on your responses, here are your results:
-            </p>
-            
-            <div id="results-content" style="text-align: left; max-width: 800px; margin: 0 auto 32px;">
-                <!-- Results will be inserted here by JavaScript -->
-            </div>
-            
-            <button onclick="backToSelection()" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 9999px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
-                Check Another Scholarship
-            </button>
         </div>
     </main>
 
+  
+    <!-- Footer -->
+<footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+    
+    <!-- Brand Info -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+        <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+        <div>
+          <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+          <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+        </div>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+      <div style="display: flex; gap: 10px; margin-top: 12px;">
+        <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="flex: 1 1 160px; min-width: 160px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+        <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+        <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+        <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+        <li><a href="courses.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+        <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Explore Links -->
+    <div style="flex: 1 1 200px; min-width: 200px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+        <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+        <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+        <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+        <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+        <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+        <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+        <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+        <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Details -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+      <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+      <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+      <p style="margin: 0 0 10px;">📧 <a href="mailto:info@hitaishitrainings.com" style="color: #ecf0f1; text-decoration: none;">info@hitaishitrainings.com</a></p>
+      <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+    </div>
+
+    <!-- Newsletter -->
+    <div style="flex: 1 1 250px; min-width: 250px;">
+      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+      <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+      <form style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+        <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+    © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+    <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+    <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+  </div>
+
+  <!-- Auto Year Script -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</footer>
+
+
+<script>
+  // Add current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<style media="screen and (max-width: 768px)">
+  /* Mobile Responsive Styles */
+  footer > div > div:first-child {
+    flex-direction: column;
+    gap: 30px !important;
+    padding-bottom: 20px !important;
+  }
+  footer h3 {
+    margin-bottom: 18px !important;
+  }
+  footer form {
+    max-width: 100% !important;
+  }
+  footer input, footer button {
+    width: 100% !important;
+  }
+  .footer-brand {
+    text-align: center;
+    justify-content: center !important;
+  }
+  .social-links {
+    justify-content: center !important;
+  }
+</style>
+
     <script>
+        // Global variables
         let selectedScholarship = '';
-        
+        const scholarshipRequirements = {
+            rhodes: {
+                minGPA: 3.7,
+                minAge: 18,
+                maxAge: 28,
+                degreeRequired: 'bachelor',
+                countries: ['US', 'GB', 'CA', 'AU', 'IN', 'DE', 'FR', 'other'],
+                englishRequired: true,
+                minEnglishScore: 7.0, // IELTS
+                leadershipRequired: true
+            },
+            daad: {
+                minGPA: 3.0,
+                minAge: 18,
+                maxAge: 35,
+                degreeRequired: 'bachelor',
+                countries: ['all'], // DAAD is open to all countries
+                englishRequired: false, // Depends on program
+                minEnglishScore: 6.5, // IELTS
+                germanRequired: false // Depends on program
+            },
+            fulbright: {
+                minGPA: 3.0,
+                minAge: 18,
+                maxAge: 45,
+                degreeRequired: 'bachelor',
+                countries: ['all'], // Fulbright has programs for many countries
+                englishRequired: true,
+                minEnglishScore: 6.5, // IELTS
+                workExpPreferred: true
+            }
+        };
+
+        // Scholarship selection
         function selectScholarship(scholarship) {
             selectedScholarship = scholarship;
             
             // Highlight selected card
-            document.getElementById('rhodes-card').style.borderColor = scholarship === 'rhodes' ? '#2563eb' : '#e2e8f0';
-            document.getElementById('daad-card').style.borderColor = scholarship === 'daad' ? '#2563eb' : '#e2e8f0';
-            document.getElementById('fulbright-card').style.borderColor = scholarship === 'fulbright' ? '#2563eb' : '#e2e8f0';
+            document.querySelectorAll('[id$="-card"]').forEach(card => {
+                card.style.borderColor = '#e2e8f0';
+                card.style.backgroundColor = 'white';
+            });
+            document.getElementById(`${scholarship}-card`).style.borderColor = '#2563eb';
+            document.getElementById(`${scholarship}-card`).style.backgroundColor = '#f0f7ff';
             
-            // Show appropriate form title
-            let title = '';
-            switch(scholarship) {
-                case 'rhodes': title = 'Rhodes Scholarship Eligibility Check'; break;
-                case 'daad': title = 'DAAD Scholarship Eligibility Check'; break;
-                case 'fulbright': title = 'Fulbright Scholarship Eligibility Check'; break;
-            }
-            document.getElementById('form-title').textContent = title;
-            
-            // Hide selection cards and show form
-            document.querySelector('h1').style.display = 'none';
-            document.querySelector('p').style.display = 'none';
-            document.querySelector('div > div:first-child > div').style.display = 'none';
+            // Show form
             document.getElementById('eligibility-form').style.display = 'block';
+            document.getElementById('form-title').textContent = `${capitalizeFirstLetter(scholarship)} Scholarship Eligibility`;
             
-            // Reset form to step 1
-            resetForm();
+            // Scroll to form
+            document.getElementById('eligibility-form').scrollIntoView({ behavior: 'smooth' });
         }
-        
+
         function backToSelection() {
-            // Show selection cards and hide form/results
-            document.querySelector('h1').style.display = 'block';
-            document.querySelector('p').style.display = 'block';
-            document.querySelector('div > div:first-child > div').style.display = 'grid';
             document.getElementById('eligibility-form').style.display = 'none';
-            document.getElementById('results-section').style.display = 'none';
+            selectedScholarship = '';
             
-            // Reset card borders
-            document.getElementById('rhodes-card').style.borderColor = '#e2e8f0';
-            document.getElementById('daad-card').style.borderColor = '#e2e8f0';
-            document.getElementById('fulbright-card').style.borderColor = '#e2e8f0';
-        }
-        
-        function resetForm() {
-            // Reset to step 1
+            // Reset form steps
             document.getElementById('step1').style.display = 'block';
             document.getElementById('step2').style.display = 'none';
             document.getElementById('step3').style.display = 'none';
@@ -379,157 +729,296 @@
             document.getElementById('step2-indicator').style.color = '#64748b';
             document.getElementById('step3-indicator').style.backgroundColor = '#e2e8f0';
             document.getElementById('step3-indicator').style.color = '#64748b';
-            document.getElementById('step1-connector').style.backgroundColor = '#e2e8f0';
-            document.getElementById('step2-connector').style.backgroundColor = '#e2e8f0';
             
-            // Hide all scholarship-specific questions
-            document.getElementById('rhodes-questions').style.display = 'none';
-            document.getElementById('daad-questions').style.display = 'none';
-            document.getElementById('fulbright-questions').style.display = 'none';
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        function nextStep(currentStep) {
-            // Hide current step
-            document.getElementById(`step${currentStep}`).style.display = 'none';
+
+        // Form navigation
+        function validateStep1() {
+            const fullName = document.getElementById('full-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const country = document.getElementById('country').value;
+            const dob = document.getElementById('dob').value;
             
-            // Show next step
-            document.getElementById(`step${currentStep + 1}`).style.display = 'block';
+            let isValid = true;
             
-            // Update progress indicators
-            if (currentStep === 1) {
+            // Validate name
+            if (fullName === '') {
+                document.getElementById('name-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('name-error').style.display = 'none';
+            }
+            
+            // Validate email
+            if (email === '' || !isValidEmail(email)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('email-error').style.display = 'none';
+            }
+            
+            // Validate country
+            if (country === '') {
+                document.getElementById('country-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('country-error').style.display = 'none';
+            }
+            
+            // Validate date of birth
+            if (dob === '') {
+                document.getElementById('dob-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('dob-error').style.display = 'none';
+            }
+            
+            if (isValid) {
+                // Move to step 2
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                
+                // Update progress indicators
                 document.getElementById('step1-indicator').style.backgroundColor = '#10b981';
                 document.getElementById('step1-connector').style.backgroundColor = '#10b981';
                 document.getElementById('step2-indicator').style.backgroundColor = '#2563eb';
                 document.getElementById('step2-indicator').style.color = 'white';
+            }
+        }
+
+        function backToStep1() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            
+            // Update progress indicators
+            document.getElementById('step1-indicator').style.backgroundColor = '#2563eb';
+            document.getElementById('step1-connector').style.backgroundColor = '#e2e8f0';
+            document.getElementById('step2-indicator').style.backgroundColor = '#e2e8f0';
+            document.getElementById('step2-indicator').style.color = '#64748b';
+        }
+
+        function validateStep2() {
+            const degree = document.getElementById('degree').value;
+            const gpa = parseFloat(document.getElementById('gpa').value);
+            const institution = document.getElementById('institution').value.trim();
+            const fieldOfStudy = document.getElementById('field-of-study').value.trim();
+            
+            let isValid = true;
+            
+            // Validate degree
+            if (degree === '') {
+                document.getElementById('degree-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('degree-error').style.display = 'none';
+            }
+            
+            // Validate GPA
+            if (isNaN(gpa) || gpa < 0 || gpa > 4) {
+                document.getElementById('gpa-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('gpa-error').style.display = 'none';
+            }
+            
+            // Validate institution
+            if (institution === '') {
+                document.getElementById('institution-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('institution-error').style.display = 'none';
+            }
+            
+            // Validate field of study
+            if (fieldOfStudy === '') {
+                document.getElementById('field-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('field-error').style.display = 'none';
+            }
+            
+            if (isValid) {
+                // Move to step 3
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step3').style.display = 'block';
                 
-                // Show appropriate scholarship-specific questions in step 3
-                if (currentStep + 1 === 2) {
-                    // This is step 2, no special handling needed
-                } else if (currentStep + 1 === 3) {
-                    document.getElementById(`${selectedScholarship}-questions`).style.display = 'block';
-                    document.getElementById('step3-title').textContent = 
-                        selectedScholarship === 'rhodes' ? 'Oxford Study Plans' :
-                        selectedScholarship === 'daad' ? 'German Study/Research Plans' :
-                        'U.S. Study/Research Plans';
-                }
-            } else if (currentStep === 2) {
+                // Update progress indicators
                 document.getElementById('step2-indicator').style.backgroundColor = '#10b981';
                 document.getElementById('step2-connector').style.backgroundColor = '#10b981';
                 document.getElementById('step3-indicator').style.backgroundColor = '#2563eb';
                 document.getElementById('step3-indicator').style.color = 'white';
-                
-                // Show appropriate scholarship-specific questions
-                document.getElementById(`${selectedScholarship}-questions`).style.display = 'block';
-                document.getElementById('step3-title').textContent = 
-                    selectedScholarship === 'rhodes' ? 'Oxford Study Plans' :
-                    selectedScholarship === 'daad' ? 'German Study/Research Plans' :
-                    'U.S. Study/Research Plans';
             }
         }
-        
-        function prevStep(currentStep) {
-            // Hide current step
-            document.getElementById(`step${currentStep}`).style.display = 'none';
-            
-            // Show previous step
-            document.getElementById(`step${currentStep - 1}`).style.display = 'block';
+
+        function backToStep2() {
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('step3').style.display = 'none';
             
             // Update progress indicators
-            if (currentStep === 2) {
-                document.getElementById('step1-indicator').style.backgroundColor = '#2563eb';
-                document.getElementById('step1-indicator').style.color = 'white';
-                document.getElementById('step1-connector').style.backgroundColor = '#e2e8f0';
-                document.getElementById('step2-indicator').style.backgroundColor = '#e2e8f0';
-                document.getElementById('step2-indicator').style.color = '#64748b';
-            } else if (currentStep === 3) {
-                document.getElementById('step2-indicator').style.backgroundColor = '#2563eb';
-                document.getElementById('step2-indicator').style.color = 'white';
-                document.getElementById('step2-connector').style.backgroundColor = '#e2e8f0';
-                document.getElementById('step3-indicator').style.backgroundColor = '#e2e8f0';
-                document.getElementById('step3-indicator').style.color = '#64748b';
-                
-                // Hide scholarship-specific questions
-                document.getElementById(`${selectedScholarship}-questions`).style.display = 'none';
-            }
+            document.getElementById('step2-indicator').style.backgroundColor = '#2563eb';
+            document.getElementById('step2-connector').style.backgroundColor = '#e2e8f0';
+            document.getElementById('step3-indicator').style.backgroundColor = '#e2e8f0';
+            document.getElementById('step3-indicator').style.color = '#64748b';
         }
-        
-        function submitForm() {
-            // Hide form and show results
+
+        function backToForm() {
+            document.getElementById('results-section').style.display = 'none';
+            document.getElementById('eligibility-form').style.display = 'block';
+        }
+
+        // Eligibility check
+        function checkEligibility() {
+            // Get all form values
+            const fullName = document.getElementById('full-name').value.trim();
+            const dob = new Date(document.getElementById('dob').value);
+            const today = new Date();
+            const age = today.getFullYear() - dob.getFullYear();
+            const country = document.getElementById('country').value;
+            const degree = document.getElementById('degree').value;
+            const gpa = parseFloat(document.getElementById('gpa').value);
+            const englishScore = document.getElementById('english-score').value ? parseFloat(document.getElementById('english-score').value) : 0;
+            const workExp = document.getElementById('work-exp').value ? parseInt(document.getElementById('work-exp').value) : 0;
+            const publications = document.getElementById('publications').value ? parseInt(document.getElementById('publications').value) : 0;
+            const leadership = document.getElementById('leadership').value;
+            
+            // Get requirements for selected scholarship
+            const requirements = scholarshipRequirements[selectedScholarship];
+            
+            // Check eligibility
+            let isEligible = true;
+            let reasons = [];
+            
+            // Check age
+            if (age < requirements.minAge || age > requirements.maxAge) {
+                isEligible = false;
+                reasons.push(`Age must be between ${requirements.minAge} and ${requirements.maxAge} years`);
+            }
+            
+            // Check country (for Rhodes)
+            if (selectedScholarship === 'rhodes' && !requirements.countries.includes(country)) {
+                isEligible = false;
+                reasons.push('Not eligible based on your country of citizenship');
+            }
+            
+            // Check degree
+            if ((degree === 'bachelor' && requirements.degreeRequired === 'master') || 
+                (degree === 'other' && requirements.degreeRequired !== 'other')) {
+                isEligible = false;
+                reasons.push(`Requires at least a ${requirements.degreeRequired === 'bachelor' ? "Bachelor's" : "Master's"} degree`);
+            }
+            
+            // Check GPA
+            if (gpa < requirements.minGPA) {
+                isEligible = false;
+                reasons.push(`Minimum GPA requirement not met (requires ${requirements.minGPA}+)`);
+            }
+            
+            // Check English proficiency (if required)
+            if (requirements.englishRequired && englishScore < requirements.minEnglishScore) {
+                isEligible = false;
+                reasons.push(`English proficiency score too low (requires ${requirements.minEnglishScore}+)`);
+            }
+            
+            // Check leadership (for Rhodes)
+            if (requirements.leadershipRequired && leadership === 'none') {
+                isEligible = false;
+                reasons.push('Leadership experience required');
+            }
+            
+            // Prepare results
+            let resultsHTML = '';
+            let nextStepsHTML = '';
+            
+            if (isEligible) {
+                resultsHTML = `
+                    <div style="background-color: #ecfdf5; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #10b981;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <div style="width: 40px; height: 40px; border-radius: 9999px; background-color: #10b981; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-check" style="color: white; font-size: 18px;"></i>
+                            </div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #065f46;">Congratulations!</h3>
+                        </div>
+                        <p style="color: #065f46; margin-bottom: 12px;">You meet the basic eligibility requirements for the ${capitalizeFirstLetter(selectedScholarship)} Scholarship.</p>
+                    </div>
+                    
+                    <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Your Strengths</h3>
+                        <ul style="color: #334155; padding-left: 20px;">
+                            <li style="margin-bottom: 8px;">Strong academic record (GPA: ${gpa})</li>
+                            ${englishScore >= requirements.minEnglishScore ? `<li style="margin-bottom: 8px;">Excellent English proficiency (Score: ${englishScore})</li>` : ''}
+                            ${workExp > 0 ? `<li style="margin-bottom: 8px;">Relevant work experience (${workExp} years)</li>` : ''}
+                            ${publications > 0 ? `<li style="margin-bottom: 8px;">Research experience (${publications} publications)</li>` : ''}
+                            ${leadership !== 'none' ? `<li style="margin-bottom: 8px;">${capitalizeFirstLetter(leadership)} leadership experience</li>` : ''}
+                        </ul>
+                    </div>
+                `;
+                
+                nextStepsHTML = `
+                    <ul style="color: #334155; padding-left: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>Prepare your application:</strong> Start gathering required documents (transcripts, recommendation letters, etc.)</li>
+                        <li style="margin-bottom: 8px;"><strong>Write a compelling personal statement:</strong> Highlight your achievements and goals</li>
+                        <li style="margin-bottom: 8px;"><strong>Contact recommenders:</strong> Give them plenty of time to write strong letters</li>
+                        <li style="margin-bottom: 8px;"><strong>Check deadlines:</strong> Mark important dates on your calendar</li>
+                        ${englishScore < requirements.minEnglishScore ? `<li style="margin-bottom: 8px; color: #b45309;"><strong>Improve English score:</strong> Consider retaking the test to meet the ${requirements.minEnglishScore}+ requirement</li>` : ''}
+                    </ul>
+                    <a href="contact_us.html" style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; margin-top: 16px;">Get Application Assistance</a>
+                `;
+            } else {
+                resultsHTML = `
+                    <div style="background-color: #fef2f2; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #ef4444;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <div style="width: 40px; height: 40px; border-radius: 9999px; background-color: #ef4444; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-times" style="color: white; font-size: 18px;"></i>
+                            </div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #991b1b;">Not Eligible</h3>
+                        </div>
+                        <p style="color: #991b1b; margin-bottom: 12px;">You don't currently meet the basic eligibility requirements for the ${capitalizeFirstLetter(selectedScholarship)} Scholarship.</p>
+                    </div>
+                    
+                    <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Reasons</h3>
+                        <ul style="color: #334155; padding-left: 20px;">
+                            ${reasons.map(reason => `<li style="margin-bottom: 8px;">${reason}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                nextStepsHTML = `
+                    <ul style="color: #334155; padding-left: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>Consider alternative scholarships:</strong> We can help you find other opportunities that match your profile</li>
+                        ${age < requirements.minAge ? `<li style="margin-bottom: 8px;"><strong>Wait until you're older:</strong> You'll be eligible in ${requirements.minAge - age} years</li>` : ''}
+                        ${age > requirements.maxAge ? `<li style="margin-bottom: 8px;"><strong>Look for age-flexible programs:</strong> Some scholarships have no age limits</li>` : ''}
+                        ${gpa < requirements.minGPA ? `<li style="margin-bottom: 8px;"><strong>Improve your GPA:</strong> Consider retaking courses or pursuing additional education</li>` : ''}
+                        ${(requirements.englishRequired && englishScore < requirements.minEnglishScore) ? `<li style="margin-bottom: 8px;"><strong>Improve English proficiency:</strong> Consider language courses or test preparation</li>` : ''}
+                    </ul>
+                    <div style="display: flex; gap: 12px; margin-top: 16px;">
+                        <a href="contact_us.html" style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none;">Get Personalized Advice</a>
+                        <button onclick="backToSelection()" style="background-color: white; color: #3b82f6; border: 2px solid #3b82f6; padding: 12px 24px; border-radius: 6px; font-weight: 600; cursor: pointer;">Check Other Scholarships</button>
+                    </div>
+                `;
+            }
+            
+            // Display results
+            document.getElementById('results-content').innerHTML = resultsHTML;
+            document.getElementById('next-steps').innerHTML = nextStepsHTML;
             document.getElementById('eligibility-form').style.display = 'none';
             document.getElementById('results-section').style.display = 'block';
+            document.getElementById('results-title').textContent = `${capitalizeFirstLetter(selectedScholarship)} Scholarship Results`;
             
-            // Generate results based on scholarship type
-            const resultsContent = document.getElementById('results-content');
-            resultsContent.innerHTML = '';
-            
-            let resultsHTML = '';
-            const scholarshipName = selectedScholarship === 'rhodes' ? 'Rhodes Scholarship' : 
-                                  selectedScholarship === 'daad' ? 'DAAD Scholarship' : 
-                                  'Fulbright Scholarship';
-            
-            resultsHTML += `
-                <div style="margin-bottom: 24px;">
-                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #1e293b; margin-bottom: 12px;">${scholarshipName} Eligibility</h3>
-                    <div style="background-color: #f1f5f9; border-radius: 8px; padding: 16px;">
-                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 8px;"></i>
-                            <span>You meet the basic eligibility criteria</span>
-                        </div>
-                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 8px;"></i>
-                            <span>Your academic background is competitive</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <i class="fas fa-info-circle" style="color: #3b82f6; margin-right: 8px;"></i>
-                            <span>Next steps: Prepare your application materials</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 24px;">
-                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Recommendations</h3>
-                    <ul style="list-style-type: none; padding-left: 0;">
-                        <li style="margin-bottom: 8px; display: flex; align-items: flex-start;">
-                            <i class="fas fa-check" style="color: #10b981; margin-right: 8px; margin-top: 4px;"></i>
-                            <span>Start your application early to meet all deadlines</span>
-                        </li>
-                        <li style="margin-bottom: 8px; display: flex; align-items: flex-start;">
-                            <i class="fas fa-check" style="color: #10b981; margin-right: 8px; margin-top: 4px;"></i>
-                            <span>Request recommendation letters from professors who know you well</span>
-                        </li>
-                        <li style="margin-bottom: 8px; display: flex; align-items: flex-start;">
-                            <i class="fas fa-check" style="color: #10b981; margin-right: 8px; margin-top: 4px;"></i>
-                            <span>Tailor your personal statement to the scholarship's values</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Resources</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                        <a href="#" style="display: block; background-color: #f1f5f9; border-radius: 8px; padding: 16px; text-decoration: none; color: #2563eb; font-weight: 500; transition: all 0.3s ease;">
-                            <div style="display: flex; align-items: center;">
-                                <i class="fas fa-file-alt" style="margin-right: 8px;"></i>
-                                <span>Official Application Guide</span>
-                            </div>
-                        </a>
-                        <a href="#" style="display: block; background-color: #f1f5f9; border-radius: 8px; padding: 16px; text-decoration: none; color: #2563eb; font-weight: 500; transition: all 0.3s ease;">
-                            <div style="display: flex; align-items: center;">
-                                <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>
-                                <span>Important Deadlines</span>
-                            </div>
-                        </a>
-                        <a href="#" style="display: block; background-color: #f1f5f9; border-radius: 8px; padding: 16px; text-decoration: none; color: #2563eb; font-weight: 500; transition: all 0.3s ease;">
-                            <div style="display: flex; align-items: center;">
-                                <i class="fas fa-users" style="margin-right: 8px;"></i>
-                                <span>Connect with Alumni</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            resultsContent.innerHTML = resultsHTML;
+            // Scroll to results
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Helper functions
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
     </script>
 </body>

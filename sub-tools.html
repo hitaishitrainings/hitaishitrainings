@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Tools Courses - Hitaishi Trainings | Master Development Tools</title>
+    <meta name="description" content="Master essential software development tools with our comprehensive courses. Learn VS Code, Git, Docker, Kubernetes, CI/CD tools, and more with expert instructors.">
+    <meta name="keywords" content="software tools courses, development tools training, git course, docker training, kubernetes course, VS Code mastery, CI/CD tools">
+    <meta name="author" content="Hitaishi Trainings">
+    <link rel="canonical" href="https://www.hitaishitrainings.com/software-tools-courses">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse the same animations from software_tools.html */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .course-category {
+            margin: 4rem 0;
+            padding: 2rem 0;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .course-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .course-card ul {
+            padding-left: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+
+        /* New Tools Section Styles */
+        .tools-section {
+            padding: 6rem 1rem;
+            background-color: white;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        .tool-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .tool-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .tool-card:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .dev-tools-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .data-science-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .devops-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .check-icon {
+            background: #dbeafe;
+            color: #1e40af;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .data-science-check {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .devops-check {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-section {
+                padding: 4rem 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .tools-section {
+                padding: 4rem 1rem;
+            }
+
+            .tool-card {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header would be included here (same as software_tools.html) -->
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 style="font-size: 3rem; margin-bottom: 1.5rem;">Software Tools Courses</h1>
+            <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 2.5rem;">
+                Master the tools that power modern development workflows with our expert-led courses
+            </p>
+            <a href="#tools-overview" class="btn btn-primary">Explore Courses</a>
+        </div>
+    </section>
+
+    <!-- Tools Overview Section -->
+    <section id="tools-overview" class="tools-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:5rem;">
+                <h2 class="section-title">Comprehensive Tool Training</h2>
+                <p class="section-subtitle">Learn the tools that power modern tech teams with our expert-led courses</p>
+            </div>
+
+            <div class="tools-grid">
+                <!-- Development Tools Card -->
+                <div class="tool-card">
+                    <div style="padding:2rem; text-align:center;">
+                        <div class="tool-icon dev-tools-icon">
+                            <i class="fas fa-code" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#1e40af; margin-top:0; font-size:1.5rem; font-weight:600;">Development Tools</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Essential tools for modern software development workflows</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Visual Studio Code & JetBrains IDEs</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Git, GitHub & GitLab</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Postman & API testing tools</span>
+                            </li>
+                        </ul>
+                        <a href="#editors" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#eff6ff; color:#1e40af; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Science Card -->
+                <div class="tool-card">
+                    <div style="padding:2rem; text-align:center;">
+                        <div class="tool-icon data-science-icon">
+                            <i class="fas fa-chart-line" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#065f46; margin-top:0; font-size:1.5rem; font-weight:600;">Data Science</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Tools for data analysis, visualization, and machine learning</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon data-science-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Python (Pandas, NumPy, Scikit-learn)</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon data-science-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Jupyter Notebooks & VS Code</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon data-science-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Tableau & Power BI</span>
+                            </li>
+                        </ul>
+                        <a href="#data-science" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#ecfdf5; color:#065f46; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cloud & DevOps Card -->
+                <div class="tool-card">
+                    <div style="padding:2rem; text-align:center;">
+                        <div class="tool-icon devops-icon">
+                            <i class="fas fa-cloud" style="font-size:2rem; color:white;"></i>
+                        </div>
+                        <h3 style="color:#92400e; margin-top:0; font-size:1.5rem; font-weight:600;">Cloud & DevOps</h3>
+                        <p style="color:#4b5563; margin-bottom:1.5rem;">Tools for infrastructure, deployment, and automation</p>
+                        <ul style="padding-left:0; list-style:none; margin-bottom:2rem; text-align:left;">
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon devops-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>AWS, Azure & Google Cloud</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon devops-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Docker & Kubernetes</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem; display:flex; align-items:flex-start;">
+                                <span class="check-icon devops-check">
+                                    <i class="fas fa-check" style="font-size:0.75rem;"></i>
+                                </span>
+                                <span>Terraform & Ansible</span>
+                            </li>
+                        </ul>
+                        <a href="#containers" style="display:inline-flex; align-items:center; padding:0.75rem 1.5rem; background:#fffbeb; color:#92400e; text-decoration:none; border-radius:8px; font-weight:600; transition:all 0.3s ease;">
+                            View Courses <i class="fas fa-arrow-right" style="margin-left:8px; font-size:0.875rem;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Editors & IDEs Section -->
+    <section id="editors" class="course-category">
+        <div class="container">
+            <h2 class="section-title">Code Editors & IDEs</h2>
+            <p class="section-subtitle">Master the tools that developers use daily to write, debug, and optimize code</p>
+            
+            <div class="course-card">
+                <h3>Visual Studio Code Mastery</h3>
+                <p>Become proficient in the world's most popular code editor with these essential skills:</p>
+                <ul>
+                    <li>Customizing your workspace with themes and extensions</li>
+                    <li>Keyboard shortcuts for maximum productivity</li>
+                    <li>Integrated terminal and debugging tools</li>
+                    <li>Git integration and source control</li>
+                    <li>Advanced editing features like multi-cursor</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>JetBrains IDE Suite (IntelliJ, PyCharm, WebStorm)</h3>
+                <p>Professional-grade IDEs for specific languages and frameworks:</p>
+                <ul>
+                    <li>IntelliJ IDEA for Java development</li>
+                    <li>PyCharm for Python development</li>
+                    <li>WebStorm for JavaScript and frontend development</li>
+                    <li>Database tools and version control integration</li>
+                    <li>Refactoring and code analysis tools</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Version Control Section -->
+    <section id="version-control" class="course-category" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">Version Control Systems</h2>
+            <p class="section-subtitle">Learn to manage code changes and collaborate effectively with version control</p>
+            
+            <div class="course-card">
+                <h3>Git Complete: From Beginner to Advanced</h3>
+                <p>Comprehensive Git training for all skill levels:</p>
+                <ul>
+                    <li>Git fundamentals and workflow</li>
+                    <li>Branching and merging strategies</li>
+                    <li>Resolving merge conflicts</li>
+                    <li>Git hooks and custom commands</li>
+                    <li>Advanced techniques like rebasing</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>GitHub & GitLab for Teams</h3>
+                <p>Collaborative development with Git platforms:</p>
+                <ul>
+                    <li>Pull requests and code reviews</li>
+                    <li>CI/CD pipelines</li>
+                    <li>Project management with issues and boards</li>
+                    <li>Security best practices</li>
+                    <li>Open source contribution workflow</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Tools Section -->
+    <section id="api" class="course-category">
+        <div class="container">
+            <h2 class="section-title">API Development Tools</h2>
+            <p class="section-subtitle">Tools for designing, testing, and documenting APIs</p>
+            
+            <div class="course-card">
+                <h3>Postman for API Development</h3>
+                <p>Master API testing and development with Postman:</p>
+                <ul>
+                    <li>Sending requests and inspecting responses</li>
+                    <li>Writing and running tests</li>
+                    <li>Environment variables and workflows</li>
+                    <li>API documentation</li>
+                    <li>Mock servers and monitoring</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>Swagger/OpenAPI Specification</h3>
+                <p>Design and document RESTful APIs:</p>
+                <ul>
+                    <li>OpenAPI specification format</li>
+                    <li>Design-first API development</li>
+                    <li>Generating client SDKs</li>
+                    <li>Interactive API documentation</li>
+                    <li>Integration with development tools</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Containers Section -->
+    <section id="containers" class="course-category" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">Containerization Tools</h2>
+            <p class="section-subtitle">Package and deploy applications with container technologies</p>
+            
+            <div class="course-card">
+                <h3>Docker Fundamentals</h3>
+                <p>Containerize your applications with Docker:</p>
+                <ul>
+                    <li>Docker architecture and components</li>
+                    <li>Building custom images with Dockerfiles</li>
+                    <li>Container networking and storage</li>
+                    <li>Docker Compose for multi-container apps</li>
+                    <li>Best practices for production</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>Kubernetes for Developers</h3>
+                <p>Orchestrate containers at scale:</p>
+                <ul>
+                    <li>Kubernetes architecture overview</li>
+                    <li>Pods, deployments, and services</li>
+                    <li>ConfigMaps and Secrets</li>
+                    <li>Scaling and auto-scaling</li>
+                    <li>Monitoring and logging</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Management Section -->
+    <section id="management" class="course-category">
+        <div class="container">
+            <h2 class="section-title">Project Management Tools</h2>
+            <p class="section-subtitle">Tools for agile planning, tracking, and team collaboration</p>
+            
+            <div class="course-card">
+                <h3>Jira for Agile Teams</h3>
+                <p>Manage software projects with Jira:</p>
+                <ul>
+                    <li>Scrum and Kanban boards</li>
+                    <li>Creating and managing issues</li>
+                    <li>Custom workflows</li>
+                    <li>Reporting and dashboards</li>
+                    <li>Integrations with development tools</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>Trello & Asana for Project Management</h3>
+                <p>Lightweight project management solutions:</p>
+                <ul>
+                    <li>Board and card systems</li>
+                    <li>Task assignment and tracking</li>
+                    <li>Collaboration features</li>
+                    <li>Automation rules</li>
+                    <li>Integrations with other tools</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Tools Section -->
+    <section id="design" class="course-category" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">Design & Prototyping Tools</h2>
+            <p class="section-subtitle">Create stunning interfaces and user experiences</p>
+            
+            <div class="course-card">
+                <h3>Figma for UI/UX Design</h3>
+                <p>Collaborative interface design:</p>
+                <ul>
+                    <li>Vector editing tools</li>
+                    <li>Components and design systems</li>
+                    <li>Prototyping and animations</li>
+                    <li>Collaboration features</li>
+                    <li>Handoff to developers</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>Adobe XD for Designers</h3>
+                <p>Professional design and prototyping:</p>
+                <ul>
+                    <li>Artboards and responsive design</li>
+                    <li>Repeat grid and assets</li>
+                    <li>Micro-interactions</li>
+                    <li>Voice prototyping</li>
+                    <li>Sharing and feedback</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Tools Section -->
+    <section id="collaboration" class="course-category">
+        <div class="container">
+            <h2 class="section-title">Team Collaboration Tools</h2>
+            <p class="section-subtitle">Communicate and work together effectively</p>
+            
+            <div class="course-card">
+                <h3>Slack for Teams</h3>
+                <p>Team communication platform:</p>
+                <ul>
+                    <li>Channels and threads</li>
+                    <li>Integrations with other tools</li>
+                    <li>File sharing and search</li>
+                    <li>Workflow automation</li>
+                    <li>Best practices for teams</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>Remote Pair Programming Tools</h3>
+                <p>Collaborative coding solutions:</p>
+                <ul>
+                    <li>VS Code Live Share</li>
+                    <li>JetBrains Code With Me</li>
+                    <li>Teletype for Atom</li>
+                    <li>Screen sharing alternatives</li>
+                    <li>Best practices for remote pairing</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Tools Section -->
+    <section id="build" class="course-category" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">Build & CI/CD Tools</h2>
+            <p class="section-subtitle">Automate your development workflow</p>
+            
+            <div class="course-card">
+                <h3>Jenkins for CI/CD</h3>
+                <p>Automate your build pipeline:</p>
+                <ul>
+                    <li>Setting up Jenkins</li>
+                    <li>Creating pipelines</li>
+                    <li>Integrating with version control</li>
+                    <li>Automated testing</li>
+                    <li>Deployment strategies</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+            
+            <div class="course-card">
+                <h3>GitHub Actions & GitLab CI</h3>
+                <p>Modern CI/CD solutions:</p>
+                <ul>
+                    <li>Workflow syntax</li>
+                    <li>Building, testing, and deploying</li>
+                    <li>Container-based workflows</li>
+                    <li>Caching and artifacts</li>
+                    <li>Security scanning</li>
+                </ul>
+                <a href="contact_us.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 4rem 1rem; background: linear-gradient(135deg, #1e40af, #1e3a8a); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Master These Tools?</h2>
+            <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 2.5rem;">
+                Our expert instructors will help you become proficient in the tools that matter most for your career
+            </p>
+            <a href="contact_us.html" class="btn" style="background: white; color: #1e40af; padding: 1rem 2rem; font-size: 1.1rem;">
+                Contact Admissions
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer would be included here (same as software_tools.html) -->
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

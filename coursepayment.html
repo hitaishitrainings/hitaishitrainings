@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment & Payment | Hitaishi Trainings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #f8f9fa;
+            --text-color: #1c1d1f;
+            --box-shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-medium);
+        }
+
+        .payment-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .payment-summary {
+            background: var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .payment-summary p {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .payment-summary strong {
+            color: var(--primary-color);
+        }
+
+        .payment-summary .summary-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .payment-option {
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .payment-option i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .payment-option span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .enroll-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .enroll-btn:hover {
+            background-color: #4a1dbb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="payment-card">
+            <h2>Complete Your Enrollment</h2>
+            
+            <div id="paymentDetails">
+                <p>Loading course details...</p>
+            </div>
+
+            <div class="payment-options">
+                <div class="payment-option">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Pay with Credit/Debit Card</span>
+                </div>
+                <div class="payment-option">
+                    <i class="fab fa-paypal"></i>
+                    <span>Pay with PayPal</span>
+                </div>
+                <div class="payment-option">
+                    <i class="fas fa-qrcode"></i>
+                    <span>Pay with UPI / QR Code</span>
+                </div>
+            </div>
+
+            <button class="enroll-btn" onclick="processPayment()">Pay Now</button>
+            <p id="paymentStatus" style="text-align: center; margin-top: 1rem;"></p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:5000";
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get("courseId");
+        const paymentDetailsDiv = document.getElementById("paymentDetails");
+        const paymentStatusDiv = document.getElementById("paymentStatus");
+
+        if (!courseId) {
+            paymentDetailsDiv.innerHTML = "<p style='color: red; text-align: center;'>Error: No course ID found. Please go back and select a course.</p>";
+        } else {
+            fetchCourseDetails(courseId);
+        }
+
+        function fetchCourseDetails(id) {
+            // This is a dummy endpoint, you'd need a real one on your backend
+            fetch(`${API_BASE}/api/get-course/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.course) {
+                        const course = data.course;
+                        paymentDetailsDiv.innerHTML = `
+                            <div class="payment-summary">
+                                <p><strong>Course:</strong> ${course.title}</p>
+                                <p><strong>Duration:</strong> ${course.duration}</p>
+                                <p><strong>Fee:</strong> <span class="summary-price">₹${course.fee}</span></p>
+                            </div>
+                        `;
+                    } else {
+                        paymentDetailsDiv.innerHTML = "<p style='color: red; text-align: center;'>Course details could not be loaded.</p>";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching course details:", err);
+                    paymentDetailsDiv.innerHTML = "<p style='color: red; text-align: center;'>An error occurred while fetching course details.</p>";
+                });
+        }
+
+        function processPayment() {
+            paymentStatusDiv.innerHTML = "Processing payment...";
+            paymentStatusDiv.style.color = "blue";
+            // In a real application, this would call a secure backend endpoint
+            // or a third-party payment gateway SDK (e.g., Stripe, PayPal, Razorpay)
+            // with the courseId and amount.
+            
+            setTimeout(() => {
+                const isSuccess = Math.random() > 0.3; // Simulate success/failure
+                if (isSuccess) {
+                    paymentStatusDiv.innerHTML = "Payment successful! 🎉 Redirecting to your dashboard...";
+                    paymentStatusDiv.style.color = "green";
+                    // Redirect to a success page or user dashboard
+                    // window.location.href = "dashboard.html?enrollment=success";
+                } else {
+                    paymentStatusDiv.innerHTML = "Payment failed. Please try again or contact support. 😢";
+                    paymentStatusDiv.style.color = "red";
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

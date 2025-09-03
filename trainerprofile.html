@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Profile Setup | Hitaishi Trainings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3f37c9;
+      --secondary: #4cc9f0;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --danger: #dc3545;
+      --success: #28a745;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      font-size: 0.95rem;
+      transition: var(--transition);
+      background-color: var(--light);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .profile-image-section {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-image-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px;
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--light-gray);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .profile-image-container:hover {
+      border-color: var(--primary);
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+    }
+
+    .profile-image-placeholder i {
+      font-size: 3rem;
+    }
+
+    .profile-image-upload {
+      display: none;
+    }
+
+    .profile-image-label {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 8px 15px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .profile-image-label:hover {
+      background: var(--primary-dark);
+    }
+
+    button[type="submit"] {
+      grid-column: 1 / -1;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-user-edit"></i> Trainer Profile Setup</h2>
+    
+    <form id="profileForm" enctype="multipart/form-data">
+      <!-- Profile Image Section -->
+      <div class="profile-image-section">
+        <div class="profile-image-container" id="profileImageContainer">
+          <div class="profile-image-placeholder" id="profileImagePlaceholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <img src="" alt="Profile" class="profile-image" id="profileImage" style="display: none;">
+        </div>
+        <input type="file" id="profileImageUpload" class="profile-image-upload" accept="image/*">
+        <label for="profileImageUpload" class="profile-image-label">
+          <i class="fas fa-camera"></i> Upload Profile Picture
+        </label>
+        <p class="form-note">Recommended size: 500x500 pixels (JPG/PNG)</p>
+      </div>
+
+      <div class="form-grid">
+        <!-- Personal Details -->
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" />
+          <p class="form-note">10 digit phone number without country code</p>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+        </div>
+
+        <!-- Professional Details -->
+        <div class="form-group">
+          <label for="qualification">Highest Qualification</label>
+          <input type="text" id="qualification" name="qualification" required />
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Years of Experience</label>
+          <input type="number" id="experience" name="experience" required min="0" step="0.5" />
+          <p class="form-note">Can include half years (e.g., 2.5)</p>
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <input type="text" id="skills" name="skills" placeholder="e.g., Python, Data Science, Teaching" required />
+          <p class="form-note">Separate multiple skills with commas</p>
+        </div>
+
+        <div class="form-group">
+          <label for="certifications">Certifications</label>
+          <input type="text" id="certifications" name="certifications" placeholder="Optional" />
+        </div>
+
+        <div class="form-group">
+          <label for="linkedin">LinkedIn/Profile Link</label>
+          <input type="url" id="linkedin" name="linkedin" placeholder="Optional" />
+        </div>
+      </div>
+
+      <button type="submit">
+        <i class="fas fa-save"></i> Save Profile
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+    if (!trainer) {
+      alert("You must be logged in first.");
+      window.location.href = "trainerlogin.html";
+    }
+
+    // DOM Elements
+    const profileForm = document.getElementById("profileForm");
+    const profileImageContainer = document.getElementById("profileImageContainer");
+    const profileImagePlaceholder = document.getElementById("profileImagePlaceholder");
+    const profileImage = document.getElementById("profileImage");
+    const profileImageUpload = document.getElementById("profileImageUpload");
+    let profileImageFile = null;
+
+    // Pre-fill form with existing trainer data
+    async function loadTrainerProfile() {
+      try {
+        const res = await fetch(`http://localhost:5000/api/get-trainer/${trainer.id}`);
+        const data = await res.json();
+        
+        if (data.success) {
+          const t = data.trainer;
+          
+          // Set profile image if exists
+          if (t.profileImage) {
+            profileImage.src = `http://localhost:5000/uploads/${t.profileImage}`; // ✅ full backend URL
+            profileImage.style.display = 'block';
+            profileImagePlaceholder.style.display = 'none';
+          }
+          
+          // Set other form fields
+          if (t.dob) {
+            const dateObj = new Date(t.dob);
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+            const day = String(dateObj.getDate()).padStart(2, "0");
+            document.getElementById("dob").value = `${year}-${month}-${day}`;
+          }
+          
+          document.getElementById("gender").value = t.gender || "";
+          document.getElementById("phone").value = t.phone || "";
+          document.getElementById("address").value = t.address || "";
+          document.getElementById("qualification").value = t.qualification || "";
+          document.getElementById("experience").value = t.experience || "";
+          document.getElementById("skills").value = t.skills || "";
+          document.getElementById("certifications").value = t.certifications || "";
+          document.getElementById("linkedin").value = t.linkedin || "";
+        }
+      } catch (err) {
+        console.error("Error loading trainer profile:", err);
+      }
+    }
+
+    // Handle profile image upload
+    profileImageUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        if (!file.type.match('image.*')) {
+          alert('Please select an image file (JPG, PNG)');
+          return;
+        }
+        
+        if (file.size > 2 * 1024 * 1024) { // 2MB limit
+          alert('Image size should be less than 2MB');
+          return;
+        }
+        
+        profileImageFile = file;
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+          profileImage.src = event.target.result;
+          profileImage.style.display = 'block';
+          profileImagePlaceholder.style.display = 'none';
+        }
+        
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Form submission
+    profileForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData();
+      formData.append('trainerId', trainer.id);
+      formData.append('dob', e.target.dob.value);
+      formData.append('gender', e.target.gender.value);
+      formData.append('phone', e.target.phone.value);
+      formData.append('address', e.target.address.value);
+      formData.append('qualification', e.target.qualification.value);
+      formData.append('experience', e.target.experience.value);
+      formData.append('skills', e.target.skills.value);
+      formData.append('certifications', e.target.certifications.value);
+      formData.append('linkedin', e.target.linkedin.value);
+      
+      if (profileImageFile) {
+        formData.append('profileImage', profileImageFile);
+      }
+
+      try {
+        const res = await fetch("http://localhost:5000/api/complete-trainer-profile", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert("Profile updated successfully!");
+          window.location.href = "trainerdashboard.html";
+        } else {
+          alert(data.error || "Failed to update profile.");
+        }
+      } catch (err) {
+        console.error("Error submitting form:", err);
+        alert("An error occurred. Please try again.");
+      }
+    });
+
+    // Load trainer data when page loads
+    loadTrainerProfile();
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const profileForm = document.getElementById("profileForm");
+  let user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  profileForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formData = new FormData(profileForm);
+
+    fetch(`http://localhost:5000/api/profile/${user.email}`, {
+      method: "PUT",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(result => {
+      if (result.message === "Profile updated successfully") {
+        localStorage.setItem("loggedInUser", JSON.stringify(result.user));
+        document.getElementById("profileImage").src = result.user.profileImage || "/default-avatar.png";
+        alert("Profile updated!");
+      } else {
+        alert("Update failed: " + result.message);
+      }
+    })
+    .catch(err => console.error("Error updating profile:", err));
+  });
+});
+</script>
+
+</body>
+</html>

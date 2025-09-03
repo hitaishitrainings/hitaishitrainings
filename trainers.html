@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Trainers | Hitaishi Trainings</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
+    header { background:#3498db; color:#fff; padding:15px; text-align:center; }
+
+    .page-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 20px auto;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    /* Sidebar filter */
+    .filters {
+      flex: 1 1 220px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+    .filters h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .filters label {
+      display: block;
+      margin: 8px 0 4px;
+      font-weight: bold;
+    }
+    .filters input, .filters select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    /* Trainers grid */
+    .trainer-list {
+      flex: 3 1 700px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .trainer-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .trainer-card:hover { transform: translateY(-5px); }
+    .trainer-card img {
+      width: 100px; height: 100px;
+      border-radius: 50%; object-fit: cover;
+      margin-bottom: 10px;
+    }
+    .trainer-card h3 { margin: 5px 0; font-size: 18px; }
+    .trainer-card p { margin: 4px 0; font-size: 14px; }
+    .rating { color: #ffb400; font-size: 14px; }
+
+    .trainer-card a {
+      display: inline-block;
+      margin-top: 10px;
+      background: #3498db;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .trainer-card a:hover { background:#0061a1; }
+
+    /* Responsive layout */
+    @media(max-width: 1024px) {
+      .page-container { flex-direction: column; }
+      .filters { width: 100%; order: -1; }
+    }
+    @media(max-width: 600px) {
+      .trainer-card img { width: 80px; height: 80px; }
+      .trainer-card h3 { font-size: 16px; }
+      .trainer-card p { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>All Trainers</h1>
+  </header>
+
+  <div class="page-container">
+    <!-- Sidebar Filters -->
+    <div class="filters">
+      <h3>Filters</h3>
+
+      <label for="searchName">Search by Name</label>
+      <input type="text" id="searchName" placeholder="e.g. John Doe">
+
+      <label for="expertiseFilter">Expertise</label>
+      <select id="expertiseFilter">
+        <option value="">All</option>
+        <option value="B.Tech IT">Web Development</option>
+        <option value="MCA">Data Science</option>
+        <option value="BCA">AI / ML</option>
+      </select>
+
+      <label for="ratingFilter">Minimum Rating</label>
+      <select id="ratingFilter">
+        <option value="">Any</option>
+        <option value="4.5">⭐ 4.5+</option>
+        <option value="4.0">⭐ 4.0+</option>
+        <option value="3.5">⭐ 3.5+</option>
+      </select>
+    </div>
+
+    <!-- Trainers Grid -->
+    <div class="trainer-list" id="trainerList"></div>
+  </div>
+
+  <script>
+  let allTrainers = [];
+  const API_BASE = "http://localhost:5000"; // ✅ same as dashboard
+  const DEFAULT_IMG = `${API_BASE}/uploads/default-trainer.png`; // your default image
+
+  async function fetchTrainers() {
+    try {
+      const res = await fetch(`${API_BASE}/api`);
+      allTrainers = await res.json();
+      renderTrainers(allTrainers);
+    } catch (err) {
+      console.error("Failed to fetch trainers:", err);
+    }
+  }
+
+  function renderTrainers(trainers) {
+    const list = document.getElementById("trainerList");
+    list.innerHTML = "";
+
+    if (!Array.isArray(trainers) || trainers.length === 0) {
+      list.innerHTML = "<p>No trainers found</p>";
+      return;
+    }
+
+    trainers.forEach(trainer => {
+      // Use default image initially, replace only if trainer has an image
+      let imgSrc = trainer.profileImage && trainer.profileImage.trim() !== ""
+        ? `${API_BASE}/uploads/${trainer.profileImage}`
+        : DEFAULT_IMG;
+
+      const card = document.createElement("div");
+      card.className = "trainer-card";
+      card.innerHTML = `
+        <img src="${imgSrc}" 
+            alt="${trainer.name}"
+            onerror="this.onerror=null; this.src='${DEFAULT_IMG}';">
+        <h3>${trainer.name || "No Name"}</h3>
+        <p>${trainer.expertise || "No expertise provided"}</p>
+        <p class="rating">⭐ ${trainer.rating || "4.5"} ( ${trainer.reviewsCount || "100"} reviews )</p>
+        <a href="trainer-details.html?id=${trainer.id}">View Profile</a>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  // Apply filters
+  function applyFilters() {
+    let filtered = [...allTrainers];
+
+    const search = document.getElementById("searchName").value.toLowerCase();
+    const expertise = document.getElementById("expertiseFilter").value;
+    const rating = parseFloat(document.getElementById("ratingFilter").value);
+
+    if (search) filtered = filtered.filter(t => t.name.toLowerCase().includes(search));
+    if (expertise) filtered = filtered.filter(t => t.expertise === expertise);
+    if (!isNaN(rating)) filtered = filtered.filter(t => (t.rating || 0) >= rating);
+
+    renderTrainers(filtered);
+  }
+
+  document.getElementById("searchName").addEventListener("input", applyFilters);
+  document.getElementById("expertiseFilter").addEventListener("change", applyFilters);
+  document.getElementById("ratingFilter").addEventListener("change", applyFilters);
+
+  fetchTrainers();
+  </script>
+
+</body>
+</html>
