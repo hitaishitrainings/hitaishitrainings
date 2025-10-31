@@ -763,7 +763,8 @@
                     <p><b>Experience:</b> ${t.experience || 'N/A'}</p>
                     <div class="card-actions">
                         <!-- Link to the new trainer profile page -->
-                        <a href="/trainer/${t.id}" class="btn profile-btn">View Profile</a>
+                        <a href="verification.html?id=${t.id}" class="btn profile-btn">View Profile</a>
+
                     </div>
                 </div>
                 `;
@@ -787,7 +788,7 @@
                     </div>
                     <div class="card-actions">
                         <!-- Added Enroll Now Button -->
-                        <a href="/enroll/${c.courseId}" class="btn enroll-btn">Enroll Now</a>
+                        <a href="enroll.html" class="btn enroll-btn">Enroll Now</a>
                     </div>
                 </div>
             `).join("");
