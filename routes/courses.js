@@ -169,7 +169,7 @@ router.get("/all-trainer-courses", (req, res) => {
   const query = `
     SELECT c.*, t.name AS trainer_name 
     FROM courses c
-    LEFT JOIN trainers t ON c.trainerId = t.trainerId
+    LEFT JOIN trainers t ON c.trainerId = t.id
     ORDER BY c.createdAt DESC
   `;
 

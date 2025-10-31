@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* General Setup */
+        body { 
+            font-family: 'Inter', Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px;
+            background-color: #f4f7fa; 
+            color: #1f2937;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header Styling */
+        header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.875rem; /* 3xl equivalent */
+            font-weight: 800;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        header h1 svg {
+            width: 2rem;
+            height: 2rem;
+            color: #4f46e5; /* Indigo-600 */
+        }
+        header p {
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        /* Input Section Styling */
+        .input-section {
+            background-color: #eef2ff; /* Indigo-50 */
+            padding: 1.5rem;
+            border-radius: 1rem; /* 2xl equivalent */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            margin-bottom: 2rem;
+        }
+        .input-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4338ca; /* Indigo-700 */
+            margin-bottom: 1rem;
+        }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 640px) {
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .input-grid label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151; /* Gray-700 */
+            margin-bottom: 0.25rem;
+        }
+        .input-grid input, .input-grid select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .input-grid input:focus, .input-grid select:focus {
+            border-color: #4f46e5;
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        .input-grid .flex-end {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            width: 100%;
+            background-color: #4f46e5; /* Indigo-600 */
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.15s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            height: 42px; /* Ensure button aligns with inputs */
+        }
+        .btn-primary:hover:not(:disabled) {
+            background-color: #4338ca; /* Indigo-700 */
+        }
+        .btn-primary:disabled {
+            background-color: #a5b4fc; /* Indigo-300 */
+            cursor: not-allowed;
+        }
+
+        /* Dashboard Output and Card Styling */
+        .dashboard-output {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* lg */
+            border: 1px solid #f3f4f6; /* Gray-100 */
+        }
+        .card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #374151; /* Gray-700 */
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card h3 svg {
+            color: #6366f1; /* Indigo-500 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Data Grid for Info Cards */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            font-size: 0.875rem; /* sm */
+        }
+        .data-grid div {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .data-grid span.font-semibold {
+            font-weight: 600;
+            color: #4b5563; /* Gray-600 */
+        }
+        .data-grid .full-span {
+            grid-column: 1 / -1; 
+        }
+
+        /* User Type Pill */
+        #data-type {
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem; /* xs */
+            font-weight: 600;
+            background-color: #e0e7ff; /* Indigo-100 */
+            color: #3730a3; /* Indigo-800 */
+            display: inline-block;
+        }
+
+        /* Profile Details List */
+        #profileDetails > div {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        #profileDetails > div:last-child {
+            border-bottom: none;
+        }
+        
+        /* New styles for Manager Operational Data */
+        .operational-list {
+            margin-top: 1.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #e5e7eb; /* Light gray separator */
+            overflow-x: auto; /* Ensure horizontal scrolling on small screens */
+        }
+        .operational-list h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #4b5563; /* Darker gray title */
+            margin-bottom: 0.5rem;
+        }
+        .operational-list table {
+            min-width: 600px; /* Ensure tables don't collapse too much */
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+        }
+        .operational-list th, .operational-list td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+        .operational-list th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Message Box */
+        #messageBox {
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .bg-red-100 { background-color: #fee2e2; }
+        .text-red-800 { color: #991b1b; }
+        .bg-green-100 { background-color: #d1fae5; }
+        .text-green-800 { color: #065f46; }
+        .hidden { display: none; }
+
+    </style>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    <div class="container">
+        <header>
+            <h1 class="header-title">
+                <i data-lucide="layout-dashboard"></i>
+                <span>User Profile Dashboard</span>
+            </h1>
+            <p>View combined data from the main user and specific profile tables.</p>
+        </header>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <h2>Fetch User Data</h2>
+            <div class="input-grid">
+                <div>
+                    <label for="userId">User ID</label>
+                    <input type="number" id="userId" value="1" placeholder="Enter ID">
+                </div>
+                <div>
+                    <label for="userType">User Type</label>
+                    <select id="userType">
+                        <option value="Trainer">Trainer</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Donor">Donor</option>
+                        <option value="Student">Student</option>
+                        <option value="Adult">Adult</option>
+                    </select>
+                </div>
+                <div class="flex-end">
+                    <button onclick="fetchUserData()" class="btn-primary" id="fetchButton">
+                        <i data-lucide="search"></i>
+                        <span>Load Data</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Output Section -->
+        <div class="dashboard-output">
+            <div id="messageBox" class="hidden"></div>
+            
+            <!-- User Information Card -->
+            <div id="userInfoCard" class="card hidden">
+                <h3>
+                    <i data-lucide="user"></i>
+                    <span>Primary User Information</span>
+                </h3>
+                <div class="data-grid">
+                    <div class="py-1"><span class="font-semibold">Name:</span> <span id="data-name"></span></div>
+                    <div class="py-1"><span class="font-semibold">Email:</span> <span id="data-email"></span></div>
+                    <div class="py-1"><span class="font-semibold">User Type:</span> <span id="data-type"></span></div>
+                    <div class="py-1"><span class="font-semibold">Aadhaar:</span> <span id="data-aadhaar"></span></div>
+                    <div class="py-1"><span class="font-semibold">Phone:</span> <span id="data-phone"></span></div>
+                    <div class="py-1"><span class="font-semibold">Age:</span> <span id="data-age"></span></div>
+                    <div class="py-1"><span class="font-semibold">Gender:</span> <span id="data-gender"></span></div>
+                    <div class="py-1 full-span"><span class="font-semibold">Profile Complete:</span> <span id="data-complete"></span></div>
+                </div>
+            </div>
+
+            <!-- Address Information Card -->
+            <div id="addressCard" class="card hidden">
+                <h3>
+                    <i data-lucide="map-pin"></i>
+                    <span>Address Details</span>
+                </h3>
+                <div class="data-grid">
+                    <div class="py-1 full-span"><span class="font-semibold">Address Line 1:</span> <span id="data-address1"></span></div>
+                    <div class="py-1"><span class="font-semibold">Village:</span> <span id="data-village"></span></div>
+                    <div class="py-1"><span class="font-semibold">Mandal/Tehsil:</span> <span id="data-mandal"></span></div>
+                    <div class="py-1"><span class="font-semibold">District:</span> <span id="data-district"></span></div>
+                    <div class="py-1"><span class="font-semibold">State:</span> <span id="data-state"></span></div>
+                    <div class="py-1"><span class="font-semibold">Zip Code:</span> <span id="data-zip"></span></div>
+                    <div class="py-1"><span class="font-semibold">Country:</span> <span id="data-country"></span></div>
+                </div>
+            </div>
+            
+            <!-- Specific Profile Card (Content is dynamic) -->
+            <div id="profileCard" class="card hidden">
+                <h3>
+                    <i data-lucide="briefcase"></i>
+                    <span id="profileTitle">Specific Profile Data</span>
+                </h3>
+                <div id="profileDetails">
+                    <!-- Dynamic fields will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Set the backend API URL prefix
+        const API_PREFIX = 'http://localhost:5000/api';
+
+        // Helper function to show messages (errors or success)
+        function showMessage(text, isError = false) {
+            const box = document.getElementById('messageBox');
+            box.innerText = text;
+            box.classList.remove('hidden');
+            box.classList.remove('bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+            
+            if (isError) {
+                box.classList.add('bg-red-100', 'text-red-800');
+            } else {
+                box.classList.add('bg-green-100', 'text-green-800');
+            }
+        }
+
+        // Helper function to hide all data cards and reset messages
+        function resetDashboard() {
+            document.getElementById('messageBox').classList.add('hidden');
+            document.getElementById('userInfoCard').classList.add('hidden');
+            document.getElementById('addressCard').classList.add('hidden');
+            document.getElementById('profileCard').classList.add('hidden');
+            document.getElementById('profileDetails').innerHTML = '';
+        }
+
+        // Helper function to render data into the dashboard
+        function renderData(user) {
+            // --- Primary User Info ---
+            document.getElementById('data-name').textContent = user.name || 'N/A';
+            document.getElementById('data-email').textContent = user.email || 'N/A';
+            document.getElementById('data-type').textContent = user.user_type || 'N/A';
+            document.getElementById('data-aadhaar').textContent = user.aadhaar_number || 'N/A';
+            document.getElementById('data-phone').textContent = user.phone || 'N/A';
+            document.getElementById('data-age').textContent = user.age || 'N/A';
+            document.getElementById('data-gender').textContent = user.gender || 'N/A';
+            document.getElementById('data-complete').textContent = user.profile_complete ? 'Yes' : 'No';
+
+            // --- Address Info ---
+            document.getElementById('data-address1').textContent = user.address_line1 || 'N/A';
+            document.getElementById('data-village').textContent = user.village || 'N/A';
+            document.getElementById('data-mandal').textContent = user.mandal || 'N/A';
+            document.getElementById('data-district').textContent = user.district || 'N/A';
+            document.getElementById('data-state').textContent = user.state || 'N/A';
+            document.getElementById('data-zip').textContent = user.zip_code || 'N/A';
+            document.getElementById('data-country').textContent = user.country || 'N/A';
+
+            // --- Specific Profile Data ---
+            const profileDetails = document.getElementById('profileDetails');
+            profileDetails.innerHTML = '';
+            document.getElementById('profileTitle').textContent = `${user.user_type} Profile Details`;
+
+            // Function to add a detail row (used for basic profile fields)
+            const addDetail = (label, value) => {
+                const div = document.createElement('div');
+                div.classList.add('py-1', 'border-b', 'border-gray-100'); 
+                div.innerHTML = `<span class="font-semibold"><b>${label}:</b></span> <span>${value || 'N/A'}</span>`;
+                profileDetails.appendChild(div);
+            };
+            
+            // Function to add an operational list (used for Manager data)
+            const addDetailList = (title, items, keys) => {
+                const listContainer = document.createElement('div');
+                listContainer.classList.add('operational-list');
+                listContainer.innerHTML = `<h4>${title} (${items.length})</h4>`;
+                
+                const table = document.createElement('table');
+                table.innerHTML = `<thead><tr>${keys.map(k => `<th>${k.label}</th>`).join('')}</tr></thead><tbody></tbody>`;
+                
+                const tbody = table.querySelector('tbody');
+                items.forEach(item => {
+                    const tr = document.createElement('tr');
+                    // Safely check for nested properties
+                    tr.innerHTML = keys.map(k => `<td>${item[k.key] || 'N/A'}</td>`).join('');
+                    tbody.appendChild(tr);
+                });
+                
+                listContainer.appendChild(table);
+                profileDetails.appendChild(listContainer);
+            };
+
+
+            switch (user.user_type) {
+                case 'Trainer':
+                    addDetail('Skills', user.skills);
+                    addDetail('Experience', user.experience);
+                    addDetail('Certifications', user.certifications);
+                    break;
+
+                case 'Manager':
+                    addDetail('Organization Name', user.organization_name);
+                    addDetail('Role', user.role);
+                    addDetail('Programs Managed', user.programs_managed);
+                    
+                    // --- Manager Operational Data ---
+                    if (user.operational) {
+                        const op = user.operational;
+                        const res = op.resources || {};
+                        
+                        // Resources/Budget (Simple details)
+                        addDetail('Funds Allocated', `₹${res.fundsAllocated || 0}`);
+                        addDetail('Funds Spent', `₹${res.fundsSpent || 0}`);
+                        addDetail('Trainer Payments', `₹${res.trainerPayments || 0}`);
+                        
+                        // Villages
+                        if (op.villages && op.villages.length) {
+                            addDetailList(
+                                'Villages Managed', 
+                                op.villages,
+                                [{key: 'name', label: 'Village'}, {key: 'status', label: 'Status'}]
+                            );
+                        }
+                        
+                        // Trainers
+                        if (op.trainers && op.trainers.length) {
+                            addDetailList(
+                                'Trainers', 
+                                op.trainers,
+                                [
+                                    {key: 'name', label: 'Name'}, 
+                                    {key: 'aadhaar', label: 'Aadhaar'}, 
+                                    {key: 'gender', label: 'Gender'}, 
+                                    {key: 'contact', label: 'Contact'}
+                                ]
+                            );
+                        }
+
+                        // Programs - UPDATED KEYS HERE
+                        if (op.programs && op.programs.length) {
+                            addDetailList(
+                                'Programs', 
+                                op.programs,
+                                [
+                                    {key: 'name', label: 'Program'},
+                                    {key: 'description', label: 'Description'}, // New Key
+                                    {key: 'type', label: 'Type'}, 
+                                    {key: 'date', label: 'Start Date'}, 
+                                    {key: 'endDate', label: 'End Date'}, // New Key
+                                    {key: 'duration', label: 'Duration'}, 
+                                    {key: 'status', label: 'Status'}
+                                ]
+                            );
+                        }
+
+                        // Students/Beneficiaries by Village (Data is simpler)
+                        if (op.studentsByVillage && op.studentsByVillage.length) {
+                            addDetailList(
+                                'Students/Beneficiaries', 
+                                op.studentsByVillage,
+                                [{key: 'village', label: 'Village'}, {key: 'students', label: 'Count'}]
+                            );
+                        }
+                        
+                        
+                    } else {
+                        addDetail('Operational Data', 'No operational data found.');
+                    }
+                    break;
+                    
+                case 'Donor':
+                    addDetail('Donation Preference', user.donation_preference);
+                    addDetail('Cause/Program', user.cause_program);
+                    break;
+                case 'Student':
+                    addDetail('Education Level', user.education);
+                    addDetail('Skills', user.student_skills);
+                    break;
+                case 'Adult':
+                    addDetail('Occupation', user.occupation);
+                    addDetail('Interests', user.interests);
+                    addDetail('Monthly Income', user.monthly_income ? `₹${user.monthly_income}` : 'N/A');
+                    addDetail('Education Level', user.education_level);
+                    break;
+            }
+            
+            // Remove the border-bottom from the last element in the list
+            if (profileDetails.lastElementChild) {
+                profileDetails.lastElementChild.classList.remove('border-b');
+            }
+
+            // Show all cards
+            document.getElementById('userInfoCard').classList.remove('hidden');
+            document.getElementById('addressCard').classList.remove('hidden');
+            document.getElementById('profileCard').classList.remove('hidden');
+        }
+
+        // Main function to fetch data
+        async function fetchUserData() {
+            resetDashboard();
+            const userId = document.getElementById('userId').value;
+            const userType = document.getElementById('userType').value;
+            const fetchButton = document.getElementById('fetchButton');
+
+            if (!userId || !userType) {
+                return showMessage('Please enter a User ID and select a User Type.', true);
+            }
+
+            fetchButton.disabled = true;
+            fetchButton.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i><span>Loading...</span>';
+            lucide.createIcons();
+
+            try {
+                // 1. Fetch User Profile Data (From nonprofit and manager_profiles tables)
+                const userUrl = `${API_PREFIX}/npget-user-dashboard/${userId}/${userType}`;
+                const userResponse = await fetch(userUrl);
+                const userData = await userResponse.json();
+
+                if (!userData.success) {
+                    showMessage(userData.message || 'Failed to fetch user profile data.', true);
+                    return;
+                }
+                
+                const user = userData.user;
+
+                // 2. Fetch Operational Data only for Manager (From manager_operational table)
+                if (userType === 'Manager') {
+                    const operationalUrl = `${API_PREFIX}/manager/operational/${userId}`;
+                    const operationalResponse = await fetch(operationalUrl);
+                    
+                    if (!operationalResponse.ok) {
+                        const errorText = await operationalResponse.text();
+                        console.error('Operational Data Fetch Failed:', errorText);
+                        // Store an error message or flag for rendering
+                        user.operationalError = `Server Error (${operationalResponse.status}): Could not load operational data.`;
+                    } else {
+                        const operationalResult = await operationalResponse.json();
+                        // CRITICAL: Ensure we check operationalResult.data. It will be null if no record exists.
+                        if (operationalResult.data) {
+                            // Merge operational data into the user object under the 'operational' key
+                            user.operational = operationalResult.data;
+                            console.log("Operational Data Merged:", user.operational); // Debugging check
+                        } else {
+                            user.operational = null;
+                            user.operationalError = 'No operational data record found for this Manager ID.';
+                        }
+                    }
+                }
+                // End Operational Data Fetch
+
+                renderData(user);
+                
+                // Show general success message unless there was an operational error
+                if (user.operationalError) {
+                    showMessage(`User profile loaded successfully, but: ${user.operationalError}`, true);
+                } else {
+                    showMessage('User data loaded successfully.', false);
+                }
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                showMessage('Network error or server unavailable. Check console for details.', true);
+            } finally {
+                fetchButton.disabled = false;
+                fetchButton.innerHTML = '<i data-lucide="search" class="w-5 h-5"></i><span>Load Data</span>';
+                lucide.createIcons();
+            }
+        }
+
+        // Initialize Lucide Icons on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+    </script>
+        <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

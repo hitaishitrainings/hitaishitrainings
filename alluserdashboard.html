@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global User Admin Dashboard</title>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 20px;
+            background-color: #f4f7fa; 
+            color: #1f2937;
+        }
+        .container {
+            max-width: 100%; /* Increased max-width for more columns */
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h1 svg {
+            color: #4f46e5;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .controls input, .controls select {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            flex-grow: 1;
+            min-width: 150px;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow-x: auto; /* Essential for wide tables on small screens */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            white-space: nowrap;
+        }
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: #4b5563;
+            cursor: pointer;
+        }
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+        .loading-message, .error-message {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .error-message {
+            color: #dc2626;
+        }
+        
+        /* Status Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-manager { background-color: #e0e7ff; color: #3730a3; }
+        .badge-trainer { background-color: #d1fae5; color: #065f46; }
+        .badge-student { background-color: #ffedd5; color: #9a3412; }
+        .badge-donor { background-color: #fce7f3; color: #9d174d; }
+        .badge-adult { background-color: #e5e7eb; color: #374151; }
+        .badge-complete-true { background-color: #d1fae5; color: #065f46; }
+        .badge-complete-false { background-color: #fee2e2; color: #991b1b; }
+        
+        /* Responsive Table adjustments for smaller screens */
+        @media (max-width: 768px) {
+            th, td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+        
+        .manager-link {
+            color: #4f46e5;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .manager-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    <div class="container">
+        <h1>
+            <i data-lucide="layout-grid"></i>
+            <span>Global User Admin Dashboard</span>
+        </h1>
+        <p>Overview of all registered users in the nonprofit database. Click on a Manager's name for full operational details.</p>
+
+        <!-- Controls for Search and Filter -->
+        <div class="controls">
+            <input type="text" id="searchNameEmail" placeholder="Search by Name, Email, or Village..." onkeyup="filterUsers()">
+            <select id="filterType" onchange="filterUsers()">
+                <option value="">All User Types</option>
+                <option value="Manager">Manager</option>
+                <option value="Trainer">Trainer</option>
+                <option value="Student">Student</option>
+                <option value="Donor">Donor</option>
+                <option value="Adult">Adult</option>
+            </select>
+            <select id="filterStatus" onchange="filterUsers()">
+                <option value="">All Profile Statuses</option>
+                <option value="true">Complete</option>
+                <option value="false">Incomplete</option>
+            </select>
+        </div>
+
+        <!-- Table Output -->
+        <div class="table-container">
+            <div id="statusMessage" class="loading-message">
+                <i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Loading user list...
+            </div>
+            <table>
+                <thead>
+                    <tr id="tableHeader">
+                        <th onclick="sortTable('id')">ID</th>
+                        <th onclick="sortTable('name')">Name</th>
+                        <th onclick="sortTable('email')">Email</th>
+                        <th onclick="sortTable('user_type')">Type</th>
+                        <th onclick="sortTable('profile_complete')">Status</th>
+                        <th onclick="sortTable('village')">Village</th>
+                        <th onclick="sortTable('district')">District</th>
+                        <th onclick="sortTable('state')">State</th>
+                        <th onclick="sortTable('gender')">Gender</th>
+                        <th onclick="sortTable('programs_managed')">Programs/Skills</th>
+                        <th onclick="sortTable('created_at')">Joined</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Manager Details Modal -->
+        <div id="managerModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100;">
+            <div style="background-color: white; margin: 5% auto; padding: 20px; border-radius: 1rem; max-width: 600px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+                    <h2 id="modalTitle" style="margin: 0; font-size: 1.5rem; color: #4f46e5;">Manager Details</h2>
+                    <button onclick="closeManagerModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #4b5563;">&times;</button>
+                </div>
+                <div id="modalContent">
+                    <!-- Details will be loaded here -->
+                    <div id="managerLoading" class="loading-message" style="display:none;">Loading manager operational data...</div>
+                    <div id="managerError" class="error-message" style="display:none;"></div>
+                    <div id="managerData"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = "http://localhost:5000/api";
+        let allUsers = [];
+        let sortedColumn = 'id';
+        let sortDirection = 1; // 1 for ascending, -1 for descending
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            fetchAllUsers();
+        });
+
+        async function fetchAllUsers() {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.className = 'loading-message';
+            statusMessage.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Loading user list...';
+            lucide.createIcons();
+            
+            try {
+                // This route now fetches all public details
+                const response = await fetch(`${API_BASE_URL}/npget-all-users`);
+                const result = await response.json();
+
+                if (result.success && result.users) {
+                    allUsers = result.users;
+                    statusMessage.style.display = 'none';
+                    filterUsers(); // Initial render and sort
+                } else {
+                    statusMessage.className = 'error-message';
+                    statusMessage.textContent = result.message || 'Failed to retrieve user list.';
+                }
+
+            } catch (error) {
+                console.error("Fetch All Users Error:", error);
+                statusMessage.className = 'error-message';
+                statusMessage.textContent = 'Network Error: Could not connect to the backend server.';
+            }
+        }
+
+        function filterUsers() {
+            const searchTerm = document.getElementById('searchNameEmail').value.toLowerCase();
+            const filterType = document.getElementById('filterType').value;
+            const filterStatus = document.getElementById('filterStatus').value;
+
+            let filteredUsers = allUsers.filter(user => {
+                // Search filter (expanded to include village)
+                const searchMatch = user.name.toLowerCase().includes(searchTerm) || 
+                                    user.email.toLowerCase().includes(searchTerm) ||
+                                    (user.village || '').toLowerCase().includes(searchTerm);
+                
+                // Type filter
+                const typeMatch = filterType === '' || user.user_type === filterType;
+
+                // Status filter (converts boolean to string for comparison with select value)
+                const statusMatch = filterStatus === '' || String(user.profile_complete) === filterStatus;
+                
+                return searchMatch && typeMatch && statusMatch;
+            });
+            
+            // Sort the filtered list
+            sortData(filteredUsers);
+            
+            renderTable(filteredUsers);
+        }
+
+        function sortTable(column) {
+            if (sortedColumn === column) {
+                sortDirection *= -1; // Toggle direction
+            } else {
+                sortedColumn = column;
+                sortDirection = 1; // Default ascending for new column
+            }
+            filterUsers(); // Re-filter and re-render
+        }
+
+        function sortData(data) {
+            data.sort((a, b) => {
+                let aVal = a[sortedColumn];
+                let bVal = b[sortedColumn];
+
+                // Handle string comparison (case-insensitive)
+                if (typeof aVal === 'string') {
+                    aVal = aVal ? aVal.toLowerCase() : '';
+                    bVal = bVal ? bVal.toLowerCase() : '';
+                }
+                
+                // Handle null/undefined values by treating them as smaller
+                if (aVal === null || aVal === undefined) return -1 * sortDirection;
+                if (bVal === null || bVal === undefined) return 1 * sortDirection;
+
+
+                if (aVal < bVal) return -1 * sortDirection;
+                if (aVal > bVal) return 1 * sortDirection;
+                return 0;
+            });
+        }
+        
+        function renderTable(users) {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = '';
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (users.length === 0) {
+                 statusMessage.style.display = 'block';
+                 statusMessage.className = 'loading-message';
+                 statusMessage.textContent = 'No users match the current filters.';
+                 return;
+            }
+            statusMessage.style.display = 'none';
+
+            users.forEach(user => {
+                const tr = document.createElement('tr');
+                
+                const typeBadge = `<span class="badge badge-${user.user_type.toLowerCase()}">${user.user_type}</span>`;
+                const statusBadge = `<span class="badge badge-complete-${user.profile_complete}">${user.profile_complete ? 'Complete' : 'Incomplete'}</span>`;
+                
+                // Format date for better readability
+                const joinDate = user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A';
+                
+                // Determine the primary detail field based on user type
+                let primaryDetail = 'N/A';
+                switch (user.user_type) {
+                    case 'Trainer':
+                        primaryDetail = user.trainer_skills || 'No Skills Listed';
+                        break;
+                    case 'Manager':
+                        primaryDetail = user.programs_managed || 'No Programs Listed';
+                        break;
+                    case 'Donor':
+                        primaryDetail = user.cause_program || 'No Cause Listed';
+                        break;
+                    case 'Student':
+                        primaryDetail = user.student_skills || 'No Skills Listed';
+                        break;
+                    case 'Adult':
+                        primaryDetail = user.occupation || 'No Occupation Listed';
+                        break;
+                }
+                
+                // Make Manager name a clickable link
+                const userNameCell = user.user_type === 'Manager' ? 
+                    `<a href="#" class="manager-link" onclick="event.preventDefault(); showManagerDetails(${user.id}, '${user.name}')">${user.name || 'N/A'}</a>` :
+                    user.name || 'N/A';
+
+
+                tr.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${userNameCell}</td>
+                    <td>${user.email || 'N/A'}</td>
+                    <td>${typeBadge}</td>
+                    <td>${statusBadge}</td>
+                    <td>${user.village || 'N/A'}</td>
+                    <td>${user.district || 'N/A'}</td>
+                    <td>${user.state || 'N/A'}</td>
+                    <td>${user.gender || 'N/A'}</td>
+                    <td title="${primaryDetail.replace(/"/g, '&quot;')}">${primaryDetail.length > 30 ? primaryDetail.substring(0, 30) + '...' : primaryDetail}</td>
+                    <td>${joinDate}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function openManagerModal() {
+            document.getElementById('managerModal').style.display = 'block';
+        }
+
+        function closeManagerModal() {
+            document.getElementById('managerModal').style.display = 'none';
+        }
+
+        async function showManagerDetails(managerId, managerName) {
+            openManagerModal();
+            const loading = document.getElementById('managerLoading');
+            const errorDiv = document.getElementById('managerError');
+            const dataDiv = document.getElementById('managerData');
+            const title = document.getElementById('modalTitle');
+
+            loading.style.display = 'block';
+            errorDiv.style.display = 'none';
+            dataDiv.innerHTML = '';
+            title.textContent = `Details for Manager: ${managerName}`;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/npget-manager-details/${managerId}`);
+                const result = await response.json();
+
+                loading.style.display = 'none';
+
+                if (result.success && result.manager) {
+                    const mgr = result.manager;
+                    
+                    let operationalHtml = `
+                        <h3 style="font-size: 1.25rem; color: #1f2937; margin-top: 0;">Summary</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                            <div style="background-color: #f3f4f6; padding: 10px; border-radius: 0.5rem; flex: 1;"><strong>Villages Managed:</strong> ${mgr.total_villages || 0}</div>
+                            <div style="background-color: #f3f4f6; padding: 10px; border-radius: 0.5rem; flex: 1;"><strong>Trainers:</strong> ${mgr.total_trainers || 0}</div>
+                            <div style="background-color: #f3f4f6; padding: 10px; border-radius: 0.5rem; flex: 1;"><strong>Beneficiaries:</strong> ${mgr.student_beneficiaries || 0}</div>
+                            <div style="background-color: #f3f4f6; padding: 10px; border-radius: 0.5rem; flex: 1;"><strong>Funds Managed:</strong> ${mgr.funds_managed ? '₹' + mgr.funds_managed.toLocaleString('en-IN') : 'N/A'}</div>
+                        </div>
+
+                        <h3 style="font-size: 1.25rem; color: #1f2937; margin-top: 1.5rem;">Profile & Location</h3>
+                        <p><strong>Role:</strong> ${mgr.role || 'N/A'}</p>
+                        <p><strong>Organization:</strong> ${mgr.organization_name || 'N/A'}</p>
+                        <p><strong>Programs:</strong> ${mgr.programs_managed || 'N/A'}</p>
+                        <p><strong>Location:</strong> ${mgr.village}, ${mgr.district}, ${mgr.state} (${mgr.zip_code})</p>
+                    `;
+                    
+                    // Detailed Operational Data (Villages/Trainers lists)
+                    operationalHtml += `<h3 style="font-size: 1.25rem; color: #1f2937; margin-top: 1.5rem;">Operational Details</h3>`;
+                    
+                    if (mgr.villages && mgr.villages.length > 0) {
+                        operationalHtml += `
+                            <h4>Villages List:</h4>
+                            <ul style="list-style-type: disc; margin-left: 20px;">
+                                ${mgr.villages.map(v => `<li>${v.name || v}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+                    
+                    if (mgr.trainers && mgr.trainers.length > 0) {
+                         operationalHtml += `
+                            <h4>Trainers List:</h4>
+                            <ul style="list-style-type: disc; margin-left: 20px;">
+                                ${mgr.trainers.map(t => `<li>${t.name || t}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+                    
+                    if (!mgr.villages && !mgr.trainers) {
+                        operationalHtml += `<p>No detailed operational data available (Villages, Trainers, etc.).</p>`;
+                    }
+
+
+                    dataDiv.innerHTML = operationalHtml;
+                    
+                } else {
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = result.message || 'Failed to retrieve manager details.';
+                }
+
+            } catch (error) {
+                loading.style.display = 'none';
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = 'Network Error: Could not fetch manager details.';
+                console.error("Fetch Manager Details Error:", error);
+            }
+        }
+        
+        // Ensure Lucide icons are re-created when content changes (like in a modal)
+        // This is a helper function, not strictly needed for this simple modal, but good practice.
+        // lucide.createIcons();
+
+    </script>
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>    
+</body>
+</html>

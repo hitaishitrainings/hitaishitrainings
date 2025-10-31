@@ -35,8 +35,8 @@ router.post("/subscribe", (req, res) => {
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
-                        user: "konukatiakhila12@gmail.com",
-                        pass: "ppwo jgat nvza nkmd" // Use your actual app password here
+                        user: "hitaishitrainings@gmail.com",
+                        pass: "pmer cxjx vlie xwud" // Use your actual app password here
                     }
                 });
 

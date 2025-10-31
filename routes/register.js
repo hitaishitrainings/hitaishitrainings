@@ -216,6 +216,24 @@ router.put("/profile/:email", upload.fields([
 });
 
 
+// =====================================================
+// Get all students
+router.get("/allstudents", (req, res) => {
+  db.query("SELECT id, fullname, email, phone, course FROM users", (err, results) => {
+    if (err) return res.status(500).json({ error: "DB error" });
+    res.json(results);
+  });
+});
+
+// Delete student by ID
+router.delete("/deletestudent/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("DELETE FROM users WHERE id = ?", [id], (err, result) => {
+    if (err) return res.status(500).json({ error: "DB error" });
+    if (result.affectedRows === 0) return res.status(404).json({ error: "Not found" });
+    res.json({ success: true });
+  });
+});
 
 
 module.exports = router;

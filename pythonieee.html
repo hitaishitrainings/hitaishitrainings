@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optic Bee Python Projects</title>
+    <style>
+
+
+        main {
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 1rem auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .project-list {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enables horizontal scrolling for the table */
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #e9eff5;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        tr:hover {
+            background-color: #f7f7f7;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .project-name {
+            min-width: 250px; /* Ensures a minimum width for the project name column */
+        }
+
+        .project-domain {
+            min-width: 150px;
+        }
+
+        .project-language {
+            white-space: nowrap; /* Prevents the language from wrapping */
+            text-align: right;
+            min-width: 100px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-list {
+                padding: 0;
+            }
+            /* Stack table columns as rows on small screens */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border-bottom: 1px solid #eee;
+                margin-bottom: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            }
+            
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+                word-break: break-word;
+            }
+
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #2c3e50;
+            }
+            .project-language {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+
+    <header>
+        <h1>Optic Bee Python Projects</h1>
+    </header>
+
+    <main>
+        <section>
+            <div class="project-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Domain</th>
+                            <th>Language</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td data-label="Project Name">Automated Emerging Cyber Threat Identification and Profiling Based on Natural Language Processing</td><td data-label="Domain">Cyber security, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Deep Attentive Multimodal Learning Approach for Disaster Identification From Social Media Posts</td><td data-label="Domain">Disaster Management, Social Media, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Heart Disease Identification Method Using Machine Learning Classification in E-Healthcare</td><td data-label="Domain">E-Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Phishing Detection System Through Hybrid Machine Learning Based on URL</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">DeepSide A Deep Learning Framework for Drug Side Effect Prediction</td><td data-label="Domain">Healthcare, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">ROAD The Road Event Awareness Dataset for Autonomous Driving</td><td data-label="Domain">Autonomous Driving, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">PregBot:A System Based on ML and NLP for Supporting Women and Families during Pregnancy</td><td data-label="Domain">Healthcare, Machine Learning, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Parkinson’s Disease Detection Using Machine Learning</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automated Detection of Cardiac Arrhythmia using Recurrent Neural Network</td><td data-label="Domain">Healthcare, Deep Learning, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An Efficient Spam Detection Technique for IoT Devices using Machine Learning</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Multi Class Stress Detection Through Heart Rate Variability A Deep Neural Network Based Study</td><td data-label="Domain">Healthcare, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Web-Based Music Genre Classification for Timeline Song Visualization and Analysis</td><td data-label="Domain">Machine Learning, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Unsupervised Machine Learning for Managing Safety Accidents in Railway Stations</td><td data-label="Domain">Safety Management, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Novel Approach for Disaster Victim Detection Under Debris Environments Using Decision Tree Algorithms With Deep Learning Features</td><td data-label="Domain">Disaster Management, Machine Learning, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Price Negotiating Chabot with Text & Voice on E-commerce website</td><td data-label="Domain">E-commerce, NLP, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Malicious URL Detection based on Machine Learning</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">DEARNN A Hybrid Deep Learning Approach for Cyberbullying Detection in Twitter Social Media Platform</td><td data-label="Domain">Cyber security, NLP, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Security of Cyber Physical Systems: Design of a Security Supervisor to Thwart Attacks</td><td data-label="Domain">Cyber security, Cyber-Physical Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Deep Learning Based Efficient Firearms Monitoring Technique for Building Secure Smart Cities</td><td data-label="Domain">Smart Cities, Deep Learning, Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automated Android Malware Detection Using Optimal Ensemble Learning Approach for Cyber security</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Child Mortality prediction using Machine Learning Techniques</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Improving Shopping Mall Revenue by Real Time Customized Digital Coupon Issuance</td><td data-label="Domain">E-commerce, Real-Time Systems, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Behavior Change in Students With Special Education Needs Using Multimodal Learning Analytics</td><td data-label="Domain">Education, Machine Learning, Multimodal Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Brain Age Using Machine Learning Algorithms: A Comprehensive Evaluation</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Hourly Boarding Demand of Bus Passengers Using Imbalanced Records From Smart Cards A Deep Learning Approach</td><td data-label="Domain">Transportation, Machine Learning, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction of Air Pollution by using Machine Learning Algorithm</td><td data-label="Domain">Environmental Science, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Privilege Escalation Attack Detection and Mitigation in Cloud Using Machine Learning</td><td data-label="Domain">Cyber security, Cloud Computing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Propounding First Artificial Intelligence Approach for Predicting Robbery Behavior</td><td data-label="Domain">Crime Prevention, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">The Influence of Artificial Intelligence on E-Governance and Cyber security in Smart Cities</td><td data-label="Domain">AI, Cyber Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">WaterNet A Network for Monitoring and Assessing Water Quality for Drinking and Irrigation Purposes</td><td data-label="Domain">Water Quality Monitoring, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Human Action Recognition from depth maps and Postures using Deep Learning</td><td data-label="Domain">Deep Learning, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Abnormal Traffic Detection Based on Attention and Big Step Convolution</td><td data-label="Domain">Traffic Analysis, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Explainable Artificial Intelligence for Patient Safety A Review of Application</td><td data-label="Domain">Explainable AI, Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Personalized Federated Learning for In-Hospital Mortality Prediction of Multi-Center ICU</td><td data-label="Domain">Federated Learning, Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">RFCNN Traffic Accident Severity Prediction Based on Decision Level Fusion of Machine and Deep Learning Model</td><td data-label="Domain">Traffic Prediction, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Water Quality Monitoring & Forecasting System</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake Profile Identification in Social Network using Machine Learning and NLP</td><td data-label="Domain">Social Network Analysis, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fighting Money Laundering With Statistics and Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Malware Detection A Framework for Reverse Engineered Android Applications through Machine Learning Algorithms</td><td data-label="Domain">Malware Detection, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Optimal Ambulance Positioning for Road Accidents With Deep Embedded Clustering</td><td data-label="Domain">Healthcare, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Phish Catcher Client-Side Defense Against Web Spoofing Attacks Using Machine Learning</td><td data-label="Domain">Cyber Security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Novel Approach to Improve Software Defect Prediction Accuracy Using Machine Learning</td><td data-label="Domain">Software Engineering, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">BlockChain Based Federated Learning With SMPC Model Verification Against Poisoning Attack</td><td data-label="Domain">Blockchain, Federated Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Effective Software Effort Estimation Leveraging Machine Learning for Digital Transformation</td><td data-label="Domain">Software Engineering, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Multi-perspective Fraud Detection Method for Multi-Participant E-commerce Transactions</td><td data-label="Domain">E-commerce, Fraud Detection</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Creating Alert Messages Based On Wild Animal Activity Detection Using Hybrid Deep Neural Networks</td><td data-label="Domain">Wildlife Monitoring, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Identifying Alcohol-Related Information From Unstructured Bilingual Clinical Notes With Multilingual Transformers</td><td data-label="Domain">NLP, Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Two Stage Job Title Identification System For Online Job Advertisements</td><td data-label="Domain">NLP, Job Market</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An Efficient Privacy Enhancing Cross Silo Federated Learning And Applications For False Data Injection Attack Detection In Smart Grids</td><td data-label="Domain">Federated Learning, Cyber Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Thyroid Disease Prediction Using Machine Learning</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suicidal Tendency Detection</td><td data-label="Domain">Mental Health, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Identifying Student Profiles within Online Judge systems using Explainable Artificial Intelligence</td><td data-label="Domain">Education, Explainable AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Deep Learning Anti-Fraud Model for Internet Loan Where We Are Going</td><td data-label="Domain">Financial Security, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Social Media and Misleading Information in a Democracy: A Mechanism Design Approach</td><td data-label="Domain">Social Media, Democracy, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suicidal Ideation Detection: A Review of Machine Learning Methods and Applications</td><td data-label="Domain">Mental Health, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Membership Inference Attack and Defense for Wireless Signal Classifiers with Deep Learning</td><td data-label="Domain">Wireless Networks, Cyber Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crop Prediction Based on Characteristics of the Agricultural Environment Using Various Feature Selection Techniques and Classifiers</td><td data-label="Domain">Agriculture, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">EPilots A system to predict hard landing during the approach phase of commercial flights</td><td data-label="Domain">Aviation, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predictive Analysis for Big Mart Sales Using Machine Learning Algorithms</td><td data-label="Domain">Retail, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Campus Placements Prediction & Analysis using Machine Learning</td><td data-label="Domain">Education, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction Of Used Car Prices Using Artificial Neural Networks And Machine Learning</td><td data-label="Domain">Automotive, Predictive Analytics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Trustworthiness Assessment of Users in Social Reviewing Systems</td><td data-label="Domain">Social Networks, Trust Management</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Personality aware Product Recommendation System based on User Interests Mining and Meta path Discovery</td><td data-label="Domain">Recommender Systems, E-commerce, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Cyber Threat Predictive Analytics for Improving Cyber Supply Chain Security</td><td data-label="Domain">Cyber Security, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Mining Fraudsters and Fraudulent Strategies in Large-Scale Mobile Social Networks</td><td data-label="Domain">Social Networks, Fraud Detection, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Mitigating COVID-19 Transmission in Schools With Digital Contact Tracing</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning Approach For Opinion Mining Online Customer Reviews</td><td data-label="Domain">Opinion Mining, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction of Air Pollution by using Machine Learning Algorithm</td><td data-label="Domain">Environmental Monitoring, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Fake and Clone accounts in Twitter using Classification and Distance Measure Algorithms</td><td data-label="Domain">Social Media, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Spam Transformer Model for SMS Spam Detection</td><td data-label="Domain">Spam Detection, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Student Attendance Management Method Based on Crowd sensing in Classroom Environment</td><td data-label="Domain">Education, Crowd Sensing, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">BullyNet Unmasking Cyberbullies on Social Networks</td><td data-label="Domain">Cyber security, Social Media</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Urban Water Quality With Ubiquitous Data - A Data-Driven Approach</td><td data-label="Domain">Water Quality Monitoring, Data Science</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Credit Card Fraud Detection Using State-of-the-Art Machine Learning and Deep Learning Algorithms</td><td data-label="Domain">Financial Security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning Based Heart Disease Prediction System</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Cyberbullying on Social Media Using Machine learning</td><td data-label="Domain">Social Media, Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">DFR-TSD: A Deep Learning Based Framework for Robust Traffic Sign Detection Under Challenging Weather Conditions</td><td data-label="Domain">Traffic Monitoring, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">TEEN: A Routing Protocol for Enhanced Efficiency in Wireless Sensor Networks</td><td data-label="Domain">Wireless Sensor Networks, IoT</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">RFCNN: Traffic Accident Severity Prediction Based on Decision Level Fusion of Machine and Deep Learning Model</td><td data-label="Domain">Traffic Analysis, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning-Based Prototyping of Graphical User Interfaces for Mobile Apps</td><td data-label="Domain">Software Engineering, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning for Real-Time Heart Disease Prediction</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">DeepGrip: Cricket Bowling Delivery Detection with Superior CNN Architectures</td><td data-label="Domain">Sports Analytics, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">CSKG4APT: A Cyber security Knowledge Graph for Advanced Persistent Threat Organization Attribution</td><td data-label="Domain">Cyber security, Knowledge Graphs</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning-Based Analysis of Crypto Currency Market Financial Risk Management</td><td data-label="Domain">Financial Risk Management, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning and End-to-end Deep Learning for the Detection of Chronic Heart Failure from Heart Sounds</td><td data-label="Domain">Healthcare, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Joint Resource Allocation and Trajectory Optimization for Multi-UAV-Assisted Multi-Access Mobile Edge Computing</td><td data-label="Domain">UAVs, Mobile Edge Computing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Movie Success Prediction Using Naïve Bayes, Logistic Regression and Support Vector Machine</td><td data-label="Domain">Entertainment, Predictive Analytics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Earthquake Early Warning (EEW) system; Machine learning; Earthquake Location</td><td data-label="Domain">Disaster Management, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Block Hunter Federated Learning for Cyber Threat Hunting in Block chain-based IIoT Networks</td><td data-label="Domain">Cyber security, Federated Learning, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Thyroid Disorders Using Machine Learning Approach</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Social Media and Misleading Information in a Democracy: A Mechanism Design Approach</td><td data-label="Domain">Social Media, Democracy, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Optimize The Storage Volume Using Data Mining Techniques</td><td data-label="Domain">Data Mining, Storage Optimization</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analysis of Women's Safety in Indian Cities using Machine Learning on Tweets</td><td data-label="Domain">Social Media Analysis, Public Safety, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Feature-Level Rating System Using Customer Reviews and Review Votes</td><td data-label="Domain">Recommender Systems, Data Analysis, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Food Demand Forecasting Using Machine Learning and Statistical Analysis</td><td data-label="Domain">Food Industry, Predictive Analytics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Strategic Improvements in Malls for Customers by Using Machine Learning</td><td data-label="Domain">Retail, Customer Experience, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Car Price Prediction Using Random Forest Regression Machine Learning</td><td data-label="Domain">Automobile, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Car Price Prediction Using Linear Regression Model in Machine Learning</td><td data-label="Domain">Automobile, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Recognition Attendance System Using Machine Learning</td><td data-label="Domain">Biometrics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Detection and Recognition for Criminal Identification System</td><td data-label="Domain">Criminal Justice, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Cyberbullying Detection Using Machine Learning</td><td data-label="Domain">Social Media, Cyber security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Rainfall Prediction Using Machine Learning</td><td data-label="Domain">Environmental Monitoring, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction Of Loan Eligibility of The Customer</td><td data-label="Domain">Finance, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Driver Attentiveness Detection System with OpenCV Using Machine Learning</td><td data-label="Domain">Automobile, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Driver Sleep Detection and Alarming System Using Machine Learning</td><td data-label="Domain">Automobile, Safety Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Data Mining Approach Combining K-Means Clustering with Bagging Neural Network Driver</td><td data-label="Domain">Data Mining, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning-Based Lightweight Intrusion Detection System for The Internet of Things</td><td data-label="Domain">Cyber security, IoT</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Chatbot Application Using Machine Learning</td><td data-label="Domain">NLP, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Forensic Scanner Identification Using Machine Learning</td><td data-label="Domain">Forensics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction Of Student's Performance Using Educational Data Mining</td><td data-label="Domain">Education, Data Mining</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Soil Moisture Retrieval Using Groundwater Dataset Using Machine Learning Algorithm</td><td data-label="Domain">Agriculture, Environmental Monitoring</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Stock Market Analysis Using Machine Learning</td><td data-label="Domain">Finance, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Stress Detection in It Professional by Image Processing and Machine Learning</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Driver Drowsiness Alert Detection Using Machine Learning</td><td data-label="Domain">Automobile, Safety Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Recognition Using Machine Learning</td><td data-label="Domain">Biometrics, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning to Detect Emotions in Real-Time Based on Facial Expressions</td><td data-label="Domain">Psychology, Real-Time Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Study Of Blockchain Technology in The Farmers Portal</td><td data-label="Domain">Agriculture, Blockchain Technology</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Travelsense: Personalized Travel Recommendation and Itinerary Planner</td><td data-label="Domain">Travel, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake News Detection Using Machine Learning</td><td data-label="Domain">Social Media, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Car Parking Number Plate Detection Using Machine Learning</td><td data-label="Domain">Automobile, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Running Car Number Plate Detection System</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crime Rate Prediction & Analysis Using K-Means Clustering Algorithm</td><td data-label="Domain">Crime Analysis, Data Mining</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Fake Job Recruitment Using Machine Learning Techniques</td><td data-label="Domain">Employment, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">After Capturing and Processing the Image for Authentication Using Machine Learning</td><td data-label="Domain">Cyber security, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crime Activity Detection Through Videos Using Machine Learning</td><td data-label="Domain">Crime Analysis, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real-Time Object Detection</td><td data-label="Domain">Computer Vision, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real-Time Chatbot Assistant</td><td data-label="Domain">AI, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Advanced Image Captioning with Deep Learning</td><td data-label="Domain">Computer Vision, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Object Tracking Using Python from Video</td><td data-label="Domain">Computer Vision, Video Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Brain Stroke Disease Using Machine Learning</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Modeling And Predicting Cyber Hacking Breaches</td><td data-label="Domain">Cyber security, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Lung Cancer from Ct Image Using SVM Classification and 3D CNN On Lung Nodules Data Set</td><td data-label="Domain">Healthcare, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Email Spam Filter Using Natural Language Process</td><td data-label="Domain">Spam Detection, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">House Price Prediction Using Machine Learning</td><td data-label="Domain">Real Estate, Predictive Analytics, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">SMS Spam Detector Using Machine Learning</td><td data-label="Domain">Spam Detection, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Cyber Attacks in Network Using Machine Learning Techniques</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Currency Detection Using OpenCV in Machine Learning</td><td data-label="Domain">Finance, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Emotion Based Music Recommendation System</td><td data-label="Domain">Entertainment, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Diagnosing Chronic Kidney Disease Using Hybrid Machine Learning Algorithms</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image-Based Product Recommendation System</td><td data-label="Domain">E-commerce, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Breast Cancer Detection Using Machine Learning</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Question Paper Generation System</td><td data-label="Domain">Education, Automation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Comparison Of Machine Learning Algorithms for Predicting Crime Hotspots</td><td data-label="Domain">Crime Analysis, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image Encryption and Decryption Using 3DES Encryption</td><td data-label="Domain">Cyber security, Cryptography</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">File Encryption and Decryption or Using Cryptography and Tkinter</td><td data-label="Domain">Cyber security, Cryptography</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Grocery Shopping System</td><td data-label="Domain">E-commerce, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Hotel Management System</td><td data-label="Domain">Hospitality, Software Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Hospital Information Management System</td><td data-label="Domain">Healthcare, Information Management</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Text Recognition OCR with Tesseract and OpenCV</td><td data-label="Domain">Computer Vision, Text Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Object Counting and Tracking with OpenCV and Python</td><td data-label="Domain">Computer Vision, Video Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Eye Blinking Detection</td><td data-label="Domain">Computer Vision, Human-Computer Interaction</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Count Vehicles on Images with OpenCV and Deep Learning</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Landmarks Detection - OpenCV with Python</td><td data-label="Domain">Computer Vision, Biometrics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Add Watermark to Multiple Images with OpenCV and Python</td><td data-label="Domain">Image Processing, Automation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Swapping Detection Using OpenCV</td><td data-label="Domain">Computer Vision, Image Manipulation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Road Lines Detection Hough Transform Using OpenCV</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Rental Bike Sharing Using Machine Learning</td><td data-label="Domain">Transportation, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crop Recommendation (Smart Farming) Using Machine Learning</td><td data-label="Domain">Agriculture, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Multiple Disease Prediction System Using Machine Learning in Python</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Collaborative Filtering-Based Book Recommender System Using Machine Learning</td><td data-label="Domain">E-commerce, Recommender Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Flight Price Prediction Using Machine Learning</td><td data-label="Domain">Travel, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Employee Salary Prediction Using Machine Learning</td><td data-label="Domain">HR, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real-Time Stock Price Prediction and Market Analysis Using Machine Learning</td><td data-label="Domain">Finance, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Enhancing Visual Intelligence: Streaming Object Detection and Recognition with Machine Learning in Image, Video, And OpenCV</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Course Recommendation System Using Machine Learning</td><td data-label="Domain">Education, Recommender Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automated Pest Detection Using Image Classification</td><td data-label="Domain">Agriculture, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Traffic Rules Violations Detection System</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Handwriting Recognition System</td><td data-label="Domain">Computer Vision, Text Recognition</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Characterizing And Predicting Early Reviewers for Effective Product Marketing on E-Commerce Websites</td><td data-label="Domain">E-commerce, Data Mining</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Sentiment Analysis of Good reads Reviews Using Machine Learning</td><td data-label="Domain">Social Media, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analyzing And estimating the IPL Winner Using Machine Learning</td><td data-label="Domain">Sports Analytics, Predictive Modeling</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Book Genre Classification Using Machine Learning</td><td data-label="Domain">E-commerce, Classification</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Error Detection Credit Card Using Machine Learning</td><td data-label="Domain">Finance, Fraud Detection</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analyzing And estimating the IPL Winner Using Machine Learning</td><td data-label="Domain">Environmental Monitoring, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Performance Analysis and Evaluation of Machine Learning Algorithms in Rainfall Prediction</td><td data-label="Domain">Finance, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Artificial Intelligence-Based Fake Currency Detection System</td><td data-label="Domain">Finance, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Evaluation Of Machine Learning Algorithms for The Detection of Fake Bank Currency</td><td data-label="Domain">Computer Vision, Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting The Movement of Objects with Webcam and Alert Using Machine Learning</td><td data-label="Domain">Finance, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Currency Detection and Verification Using OpenCV</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real Time Car Number Plate Detection Using OpenCV</td><td data-label="Domain">Education, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning Approach for Tracking and Predicting Student Performance in Degree Programs</td><td data-label="Domain">Healthcare, Big Data Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">5g-Smart Diabetes Toward Personalized Diabetes Diagnosis with Healthcare Big Data Clouds</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Lung Cancer from Ct Image Using SVM Classification And 3d CNN on Lung Nodules Data Set</td><td data-label="Domain">Biometrics, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automatic Age and Gender Classification</td><td data-label="Domain">Entertainment, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Emotion-Based Music Player Using OpenCV</td><td data-label="Domain">Computer Vision, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real Time Face Emotion Detection Using OpenCV in CNN Model</td><td data-label="Domain">Entertainment, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Emotion Based Music Player Using Artificial Intelligence</td><td data-label="Domain">Artificial Intelligence</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Block chain Based Certificate Validation</td><td data-label="Domain">Agriculture, AI, Cloud Computing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection And Classification of Fruit Diseases Using Image Processing and Cloud Computing</td><td data-label="Domain">AI, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Personal Voice Assistant</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Drug Recommendation and Disease Prediction System</td><td data-label="Domain">Healthcare, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Drug Recommendation System Based on Sentiment Analysis of Drug Reviews Using Machine Learning</td><td data-label="Domain">Healthcare, Recommender Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Medicine Drugs Recommendation System Using Content-Based Filtering</td><td data-label="Domain">Healthcare, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Mask Detection Using TensorFlow and Kera’s</td><td data-label="Domain">Healthcare, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Mask Detection System Using OpenCV- Streamlit App</td><td data-label="Domain">Finance, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fish Disease Detection Using Image Based Machine Learning Technique In Aquaculture</td><td data-label="Domain">Agriculture, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Sign Language Detection Using Machine Learning</td><td data-label="Domain">Accessibility, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vehicles Speed Detection System Using OpenCV</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Speed Estimation and Number Plate Detection Using OpenCV</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Hand And Face Landmarks Detection Media pipe Using Artificial Intelligence</td><td data-label="Domain">Computer Vision, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Iris Mouse Or Eye Mouse Controlled Using OpenCV</td><td data-label="Domain">Human-Computer Interaction, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Beautify Using OpenCV</td><td data-label="Domain">Computer Vision, Image Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analysis And Prediction of Covid-19 Using Time Series Forecasting</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analysis And Prediction of Occupational Accidents</td><td data-label="Domain">Occupational Safety, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Artist Recommendation System Using Collaborative Filtering</td><td data-label="Domain">Entertainment, Recommender Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Biometric Steganography Using Mid Position Value Technique</td><td data-label="Domain">Cyber security, Steganography</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Classification Of Covid-19 Using Chest X-Ray</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Covid-19 Future Forecasting</td><td data-label="Domain">Healthcare, Time Series Forecasting</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Covid19 Social Distance Monitoring System Using Yolo</td><td data-label="Domain">Healthcare, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Credit Card Fraud Detection</td><td data-label="Domain">Finance, Fraud Detection</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Malicious Code Variants Based on Deep Learning</td><td data-label="Domain">Cyber security, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face To Emoji Using OpenCV and HaarCascade Classifier / Facial Expression Recognition Emoji</td><td data-label="Domain">Computer Vision, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fusion Approach to Infrared and Visible Images</td><td data-label="Domain">Computer Vision, Image Fusion</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Money Laundering Detection Using Machine Learning Methods</td><td data-label="Domain">Finance, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction Analysis Using Support Vector Machine in Cardiovascular Ailments</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vehicle Pattern Recognition Using Machine Learning and Deep Learning to Predict Car Model</td><td data-label="Domain">Transportation, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Hybrid Fuzzy Logic-based Deep Learning Approach for Fake Review Detection</td><td data-label="Domain">E-commerce, Fake Review Detection</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Joint Multi-Task CNN for Cross-Age Face Recognition</td><td data-label="Domain">Biometrics, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Advertisement Classification using machine learning</td><td data-label="Domain">Marketing, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Android malware detection using Machine learning techniques</td><td data-label="Domain">Cybersecurity, Mobile Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Artificial Intelligence and Internet of Things Enabled Disease Diagnosis Model for Smart Healthcare Systems</td><td data-label="Domain">Healthcare, AI, IoT</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Black Friday Sales Prediction Using ML</td><td data-label="Domain">E-commerce, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Child Predators Cyber Harassers on Social Media</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Retinal Disease Prediction using Machine Learning</td><td data-label="Domain">Healthcare, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of fake online reviews using Supervised Learning and Non-Supervised Learning--JAVA</td><td data-label="Domain">E-commerce, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Efficient Prediction of Cardiovascular Disease Using Machine Learning Algorithms with Relief and LASSO Feature Selection Techniques</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Early detection and prediction of Alzheimer disease</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Desktop Voice Assistant</td><td data-label="Domain">AI, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Phishing Websites using Supervised Machine Learning Techniques</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Phishing Websites using Machine Learning</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Plant disease detection and Classification Using ML</td><td data-label="Domain">Agriculture, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Plant Species Health Detection Using AI</td><td data-label="Domain">Agriculture, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Plagiarism Checker Using Flask</td><td data-label="Domain">Education, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Weapons Detection using OpenCV</td><td data-label="Domain">Security, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Depression Detection on Tweets Using Machine Learning</td><td data-label="Domain">Healthcare, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">EDA - Bank Loan Default Risk Analysis</td><td data-label="Domain">Finance, Data Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Artificial Intelligence and Internet of Things Enabled Disease Diagnosis Model for Smart Healthcare Systems</td><td data-label="Domain">Healthcare, IoT, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Lip Reading using Neural Network and Deep learning</td><td data-label="Domain">Accessibility, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning Algorithm For Stroke Disease Classification</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Human Activity Recognition</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Using Deep Learning to Predict Plant Growth and Yield in Greenhouse Environments</td><td data-label="Domain">Agriculture, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Estimating the price of houses using machine learning</td><td data-label="Domain">Real Estate, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Semi Supervised Machine Learning Approach for DDoS detection</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Traffic Sign Detection And Recognition</td><td data-label="Domain">Transportation, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">twitter sentiment analysis using machine learning</td><td data-label="Domain">Social Media, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suicide tweet detection machine learning</td><td data-label="Domain">Healthcare, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Building Search Engine Using Machine Learning Technique</td><td data-label="Domain">AI, Information Retrieval</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Converging Block chain and Machine Learning for Healthcare</td><td data-label="Domain">Healthcare, Blockchain, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Data Analysis by Web Scraping using Python</td><td data-label="Domain">Data Science, Web Scraping</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Corona Recognition Method Based on Visible Light Color and Machine Learning</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning Approach to predict autism spectrum disorder</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Cyber Attack in Network Using Machine Learning Techniques</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Filtering Instagram Hashtags Through Crowd tagging and the HITS Algorithm</td><td data-label="Domain">Social Media, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Generating Cloud Monitors from Models to Secure Clouds</td><td data-label="Domain">Cybersecurity, Cloud Computing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Employee salary hike prediction using machine learning</td><td data-label="Domain">HR, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crypto currency Price Analysis with Artificial Intelligence</td><td data-label="Domain">Finance, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Cyber Threat Detection Based on Artificial Neural Networks Using Event Profiles</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Lifestyle Disease Prediction</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Software Defect Estimation Using Machine Learning Algorithms</td><td data-label="Domain">Software Engineering, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Characteristics & predicating early reviews for effective product marketing one commerce websites</td><td data-label="Domain">E-commerce, Data Mining</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analysis and Prediction of Industrial Accidents Using Machine Learning</td><td data-label="Domain">Occupational Safety, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Facial Emotion Reorganization using CNN</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting Mental Disorders in Social Media Through Emotional Patterns - The case of Anorexia and Depression</td><td data-label="Domain">Healthcare, Sentiment Analysis</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake Account Detection using Machine Learning</td><td data-label="Domain">Social Media, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Use of Artificial Neural Networks to Identify Fake Profiles</td><td data-label="Domain">Social Media, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Driving Decision Strategy (DDS) Based on Machine learning for an autonomous vehicle</td><td data-label="Domain">Transportation, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Quality Risk Analysis for Sustainable Smart Water Supply Using Data Perception</td><td data-label="Domain">Environmental Monitoring, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning Model for Average Fuel Consumption in Heavy Vehicles.</td><td data-label="Domain">Transportation, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Stock Market Trends Using Machine Learning and Deep Learning Algorithms Via Continuous and Binary Data a Comparative Analysis</td><td data-label="Domain">Finance, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Privacy Preserving Location Data Publishing: A Machine Learning Approach</td><td data-label="Domain">Cybersecurity, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Spammer Detection And Fake User Identification On Social Network</td><td data-label="Domain">Social Media, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Face Recognition and Crime detection</td><td data-label="Domain">Security, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Hepatitis disease Prediction Using Machine Learning classification techniques</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Intrusion Detection System using KDD dataset and Deep learning methods</td><td data-label="Domain">Cyber security, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automating E-Government using AI</td><td data-label="Domain">Government, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Building Search Engine using Machine Learning Algorithm</td><td data-label="Domain">AI, Information Retrieval</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Breast Cancer Detection</td><td data-label="Domain">Healthcare, Predictive Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Customer Segmentation Using Clustering And Data Mining Techniques</td><td data-label="Domain">Marketing, Data Mining</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Comprehensive and Scalable Stock Market Analysis System using Python</td><td data-label="Domain">Finance, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting Spam Email with Machine Learning Optimized with Bio- Inspired Metaheuristic Algorithms</td><td data-label="Domain">Cyber security, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Securing Data With Block Chain And Ai</td><td data-label="Domain">Cyber security, Block chain, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automatic Identification Of Malaria-Infected Cells Using Deep Convolutional Neural Network</td><td data-label="Domain">Healthcare, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Employee Block chain In Agriculture</td><td data-label="Domain">Agriculture, Blockchain</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Decentralized Web Hosting Using Block chain</td><td data-label="Domain">Web Development, Block chain</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Activity Minimization Of Misinformation Influence In Online Social Networks</td><td data-label="Domain">Social Media, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Biometric Information Recognition Using Artificial Intelligence Algorithms</td><td data-label="Domain">Biometrics, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Employees Face Recognition System</td><td data-label="Domain">Security, Biometrics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">EyeBall Cursor Movement Using OpenCV</td><td data-label="Domain">Human-Computer Interaction, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">QR Code Based Attendance System Using Deep Learning</td><td data-label="Domain">Education, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection Of Fake News Through Implementation Of Data Science Application</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Phishing Website Detection Using Machine Learning Algorithms</td><td data-label="Domain">ML/Cyber security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Health Consulting Online System Using Block chain</td><td data-label="Domain">Blockchain/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Multi Disease Prediction Using Machine Learning</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suspicious Activity Detection Using Deep Learning</td><td data-label="Domain">Deep Learning/Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Supra Ventricular Arrhythmia using LSTM, BI-LSTM & GRU</td><td data-label="Domain">Deep Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Deep Learning-Based Approach for Inappropriate Content Detection and Classification of YouTube Videos</td><td data-label="Domain">Deep Learning/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Block chain E-Voting Done Right: Privacy and Transparency with Public Block chain</td><td data-label="Domain">Blockchain/Voting System</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Body Fat Estimator</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Watermarking Images using Deep Learning</td><td data-label="Domain">Deep Learning/Image Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predict Zomato Restaurant Ratings</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Cricket Match Outcome Prediction Using Machine Learning</td><td data-label="Domain">Machine Learning/Sports Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Flight Delay Prediction with Error Calculation using Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Disease Detection and Prediction Analysis</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake Marriage Profile Detection</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Biometric Information Recognition Using Artificial Intelligence</td><td data-label="Domain">AI/Biometric</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake OR Real Face Detection using OpenCv</td><td data-label="Domain">Computer Vision/Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Skin Cancer Detection Squamous Cell Carcinoma</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Intermediate Fasting Application</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Sentiment Analysis using Machine Learning and Flask App</td><td data-label="Domain">Machine Learning/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vehicle Parking Lot Monitoring System using OpenCV</td><td data-label="Domain">AI/Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Sentiment Analysis Django WebApp</td><td data-label="Domain">Machine Learning/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Garbage Classification using Convolutional Neural Network</td><td data-label="Domain">Deep Learning/Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real Time Vehicle Identification and Detection System Along with Vehicle Counting</td><td data-label="Domain">AI/Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Enhancing Visual Intelligence Streaming Object Detection and Recognition with Machine Learning in Image, Video, and OpenCV</td><td data-label="Domain">Machine Learning/Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Brain Stroke Prediction and Analysis of Machine Learning</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Heart Disease Prediction Using Machine Learning Algorithms</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Text Classification on Twitter Data</td><td data-label="Domain">Machine Learning/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An Efficient Approach for Interpretation of Indian Sign Language using Machine Learning</td><td data-label="Domain">Machine Learning/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suspicious Activity Detection using Machine Learning</td><td data-label="Domain">Machine Learning/Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Multi classifier interactive learning for ambiguous speech emotion recognition</td><td data-label="Domain">AI/Speech Recognition</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image Understanding Through Deep Learning with Automatic Caption Generation</td><td data-label="Domain">Deep Learning/Image Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Disease prediction in particular area or crop</td><td data-label="Domain">Machine Learning/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Helmet Detection using Machine Learning</td><td data-label="Domain">Computer Vision/AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Healthcare-Multi Diseases Prediction Using ML</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Movie Recommendation System Using Machine Learning</td><td data-label="Domain">Machine Learning/Recommendation System</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Farming Made Easy using Machine Learning</td><td data-label="Domain">Machine Learning/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Campus Placement Prediction using Machine Learning</td><td data-label="Domain">Machine Learning/Education</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Estimate Distance from the camera for detected faces</td><td data-label="Domain">Computer Vision/AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Human Stress Detection in and through Sleep Using ML- (Smart Sleeping)</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Ingredients identification from the food image</td><td data-label="Domain">AI/Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Recipe Generation from Food Image</td><td data-label="Domain">AI/Computer Vision/NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Diabetic Retinopathy Detection using CNN</td><td data-label="Domain">Deep Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">SMARTEDPRO: Integrated Smart Education Management System / Student Management System/College management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Blood Bank Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Hospital Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Library Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Insurance Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">E-Learning Assessment</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Vehicle Service Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Next-Generation Secure E-Commerce Platform / Online Shopping</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Integrated Educational Administration: A Comprehensive School Management System</td><td data-label="Domain">Python-Django</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">AI Driven Drug Interaction Prediction System</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Ai Powered Biomedical Image Analysis</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Ai-Enhanced Elderly Care Companion</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">HandWritten Text Conversion Into Editable Digital Format</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fruit Disease Detection And Prevention Using Generative Adversarial Networks</td><td data-label="Domain">AI/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Brain Tumour Detection Using Deep Learning</td><td data-label="Domain">Deep Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Epilots A System To Predict Hard Landing During The Approach Phase Of Commercial Flights</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real Time Earthquake Early Warning System using Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Startup Success Prediction Using Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Development of Multilingual Video Dubbing Software for Indian Regional Languages</td><td data-label="Domain">AI / NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Web Based Graphical Password Authentication System</td><td data-label="Domain">Cyber security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Web based turf playground booking hub</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Timetable Generation System</td><td data-label="Domain">AI-Web Application</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">QR Based Food Ordering System</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Stock Price Prediction using Twitter Dataset</td><td data-label="Domain">ML/Finance</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Depression Detection Using ECG</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Secure crypto-biometric system for cloud computing</td><td data-label="Domain">Cyber security/Cloud Computing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Audio to Sign Language Translator Using Python</td><td data-label="Domain">AI/NLP/Accessibility</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting Accuracy of Players in the Cricket using Machine Learning</td><td data-label="Domain">AI/Sports Analytics</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Recovery Of Image Using One Dimensional Signal</td><td data-label="Domain">Signal Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Early Detection of Cancer using AI</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Kidney Stone Detection using Ultrasound Images</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Parking Management System</td><td data-label="Domain">Web Application</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Toll System using Automatic Number Plate Detection</td><td data-label="Domain">AI/Transportation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Machine Learning Based Prediction Model for College Admission / Prediction of Admission in Engineering College</td><td data-label="Domain">Machine Learning/Education</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Future of Loan Approvals with Explainable AI</td><td data-label="Domain">AI/Finance</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Al Powered Server Log Management Software</td><td data-label="Domain">AI/IT Management</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Microwave Medical Image Segmentation for Brain Stroke Diagnosis: Imaging-Process-Informed Image Processing</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Two Factor Worm Detection Based on Signature & Anomaly</td><td data-label="Domain">Cybersecurity/AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Children ADHD Disease Detection using Pose Estimation Technique</td><td data-label="Domain">AI/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Exam Invigilation Duty</td><td data-label="Domain">AI/Education</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">IOT Based Smart Irrigation System using Reinforcement Learning</td><td data-label="Domain">Agriculture/ ML</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting Web Attacks with End-to-End Deep Learning</td><td data-label="Domain">AI/Cyber security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Blockchain Traceability for Sustainable Agriculture</td><td data-label="Domain">Blockchain/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Farming: Crop Selection, Fertilizer Advice, Disease detection and prevention using Deep Learning</td><td data-label="Domain">Deep Learning/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Movie Recommendation System Using Sentiment Analysis From Microblogging</td><td data-label="Domain">AI/Recommendation System</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automated Resume Analysis & Skill Suggesting Website using NLP</td><td data-label="Domain">NLP/Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning Approach Using Statistical Models for Early Detection of Cardiac Arrest in Newborn Babies in the Cardiac Intensive Care Unit</td><td data-label="Domain">Machine Learning/Healthcare</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Artificial Intelligence Crime: An Overview of Malicious Use and Abuse of AI</td><td data-label="Domain">AI/Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Discover Customers' Gender From Online Shopping Behavior</td><td data-label="Domain">Machine Learning/E-commerce</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Flight Delay Prediction Based on Aviation Big Data and Machine Learning</td><td data-label="Domain">AI/Transportation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predicting the Rice leaf diseases using CNN</td><td data-label="Domain">AI/Agriculture</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Prediction of Engineering branch selection for Inter Students</td><td data-label="Domain">Cybersecurity, IoT</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Measurement Approach for inline Intrusion Detection of Heartbleed-like Attacks in IoT Frameworks</td><td data-label="Domain">AI, Recommendation Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Emotion detection-based movie and music recommendation</td><td data-label="Domain">Computer Vision, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fake Logo Detection</td><td data-label="Domain">Computer Vision, Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Signature Verification System</td><td data-label="Domain">Computer Vision, Image Processing</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Auto capture Selfie by Detecting Smile</td><td data-label="Domain">Artificial Intelligence</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Nursery Plant Shopping Website Python</td><td data-label="Domain">Software Engineering, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An experiment study for software quality prediction with machine learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">HealthCare Chatbot</td><td data-label="Domain">E-commerce, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Organic Health Food Store Project</td><td data-label="Domain">E-commerce, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online price comparison website python</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Text and image plagiarism detection</td><td data-label="Domain">AI, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Deep Learning Based Road Accident Detection System</td><td data-label="Domain">Data Science, Transportation</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Station-Level Demand Prediction for Bike-Sharing System</td><td data-label="Domain">Recommendation Systems, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Personalized Travel Planning System</td><td data-label="Domain">Finance, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Stock Price Prediction Using LSTM</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Quiz: A Comprehensive Online Quiz Management System</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Indian Railway Booking System</td><td data-label="Domain">Public Safety, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Fire Reporting System</td><td data-label="Domain">EducationTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online College Magazine</td><td data-label="Domain">HealthTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Medicine Donation</td><td data-label="Domain">Productivity, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">E-Diary Management System/ Smart Note Manager</td><td data-label="Domain">HealthTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Gym Management System</td><td data-label="Domain">FinanceTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Loan Management System</td><td data-label="Domain">Finance Tech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Banking System</td><td data-label="Domain">IoT, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vehicle Parking Management System</td><td data-label="Domain">Education Tech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Notes and Material Sharing</td><td data-label="Domain">Web Security, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Voting System</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Steganography For Text, Image, Audio And Video Using Python</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Network Intrusion Detection Using Supervised Machine Learning Technique With Feature Selection</td><td data-label="Domain">Web Development, Event Management</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Auditorium booking web application using Python</td><td data-label="Domain">HealthTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">HDPM: An Effective Heart Disease Prediction Model for a Clinical Decision Support System</td><td data-label="Domain">HealthTech, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real Time Personalized Physiologically Based Stress Detection for Hazardous Operations</td><td data-label="Domain">Transportation, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Traffic Route Prediction</td><td data-label="Domain">HealthTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Food Calorie Count Using Django</td><td data-label="Domain">HealthTech, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Estimation of Nutrition Components</td><td data-label="Domain">Environment, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Ground water Level Prediction Using Hybrid Random Forest And DCNN</td><td data-label="Domain">Public Safety, Data Science</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crime Data Analysis and Prediction Using Decision Tree</td><td data-label="Domain">AI, NLP</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">AI Based FAQ Chatbot with Voice Assistance</td><td data-label="Domain">EducationTech, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An Online Learning Platform with Intelligent Tutoring using AI Components</td><td data-label="Domain">HealthTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Liver Disease Prediction using GA features selection, Social Spider Optimization and CNN Classification</td><td data-label="Domain">E-commerce, Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online Book Reselling System</td><td data-label="Domain">Web Development/Python</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Secure Communication using DiffieHellman Key Exchange, AES & SHA for Data Integrity</td><td data-label="Domain">IoT, Networking</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vehicle 2 Vehicle Communication</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image Gallery using Google Cloud</td><td data-label="Domain">HealthTech, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Road Accident Severity & Hospital Recommendation using Deep Learning Techniques</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Novel Web Attack Detection System for Internet of Things via Ensemble Classification</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Supermarket Basket Project</td><td data-label="Domain">AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Suicidal Ideation Detection A Review of Machine Learning Methods and Applications</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Food Tech BlockChain Using Python</td><td data-label="Domain">AgriTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Crop Yield Prediction using Machine Learning Algorithm</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Attendance Capture System Using Face Recognition</td><td data-label="Domain">AgriTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Tomato leaf disease detection</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Big Mart Sales Prediction Using Machine Learning</td><td data-label="Domain">IoT, Smart Cities, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Garbage Management System</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Lightweight Convolutional Neural Network for Real-Time Facial Expression Detection</td><td data-label="Domain">Cyber security, Web traffic sDevelopment</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">SecureWeb: A Novel Machine Learning Methodology for Identifying Cross-Site Request Forgery Vulnerabilities</td><td data-label="Domain">Cyber security, Machine Learning.</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Intelligent Bird Sound Recognition</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">NSE Stock Monitoring & Prediction using Robotic Process Automation</td><td data-label="Domain">HealthTech, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Chronic Kidney Disease Prediction using CNN, LSTM and Ensemble Model</td><td data-label="Domain">AI, Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Deep Cross-modal Face Naming for People News Retrieval</td><td data-label="Domain">AgriTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Grape Leaf Disease Identification using Machine Learning Techniques</td><td data-label="Domain">AI, Computer Vision</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Campus Abnormal Behavior Recognition With Temporal Segment Transformers</td><td data-label="Domain">HealthTech, Explainable AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Explainable Artificial Intelligence for Patient Safety A Review of Application</td><td data-label="Domain">AI, Federated Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Federated Learning Based Face and Eye Blink Recognition</td><td data-label="Domain">HealthTech, Block chain</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Medilink One Health One Card</td><td data-label="Domain">EducationTech, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Navigating the Path to Academic Success</td><td data-label="Domain">HealthTech, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">PupilHeart: Heart Rate Variability Monitoring via Pupillary Fluctuations on Mobile Devices</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Real-time Traffic Surveillance and Detection using Deep Learning and Computer Vision Techniques</td><td data-label="Domain">Public Safety, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Using Existing CCTV Network for Crowd Management, Crime Prevention & Work Monitoring using AI & ML</td><td data-label="Domain">Environment, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Systematic Review of Predicting Elections Based on Social Media Data</td><td data-label="Domain">EnergyTech, AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Online College Magazine</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Groundwater Level Prediction Using Hybrid Artificial Neural Network with Genetic Algorithm</td><td data-label="Domain">Cyber security, Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Electricity Theft Detection In Power Grids With Deep Learning And Random Forests</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Doctor Appointment Booking System</td><td data-label="Domain">Web Development</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Epileptic Seizures Prediction Using Deep Learning Techniques</td><td data-label="Domain">Healthcare / Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Classification of Software Defined Network Traffic to Provide Quality of Service</td><td data-label="Domain">Networking / Software Defined Networks</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Lung Cancer Stages Prediction</td><td data-label="Domain">Healthcare / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Machine Learning Modelling for Bitcoin Market Price Prediction Based on the Long Short Term Memory Recurrent Neural Network</td><td data-label="Domain">Finance / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automatic Assessment of Communication Skill in Non-conventional Interview Settings: A Comparative Study</td><td data-label="Domain">Human Resources / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Data Driven Energy Economy Prediction for Electric City Buses Using Machine Learning</td><td data-label="Domain">Energy / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting and Mitigating Botnet Attacks in Software-Defined Networks Using Deep Learning Techniques</td><td data-label="Domain">Cyber security / Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Privilege Escalation Attack Detection and Mitigation in Cloud Using Machine Learning</td><td data-label="Domain">ML / Security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">An AI-Based Medical Chatbot Model for Infectious Disease Prediction</td><td data-label="Domain">Healthcare / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Graph Convolutional Network-Based Model for Megacity Real Estate Valuation</td><td data-label="Domain">Real Estate / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Efficient Email Phishing Detection Using Machine Learning</td><td data-label="Domain">Cyber security / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Data Poisoning Attacks on Federated Machine Learning</td><td data-label="Domain">Cyber security / Federated Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Representing Fine-Grained Co-Occurrences for Behavior-Based Fraud Detection in Online Payment Services</td><td data-label="Domain">Finance / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">GEFA Early Fusion Approach in Drug-Target Affinity Prediction</td><td data-label="Domain">Healthcare / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Agricultural Land Image Classification Using Regression Neural Network and Compare with KNN for Feature Extraction</td><td data-label="Domain">Agriculture / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">MADNet: A Fast and Lightweight Network for Single-Image Super Resolution</td><td data-label="Domain">Image Processing / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Classification of Diabetic Retinopathy Disease Levels by Extracting Topological Features Using Graph Neural Networks</td><td data-label="Domain">Healthcare / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detecting and Characterizing Extremist Reviewer Groups in Online Product Reviews</td><td data-label="Domain">E-commerce / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Mammogram Detection Using Machine Learning</td><td data-label="Domain">Healthcare / Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Securing Data in the Image Using SHA & ECC</td><td data-label="Domain">Cyber security</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Hashtag-Based Tweet Expansion for Improved Topic Modelling</td><td data-label="Domain">Social Media / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Nature-Based Prediction Model of Bug Reports Based on Ensemble Machine Learning Model</td><td data-label="Domain">Software Engineering / AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Collaborative Filter Based Group Recommendation for Crowd funding</td><td data-label="Domain">Finance / Recommendation Systems</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Predictive Analysis of Medical Insurance Charges Using Linear Regression for Personalized Cost Estimation</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image Forgery Detection using Machine Learning and CNN</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Scene: Automated Captioning with Generative AI</td><td data-label="Domain">Generative AI</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automated Road Condition Classification for Pothole Detection Using Deep Learning</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Fingerprint Based Blood Group Identification / Automated Blood Group Detection</td><td data-label="Domain">Biometrics and Healthcare / Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Medical Insurance Premium Prediction With Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Integrated Quality Prediction Dashboard for Water, Air, and Wine</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Early Detection of Down Syndrome in Children Using Convolutional Neural Networks</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Email Spam Detection Using Machine Learning Algorithms</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Location prediction on Twitter using machine learning Techniques</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Virtual Mouse Operation Using Webcam</td><td data-label="Domain">Artificial Intelligence</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Emotion Detection using Twitter Datasets and Spacy Algorithm</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Designing Secure and Efficient Biometric</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Water Quality Monitoring & Forecasting System</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Road Traffic Vehicle Detection and Tracking using Deep Learning with Custom-Collected and Public Datasets</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Vitamin Deficiency And Food Recommendation System Using Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">DL-IDF: Deep Learning Based Intrusion Detection Framework in Industrial Internet of Things</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Classifying Soil Texture Using RBG Images In Uncontrolled Field Settings</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Smart Farming Fruit Disease Detection through Color, Texture Analysis, and Neural Networks</td><td data-label="Domain">Deep Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Video captioning using Multi-model Attention-based Transformer Approach</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Novel Approach to Predict Blood Group using Fingerprint Map Reading</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Chronic Diseases Prediction Using Machine Learning With Data Preprocessing Handling: A Critical Review</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Lesion-Based Diabetic Retinopathy Detection Through Hybrid Deep Learning Model</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Analyzing Employee Retention Factors using Machine Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Faculty Management System</td><td data-label="Domain">Django-web App</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">A Hybrid Network Analysis and Machine Learning Model for Enhanced Financial Distress Prediction</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Green Basket</td><td data-label="Domain">Django-web App</td><td data-label="Language">Python-Django</td></tr>
+                        <tr><td data-label="Project Name">Propounding First Artificial Intelligence Approach for Predicting Robbery Behavior Potential in an Indoor Security Camera</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Noise Reduction in Web Data A Learning ApproachBased on Dynamic User Interests</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">A Forest Fire Identification Method for Unmanned Aerial Vehicle Monitoring Video Images</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Human Activity Recognition Using SmartPhone Data</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Automatic Detection of Genetic Diseases in Paediatric Age Using Pupillometry</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Stroke Disease using Machine Learning Algorithms</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Energy efficient teaching-learning-based optimization for the discrete routing problem in wireless sensor networks</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Classification of Oral Cancer Into Pre-Cancerous Stages From White Light Images Using LightGBM Algorithm</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Applying Machine Learning Algorithms for the Classification of Sleep Disorders</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">The Short Video Popularity Prediction Using Internet of Things and Deep Learning</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Short-Term Arrival Delay Time Prediction in Freight Rail Operations Using Data-Driven Models</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Human Stress Detection Based on Sleeping Habits</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Detection of Malicious Social Bots Using Learning Automata With URL Features in Twitter Network</td><td data-label="Domain">Machine Learning</td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">AUTOMATING E-GOVERNMENT SERVICES WITH MACHINE LEARNING AND ARTIFICIAL INTELLIGENCE</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Lightweight Privacy Preserving Medical Diagnosis in Edge Computing</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Semantics of Data Mining Services in Cloud Computing</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Image segmentation on satellite images</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Enhancing Image Clarity with GANs A Deep Learning Approach to Super-Resolution</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                        <tr><td data-label="Project Name">Content Based Image Retrieval using Deep Learning</td><td data-label="Domain"></td><td data-label="Language">Python</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

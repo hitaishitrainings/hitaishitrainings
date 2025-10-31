@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Overseas Course</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h2 { color: #007BFF; }
+    form { max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, select, textarea, button { width: 100%; padding: 8px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc; }
+    button { background: #007BFF; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h2>➕ Add Overseas Course</h2>
+
+  <form id="courseForm"
+    style="max-width:850px;margin:40px auto;padding:30px 40px;background:#fff;
+    border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,0.12);
+    font-family:Poppins, sans-serif;box-sizing:border-box;">
+
+    <h2 style="text-align:center;margin:0 0 25px;color:#1a237e;font-weight:700;">
+      Add Overseas Course
+    </h2>
+
+    <div style="display:flex;flex-wrap:wrap;gap: 30px;">
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="university_name" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">University Name *</label>
+        <input type="text" id="university_name" placeholder="Enter university name" required
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="course_name" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Course Name *</label>
+        <input type="text" id="course_name" placeholder="Enter course name" required
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="country" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Country *</label>
+        <input type="text" id="country" placeholder="Enter country name" required
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="city" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">City</label>
+        <input type="text" id="city" placeholder="Enter city name"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="course_type" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Course Type</label>
+        <select id="course_type"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+          <option value="">Select Course Type</option>
+          <option>Undergraduate</option>
+          <option>Postgraduate</option>
+          <option>Diploma</option>
+        </select>
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="duration" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Duration </label>
+        <input type="text" id="duration" placeholder="e.g., 2 years"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="tuition_fee" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Tuition Fee ($) *</label>
+        <input type="number" id="tuition_fee" placeholder="Enter tuition fee"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="intake_month" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Intake Month </label>
+        <select id="intake_month"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+          <option value="">Select Intake Month</option>
+          <option>January</option>
+          <option>May</option>
+          <option>September</option>
+        </select>
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="ielts_required" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">IELTS Required *</label>
+        <input type="number" step="0.1" id="ielts_required" placeholder="e.g., 6.5"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="toefl_required" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">TOEFL Required *</label>
+        <input type="number" id="toefl_required" placeholder="e.g., 90"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 48%;min-width:260px;">
+        <label for="gpa_required" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">GPA Required *</label>
+        <input type="number" step="0.01" id="gpa_required" placeholder="e.g., 3.0"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="scholarships" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Scholarships</label>
+        <textarea id="scholarships" placeholder="Enter scholarship details"
+          style="width:100%;min-height:80px;padding:12px 14px;border:1px solid #cfd8dc;
+          border-radius:8px;font-size:15px;color:#333;background:#fafafa;resize:vertical;transition:0.3s;"></textarea>
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="application_deadline" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Application Deadline *</label>
+        <input type="date" id="application_deadline"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="career_outcomes" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Career Outcomes</label>
+        <textarea id="career_outcomes" placeholder="Enter career outcomes"
+          style="width:100%;min-height:80px;padding:12px 14px;border:1px solid #cfd8dc;
+          border-radius:8px;font-size:15px;color:#333;background:#fafafa;resize:vertical;transition:0.3s;"></textarea>
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="course_structure" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Course Structure</label>
+        <textarea id="course_structure" placeholder="Enter course structure details"
+          style="width:100%;min-height:80px;padding:12px 14px;border:1px solid #cfd8dc;
+          border-radius:8px;font-size:15px;color:#333;background:#fafafa;resize:vertical;transition:0.3s;"></textarea>
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="description" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Course Description</label>
+        <textarea id="description" placeholder="Enter full course description"
+          style="width:100%;min-height:80px;padding:12px 14px;border:1px solid #cfd8dc;
+          border-radius:8px;font-size:15px;color:#333;background:#fafafa;resize:vertical;transition:0.3s;"></textarea>
+      </div>
+
+      <div style="flex:1 1 100%;">
+        <label for="image_url" style="display:block;margin-bottom:6px;font-weight:700;color:#333;">Image URL</label>
+        <input type="text" id="image_url" placeholder="Paste course image URL"
+          style="width:100%;padding:12px 14px;border:1px solid #cfd8dc;border-radius:8px;
+          font-size:15px;color:#333;background:#fafafa;transition:0.3s;">
+      </div>
+
+      <div style="flex:1 1 100%;text-align:center;margin-top:10px;">
+        <button type="submit"
+          style="background-color:#3f51b5;color:#fff;font-weight:700;border:none;cursor:pointer;
+          padding:14px 24px;border-radius:10px;font-size:16px;transition:0.3s;">
+          Add Course
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+
+  <div id="message"></div>
+
+<script>
+  const form = document.getElementById("courseForm");
+  const messageDiv = document.getElementById("message");
+
+  // ✅ Helper: create a popup
+  function showPopup(message, isError = false) {
+    // Create popup container
+    const popup = document.createElement("div");
+    popup.style.position = "fixed";
+    popup.style.top = "0";
+    popup.style.left = "0";
+    popup.style.width = "100%";
+    popup.style.height = "100%";
+    popup.style.background = "rgba(0,0,0,0.6)";
+    popup.style.display = "flex";
+    popup.style.justifyContent = "center";
+    popup.style.alignItems = "center";
+    popup.style.zIndex = "9999";
+
+    // Create popup content box
+    const box = document.createElement("div");
+    box.style.background = "#fff";
+    box.style.padding = "30px 40px";
+    box.style.borderRadius = "12px";
+    box.style.boxShadow = "0 8px 20px rgba(0,0,0,0.2)";
+    box.style.textAlign = "center";
+    box.style.fontFamily = "Arial, sans-serif";
+    box.style.maxWidth = "400px";
+
+    // Message styling
+    const msg = document.createElement("p");
+    msg.textContent = message;
+    msg.style.fontSize = "1.1rem";
+    msg.style.marginBottom = "20px";
+    msg.style.color = isError ? "#e63946" : "#28a745";
+    msg.style.fontWeight = "600";
+
+    // Button
+    const btn = document.createElement("button");
+    btn.textContent = "OK";
+    btn.style.background = isError ? "#e63946" : "#28a745";
+    btn.style.color = "#fff";
+    btn.style.border = "none";
+    btn.style.padding = "10px 20px";
+    btn.style.borderRadius = "8px";
+    btn.style.cursor = "pointer";
+    btn.style.fontWeight = "600";
+
+    // On button click → close popup (and redirect if success)
+    btn.onclick = () => {
+      document.body.removeChild(popup);
+      if (!isError) {
+        window.location.href = "overseas-courses.html";
+      }
+    };
+
+    // Assemble popup
+    box.appendChild(msg);
+    box.appendChild(btn);
+    popup.appendChild(box);
+    document.body.appendChild(popup);
+  }
+
+  // ✅ Form submit handler
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      university_name: document.getElementById("university_name").value,
+      course_name: document.getElementById("course_name").value,
+      country: document.getElementById("country").value,
+      city: document.getElementById("city").value,
+      course_type: document.getElementById("course_type").value,
+      duration: document.getElementById("duration").value,
+      tuition_fee: document.getElementById("tuition_fee").value,
+      intake_month: document.getElementById("intake_month").value,
+      ielts_required: document.getElementById("ielts_required").value,
+      toefl_required: document.getElementById("toefl_required").value,
+      gpa_required: document.getElementById("gpa_required").value,
+      scholarships: document.getElementById("scholarships").value,
+      application_deadline: document.getElementById("application_deadline").value,
+      career_outcomes: document.getElementById("career_outcomes").value,
+      course_structure: document.getElementById("course_structure").value,
+      description: document.getElementById("description").value,
+      image_url: document.getElementById("image_url").value
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/overseas-courses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        form.reset();
+        showPopup("🎉 Course added successfully!");
+      } else {
+        showPopup(`Error: ${result.error || "Unable to add course"}`, true);
+      }
+    } catch (err) {
+      showPopup(`Error: ${err.message}`, true);
+    }
+  });
+</script>
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

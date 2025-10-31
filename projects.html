@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HitaishiTrainings Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+           
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+            --light-text: #fff;
+            --accent-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-text);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: slideInUp 1.5s ease-out;
+        }
+
+        header p {
+            font-size: 1.35rem;
+            max-width: 800px;
+            margin: 1rem auto 0;
+            font-weight: 300;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 3rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .intro-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-section h2 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #555;
+        }
+
+        .project-category {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .project-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-category-content {
+            flex: 1;
+        }
+
+        .project-category h3 {
+            font-size: 2.2rem;
+            color: var(--tertiary-color);
+            margin-top: 0;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-category p {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            color: #444;
+        }
+
+        .project-category p strong {
+            color: var(--dark-text);
+        }
+
+        .category-icon {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            color: var(--primary-color);
+            opacity: 0.8;
+            margin-top: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .project-category:hover .category-icon {
+            transform: rotateY(360deg);
+        }
+
+        .projects-list {
+            margin-top: 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s ease-in-out;
+            background-color: #f7f9fa;
+            border-radius: 8px;
+            padding: 0 1.5rem;
+        }
+        
+        .projects-list.expanded {
+            max-height: 2000px; /* Adjust as needed for content length */
+            padding: 1.5rem;
+        }
+        
+        .projects-list h4 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .projects-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .projects-list ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1rem;
+        }
+        
+        .projects-list ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 1.5em;
+            line-height: 1;
+        }
+        
+        .toggle-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .toggle-button:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .cta-button-container {
+            text-align: center;
+            padding: 2rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .cta-button-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--tertiary-color);
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .intro-section h2 {
+                font-size: 2rem;
+            }
+            .project-category {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .category-icon {
+                margin-bottom: 1rem;
+            }
+            .project-category h3 {
+                font-size: 1.5rem;
+            }
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+            .projects-list ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+
+    <header>
+        <h1>Explore Innovative Projects with HitaishiTrainings</h1>
+        <p>Your journey into cutting-edge technology starts here. We offer hands-on training and real-world projects to build your skills and ignite your career.</p>
+    </header>
+
+    <main class="container">
+        <section class="intro-section">
+            <h2>Transforming Ideas into Reality</h2>
+            <p>At HitaishiTrainings, we don't just teach theory; we empower you to build. Our project-based approach ensures you gain practical experience in the most sought-after domains. Take a look at the innovative projects that await you and see how you can start creating meaningful technology today.</p>
+        </section>
+
+        <section class="project-category">
+            <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <div class="project-category-content">
+                <h3>Pioneering AI & Data Science Projects</h3>
+                <p>Our AI and Data Science projects, developed in **Python**, cover a vast range of real-world applications. You'll work on projects that directly address modern challenges, from **healthcare** and **cybersecurity** to **agriculture** and **urban development**. Imagine building a system to predict Alzheimer's disease using machine learning, or creating a deep learning model to detect crop diseases. We also have projects focused on **cybersecurity**, such as a hybrid image protection system, and innovative AI tools for smart cities. Our curriculum empowers you to turn complex data into intelligent solutions, preparing you for a future at the forefront of technology.</p>
+                <button class="toggle-button" onclick="toggleProjects(this, 'ai')">View All Projects</button>
+                <div id="ai-projects" class="projects-list">
+                    <h4>AI & Data Science Project List</h4>
+                    <ul>
+                        <li>Hybrid Image Protection System Using Invisible Watermarking</li>
+                        <li>Agriculture Land Classification using Deep Learning</li>
+                        <li>TravelBot-HYD NLP and RNN Based Urban Trip Planner</li>
+                        <li>Hyderabad Navigator Chatbot: Intelligent Trip Planning Using NLP and Random Forest</li>
+                        <li>Cloth(Fabric) Defect Detection using deep learning and Market Integration</li>
+                        <li>Stroke Prediction Using Machine Learning Models With Flask and MySQL Integration</li>
+                        <li>EduAssist: AI-Powered College Enquiry Chatbot</li>
+                        <li>AI-Based Healthcare System for Disease Prediction Using CNN and XGBoost with Chatbot Assistance</li>
+                        <li>Diabetic Retinopathy Detection Using CNN with Inception v2 and Inception v3</li>
+                        <li>Automatic Video Dubbing for Indian Regional Languages</li>
+                        <li>SMS Spam Detection using Machine Learning</li>
+                        <li>Evaluation of Academic Performance of Students</li>
+                        <li>Real Time Face Emotions Recognition</li>
+                        <li>Smart Student Attendance System Integrating QR Codes and Facial Recognition</li>
+                        <li>Enhancing Image Clarity with GANs A Deep Learning Approach to Super Resolution</li>
+                        <li>Detect Potato Disease A Deep Learning Approach for Early Detection of Potato Leaf Diseases</li>
+                        <li>Malaria Detection Using CNN Integrated with an Interactive Chatbot System</li>
+                        <li>Measuring Semantic Textual Similarity Using TF-IDF and Cosine Similarity</li>
+                        <li>Dual-Mode Text Similarity Checker using TF-IDF and GloVe Embeddings in Flask</li>
+                        <li>Videozen – Protecting Videos with Encryption and Decryption Using a Combination of Blowfish and AES for Security</li>
+                        <li>PhishNet Detecting Phishing URLs Using Convolutional Neural Networks</li>
+                        <li>DeepSpam Neural Network Approach to Detect Spam in YouTube Comments</li>
+                        <li>SmartLand Real-Time Satellite Image Segmentation and Classification Using YOLOv8 for Sustainable Land Monitoring</li>
+                        <li>DeepPhish Machine Learning Solutions for URL-Based Phishing Detection</li>
+                        <li>GetStego An Intelligent Web-Based Multimedia Steganography System for Secure Communication</li>
+                        <li>AI4Jobs A Machine Learning Framework for Fake Recruitment Detection in Online Portals</li>
+                        <li>Air Canvas Virtual Brushes in the Wind Using Python and OpenCV</li>
+                        <li>LandMarkAI YOLOv8-Based Satellite Image Analysis for Sustainable Growth</li>
+                        <li>FitMind AI-Based Fitness and Mental Wellness Recommendation System with Chatbot Support</li>
+                        <li>Rainfall Prediction Using Ensemble Learning</li>
+                        <li>AI-Based Skin Disease Detection and Patient Engagement System</li>
+                        <li>Early detection and classification of Alzheimer’s using Machine Learning</li>
+                        <li>Classification of Surya Namaskar Yoga Asana using Convolutional Neural Networks (CNN)</li>
+                        <li>Email Spam Detection Using Deep Learning</li>
+                        <li>AI Pest Finder Detecting Insect Pests on Crops and Giving Pesticide Advice</li>
+                        <li>Automated Resume Analysis and Skill-Based Job Recommendation System using Machine Learning and NLP</li>
+                        <li>Smart Campus Attendance System using ML-Driven Face Recognition</li>
+                        <li>Employee Face Recognition Check-In and Check-Out Logging System with Role-Based Access and Attendance Analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-category">
+            <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <div class="project-category-content">
+                <h3>Advanced Python Web Applications</h3>
+                <p>The **Python Web Applications** projects at HitaishiTrainings focus on building robust, scalable web solutions using frameworks like **Django** and **Flask**. You'll develop systems that solve everyday problems, from **e-commerce platforms** and **e-learning systems** to sophisticated **management systems** for businesses and healthcare. Projects like "E-Commerce Online Shopping Platform" and "Integrated Recipe Sharing and Nutrition Management System" give you the skills to design, develop, and deploy dynamic websites. This category also includes a variety of **AI-powered web applications** and **tools for productivity**, ensuring you're ready for any web development challenge.</p>
+                <button class="toggle-button" onclick="toggleProjects(this, 'python-web')">View All Projects</button>
+                <div id="python-web-projects" class="projects-list">
+                    <h4>Python Web Project List</h4>
+                    <ul>
+                        <li>Integrated Smart Education Management System</li>
+                        <li>Blood Bank Management System</li>
+                        <li>Hospital Management System</li>
+                        <li>Library Management System</li>
+                        <li>Insurance Management System</li>
+                        <li>E-Learning Assessment</li>
+                        <li>Vehicle Service Management System</li>
+                        <li>E-Commerce Online Shopping Platform</li>
+                        <li>Integrated Educational Administration: A Comprehensive School Management System</li>
+                        <li>Web based turf playground booking hub</li>
+                        <li>Time Table Generator using Django</li>
+                        <li>Smart Quiz: A Comprehensive Online Quiz Management System</li>
+                        <li>Indian Railway Booking System</li>
+                        <li>Online Fire Reporting System</li>
+                        <li>Online College Magazine</li>
+                        <li>Online Medicine Donation</li>
+                        <li>E-Diary Management System/ Smart Note Manager</li>
+                        <li>Gym Management System</li>
+                        <li>Loan Management System</li>
+                        <li>Online Banking System</li>
+                        <li>Vehicle Parking Management System</li>
+                        <li>Online Notes and Material Sharing</li>
+                        <li>Online Voting System</li>
+                        <li>Auditorium Booking System</li>
+                        <li>QR barcode Generation using Django</li>
+                        <li>Garbage Management System</li>
+                        <li>Student Accommodation Reservation Platform</li>
+                        <li>Doctor Appointment Booking System</li>
+                        <li>Smart Bank - Banking Management System</li>
+                        <li>Bid Smart A Secure and Transparent Online Auction Platform</li>
+                        <li>Integrated Recipe Sharing and Nutrition Management System</li>
+                        <li>Secure Video Encryption and Decryption Using AES and Blowfish Algorithms</li>
+                        <li>Smart Online Nursery: Plant Shopping with Personalized Care Tips and Email Alerts</li>
+                        <li>Bus Management System</li>
+                        <li>Cloud Kitchen Management System</li>
+                        <li>ArtSphere / Art Website</li>
+                        <li>Event Management System</li>
+                        <li>HomeEase - A Convenient Home Service Platform</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-category">
+            <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6m-3 10l-4-4l-4 4"></path>
+            </svg>
+            <div class="project-category-content">
+                <h3>Cutting-Edge IEEE Python Projects</h3>
+                <p>Dive deep into **Machine Learning, Artificial Intelligence, Deep Learning, and Cybersecurity** with our IEEE-standard Python projects. This collection of projects represents the pinnacle of academic and industrial research. You will engage with highly technical and advanced topics, such as developing a "Block Hunter Federated Learning for Cyber Threat Hunting" system or creating a "Deep Learning Based Road Accident Detection System." These projects are designed to give you a profound understanding of complex algorithms and modern cybersecurity threats, making you an expert in the field. This is where you master the skills that lead to high-impact careers.</p>
+                <button class="toggle-button" onclick="toggleProjects(this, 'ieee-python')">View All Projects</button>
+                <div id="ieee-python-projects" class="projects-list">
+                    <h4>IEEE Python Project List</h4>
+                    <ul>
+                        <li>Automated Emerging Cyber Threat Identification and Profiling Based on Natural Language Processing</li>
+                        <li>A Deep Attentive Multimodal Learning Approach for Disaster Identification From Social Media Posts</li>
+                        <li>Heart Disease Identification Method Using Machine Learning Classification in E-Healthcare</li>
+                        <li>Phishing Detection System Through Hybrid Machine Learning Based on URL</li>
+                        <li>DeepSide A Deep Learning Framework for Drug Side Effect Prediction</li>
+                        <li>ROAD The Road Event Awareness Dataset for Autonomous Driving</li>
+                        <li>PregBot:A System Based on ML and NLP for Supporting Women and Families during Pregnancy</li>
+                        <li>Parkinson’s Disease Detection Using Machine Learning</li>
+                        <li>Automated Detection of Cardiac Arrhythmia using Recurrent Neural Network</li>
+                        <li>An Efficient Spam Detection Technique for IoT Devices using Machine Learning</li>
+                        <li>Multi Class Stress Detection Through Heart Rate Variability A Deep Neural Network Based Study</li>
+                        <li>Web-Based Music Genre Classification for Timeline Song Visualization and Analysis</li>
+                        <li>Unsupervised Machine Learning for Managing Safety Accidents in Railway Stations</li>
+                        <li>A Novel Approach for Disaster Victim Detection Under Debris Environments Using Decision Tree Algorithms With Deep Learning Features</li>
+                        <li>Price Negotiating Chabot with Text & Voice on E-commerce website</li>
+                        <li>Malicious URL Detection based on Machine Learning</li>
+                        <li>DEARNN A Hybrid Deep Learning Approach for Cyberbullying Detection in Twitter Social Media Platform</li>
+                        <li>Security of Cyber Physical Systems: Design of a Security Supervisor to Thwart Attacks</li>
+                        <li>A Deep Learning Based Efficient Firearms Monitoring Technique for Building Secure Smart Cities</li>
+                        <li>Automated Android Malware Detection Using Optimal Ensemble Learning Approach for Cyber security</li>
+                        <li>Child Mortality prediction using Machine Learning Techniques</li>
+                        <li>Improving Shopping Mall Revenue by Real Time Customized Digital Coupon Issuance</li>
+                        <li>Predicting Behavior Change in Students With Special Education Needs Using Multimodal Learning Analytics</li>
+                        <li>Predicting Brain Age Using Machine Learning Algorithms: A Comprehensive Evaluation</li>
+                        <li>Predicting Hourly Boarding Demand of Bus Passengers Using Imbalanced Records From Smart Cards A Deep Learning Approach</li>
+                        <li>Prediction of Air Pollution by using Machine Learning Algorithm</li>
+                        <li>Privilege Escalation Attack Detection and Mitigation in Cloud Using Machine Learning</li>
+                        <li>Propounding First Artificial Intelligence Approach for Predicting Robbery Behavior</li>
+                        <li>The Influence of Artificial Intelligence on E-Governance and Cyber security in Smart Cities</li>
+                        <li>WaterNet A Network for Monitoring and Assessing Water Quality for Drinking and Irrigation Purposes</li>
+                        <li>Human Action Recognition from depth maps and Postures using Deep Learning</li>
+                        <li>Abnormal Traffic Detection Based on Attention and Big Step Convolution</li>
+                        <li>Explainable Artificial Intelligence for Patient Safety A Review of Application</li>
+                        <li>Personalized Federated Learning for In-Hospital Mortality Prediction of Multi-Center ICU</li>
+                        <li>RFCNN Traffic Accident Severity Prediction Based on Decision Level Fusion of Machine and Deep Learning Model</li>
+                        <li>Water Quality Monitoring & Forecasting System</li>
+                        <li>Fake Profile Identification in Social Network using Machine Learning and NLP</li>
+                        <li>Fighting Money Laundering With Statistics and Machine Learning</li>
+                        <li>Malware Detection A Framework for Reverse Engineered Android Applications through Machine Learning Algorithms</li>
+                        <li>Optimal Ambulance Positioning for Road Accidents With Deep Embedded Clustering</li>
+                        <li>Phish Catcher Client-Side Defense Against Web Spoofing Attacks Using Machine Learning</li>
+                        <li>A Novel Approach to Improve Software Defect Prediction Accuracy Using Machine Learning</li>
+                        <li>BlockChain Based Federated Learning With SMPC Model Verification Against Poisoning Attack</li>
+                        <li>Effective Software Effort Estimation Leveraging Machine Learning for Digital Transformation</li>
+                        <li>A Multi-perspective Fraud Detection Method for Multi-Participant E-commerce Transactions</li>
+                        <li>Creating Alert Messages Based On Wild Animal Activity Detection Using Hybrid Deep Neural Networks</li>
+                        <li>Identifying Alcohol-Related Information From Unstructured Bilingual Clinical Notes With Multilingual Transformers</li>
+                        <li>Two Stage Job Title Identification System For Online Job Advertisements</li>
+                        <li>An Efficient Privacy Enhancing Cross Silo Federated Learning And Applications For False Data Injection Attack Detection In Smart Grids</li>
+                        <li>Thyroid Disease Prediction Using Machine Learning</li>
+                        <li>Suicidal Tendency Detection</li>
+                        <li>Identifying Student Profiles within Online Judge systems using Explainable Artificial Intelligence</li>
+                        <li>Deep Learning Anti-Fraud Model for Internet Loan Where We Are Going</li>
+                        <li>Social Media and Misleading Information in a Democracy: A Mechanism Design Approach</li>
+                        <li>Suicidal Ideation Detection: A Review of Machine Learning Methods and Applications</li>
+                        <li>Membership Inference Attack and Defense for Wireless Signal Classifiers with Deep Learning</li>
+                        <li>Crop Prediction Based on Characteristics of the Agricultural Environment Using Various Feature Selection Techniques and Classifiers</li>
+                        <li>EPilots A system to predict hard landing during the approach phase of commercial flights</li>
+                        <li>Predictive Analysis for Big Mart Sales Using Machine Learning Algorithms</li>
+                        <li>Campus Placements Prediction & Analysis using Machine Learning</li>
+                        <li>Prediction Of Used Car Prices Using Artificial Neural Networks And Machine Learning</li>
+                        <li>Trustworthiness Assessment of Users in Social Reviewing Systems</li>
+                        <li>Personality aware Product Recommendation System based on User Interests Mining and Meta path Discovery</li>
+                        <li>Cyber Threat Predictive Analytics for Improving Cyber Supply Chain Security</li>
+                        <li>Mining Fraudsters and Fraudulent Strategies in Large-Scale Mobile Social Networks</li>
+                        <li>Mitigating COVID-19 Transmission in Schools With Digital Contact Tracing</li>
+                        <li>A Machine Learning Approach For Opinion Mining Online Customer Reviews</li>
+                        <li>Prediction of Air Pollution by using Machine Learning Algorithm</li>
+                        <li>Detection of Fake and Clone accounts in Twitter using Classification and Distance Measure Algorithms</li>
+                        <li>A Spam Transformer Model for SMS Spam Detection</li>
+                        <li>A Student Attendance Management Method Based on Crowd sensing in Classroom Environment</li>
+                        <li>BullyNet Unmasking Cyberbullies on Social Networks</li>
+                        <li>Predicting Urban Water Quality With Ubiquitous Data - A Data-Driven Approach</li>
+                        <li>Credit Card Fraud Detection Using State-of-the-Art Machine Learning and Deep Learning Algorithms</li>
+                        <li>Machine Learning Based Heart Disease Prediction System</li>
+                        <li>Detection of Cyberbullying on Social Media Using Machine learning</li>
+                        <li>DFR-TSD: A Deep Learning Based Framework for Robust Traffic Sign Detection Under Challenging Weather Conditions</li>
+                        <li>TEEN: A Routing Protocol for Enhanced Efficiency in Wireless Sensor Networks</li>
+                        <li>RFCNN: Traffic Accident Severity Prediction Based on Decision Level Fusion of Machine and Deep Learning Model</li>
+                        <li>Machine Learning-Based Prototyping of Graphical User Interfaces for Mobile Apps</li>
+                        <li>Machine Learning for Real-Time Heart Disease Prediction</li>
+                        <li>DeepGrip: Cricket Bowling Delivery Detection with Superior CNN Architectures</li>
+                        <li>CSKG4APT: A Cyber security Knowledge Graph for Advanced Persistent Threat Organization Attribution</li>
+                        <li>Machine Learning-Based Analysis of Crypto Currency Market Financial Risk Management</li>
+                        <li>Machine Learning and End-to-end Deep Learning for the Detection of Chronic Heart Failure from Heart Sounds</li>
+                        <li>Joint Resource Allocation and Trajectory Optimization for Multi-UAV-Assisted Multi-Access Mobile Edge Computing</li>
+                        <li>Movie Success Prediction Using Naive Bayes, Logistic Regression and Support Vector Machine</li>
+                        <li>Earthquake Early Warning (EEW) system; Machine learning; Earthquake Location</li>
+                        <li>Block Hunter Federated Learning for Cyber Threat Hunting in Block chain-based IIoT Networks</li>
+                        <li>Detection Of Thyroid Disorders Using Machine Learning Approach</li>
+                        <li>Social Media and Misleading Information in a Democracy: A Mechanism Design Approach</li>
+                        <li>Optimize The Storage Volume Using Data Mining Techniques</li>
+                        <li>Analysis of Women's Safety in Indian Cities using Machine Learning on Tweets</li>
+                        <li>Feature-Level Rating System Using Customer Reviews and Review Votes</li>
+                        <li>Food Demand Forecasting Using Machine Learning and Statistical Analysis</li>
+                        <li>Strategic Improvements in Malls for Customers by Using Machine Learning</li>
+                        <li>Car Price Prediction Using Random Forest Regression Machine Learning</li>
+                        <li>Car Price Prediction Using Linear Regression Model in Machine Learning</li>
+                        <li>Face Recognition Attendance System Using Machine Learning</li>
+                        <li>Face Detection and Recognition for Criminal Identification System</li>
+                        <li>Cyberbullying Detection Using Machine Learning</li>
+                        <li>Rainfall Prediction Using Machine Learning</li>
+                        <li>Prediction Of Loan Eligibility of The Customer</li>
+                        <li>Driver Attentiveness Detection System with OpenCV Using Machine Learning</li>
+                        <li>Driver Sleep Detection and Alarming System Using Machine Learning</li>
+                        <li>A Data Mining Approach Combining K-Means Clustering with Bagging Neural Network Driver</li>
+                        <li>A Machine Learning-Based Lightweight Intrusion Detection System for The Internet of Things</li>
+                        <li>Chatbot Application Using Machine Learning</li>
+                        <li>Forensic Scanner Identification Using Machine Learning</li>
+                        <li>Prediction Of Student's Performance Using Educational Data Mining</li>
+                        <li>Soil Moisture Retrieval Using Groundwater Dataset Using Machine Learning Algorithm</li>
+                        <li>Stock Market Analysis Using Machine Learning</li>
+                        <li>Stress Detection in It Professional by Image Processing and Machine Learning</li>
+                        <li>Driver Drowsiness Alert Detection Using Machine Learning</li>
+                        <li>Face Recognition Using Machine Learning</li>
+                        <li>Machine Learning to Detect Emotions in Real-Time Based on Facial Expressions</li>
+                        <li>Study Of Blockchain Technology in The Farmers Portal</li>
+                        <li>Travelsense: Personalized Travel Recommendation and Itinerary Planner</li>
+                        <li>Fake News Detection Using Machine Learning</li>
+                        <li>Car Parking Number Plate Detection Using Machine Learning</li>
+                        <li>Running Car Number Plate Detection System</li>
+                        <li>Crime Rate Prediction & Analysis Using K-Means Clustering Algorithm</li>
+                        <li>Detection Of Fake Job Recruitment Using Machine Learning Techniques</li>
+                        <li>After Capturing and Processing the Image for Authentication Using Machine Learning</li>
+                        <li>Crime Activity Detection Through Videos Using Machine Learning</li>
+                        <li>Real-Time Object Detection</li>
+                        <li>Real-Time Chatbot Assistant</li>
+                        <li>Advanced Image Captioning with Deep Learning</li>
+                        <li>Object Tracking Using Python from Video</li>
+                        <li>Detection Of Brain Stroke Disease Using Machine Learning</li>
+                        <li>Modeling And Predicting Cyber Hacking Breaches</li>
+                        <li>Detection Of Lung Cancer from Ct Image Using SVM Classification and 3D CNN On Lung Nodules Data Set</li>
+                        <li>Email Spam Filter Using Natural Language Process</li>
+                        <li>House Price Prediction Using Machine Learning</li>
+                        <li>SMS Spam Detector Using Machine Learning</li>
+                        <li>Detection Of Cyber Attacks in Network Using Machine Learning Techniques</li>
+                        <li>Currency Detection Using OpenCV in Machine Learning</li>
+                        <li>Emotion Based Music Recommendation System</li>
+                        <li>Diagnosing Chronic Kidney Disease Using Hybrid Machine Learning Algorithms</li>
+                        <li>Image-Based Product Recommendation System</li>
+                        <li>Breast Cancer Detection Using Machine Learning</li>
+                        <li>Question Paper Generation System</li>
+                        <li>Comparison Of Machine Learning Algorithms for Predicting Crime Hotspots</li>
+                        <li>Image Encryption and Decryption Using 3DES Encryption</li>
+                        <li>File Encryption and Decryption or Using Cryptography and Tkinter</li>
+                        <li>Online Grocery Shopping System</li>
+                        <li>Hotel Management System</li>
+                        <li>Hospital Information Management System</li>
+                        <li>Text Recognition OCR with Tesseract and OpenCV</li>
+                        <li>Object Counting and Tracking with OpenCV and Python</li>
+                        <li>Eye Blinking Detection</li>
+                        <li>Count Vehicles on Images with OpenCV and Deep Learning</li>
+                        <li>Face Landmarks Detection - OpenCV with Python</li>
+                        <li>Add Watermark to Multiple Images with OpenCV and Python</li>
+                        <li>Face Swapping Detection Using OpenCV</li>
+                        <li>Road Lines Detection Hough Transform Using OpenCV</li>
+                        <li>Rental Bike Sharing Using Machine Learning</li>
+                        <li>Crop Recommendation (Smart Farming) Using Machine Learning</li>
+                        <li>Multiple Disease Prediction System Using Machine Learning in Python</li>
+                        <li>Collaborative Filtering-Based Book Recommender System Using Machine Learning</li>
+                        <li>Flight Price Prediction Using Machine Learning</li>
+                        <li>Employee Salary Prediction Using Machine Learning</li>
+                        <li>Real-Time Stock Price Prediction and Market Analysis Using Machine Learning</li>
+                        <li>Enhancing Visual Intelligence: Streaming Object Detection and Recognition with Machine Learning in Image, Video, And OpenCV</li>
+                        <li>Online Course Recommendation System Using Machine Learning</li>
+                        <li>Automated Pest Detection Using Image Classification</li>
+                        <li>Traffic Rules Violations Detection System</li>
+                        <li>Handwriting Recognition System</li>
+                        <li>Characterizing And Predicting Early Reviewers for Effective Product Marketing on E-Commerce Websites</li>
+                        <li>Sentiment Analysis of Good reads Reviews Using Machine Learning</li>
+                        <li>Analyzing And estimating the IPL Winner Using Machine Learning</li>
+                        <li>Book Genre Classification Using Machine Learning</li>
+                        <li>Error Detection Credit Card Using Machine Learning</li>
+                        <li>Analyzing And estimating the IPL Winner Using Machine Learning</li>
+                        <li>Performance Analysis and Evaluation of Machine Learning Algorithms in Rainfall Prediction</li>
+                        <li>Artificial Intelligence-Based Fake Currency Detection System</li>
+                        <li>Evaluation Of Machine Learning Algorithms for The Detection of Fake Bank Currency</li>
+                        <li>Detecting The Movement of Objects with Webcam and Alert Using Machine Learning</li>
+                        <li>Currency Detection and Verification Using OpenCV</li>
+                        <li>Real Time Car Number Plate Detection Using OpenCV</li>
+                        <li>A Machine Learning Approach for Tracking and Predicting Student Performance in Degree Programs</li>
+                        <li>5g-Smart Diabetes Toward Personalized Diabetes Diagnosis with Healthcare Big Data Clouds</li>
+                        <li>Detection Of Lung Cancer from Ct Image Using SVM Classification And 3d CNN on Lung Nodules Data Set</li>
+                        <li>Automatic Age and Gender Classification</li>
+                        <li>Emotion-Based Music Player Using OpenCV</li>
+                        <li>Real Time Face Emotion Detection Using OpenCV in CNN Model</li>
+                        <li>Emotion Based Music Player Using Artificial Intelligence</li>
+                        <li>Block chain Based Certificate Validation</li>
+                        <li>Detection And Classification of Fruit Diseases Using Image Processing and Cloud Computing</li>
+                        <li>Personal Voice Assistant</li>
+                        <li>Smart Drug Recommendation and Disease Prediction System</li>
+                        <li>Drug Recommendation System Based on Sentiment Analysis of Drug Reviews Using Machine Learning</li>
+                        <li>Medicine Drugs Recommendation System Using Content-Based Filtering</li>
+                        <li>Face Mask Detection Using TensorFlow and Kera’s</li>
+                        <li>Face Mask Detection System Using OpenCV- Streamlit App</li>
+                        <li>Fish Disease Detection Using Image Based Machine Learning Technique In Aquaculture</li>
+                        <li>Sign Language Detection Using Machine Learning</li>
+                        <li>Vehicles Speed Detection System Using OpenCV</li>
+                        <li>Speed Estimation and Number Plate Detection Using OpenCV</li>
+                        <li>Hand And Face Landmarks Detection Media pipe Using Artificial Intelligence</li>
+                        <li>Iris Mouse Or Eye Mouse Controlled Using OpenCV</li>
+                        <li>Beautify Using OpenCV</li>
+                        <li>Analysis And Prediction of Covid-19 Using Time Series Forecasting</li>
+                        <li>Analysis And Prediction of Occupational Accidents</li>
+                        <li>Artist Recommendation System Using Collaborative Filtering</li>
+                        <li>Biometric Steganography Using Mid Position Value Technique</li>
+                        <li>Classification Of Covid-19 Using Chest X-Ray</li>
+                        <li>Covid-19 Future Forecasting</li>
+                        <li>Covid19 Social Distance Monitoring System Using Yolo</li>
+                        <li>Credit Card Fraud Detection</li>
+                        <li>Detection Of Malicious Code Variants Based on Deep Learning</li>
+                        <li>Face To Emoji Using OpenCV and HaarCascade Classifier / Facial Expression Recognition Emoji</li>
+                        <li>Fusion Approach to Infrared and Visible Images</li>
+                        <li>Money Laundering Detection Using Machine Learning Methods</li>
+                        <li>Prediction Analysis Using Support Vector Machine in Cardiovascular Ailments</li>
+                        <li>Vehicle Pattern Recognition Using Machine Learning and Deep Learning to Predict Car Model</li>
+                        <li>A Hybrid Fuzzy Logic-based Deep Learning Approach for Fake Review Detection</li>
+                        <li>A Joint Multi-Task CNN for Cross-Age Face Recognition</li>
+                        <li>Advertisement Classification using machine learning</li>
+                        <li>Android malware detection using Machine learning techniques</li>
+                        <li>Artificial Intelligence and Internet of Things Enabled Disease Diagnosis Model for Smart Healthcare Systems</li>
+                        <li>Black Friday Sales Prediction Using ML</li>
+                        <li>Detection of Child Predators Cyber Harassers on Social Media</li>
+                        <li>Retinal Disease Prediction using Machine Learning</li>
+                        <li>Detection of fake online reviews using Supervised Learning and Non-Supervised Learning--JAVA</li>
+                        <li>Efficient Prediction of Cardiovascular Disease Using Machine Learning Algorithms with Relief and LASSO Feature Selection Techniques</li>
+                        <li>Early detection and prediction of Alzheimer disease</li>
+                        <li>Desktop Voice Assistant</li>
+                        <li>Detection of Phishing Websites using Supervised Machine Learning Techniques</li>
+                        <li>Detection Phishing Websites using Machine Learning</li>
+                        <li>Plant disease detection and Classification Using ML</li>
+                        <li>Plant Species Health Detection Using AI</li>
+                        <li>Plagiarism Checker Using Flask</li>
+                        <li>Weapons Detection using OpenCV</li>
+                        <li>Depression Detection on Tweets Using Machine Learning</li>
+                        <li>EDA - Bank Loan Default Risk Analysis</li>
+                        <li>Artificial Intelligence and Internet of Things Enabled Disease Diagnosis Model for Smart Healthcare Systems</li>
+                        <li>Lip Reading using Neural Network and Deep learning</li>
+                        <li>Machine Learning Algorithm For Stroke Disease Classification</li>
+                        <li>Human Activity Recognition</li>
+                        <li>Using Deep Learning to Predict Plant Growth and Yield in Greenhouse Environments</li>
+                        <li>Estimating the price of houses using machine learning</li>
+                        <li>Semi Supervised Machine Learning Approach for DDoS detection</li>
+                        <li>Traffic Sign Detection And Recognition</li>
+                        <li>twitter sentiment analysis using machine learning</li>
+                        <li>Suicide tweet detection machine learning</li>
+                        <li>Building Search Engine Using Machine Learning Technique</li>
+                        <li>Converging Block chain and Machine Learning for Healthcare</li>
+                        <li>Data Analysis by Web Scraping using Python</li>
+                        <li>A Corona Recognition Method Based on Visible Light Color and Machine Learning</li>
+                        <li>Machine Learning Approach to predict autism spectrum disorder</li>
+                        <li>Detection of Cyber Attack in Network Using Machine Learning Techniques</li>
+                        <li>Filtering Instagram Hashtags Through Crowd tagging and the HITS Algorithm</li>
+                        <li>Generating Cloud Monitors from Models to Secure Clouds</li>
+                        <li>Employee salary hike prediction using machine learning</li>
+                        <li>Crypto currency Price Analysis with Artificial Intelligence</li>
+                        <li>Cyber Threat Detection Based on Artificial Neural Networks Using Event Profiles</li>
+                        <li>Lifestyle Disease Prediction</li>
+                        <li>Software Defect Estimation Using Machine Learning Algorithms</li>
+                        <li>Characteristics & predicating early reviews for effective product marketing one commerce websites</li>
+                        <li>Analysis and Prediction of Industrial Accidents Using Machine Learning</li>
+                        <li>Facial Emotion Reorganization using CNN</li>
+                        <li>Detecting Mental Disorders in Social Media Through Emotional Patterns - The case of Anorexia and Depression</li>
+                        <li>Fake Account Detection using Machine Learning</li>
+                        <li>Use of Artificial Neural Networks to Identify Fake Profiles</li>
+                        <li>A Driving Decision Strategy (DDS) Based on Machine learning for an autonomous vehicle</li>
+                        <li>Quality Risk Analysis for Sustainable Smart Water Supply Using Data Perception</li>
+                        <li>A Machine Learning Model for Average Fuel Consumption in Heavy Vehicles.</li>
+                        <li>Predicting Stock Market Trends Using Machine Learning and Deep Learning Algorithms Via Continuous and Binary Data a Comparative Analysis</li>
+                        <li>Privacy Preserving Location Data Publishing: A Machine Learning Approach</li>
+                        <li>Spammer Detection And Fake User Identification On Social Network</li>
+                        <li>Face Recognition and Crime detection</li>
+                        <li>Hepatitis disease Prediction Using Machine Learning classification techniques</li>
+                        <li>Intrusion Detection System using KDD dataset and Deep learning methods</li>
+                        <li>Automating E-Government using AI</li>
+                        <li>Building Search Engine using Machine Learning Algorithm</li>
+                        <li>Breast Cancer Detection</li>
+                        <li>Customer Segmentation Using Clustering And Data Mining Techniques</li>
+                        <li>Comprehensive and Scalable Stock Market Analysis System using Python</li>
+                        <li>Detecting Spam Email with Machine Learning Optimized with Bio- Inspired Metaheuristic Algorithms</li>
+                        <li>Securing Data With Block Chain And Ai</li>
+                        <li>Automatic Identification Of Malaria-Infected Cells Using Deep Convolutional Neural Network</li>
+                        <li>Employee Block chain In Agriculture</li>
+                        <li>Decentralized Web Hosting Using Block chain</li>
+                        <li>Activity Minimization Of Misinformation Influence In Online Social Networks</li>
+                        <li>Biometric Information Recognition Using Artificial Intelligence Algorithms</li>
+                        <li>Employees Face Recognition System</li>
+                        <li>EyeBall Cursor Movement Using OpenCV</li>
+                        <li>QR Code Based Attendance System Using Deep Learning</li>
+                        <li>Detection Of Fake News Through Implementation Of Data Science Application</li>
+                        <li>Phishing Website Detection Using Machine Learning Algorithms</li>
+                        <li>Smart Health Consulting Online System Using Block chain</li>
+                        <li>Multi Disease Prediction Using Machine Learning</li>
+                        <li>Suspicious Activity Detection Using Deep Learning</li>
+                        <li>Detection of Supra Ventricular Arrhythmia using LSTM, BI-LSTM & GRU</li>
+                        <li>A Deep Learning-Based Approach for Inappropriate Content Detection and Classification of YouTube Videos</li>
+                        <li>Block chain E-Voting Done Right: Privacy and Transparency with Public Block chain</li>
+                        <li>Body Fat Estimator</li>
+                        <li>Watermarking Images using Deep Learning</li>
+                        <li>Predict Zomato Restaurant Ratings</li>
+                        <li>Cricket Match Outcome Prediction Using Machine Learning</li>
+                        <li>Flight Delay Prediction with Error Calculation using Machine Learning</li>
+                        <li>Online Disease Detection and Prediction Analysis</li>
+                        <li>Fake Marriage Profile Detection</li>
+                        <li>Biometric Information Recognition Using Artificial Intelligence</li>
+                        <li>Fake OR Real Face Detection using OpenCv</li>
+                        <li>Skin Cancer Detection Squamous Cell Carcinoma</li>
+                        <li>Intermediate Fasting Application</li>
+                        <li>Sentiment Analysis using Machine Learning and Flask App</li>
+                        <li>Vehicle Parking Lot Monitoring System using OpenCV</li>
+                        <li>Sentiment Analysis Django WebApp</li>
+                        <li>Garbage Classification using Convolutional Neural Network</li>
+                        <li>Real Time Vehicle Identification and Detection System Along with Vehicle Counting</li>
+                        <li>Enhancing Visual Intelligence Streaming Object Detection and Recognition with Machine Learning in Image, Video, and OpenCV</li>
+                        <li>Brain Stroke Prediction and Analysis of Machine Learning</li>
+                        <li>Heart Disease Prediction Using Machine Learning Algorithms</li>
+                        <li>Text Classification on Twitter Data</li>
+                        <li>An Efficient Approach for Interpretation of Indian Sign Language using Machine Learning</li>
+                        <li>Suspicious Activity Detection using Machine Learning</li>
+                        <li>Multi classifier interactive learning for ambiguous speech emotion recognition</li>
+                        <li>Image Understanding Through Deep Learning with Automatic Caption Generation</li>
+                        <li>Disease prediction in particular area or crop</li>
+                        <li>Helmet Detection using Machine Learning</li>
+                        <li>Healthcare-Multi Diseases Prediction Using ML</li>
+                        <li>Movie Recommendation System Using Machine Learning</li>
+                        <li>Farming Made Easy using Machine Learning</li>
+                        <li>Campus Placement Prediction using Machine Learning</li>
+                        <li>Estimate Distance from the camera for detected faces</li>
+                        <li>Human Stress Detection in and through Sleep Using ML- (Smart Sleeping)</li>
+                        <li>Ingredients identification from the food image</li>
+                        <li>Recipe Generation from Food Image</li>
+                        <li>Diabetic Retinopathy Detection using CNN</li>
+                        <li>SMARTEDPRO: Integrated Smart Education Management System / Student Management System/College management System</li>
+                        <li>Blood Bank Management System</li>
+                        <li>Hospital Management System</li>
+                        <li>Library Management System</li>
+                        <li>Insurance Management System</li>
+                        <li>E-Learning Assessment</li>
+                        <li>Vehicle Service Management System</li>
+                        <li>Next-Generation Secure E-Commerce Platform / Online Shopping</li>
+                        <li>Integrated Educational Administration: A Comprehensive School Management System</li>
+                        <li>AI Driven Drug Interaction Prediction System</li>
+                        <li>Ai Powered Biomedical Image Analysis</li>
+                        <li>Ai-Enhanced Elderly Care Companion</li>
+                        <li>HandWritten Text Conversion Into Editable Digital Format</li>
+                        <li>Fruit Disease Detection And Prevention Using Generative Adversarial Networks</li>
+                        <li>Brain Tumour Detection Using Deep Learning</li>
+                        <li>Epilots A System To Predict Hard Landing During The Approach Phase Of Commercial Flights</li>
+                        <li>Real Time Earthquake Early Warning System using Machine Learning</li>
+                        <li>Startup Success Prediction Using Machine Learning</li>
+                        <li>Development of Multilingual Video Dubbing Software for Indian Regional Languages</li>
+                        <li>Web Based Graphical Password Authentication System</li>
+                        <li>Web based turf playground booking hub</li>
+                        <li>Timetable Generation System</li>
+                        <li>QR Based Food Ordering System</li>
+                        <li>Stock Price Prediction using Twitter Dataset</li>
+                        <li>Depression Detection Using ECG</li>
+                        <li>Secure crypto-biometric system for cloud computing</li>
+                        <li>Audio to Sign Language Translator Using Python</li>
+                        <li>Predicting Accuracy of Players in the Cricket using Machine Learning</li>
+                        <li>Recovery Of Image Using One Dimensional Signal</li>
+                        <li>Early Detection of Cancer using AI</li>
+                        <li>Kidney Stone Detection using Ultrasound Images</li>
+                        <li>Parking Management System</li>
+                        <li>Toll System using Automatic Number Plate Detection</li>
+                        <li>Machine Learning Based Prediction Model for College Admission / Prediction of Admission in Engineering College</li>
+                        <li>Future of Loan Approvals with Explainable AI</li>
+                        <li>Al Powered Server Log Management Software</li>
+                        <li>Microwave Medical Image Segmentation for Brain Stroke Diagnosis: Imaging-Process-Informed Image Processing</li>
+                        <li>Two Factor Worm Detection Based on Signature & Anomaly</li>
+                        <li>Children ADHD Disease Detection using Pose Estimation Technique</li>
+                        <li>Exam Invigilation Duty</li>
+                        <li>IOT Based Smart Irrigation System using Reinforcement Learning</li>
+                        <li>Detecting Web Attacks with End-to-End Deep Learning</li>
+                        <li>Blockchain Traceability for Sustainable Agriculture</li>
+                        <li>Smart Farming: Crop Selection, Fertilizer Advice, Disease detection and prevention using Deep Learning</li>
+                        <li>Movie Recommendation System Using Sentiment Analysis From Microblogging</li>
+                        <li>Automated Resume Analysis & Skill Suggesting Website using NLP</li>
+                        <li>A Machine Learning Approach Using Statistical Models for Early Detection of Cardiac Arrest in Newborn Babies in the Cardiac Intensive Care Unit</li>
+                        <li>Artificial Intelligence Crime: An Overview of Malicious Use and Abuse of AI</li>
+                        <li>Discover Customers' Gender From Online Shopping Behavior</li>
+                        <li>Flight Delay Prediction Based on Aviation Big Data and Machine Learning</li>
+                        <li>Predicting the Rice leaf diseases using CNN</li>
+                        <li>Prediction of Engineering branch selection for Inter Students</li>
+                        <li>A Measurement Approach for inline Intrusion Detection of Heartbleed-like Attacks in IoT Frameworks</li>
+                        <li>Emotion detection-based movie and music recommendation</li>
+                        <li>Fake Logo Detection</li>
+                        <li>Signature Verification System</li>
+                        <li>Auto capture Selfie by Detecting Smile</li>
+                        <li>Online Nursery Plant Shopping Website Python</li>
+                        <li>An experiment study for software quality prediction with machine learning</li>
+                        <li>HealthCare Chatbot</li>
+                        <li>Online Organic Health Food Store Project</li>
+                        <li>Online price comparison website python</li>
+                        <li>Text and image plagiarism detection</li>
+                        <li>Deep Learning Based Road Accident Detection System</li>
+                        <li>Station-Level Demand Prediction for Bike-Sharing System</li>
+                        <li>Personalized Travel Planning System</li>
+                        <li>Stock Price Prediction Using LSTM</li>
+                        <li>Smart Quiz: A Comprehensive Online Quiz Management System</li>
+                        <li>Indian Railway Booking System</li>
+                        <li>Online Fire Reporting System</li>
+                        <li>Online College Magazine</li>
+                        <li>Online Medicine Donation</li>
+                        <li>E-Diary Management System/ Smart Note Manager</li>
+                        <li>Gym Management System</li>
+                        <li>Loan Management System</li>
+                        <li>Online Banking System</li>
+                        <li>Vehicle Parking Management System</li>
+                        <li>Online Notes and Material Sharing</li>
+                        <li>Online Voting System</li>
+                        <li>Steganography For Text, Image, Audio And Video Using Python</li>
+                        <li>Network Intrusion Detection Using Supervised Machine Learning Technique With Feature Selection</li>
+                        <li>Auditorium booking web application using Python</li>
+                        <li>HDPM: An Effective Heart Disease Prediction Model for a Clinical Decision Support System</li>
+                        <li>Real Time Personalized Physiologically Based Stress Detection for Hazardous Operations</li>
+                        <li>Traffic Route Prediction</li>
+                        <li>Food Calorie Count Using Django</li>
+                        <li>Estimation of Nutrition Components</li>
+                        <li>Ground water Level Prediction Using Hybrid Random Forest And DCNN</li>
+                        <li>Crime Data Analysis and Prediction Using Decision Tree</li>
+                        <li>AI Based FAQ Chatbot with Voice Assistance</li>
+                        <li>An Online Learning Platform with Intelligent Tutoring using AI Components</li>
+                        <li>Liver Disease Prediction using GA features selection, Social Spider Optimization and CNN Classification</li>
+                        <li>Online Book Reselling System</li>
+                        <li>Secure Communication using DiffieHellman Key Exchange, AES & SHA for Data Integrity</li>
+                        <li>Vehicle 2 Vehicle Communication</li>
+                        <li>Image Gallery using Google Cloud</li>
+                        <li>Road Accident Severity & Hospital Recommendation using Deep Learning Techniques</li>
+                        <li>A Novel Web Attack Detection System for Internet of Things via Ensemble Classification</li>
+                        <li>Supermarket Basket Project</li>
+                        <li>Suicidal Ideation Detection A Review of Machine Learning Methods and Applications</li>
+                        <li>Food Tech BlockChain Using Python</li>
+                        <li>Crop Yield Prediction using Machine Learning Algorithm</li>
+                        <li>Attendance Capture System Using Face Recognition</li>
+                        <li>Tomato leaf disease detection</li>
+                        <li>Big Mart Sales Prediction Using Machine Learning</li>
+                        <li>Garbage Management System</li>
+                        <li>A Lightweight Convolutional Neural Network for Real-Time Facial Expression Detection</li>
+                        <li>SecureWeb: A Novel Machine Learning Methodology for Identifying Cross-Site Request Forgery Vulnerabilities</li>
+                        <li>Intelligent Bird Sound Recognition</li>
+                        <li>NSE Stock Monitoring & Prediction using Robotic Process Automation</li>
+                        <li>Chronic Kidney Disease Prediction using CNN, LSTM and Ensemble Model</li>
+                        <li>Deep Cross-modal Face Naming for People News Retrieval</li>
+                        <li>Grape Leaf Disease Identification using Machine Learning Techniques</li>
+                        <li>Campus Abnormal Behavior Recognition With Temporal Segment Transformers</li>
+                        <li>Explainable Artificial Intelligence for Patient Safety A Review of Application</li>
+                        <li>Federated Learning Based Face and Eye Blink Recognition</li>
+                        <li>Medilink One Health One Card</li>
+                        <li>Navigating the Path to Academic Success</li>
+                        <li>PupilHeart: Heart Rate Variability Monitoring via Pupillary Fluctuations on Mobile Devices</li>
+                        <li>Real-time Traffic Surveillance and Detection using Deep Learning and Computer Vision Techniques</li>
+                        <li>Using Existing CCTV Network for Crowd Management, Crime Prevention & Work Monitoring using AI & ML</li>
+                        <li>A Systematic Review of Predicting Elections Based on Social Media Data</li>
+                        <li>Online College Magazine</li>
+                        <li>Groundwater Level Prediction Using Hybrid Artificial Neural Network with Genetic Algorithm</li>
+                        <li>Electricity Theft Detection In Power Grids With Deep Learning And Random Forests</li>
+                        <li>Doctor Appointment Booking System</li>
+                        <li>Epileptic Seizures Prediction Using Deep Learning Techniques</li>
+                        <li>Classification of Software Defined Network Traffic to Provide Quality of Service</li>
+                        <li>Lung Cancer Stages Prediction</li>
+                        <li>A Machine Learning Modelling for Bitcoin Market Price Prediction Based on the Long Short Term Memory Recurrent Neural Network</li>
+                        <li>Automatic Assessment of Communication Skill in Non-conventional Interview Settings: A Comparative Study</li>
+                        <li>Data Driven Energy Economy Prediction for Electric City Buses Using Machine Learning</li>
+                        <li>Detecting and Mitigating Botnet Attacks in Software-Defined Networks Using Deep Learning Techniques</li>
+                        <li>Privilege Escalation Attack Detection and Mitigation in Cloud Using Machine Learning</li>
+                        <li>An AI-Based Medical Chatbot Model for Infectious Disease Prediction</li>
+                        <li>Graph Convolutional Network-Based Model for Megacity Real Estate Valuation</li>
+                        <li>Efficient Email Phishing Detection Using Machine Learning</li>
+                        <li>Data Poisoning Attacks on Federated Machine Learning</li>
+                        <li>Representing Fine-Grained Co-Occurrences for Behavior-Based Fraud Detection in Online Payment Services</li>
+                        <li>GEFA Early Fusion Approach in Drug-Target Affinity Prediction</li>
+                        <li>Agricultural Land Image Classification Using Regression Neural Network and Compare with KNN for Feature Extraction</li>
+                        <li>MADNet: A Fast and Lightweight Network for Single-Image Super Resolution</li>
+                        <li>Classification of Diabetic Retinopathy Disease Levels by Extracting Topological Features Using Graph Neural Networks</li>
+                        <li>Detecting and Characterizing Extremist Reviewer Groups in Online Product Reviews</li>
+                        <li>Mammogram Detection Using Machine Learning</li>
+                        <li>Securing Data in the Image Using SHA & ECC</li>
+                        <li>Hashtag-Based Tweet Expansion for Improved Topic Modelling</li>
+                        <li>Nature-Based Prediction Model of Bug Reports Based on Ensemble Machine Learning Model</li>
+                        <li>Collaborative Filter Based Group Recommendation for Crowd funding</li>
+                        <li>Predictive Analysis of Medical Insurance Charges Using Linear Regression for Personalized Cost Estimation</li>
+                        <li>Image Forgery Detection using Machine Learning and CNN</li>
+                        <li>Smart Scene: Automated Captioning with Generative AI</li>
+                        <li>Automated Road Condition Classification for Pothole Detection Using Deep Learning</li>
+                        <li>Fingerprint Based Blood Group Identification / Automated Blood Group Detection</li>
+                        <li>Medical Insurance Premium Prediction With Machine Learning</li>
+                        <li>Integrated Quality Prediction Dashboard for Water, Air, and Wine</li>
+                        <li>Early Detection of Down Syndrome in Children Using Convolutional Neural Networks</li>
+                        <li>Email Spam Detection Using Machine Learning Algorithms</li>
+                        <li>Location prediction on Twitter using machine learning Techniques</li>
+                        <li>Virtual Mouse Operation Using Webcam</li>
+                        <li>Emotion Detection using Twitter Datasets and Spacy Algorithm</li>
+                        <li>Designing Secure and Efficient Biometric</li>
+                        <li>Water Quality Monitoring & Forecasting System</li>
+                        <li>Road Traffic Vehicle Detection and Tracking using Deep Learning with Custom-Collected and Public Datasets</li>
+                        <li>Vitamin Deficiency And Food Recommendation System Using Machine Learning</li>
+                        <li>DL-IDF: Deep Learning Based Intrusion Detection Framework in Industrial Internet of Things</li>
+                        <li>Classifying Soil Texture Using RBG Images In Uncontrolled Field Settings</li>
+                        <li>Smart Farming Fruit Disease Detection through Color, Texture Analysis, and Neural Networks</li>
+                        <li>Video captioning using Multi-model Attention-based Transformer Approach</li>
+                        <li>A Novel Approach to Predict Blood Group using Fingerprint Map Reading</li>
+                        <li>Chronic Diseases Prediction Using Machine Learning With Data Preprocessing Handling: A Critical Review</li>
+                        <li>A Lesion-Based Diabetic Retinopathy Detection Through Hybrid Deep Learning Model</li>
+                        <li>Analyzing Employee Retention Factors using Machine Learning</li>
+                        <li>Faculty Management System</li>
+                        <li>A Hybrid Network Analysis and Machine Learning Model for Enhanced Financial Distress Prediction</li>
+                        <li>Green Basket</li>
+                        <li>Propounding First Artificial Intelligence Approach for Predicting Robbery Behavior Potential in an Indoor Security Camera</li>
+                        <li>Noise Reduction in Web Data A Learning ApproachBased on Dynamic User Interests</li>
+                        <li>A Forest Fire Identification Method for Unmanned Aerial Vehicle Monitoring Video Images</li>
+                        <li>Human Activity Recognition Using SmartPhone Data</li>
+                        <li>Automatic Detection of Genetic Diseases in Paediatric Age Using Pupillometry</li>
+                        <li>Detection of Stroke Disease using Machine Learning Algorithms</li>
+                        <li>Energy efficient teaching-learning-based optimization for the discrete routing problem in wireless sensor networks</li>
+                        <li>Classification of Oral Cancer Into Pre-Cancerous Stages From White Light Images Using LightGBM Algorithm</li>
+                        <li>Applying Machine Learning Algorithms for the Classification of Sleep Disorders</li>
+                        <li>The Short Video Popularity Prediction Using Internet of Things and Deep Learning</li>
+                        <li>Short-Term Arrival Delay Time Prediction in Freight Rail Operations Using Data-Driven Models</li>
+                        <li>Human Stress Detection Based on Sleeping Habits</li>
+                        <li>Detection of Malicious Social Bots Using Learning Automata With URL Features in Twitter Network</li>
+                        <li>AUTOMATING E-GOVERNMENT SERVICES WITH MACHINE LEARNING AND ARTIFICIAL INTELLIGENCE</li>
+                        <li>Lightweight Privacy Preserving Medical Diagnosis in Edge Computing</li>
+                        <li>Semantics of Data Mining Services in Cloud Computing</li>
+                        <li>Image segmentation on satellite images</li>
+                        <li>Enhancing Image Clarity with GANs A Deep Learning Approach to Super-Resolution</li>
+                        <li>Content Based Image Retrieval using Deep Learning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-category">
+            <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 17a5 5 0 1 1 0-10a5 5 0 0 1 0 10z"></path>
+                <path d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20z"></path>
+                <path d="M12 14v6"></path>
+                <path d="M12 10V4"></path>
+                <path d="M4 12h6"></path>
+                <path d="M14 12h6"></path>
+            </svg>
+            <div class="project-category-content">
+                <h3>Innovating with IEEE Java Projects</h3>
+                <p>Our **Java projects** are focused on building secure, robust, and enterprise-grade applications. This category is packed with projects from the latest IEEE standards, with a strong emphasis on **blockchain, cloud computing, and cybersecurity**. You'll work on systems that are critical to modern digital infrastructure, such as "A Secure and Efficient Cloud-Centric Internet-of-Medical-Things-Enabled Smart Healthcare System" and a "Blockchain-Based Protocol for Securing Health Records." These projects provide an invaluable opportunity to master Java in the context of advanced security, distributed systems, and data integrity, preparing you for roles in fintech, enterprise software, and cloud services.</p>
+                <button class="toggle-button" onclick="toggleProjects(this, 'java-ieee')">View All Projects</button>
+                <div id="java-ieee-projects" class="projects-list">
+                    <h4>IEEE Java Project List</h4>
+                    <ul>
+                        <li>Sec-Health: A Blockchain-Based Protocol for Securing Health Records</li>
+                        <li>Secure and Efficient Data Duplication in Joint Cloud Storage</li>
+                        <li>Friendship Inference in Mobila Social Networks: Exploiting Multi-Source Information with Two-Stage Deep Learning Framework</li>
+                        <li>A sensing communication and computing approach for vulnerable road users safety</li>
+                        <li>Target-Oriented Investigation of Online Abusive Attacks: A Dataset and Analysis</li>
+                        <li>Behavioral Model for Live Detection of Apps Based Attack</li>
+                        <li>Enabling Balanced Data Deduplication in Mobile Edge Computing</li>
+                        <li>A Fair Secure and Trusted Decentralized IIoT Data Marketplace Enabled by Block chain</li>
+                        <li>Intelligent Distribution of Fresh Agricultural Products in Smart City</li>
+                        <li>Social Spammer Detection via Convex Nonnegative Matrix Factorization</li>
+                        <li>Identity-Based Privacy Preserving Remote Data Integrity Checking With a Designated Verifier</li>
+                        <li>DSAS: A Secure Data Sharing and Authorized Searchable Framework for e-Healthcare System</li>
+                        <li>Detecting fraudulent student communication in a multiple choice online test environment</li>
+                        <li>Bank Record Storage Using Block chain</li>
+                        <li>Travel direction recommendation model based on photos of user social network profile</li>
+                        <li>Privacy preserving electricity theft detection based on block chain</li>
+                        <li>Secure and privacy preserving egovt frame work using blockchain and artificial intelligence</li>
+                        <li>Complaint and senverity identification from online financial content</li>
+                        <li>A Proxy Re-Encryption Approach to Secure Data Sharing in the Internet of Things Based on Blockchain</li>
+                        <li>Sanitizable Access Control System for Secure Cloud Storage Against Malicious Data Publishers</li>
+                        <li>Optimal Drug Dosage Control Strategy of Immune Systems Using Reinforcement Learning</li>
+                        <li>A Collaborative Method for Route Discovery Using Taxi Drivers Experience and Preferences</li>
+                        <li>A Credibility Analysis System for Assessing Information on Twitter</li>
+                        <li>A Data Sharing Protocol to Minimize Security and Privacy Risks of Cloud Storage in Big Data Era</li>
+                        <li>A Fast Parallel Community Discovery Model on Complex</li>
+                        <li>A General Framework for Implicit and Explicit Social Recommendation</li>
+                        <li>A Lightweight Secure Data Sharing Scheme for Mobile Cloud Computing</li>
+                        <li>A New Lightweight Symmetric Searchable Encryption Scheme for String Identification</li>
+                        <li>A Resilient Dispersal Scheme for Multi-cloud Storage</li>
+                        <li>A Robust Reputation Management Mechanism in the Federated Cloud</li>
+                        <li>A Three-Layer Privacy Preserving Cloud Storage Scheme Based on Computational Intelligence in Fog Computing</li>
+                        <li>Achieving Data Truthfulness and Privacy Preservation in DataMarkets</li>
+                        <li>Achieving Flexible and Self-contained Data Protection in Cloud Computing</li>
+                        <li>An Efficient and Fine-Grained Big Data Access Control Scheme with Privacy-Preserving Policy</li>
+                        <li>Analyzing Sentiments In One Go A Supervised Joint Topic Modeling Approach</li>
+                        <li>Anonymous and Traceable Group Data Sharing in Cloud Computing</li>
+                        <li>Attribute-Based Storage Supporting Secure Deduplication of Encrypted Data in Cloud</li>
+                        <li>Authenticated Outlier Mining for Outsourced Databases</li>
+                        <li>Automatic Extraction of Access Control Policies from Natural Language Documents</li>
+                        <li>Avoiding Data Corruption in Drop Computing Mobile Networks</li>
+                        <li>Ciphertext-Policy Attribute-Based Encryption With Delgated</li>
+                        <li>Computing Semantic Similarity of Concepts in Knowledge Graphs</li>
+                        <li>Customer-Satisfaction-Aware Optimal Multiserver Configuration for Profit Maximization in Cloud Computing</li>
+                        <li>Design of Secure Authenticated Key Management Protocol for Cloud Computing Environments</li>
+                        <li>Detecting Stress Based On Social Interactions In Social Networks</li>
+                        <li>Dynamic Multi Keyword Ranked Search Based on Bloom Filter Over Encrypted Cloud Data</li>
+                        <li>Efficient and Expressive Keyword Search Over Encrypted Data in Cloud Doc</li>
+                        <li>Enhancing Cloud-Based IoT Security through Trustworthy Cloud Service An Integration of Security and Reputation Approach</li>
+                        <li>EPICS A Framework for Enforcing Security Policies in Composite Web Services</li>
+                        <li>Exploiting the Dynamic Mutual Influence for Predicting Social Event Participation</li>
+                        <li>FaaSeC Enabling Forensics-as-a-Service for Cloud Computing Systems</li>
+                        <li>FastGeo Efficient Geometric Range Queries on Encrypted Spatial Data</li>
+                        <li>FooDNet Toward an Optimized Food Delivery Network based on Spatial Crowdsourcing</li>
+                        <li>Generating Query Facets using Knowledge Bases</li>
+                        <li>Identity-Based Data Outsourcing with Comprehensive Auditing in Clouds</li>
+                        <li>Image Re-ranking based on Topic Diversity</li>
+                        <li>NAIS Neural Attentive Item Similarity Model for Recommendation</li>
+                        <li>Online Product Quantization</li>
+                        <li>Optimizing Information Leakage in Multicloud Storage Services</li>
+                        <li>ParkCrowd Reliable Crowdsensing for Aggregation and Dissemination of Parking Space Information</li>
+                        <li>Personal Web Revisitation by Context and Content Keywords with Relevance Feedback</li>
+                        <li>Point-of-interest Recommendation for Location Promotion in Location-based Social Networks</li>
+                        <li>Predicting Cyberbullying on Social Media in the Big Data Era Using Machine Learning Algorithms</li>
+                        <li>Privacy Characterization and Quantification in Data Publishing</li>
+                        <li>Privacy Protection and Intrusion Avoidance for Cloudlet-based Medical Data Sharing</li>
+                        <li>Privacy Protection based Access Control Scheme in Cloud-based Services</li>
+                        <li>Privacy-Preserving Learning Analytics Challenges and Techniques</li>
+                        <li>Privacy-Preserving Multi-keyword Top-k Similarity Search Over Encrypted Data</li>
+                        <li>ProGuard Detecting Malicious Accounts in Social-Network-Based Online Promotions</li>
+                        <li>Robust and Auditable Access Control with Multiple Attribute Authorities for Public Cloud Storage</li>
+                        <li>Search Rank Fraud and Malware Detection in Google Play</li>
+                        <li>Secure Cloud Storage based on RLWE Problem</li>
+                        <li>Securing Aggregate Queries for DNA Databases</li>
+                        <li>Securing Cloud Data under Key Exposure</li>
+                        <li>Semantically Enhanced Medical Information Retrieval System</li>
+                        <li>SeSPHR A Methodology for Secure Sharing of Personal Health Records in the Cloud</li>
+                        <li>Social Network Rumor Diffusion Predication Based on Equal Responsibility Game Model</li>
+                        <li>SocialQ&A An Online Social Network Based Question and Answer System</li>
+                        <li>Strong Key-Exposure Resilient Auditing for Secure Cloud Storage</li>
+                        <li>TAFC Time and Attribute Factors Combined Access Control for Time-Sensitive Data in Public Cloud</li>
+                        <li>Utilization-Aware Trip Advisor in Bike-sharing Systems Based on User Behavior Analysis</li>
+                        <li>Design of Secure Authenticated Key Management Protocol for Cloud Computing Environments</li>
+                        <li>A Data Sharing Protocol to Minimize Security and Privacy Risks of Cloud Storage</li>
+                        <li>A Fuzzy Approach to Text Classification with Two Stage Training for Ambiguous Instances</li>
+                        <li>A Hierarchical Attention Model for Social Contextual Image Recommendation</li>
+                        <li>A Hybrid Elearning Recommendation Approach Based on Learners Influence Propagation</li>
+                        <li>A Lightweight Secure Data Sharing Scheme for Mobile Cloud Computing</li>
+                        <li>A Novel Load Image Profile Based Electricity Load Clustering Methodology</li>
+                        <li>A Practical Attribute-Based Document Collection Hierarchical Encryption Scheme in Cloud Computing</li>
+                        <li>A Probabilistic Source Location Privacy Protection Scheme in Wireless Sensor Networks</li>
+                        <li>A Secure G-Cloud-Based Framework for Government Healthcare Services</li>
+                        <li>A Secure Searchable Encryption Framework for Privacy-Critical Cloud Storage Services</li>
+                        <li>A Trust-Based Agent Learning Model for Service Composition in Mobile Cloud Computing Environments</li>
+                        <li>Active Online Learning for Social Media Analysis to Support Crisis Management</li>
+                        <li>An attack resistant trust inference model for securing routing in vehicular Ad Hoc Networks</li>
+                        <li>An Attribute-based Controlled Collaborative Access Control Scheme for Public Cloud Storage</li>
+                        <li>An Efficient Method for High Quality andCohesive Topical Phrase Mining</li>
+                        <li>Analysis and Accurate Prediction of Users Response Behavior in Incentive-Based Demand Response</li>
+                        <li>Android User Privacy Preserving through Crowdsourcing</li>
+                        <li>Applying Simulated Annealing and Parallel Computing to the Mobile Sequential Recommendation</li>
+                        <li>Authenticated Medical Documents Releasing with Privacy Protection and Release Control</li>
+                        <li>Characterizing and Predicting Early Reviewers for Effective Product Marketing on ECommerce Websites</li>
+                        <li>CLASS Cloud Log Assuring Soundness and Secrecy Scheme for Cloud Forensics</li>
+                        <li>Clustering Based Collaborative Filtering Using an Incentivized Penalized User Model</li>
+                        <li>Collusion Defender Preserving Subscribers Privacy in Publish and Subscribe Systems</li>
+                        <li>Composition Context-Based Web Services Similarity Measure</li>
+                        <li>Conversational Networks for Automatic Online Moderation</li>
+                        <li>Crypt DAC Cryptographically Enforced Dynamic Access Control in the Cloud</li>
+                        <li>DCCR Deep Collaborative Conjunctive Recommender for Rating Prediction</li>
+                        <li>Detecting Pickpocket Suspects from Large-Scale Public Transit Records</li>
+                        <li>Dynamic Multi Keyword Ranked Search Based on Bloom Filter Over Encrypted Cloud Data</li>
+                        <li>Efficient conditional anonymity with message integrity and authentication in a vehicular adhoc network</li>
+                        <li>Enabling Authorized Encrypted Search for Multi Authority Medical Databases</li>
+                        <li>Fast Communication-efficient Spectral Clustering Over Distributed Data</li>
+                        <li>Filtering Instagram hash tags through crowd tagging and the HITS algorithm</li>
+                        <li>Fundamental Visual Concept Learning from Correlated Images and Text</li>
+                        <li>Fuzzy Identity-Based Data Integrity Auditing for Reliable Cloud Storage Systems</li>
+                        <li>Hidden Ciphertext Policy Attribute-Based Encryption with Fast Decryption for Personal Health Record System</li>
+                        <li>Towards Secure Industrial IoT: Blockchain System with Credit-Based Consensus Mechanism</li>
+                        <li>Joint Hypergraph Learning for Tag-based Image Retrieval</li>
+                        <li>LBOA Location Based Secure Outsourced Aggregation in IoT</li>
+                        <li>Learning Customer Behaviors for Effective Load Forecasting</li>
+                        <li>Memory Leakage-Resilient Dynamic and Verifiable Multi-keyword Ranked Search on Encrypted Smart Body Sensor Network Data</li>
+                        <li>Mining Users Trust From E-Commerce Reviews Based on Sentiment Similarity Analysis</li>
+                        <li>MultiParty High Dimensional Data Publishing under Differential Privacy</li>
+                        <li>NASM Nonlinearly Attentive Similarity Model for Recommendation System via Locally Attentive Embedding</li>
+                        <li>Network Representation Learning Enhanced Recommendation Algorithm</li>
+                        <li>Normalization of Duplicate Records from Multiple Sources</li>
+                        <li>Novel Multi-Keyword Search on Encrypted Data in the Cloud</li>
+                        <li>On Scalable and Robust Truth Discovery in Big Data Social Media Sensing Applications</li>
+                        <li>Online Public Shaming on Twitter Detection Analysis and Mitigation</li>
+                        <li>PersoNet Friend Recommendation System Based on Big-Five Personality Traits and Hybrid Filtering</li>
+                        <li>PMOD Secure Privilege-Based Multilevel Organizational Data Sharing in Cloud Computing</li>
+                        <li>Predicting Cyberbullying on Social Media in the Big Data Era Using Machine Learning Algorithms</li>
+                        <li>Privacy aware Personal Data Storage PPDS Learning how to Protect User Privacy</li>
+                        <li>RescueMe Smartphone Based Self Rescue System for Disaster Rescue</li>
+                        <li>Revocable Identity Based Broadcast Proxy Reencryption for Data Sharing in Clouds</li>
+                        <li>Robust defense scheme against selective drop attack in wireless Ad Hoc Networks</li>
+                        <li>Scheduling Real Time Security Aware tasks in Fog Networks</li>
+                        <li>Searchable Symmetric Encryption with Forward Search Privacy</li>
+                        <li>Secure and Efficient Skyline Queries on Encrypted Data</li>
+                        <li>Secure data group sharing and conditional dissemination</li>
+                        <li>Secure Key Agreement and Key Protection for Mobile Device User Authentication</li>
+                        <li>Selective Authentication Based Geographic Opportunistic Routing in wsn</li>
+                        <li>Sensitive Label Privacy Preservation with Anatomization for Data Publishing</li>
+                        <li>Social Network Rumor Diffusion Predication Based on Equal Responsibility Game Model</li>
+                        <li>Spammer Detection and Fake User Identification on Social Networks</li>
+                        <li>Transactional Behavior Verification in Business Process as a Service Configuration</li>
+                        <li>Trust Relationship Prediction in Alibaba ECommerce Platform</li>
+                        <li>Trust-based Privacy-Preserving Photo Sharing in Online Social Networks</li>
+                        <li>Using Data Mining to Predict Hospital Admissions From the Emergency Department</li>
+                        <li>Detecting Suspicious File Migration or Replication in the Cloud</li>
+                        <li>Toward Detection and Attribution of Cyber-Attacks in IoT enabled Cyber physical Systems</li>
+                        <li>Active Online Learning for Social Media Analysis to Support Crisis Management</li>
+                        <li>Weakly-Supervised Deep Learning for Customer Review Sentiment Classification</li>
+                        <li>An Efficient and Secured Framework for Mobile Cloud Computing</li>
+                        <li>Detection of fake online reviews using semi-supervised and supervised learning</li>
+                        <li>Secure Identity-based Data Sharing and Profile Matching for Mobile Healthcare Social Networks in Cloud Computing</li>
+                        <li>Combining data owner side and cloud side access control for Encrypted cloud storage</li>
+                        <li>Development and Examination of Fog Computing-Based Encrypted Control System</li>
+                        <li>Inference Attack-Resistant E-Healthcare Cloud System with Fine-Grained Access</li>
+                        <li>A Power-of-Two Choices Based Algorithm for Fog Computing</li>
+                        <li>Detecting Malicious Social Bots Based on Click stream Sequences</li>
+                        <li>Protecting Your Shopping Preference with Differential Privacy</li>
+                        <li>Retrieving Hidden Friends A Collusion Privacy Attack Against Online Friend Search Engine</li>
+                        <li>Dual Access Control for Cloud-Based Data Storage and Sharing</li>
+                        <li>Block chain technology for protecting the banking transaction without using tokens</li>
+                        <li>Detecting Group Shilling Attacks in Online Recommender Systems Based on Bisecting K-Means Clustering</li>
+                        <li>Block chain management based on organ donation and transplantation</li>
+                        <li>Credit Card Fraud Detection Using AdaBoost and Majority Voting</li>
+                        <li>Optimal filter assignment policy against distributed denial of service attack</li>
+                        <li>Block Hunter Federated Learning for Cyber Threat Hunting in Blockchain-based IIoT Networks</li>
+                        <li>Secure cloud storage with data dynamics using secure network coding techniques</li>
+                        <li>HinCTI: A Cyber Threat Intelligence Modeling and Identification System Based on Heterogeneous Information Network</li>
+                        <li>CloudRaid Detecting Distributed Concurrency Bugs via Log Mining and Enhancement</li>
+                        <li>An Efficient Ciphertext Index Retrieval Scheme based on Edge Computing Framework</li>
+                        <li>A Secure E Coupon Service Based on Blockchain Systems</li>
+                        <li>Secure Mobile Edge Computing Networks in the Presence of Multiple Eavesdroppers</li>
+                        <li>EntrapNet a Blockchain Based Verification Protocol for Trustless Computing</li>
+                        <li>Quantum Safe Round Optimal Password Authentication for Mobile Devices</li>
+                        <li>A Secure E-Coupon Service Based on Blockchain Systems</li>
+                        <li>A Secure and Efficient Cloud-Centric Internet-of-Medical-Things-Enabled Smart Healthcare System With Public Verifiability</li>
+                        <li>Data Trust Framework Using Blockchain Technology and Adaptive Transaction Validation</li>
+                        <li>Assessment of the Suitability of Fog Computing in the Context of Internet of Things</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <div class="cta-button-container">
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #555; font-weight: 500;">Ready to build a career in technology? Join us today!</p>
+            <a href="https://www.hitaishitrainings.com" class="cta-button" target="_blank">Join HitaishiTrainings</a>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.intro-section, .project-category, .cta-button-container');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        function toggleProjects(button, id) {
+            const projectsList = document.getElementById(id + '-projects');
+            const isExpanded = projectsList.classList.toggle('expanded');
+            button.textContent = isExpanded ? 'Hide All Projects' : 'View All Projects';
+        }
+    </script>
+        <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

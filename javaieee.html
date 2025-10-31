@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optic Bee IEEE Java Projects</title>
+    <style>
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow-x: auto;
+        }
+
+        .table-container {
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e6ed;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e9ecef;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f7f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #e9f0f6;
+            transform: scale(1.01);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .project-number {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+    <header>
+        <h1>Optic Bee IEEE Java Projects List - 2024</h1>
+    </header>
+
+    <main>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S. No</th>
+                        <th>Project Name</th>
+                        <th>Domain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="project-number">1.</td>
+                        <td>Sec-Health: A Blockchain-Based Protocol for Securing Health Records</td>
+                        <td>Blockchain/Healthcare</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">2.</td>
+                        <td>Secure and Efficient Data Duplication in Joint Cloud Storage</td>
+                        <td>Cloud Storage, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">3.</td>
+                        <td>Friendship Inference in Mobila Social Networks: Exploiting Multi-Source Information with Two-Stage Deep Learning Framework</td>
+                        <td>Social Networks, Deep Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">4.</td>
+                        <td>A sensing communication and computing approach for vulnerable road users safety</td>
+                        <td>IoT, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">5.</td>
+                        <td>Target-Oriented Investigation of Online Abusive Attacks: A Dataset and Analysis</td>
+                        <td>Cyber Security, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">6.</td>
+                        <td>Behavioral Model for Live Detection of Apps Based Attack</td>
+                        <td>Cyber Security, App Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">7.</td>
+                        <td>Enabling Balanced Data Deduplication in Mobile Edge Computing</td>
+                        <td>Mobile Edge Computing, Data Deduplication</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">8.</td>
+                        <td>A Fair Secure and Trusted Decentralized IIoT Data Marketplace Enabled by Block chain</td>
+                        <td>Blockchain, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">9.</td>
+                        <td>Intelligent Distribution of Fresh Agricultural Products in Smart City</td>
+                        <td>Smart City, Logistics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">10.</td>
+                        <td>Social Spammer Detection via Convex Nonnegative Matrix Factorization</td>
+                        <td>Social Media, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">11.</td>
+                        <td>Identity-Based Privacy Preserving Remote Data Integrity Checking With a Designated Verifier</td>
+                        <td>Data Security, Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">12.</td>
+                        <td>DSAS: A Secure Data Sharing and Authorized Searchable Framework for e-Healthcare System</td>
+                        <td>e-Healthcare, Data Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">13.</td>
+                        <td>Detecting fraudulent student communication in a multiple choice online test environment</td>
+                        <td>Education, Fraud Detection</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">14.</td>
+                        <td>Bank Record Storage Using Block chain</td>
+                        <td>Blockchain, Finance</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">15.</td>
+                        <td>Travel direction recommendation model based on photos of user social network profile</td>
+                        <td>Social Media, Recommendation Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">16.</td>
+                        <td>Privacy preserving electricity theft detection based on block chain</td>
+                        <td>Blockchain, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">17.</td>
+                        <td>Secure and privacy preserving egovt frame work using blockchain and artificial intelligence</td>
+                        <td>Blockchain, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">18.</td>
+                        <td>Complaint and senverity identification from online financial content</td>
+                        <td>Finance, NLP</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">19.</td>
+                        <td>A Proxy Re-Encryption Approach to Secure Data Sharing in the Internet of Things Based on Blockchain</td>
+                        <td>IoT, Blockchain</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">20.</td>
+                        <td>Sanitizable Access Control System for Secure Cloud Storage Against Malicious Data Publishers</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">21.</td>
+                        <td>Optimal Drug Dosage Control Strategy of Immune Systems Using Reinforcement Learning</td>
+                        <td>Healthcare, Reinforcement Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">22.</td>
+                        <td>A Collaborative Method for Route Discovery Using Taxi Drivers Experience and Preferences</td>
+                        <td>Transportation, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">23.</td>
+                        <td>A Credibility Analysis System for Assessing Information on Twitter</td>
+                        <td>Social Media, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">24.</td>
+                        <td>A Data Sharing Protocol to Minimize Security and Privacy Risks of Cloud Storage in Big Data Era</td>
+                        <td>Cloud Security, Big Data</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">25.</td>
+                        <td>A Fast Parallel Community Discovery Model on Complex</td>
+                        <td>Data Mining, Social Networks</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">26.</td>
+                        <td>A General Framework for Implicit and Explicit Social Recommendation</td>
+                        <td>Social Media, Recommendation Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">27.</td>
+                        <td>A Lightweight Secure Data Sharing Scheme for Mobile Cloud Computing</td>
+                        <td>Mobile Computing, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">28.</td>
+                        <td>A New Lightweight Symmetric Searchable Encryption Scheme for String Identification</td>
+                        <td>Cryptography, Data Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">29.</td>
+                        <td>A Resilient Dispersal Scheme for Multi-cloud Storage</td>
+                        <td>Cloud Computing, Data Storage</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">30.</td>
+                        <td>A Robust Reputation Management Mechanism in the Federated Cloud</td>
+                        <td>Cloud Computing, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">31.</td>
+                        <td>A Three-Layer Privacy Preserving Cloud Storage Scheme Based on Computational Intelligence in Fog Computing</td>
+                        <td>Cloud Computing, Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">32.</td>
+                        <td>Achieving Data Truthfulness and Privacy Preservation in DataMarkets</td>
+                        <td>Data Security, Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">33.</td>
+                        <td>Achieving Flexible and Self-contained Data Protection in Cloud Computing</td>
+                        <td>Cloud Computing, Data Protection</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">34.</td>
+                        <td>An Efficient and Fine-Grained Big Data Access Control Scheme with Privacy-Preserving Policy</td>
+                        <td>Big Data, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">35.</td>
+                        <td>Analyzing Sentiments In One Go A Supervised Joint Topic Modeling Approach</td>
+                        <td>NLP, Sentiment Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">36.</td>
+                        <td>Anonymous and Traceable Group Data Sharing in Cloud Computing</td>
+                        <td>Cloud Security, Data Sharing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">37.</td>
+                        <td>Attribute-Based Storage Supporting Secure Deduplication of Encrypted Data in Cloud</td>
+                        <td>Cloud Storage, Data Deduplication</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">38.</td>
+                        <td>Authenticated Outlier Mining for Outsourced Databases</td>
+                        <td>Data Mining, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">39.</td>
+                        <td>Automatic Extraction of Access Control Policies from Natural Language Documents</td>
+                        <td>NLP, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">40.</td>
+                        <td>Avoiding Data Corruption in Drop Computing Mobile Networks</td>
+                        <td>Mobile Networks, Data Integrity</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">41.</td>
+                        <td>Ciphertext-Policy Attribute-Based Encryption With Delgated</td>
+                        <td>Cryptography, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">42.</td>
+                        <td>Computing Semantic Similarity of Concepts in Knowledge Graphs</td>
+                        <td>Knowledge Graphs, NLP</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">43.</td>
+                        <td>Customer-Satisfaction-Aware Optimal Multiserver Configuration for Profit Maximization in Cloud Computing</td>
+                        <td>Cloud Computing, Business Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">44.</td>
+                        <td>Design of Secure Authenticated Key Management Protocol for Cloud Computing Environments</td>
+                        <td>Cloud Security, Key Management</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">45.</td>
+                        <td>Detecting Stress Based On Social Interactions In Social Networks</td>
+                        <td>Social Media, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">46.</td>
+                        <td>Dynamic Multi Keyword Ranked Search Based on Bloom Filter Over Encrypted Cloud Data</td>
+                        <td>Cloud Computing, Data Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">47.</td>
+                        <td>Efficient and Expressive Keyword Search Over Encrypted Data in Cloud Doc</td>
+                        <td>Cloud Computing, Data Search</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">48.</td>
+                        <td>Enhancing Cloud-Based IoT Security through Trustworthy Cloud Service An Integration of Security and Reputation Approach</td>
+                        <td>IoT, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">49.</td>
+                        <td>EPICS A Framework for Enforcing Security Policies in Composite Web Services</td>
+                        <td>Web Services, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">50.</td>
+                        <td>Exploiting the Dynamic Mutual Influence for Predicting Social Event Participation</td>
+                        <td>Social Networks, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">51.</td>
+                        <td>FaaSeC Enabling Forensics-as-a-Service for Cloud Computing Systems</td>
+                        <td>Cloud Computing, Forensics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">52.</td>
+                        <td>FastGeo Efficient Geometric Range Queries on Encrypted Spatial Data</td>
+                        <td>Data Security, Geospatial Data</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">53.</td>
+                        <td>FooDNet Toward an Optimized Food Delivery Network based on Spatial Crowdsourcing</td>
+                        <td>Logistics, Crowdsourcing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">54.</td>
+                        <td>Generating Query Facets using Knowledge Bases</td>
+                        <td>Knowledge Bases, Information Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">55.</td>
+                        <td>Identity-Based Data Outsourcing with Comprehensive Auditing in Clouds</td>
+                        <td>Cloud Computing, Data Auditing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">56.</td>
+                        <td>Image Re-ranking based on Topic Diversity</td>
+                        <td>Image Processing, Recommender Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">57.</td>
+                        <td>NAIS Neural Attentive Item Similarity Model for Recommendation</td>
+                        <td>Recommendation Systems, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">58.</td>
+                        <td>Online Product Quantization</td>
+                        <td>Machine Learning, E-commerce</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">59.</td>
+                        <td>Optimizing Information Leakage in Multicloud Storage Services</td>
+                        <td>Cloud Computing, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">60.</td>
+                        <td>ParkCrowd Reliable Crowdsensing for Aggregation and Dissemination of Parking Space Information</td>
+                        <td>Crowdsourcing, Smart Cities</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">61.</td>
+                        <td>Personal Web Revisitation by Context and Content Keywords with Relevance Feedback</td>
+                        <td>Information Retrieval, Web Development</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">62.</td>
+                        <td>Point-of-interest Recommendation for Location Promotion in Location-based Social Networks</td>
+                        <td>Recommendation Systems, Social Networks</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">63.</td>
+                        <td>Predicting Cyberbullying on Social Media in the Big Data Era Using Machine Learning Algorithms</td>
+                        <td>Social Media, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">64.</td>
+                        <td>Privacy Characterization and Quantification in Data Publishing</td>
+                        <td>Data Privacy, Data Science</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">65.</td>
+                        <td>Privacy Protection and Intrusion Avoidance for Cloudlet-based Medical Data Sharing</td>
+                        <td>Healthcare, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">66.</td>
+                        <td>Privacy Protection based Access Control Scheme in Cloud-based Services</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">67.</td>
+                        <td>Privacy-Preserving Learning Analytics Challenges and Techniques</td>
+                        <td>Education, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">68.</td>
+                        <td>Privacy-Preserving Multi-keyword Top-k Similarity Search Over Encrypted Data</td>
+                        <td>Cryptography, Data Search</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">69.</td>
+                        <td>ProGuard Detecting Malicious Accounts in Social-Network-Based Online Promotions</td>
+                        <td>Social Media, Fraud Detection</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">70.</td>
+                        <td>Robust and Auditable Access Control with Multiple Attribute Authorities for Public Cloud Storage</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">71.</td>
+                        <td>Search Rank Fraud and Malware Detection in Google Play</td>
+                        <td>Mobile Security, Fraud Detection</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">72.</td>
+                        <td>Secure Cloud Storage based on RLWE Problem</td>
+                        <td>Cloud Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">73.</td>
+                        <td>Securing Aggregate Queries for DNA Databases</td>
+                        <td>Biometrics, Database Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">74.</td>
+                        <td>Securing Cloud Data under Key Exposure</td>
+                        <td>Cloud Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">75.</td>
+                        <td>Semantically Enhanced Medical Information Retrieval System</td>
+                        <td>Healthcare, Information Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">76.</td>
+                        <td>SeSPHR A Methodology for Secure Sharing of Personal Health Records in the Cloud</td>
+                        <td>Healthcare, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">77.</td>
+                        <td>Social Network Rumor Diffusion Predication Based on Equal Responsibility Game Model</td>
+                        <td>Social Media, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">78.</td>
+                        <td>SocialQ&A An Online Social Network Based Question and Answer System</td>
+                        <td>Social Media, Q&A Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">79.</td>
+                        <td>Strong Key-Exposure Resilient Auditing for Secure Cloud Storage</td>
+                        <td>Cloud Security, Auditing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">80.</td>
+                        <td>TAFC Time and Attribute Factors Combined Access Control for Time-Sensitive Data in Public Cloud</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">81.</td>
+                        <td>Utilization-Aware Trip Advisor in Bike-sharing Systems Based on User Behavior Analysis</td>
+                        <td>Transportation, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">82.</td>
+                        <td>Design of Secure Authenticated Key Management Protocol for Cloud Computing Environments</td>
+                        <td>Cloud Security, Key Management</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">83.</td>
+                        <td>A Data Sharing Protocol to Minimize Security and Privacy Risks of Cloud Storage</td>
+                        <td>Cloud Security, Data Sharing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">84.</td>
+                        <td>A Fuzzy Approach to Text Classification with Two Stage Training for Ambiguous Instances</td>
+                        <td>Text Classification, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">85.</td>
+                        <td>A Hierarchical Attention Model for Social Contextual Image Recommendation</td>
+                        <td>Social Media, Recommendation Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">86.</td>
+                        <td>A Hybrid Elearning Recommendation Approach Based on Learners Influence Propagation</td>
+                        <td>E-learning, Recommendation Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">87.</td>
+                        <td>A Lightweight Secure Data Sharing Scheme for Mobile Cloud Computing</td>
+                        <td>Mobile Computing, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">88.</td>
+                        <td>A Novel Load Image Profile Based Electricity Load Clustering Methodology</td>
+                        <td>Data Science, Energy Management</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">89.</td>
+                        <td>A Practical Attribute-Based Document Collection Hierarchical Encryption Scheme in Cloud Computing</td>
+                        <td>Cloud Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">90.</td>
+                        <td>A Probabilistic Source Location Privacy Protection Scheme in Wireless Sensor Networks</td>
+                        <td>IoT, Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">91.</td>
+                        <td>A Secure G-Cloud-Based Framework for Government Healthcare Services</td>
+                        <td>E-Government, Healthcare</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">92.</td>
+                        <td>A Secure Searchable Encryption Framework for Privacy-Critical Cloud Storage Services</td>
+                        <td>Cloud Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">93.</td>
+                        <td>A Trust-Based Agent Learning Model for Service Composition in Mobile Cloud Computing Environments</td>
+                        <td>Mobile Computing, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">94.</td>
+                        <td>Active Online Learning for Social Media Analysis to Support Crisis Management</td>
+                        <td>Social Media, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">95.</td>
+                        <td>An attack resistant trust inference model for securing routing in vehicular Ad Hoc Networks</td>
+                        <td>Network Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">96.</td>
+                        <td>An Attribute-based Controlled Collaborative Access Control Scheme for Public Cloud Storage</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">97.</td>
+                        <td>An Efficient Method for High Quality andCohesive Topical Phrase Mining</td>
+                        <td>Data Mining, NLP</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">98.</td>
+                        <td>Analysis and Accurate Prediction of Users Response Behavior in Incentive-Based Demand Response</td>
+                        <td>Data Analysis, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">99.</td>
+                        <td>Android User Privacy Preserving through Crowdsourcing</td>
+                        <td>Mobile Security, Crowdsourcing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">100.</td>
+                        <td>Applying Simulated Annealing and Parallel Computing to the Mobile Sequential Recommendation</td>
+                        <td>Mobile Computing, Recommender Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">101.</td>
+                        <td>Authenticated Medical Documents Releasing with Privacy Protection and Release Control</td>
+                        <td>Healthcare, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">102.</td>
+                        <td>Characterizing and Predicting Early Reviewers for Effective Product Marketing on ECommerce Websites</td>
+                        <td>E-commerce, Data Mining</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">103.</td>
+                        <td>CLASS Cloud Log Assuring Soundness and Secrecy Scheme for Cloud Forensics</td>
+                        <td>Cloud Computing, Forensics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">104.</td>
+                        <td>Clustering Based Collaborative Filtering Using an Incentivized Penalized User Model</td>
+                        <td>Machine Learning, Collaborative Filtering</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">105.</td>
+                        <td>Collusion Defender Preserving Subscribers Privacy in Publish and Subscribe Systems</td>
+                        <td>Data Privacy, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">106.</td>
+                        <td>Composition Context-Based Web Services Similarity Measure</td>
+                        <td>Web Services, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">107.</td>
+                        <td>Conversational Networks for Automatic Online Moderation</td>
+                        <td>NLP, Social Media</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">108.</td>
+                        <td>Crypt DAC Cryptographically Enforced Dynamic Access Control in the Cloud</td>
+                        <td>Cloud Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">109.</td>
+                        <td>DCCR Deep Collaborative Conjunctive Recommender for Rating Prediction</td>
+                        <td>Deep Learning, Recommender Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">110.</td>
+                        <td>Detecting Pickpocket Suspects from Large-Scale Public Transit Records</td>
+                        <td>Data Mining, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">111.</td>
+                        <td>Dynamic Multi Keyword Ranked Search Based on Bloom Filter Over Encrypted Cloud Data</td>
+                        <td>Cloud Computing, Data Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">112.</td>
+                        <td>Efficient conditional anonymity with message integrity and authentication in a vehicular adhoc network</td>
+                        <td>Network Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">113.</td>
+                        <td>Enabling Authorized Encrypted Search for Multi Authority Medical Databases</td>
+                        <td>Healthcare, Database Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">114.</td>
+                        <td>Fast Communication-efficient Spectral Clustering Over Distributed Data</td>
+                        <td>Machine Learning, Data Processing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">115.</td>
+                        <td>Filtering Instagram hash tags through crowd tagging and the HITS algorithm</td>
+                        <td>Social Media, Data Mining</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">116.</td>
+                        <td>Fundamental Visual Concept Learning from Correlated Images and Text</td>
+                        <td>AI, Image Processing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">117.</td>
+                        <td>Fuzzy Identity-Based Data Integrity Auditing for Reliable Cloud Storage Systems</td>
+                        <td>Cloud Computing, Data Integrity</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">118.</td>
+                        <td>Hidden Ciphertext Policy Attribute-Based Encryption with Fast Decryption for Personal Health Record System</td>
+                        <td>Healthcare, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">119.</td>
+                        <td>Towards Secure Industrial IoT: Blockchain System with Credit-Based Consensus Mechanism</td>
+                        <td>IoT, Blockchain</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">120.</td>
+                        <td>Joint Hypergraph Learning for Tag-based Image Retrieval</td>
+                        <td>Image Processing, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">121.</td>
+                        <td>LBOA Location Based Secure Outsourced Aggregation in IoT</td>
+                        <td>IoT, Data Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">122.</td>
+                        <td>Learning Customer Behaviors for Effective Load Forecasting</td>
+                        <td>Data Analysis, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">123.</td>
+                        <td>Memory Leakage-Resilient Dynamic and Verifiable Multi-keyword Ranked Search on Encrypted Smart Body Sensor Network Data</td>
+                        <td>IoT, Data Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">124.</td>
+                        <td>Mining Users Trust From E-Commerce Reviews Based on Sentiment Similarity Analysis</td>
+                        <td>E-commerce, Sentiment Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">125.</td>
+                        <td>MultiParty High Dimensional Data Publishing under Differential Privacy</td>
+                        <td>Data Privacy, Big Data</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">126.</td>
+                        <td>NASM Nonlinearly Attentive Similarity Model for Recommendation System via Locally Attentive Embedding</td>
+                        <td>Recommender Systems, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">127.</td>
+                        <td>Network Representation Learning Enhanced Recommendation Algorithm</td>
+                        <td>Recommender Systems, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">128.</td>
+                        <td>Normalization of Duplicate Records from Multiple Sources</td>
+                        <td>Data Processing, Data Science</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">129.</td>
+                        <td>Novel Multi-Keyword Search on Encrypted Data in the Cloud</td>
+                        <td>Cloud Computing, Data Search</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">130.</td>
+                        <td>On Scalable and Robust Truth Discovery in Big Data Social Media Sensing Applications</td>
+                        <td>Big Data, Social Media</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">131.</td>
+                        <td>Online Public Shaming on Twitter Detection Analysis and Mitigation</td>
+                        <td>Social Media, Data Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">132.</td>
+                        <td>PersoNet Friend Recommendation System Based on Big-Five Personality Traits and Hybrid Filtering</td>
+                        <td>Social Media, Recommender Systems</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">133.</td>
+                        <td>PMOD Secure Privilege-Based Multilevel Organizational Data Sharing in Cloud Computing</td>
+                        <td>Cloud Security, Data Sharing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">134.</td>
+                        <td>Predicting Cyberbullying on Social Media in the Big Data Era Using Machine Learning Algorithms</td>
+                        <td>Social Media, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">135.</td>
+                        <td>Privacy aware Personal Data Storage PPDS Learning how to Protect User Privacy</td>
+                        <td>Data Privacy, Cloud Storage</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">136.</td>
+                        <td>RescueMe Smartphone Based Self Rescue System for Disaster Rescue</td>
+                        <td>Mobile Apps, Emergency Services</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">137.</td>
+                        <td>Revocable Identity Based Broadcast Proxy Reencryption for Data Sharing in Clouds</td>
+                        <td>Cloud Security, Data Sharing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">138.</td>
+                        <td>Robust defense scheme against selective drop attack in wireless Ad Hoc Networks</td>
+                        <td>Network Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">139.</td>
+                        <td>Scheduling Real Time Security Aware tasks in Fog Networks</td>
+                        <td>Network Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">140.</td>
+                        <td>Searchable Symmetric Encryption with Forward Search Privacy</td>
+                        <td>Cryptography, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">141.</td>
+                        <td>Secure and Efficient Skyline Queries on Encrypted Data</td>
+                        <td>Cloud Computing, Data Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">142.</td>
+                        <td>Secure data group sharing and conditional dissemination</td>
+                        <td>Data Security, Data Sharing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">143.</td>
+                        <td>Secure Key Agreement and Key Protection for Mobile Device User Authentication</td>
+                        <td>Mobile Security, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">144.</td>
+                        <td>Selective Authentication Based Geographic Opportunistic Routing in wsn</td>
+                        <td>Network Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">145.</td>
+                        <td>Sensitive Label Privacy Preservation with Anatomization for Data Publishing</td>
+                        <td>Data Privacy, Data Publishing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">146.</td>
+                        <td>Social Network Rumor Diffusion Predication Based on Equal Responsibility Game Model</td>
+                        <td>Social Media, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">147.</td>
+                        <td>Spammer Detection and Fake User Identification on Social Networks</td>
+                        <td>Social Media, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">148.</td>
+                        <td>Transactional Behavior Verification in Business Process as a Service Configuration</td>
+                        <td>Business, Data Integrity</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">149.</td>
+                        <td>Trust Relationship Prediction in Alibaba ECommerce Platform</td>
+                        <td>E-commerce, Predictive Analytics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">150.</td>
+                        <td>Trust-based Privacy-Preserving Photo Sharing in Online Social Networks</td>
+                        <td>Social Media, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">151.</td>
+                        <td>Using Data Mining to Predict Hospital Admissions From the Emergency Department</td>
+                        <td>Healthcare, Data Mining</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">152.</td>
+                        <td>Detecting Suspicious File Migration or Replication in the Cloud</td>
+                        <td>Cloud Security, Forensics</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">153.</td>
+                        <td>Toward Detection and Attribution of Cyber-Attacks in IoT enabled Cyber physical Systems</td>
+                        <td>Cyber Security, IoT</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">154.</td>
+                        <td>Active Online Learning for Social Media Analysis to Support Crisis Management</td>
+                        <td>Social Media, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">155.</td>
+                        <td>Weakly-Supervised Deep Learning for Customer Review Sentiment Classification</td>
+                        <td>Deep Learning, Sentiment Analysis</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">156.</td>
+                        <td>An Efficient and Secured Framework for Mobile Cloud Computing</td>
+                        <td>Mobile Computing, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">157.</td>
+                        <td>Detection of fake online reviews using semi-supervised and supervised learning</td>
+                        <td>Machine Learning, E-commerce</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">158.</td>
+                        <td>Secure Identity-based Data Sharing and Profile Matching for Mobile Healthcare Social Networks in Cloud Computing</td>
+                        <td>Healthcare, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">159.</td>
+                        <td>Combining data owner side and cloud side access control for Encrypted cloud storage</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">160.</td>
+                        <td>Development and Examination of Fog Computing-Based Encrypted Control System</td>
+                        <td>Fog Computing, Cryptography</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">161.</td>
+                        <td>Inference Attack-Resistant E-Healthcare Cloud System with Fine-Grained Access</td>
+                        <td>Healthcare, Cloud Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">162.</td>
+                        <td>A Power-of-Two Choices Based Algorithm for Fog Computing</td>
+                        <td>Fog Computing, Algorithms</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">163.</td>
+                        <td>Detecting Malicious Social Bots Based on Click stream Sequences</td>
+                        <td>Social Media, Cyber Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">164.</td>
+                        <td>Protecting Your Shopping Preference with Differential Privacy</td>
+                        <td>E-commerce, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">165.</td>
+                        <td>Retrieving Hidden Friends A Collusion Privacy Attack Against Online Friend Search Engine</td>
+                        <td>Social Media, Data Privacy</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">166.</td>
+                        <td>Dual Access Control for Cloud-Based Data Storage and Sharing</td>
+                        <td>Cloud Security, Access Control</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">167.</td>
+                        <td>Block chain technology for protecting the banking transaction without using tokens</td>
+                        <td>Blockchain, Finance</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">168.</td>
+                        <td>Detecting Group Shilling Attacks in Online Recommender Systems Based on Bisecting K-Means Clustering</td>
+                        <td>Recommender Systems, Fraud Detection</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">169.</td>
+                        <td>Block chain management based on organ donation and transplantation</td>
+                        <td>Blockchain, Healthcare</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">170.</td>
+                        <td>Credit Card Fraud Detection Using AdaBoost and Majority Voting</td>
+                        <td>Finance, Machine Learning</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">171.</td>
+                        <td>Optimal filter assignment policy against distributed denial of service attack</td>
+                        <td>Network Security, DoS Attack</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">172.</td>
+                        <td>Block Hunter Federated Learning for Cyber Threat Hunting in Blockchain-based IIoT Networks</td>
+                        <td>Blockchain, Cyber Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">173.</td>
+                        <td>Secure cloud storage with data dynamics using secure network coding techniques</td>
+                        <td>Cloud Security, Networking</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">174.</td>
+                        <td>HinCTI: A Cyber Threat Intelligence Modeling and Identification System Based on Heterogeneous Information Network</td>
+                        <td>Cyber Security, AI</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">175.</td>
+                        <td>CloudRaid Detecting Distributed Concurrency Bugs via Log Mining and Enhancement</td>
+                        <td>Cloud Computing, Debugging</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">176.</td>
+                        <td>An Efficient Ciphertext Index Retrieval Scheme based on Edge Computing Framework</td>
+                        <td>Edge Computing, Data Retrieval</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">177.</td>
+                        <td>A Secure E Coupon Service Based on Blockchain Systems</td>
+                        <td>Blockchain, E-commerce</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">178.</td>
+                        <td>Secure Mobile Edge Computing Networks in the Presence of Multiple Eavesdroppers</td>
+                        <td>Mobile Edge Computing, Security</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">179.</td>
+                        <td>EntrapNet a Blockchain Based Verification Protocol for Trustless Computing</td>
+                        <td>Blockchain, Cloud Computing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">180.</td>
+                        <td>Quantum Safe Round Optimal Password Authentication for Mobile Devices</td>
+                        <td>Mobile Security, Quantum Computing</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">181.</td>
+                        <td>A Secure E-Coupon Service Based on Blockchain Systems</td>
+                        <td>Blockchain, E-commerce</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">182.</td>
+                        <td>A Secure and Efficient Cloud-Centric Internet-of-Medical-Things-Enabled Smart Healthcare System With Public Verifiability</td>
+                        <td>Healthcare, IoT, Cloud</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">183.</td>
+                        <td>Data Trust Framework Using Blockchain Technology and Adaptive Transaction Validation</td>
+                        <td>Blockchain, Data Integrity</td>
+                    </tr>
+                    <tr>
+                        <td class="project-number">184.</td>
+                        <td>Assessment of the Suitability of Fog Computing in the Context of Internet of Things</td>
+                        <td>IoT, Fog Computing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

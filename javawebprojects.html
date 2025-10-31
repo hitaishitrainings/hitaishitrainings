@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optic Bee Java Projects</title>
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 30px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #2b5797;
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .project-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0f4ff;
+    margin-bottom: 10px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .project-list li:hover {
+    background: #e2ebff;
+    transform: scale(1.02);
+  }
+
+  .project-header {
+    background: #2b5797;
+    color: #000000;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+  }
+
+  .project-title {
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .project-language {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b5797;
+  }
+
+  @media (max-width: 600px) {
+    main {
+      margin: 20px;
+      padding: 20px;
+    }
+    .project-list li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .project-language {
+      margin-top: 5px;
+    }
+  }
+</style>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
+    <!-- Top Bar with Social and Search -->
+    <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
+        <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+            <!-- Main Container -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+               
+                
+                <!-- Search Box - Fixed -->
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
+
+                <!-- Contact Info - Fixed -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
+                    <!-- Call Link -->
+                    <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
+                        <span class="contact-text">+91 87901 70525</span>
+                    </a>
+
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/918790170525" target="_blank" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
+                        <i class="fab fa-whatsapp" style="font-size: 16px; color: #25D366;"></i>
+                        <span class="contact-text">Chat On WhatsApp</span>
+                    </a>
+                    
+                    <!-- Login Button -->
+                    <div id="auth-buttons" style="display: flex; align-items: center; gap: 10px;">
+
+                    <!-- Username (appears after login) -->
+                    <span id="header-username" style="color: white; font-size: 14px;"></span>
+
+                    <!-- Student Login Icon -->
+                    <a href="login.html" id="login-link" style="text-decoration: none;">
+                        <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
+                        <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        </button>
+                    </a>
+
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <style>
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                min-width: 150px !important;
+            }
+            
+            .contact-text {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            div[style*="background-color: #1a2a3a"] > div > div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                justify-content: center !important;
+                margin: 5px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(2) {
+                order: 3 !important;
+                margin: 10px 0 !important;
+            }
+            
+            div[style*="background-color: #1a2a3a"] > div > div > div:nth-child(3) {
+                order: 2 !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header style="background-color: #2c3e50; color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="width: 100%; max-width: 96%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div style="background-color: #3498db; color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold; font-size: 20px; animation: slideInLeft 0.8s ease-out;">H</div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1;color: #3498db;">
+                            <span style="color: #ffffff;">Hitaishi</span> Trainings
+                        </h1>
+                        <div style="font-size: 10px; letter-spacing: 2px; color: #bdc3c7; text-transform: uppercase; margin-top: 2px;">Knowledge Empowered</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
+                    ☰
+                </div>
+                <nav id="main-nav" style="display: flex; align-items: center;">
+                    <ul style="list-style: none; display: flex;flex-wrap: wrap; margin: 0; padding: 0;padding-right: -200px;">
+                        <li style="position: relative; margin-left: 20px;">
+                            <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="about_us.html#mission" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Mission</a>
+                                <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
+                                <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
+                            </div>
+                        </li> -->
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
+                        </li>
+                        
+                        <li  style="position: relative; margin-left: 0px;">
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
+                            </a>
+                            <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
+                                <a href="trainings.html#python" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python Training</a>
+                                <a href="trainings.html#web" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Web Development</a>
+                                <a href="trainings.html#data" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Data Science</a>
+                            </div> -->
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
+                        </li>
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
+                        </li>
+                        
+                        <li style="position: relative; margin-left: 0px;">
+                            <a href="contact_us.html" style="color: white; text-decoration: none; padding: 10px 0px; display: block; font-weight: 500; transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+        <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-nav');
+
+        // Toggle dropdowns
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Handle mobile menu
+        mobileBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+                mobileBtn.style.display = 'none';
+                // Hide all dropdowns on desktop (they'll show on hover via CSS)
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            } else {
+                mobileBtn.style.display = 'block';
+                nav.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', handleResize);
+        window.addEventListener('resize', handleResize);
+        </script>
+
+        <style media="screen and (max-width: 768px)">
+            /* Mobile styles */
+            #main-nav {
+                display: none;
+                width: 100%;
+            }
+            #main-nav ul {
+                flex-direction: column !important;
+                width: 100%;
+            }
+            #main-nav li {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            #mobile-menu-btn {
+                display: block !important;
+            }
+        </style>
+
+        <style media="screen and (min-width: 769px)">
+            /* Desktop hover effects */
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        </style>
+    <!-- Secondary Navigation -->
+        <div style="background-color: #3498db; color: white; padding: 10px 0;">
+            <div style="width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <div style="display: flex; gap: 20px; padding: 5px 0;">
+                    <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
+                    <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
+                    <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
+                    <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
+                    <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
+                </div>
+            </div>
+        </div>
+<!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
+
+    <header>
+        <h1>Optic Bee Java Web Applications</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Java Projects</h2>
+            <div class="project-list">
+                <ul>
+                    <li class="project-header">
+                        <span class="project-title">Web Project</span>
+                        <span class="project-language">Language</span>
+                    </li>
+                    <li><span class="project-title">Booking Photographer</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">City Life</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Magazine</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Tuitions</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Magazine College</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Event File Automation</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Learning Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Nirman Website</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Ship Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Placement Cell</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Cancer Project</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Procurement</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Project Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">knowledge-based Community Sharing System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Offer-Bazar</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online-E-Gas</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Income-Tax-Return-Processing</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Staff Leave Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Employee-Expense-Management-system</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Exam Seating Arrangement System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Color Hunt Gaming project</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Form Request</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Electronic-Veg-Market</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Puyo Puyo (Game Project)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Magic Bounce Ball (game project)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Satvara Matrimony</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Query Handler</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Grade Processing System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">AES--Photo Encryption</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Image Enhancement</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Paradarshia Corruption Free Economy</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Implementation Of Floyd's Algorithm</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Atm Location Search</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Farming</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Time Table Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Admin Mall</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Bulls-Eye-Quiz</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Smarter Work Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Grievance Redressal System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Real Estate Magicbricks</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Apartment Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Medical shop Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Security Mail Communicator</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Feedback Analysis Of interviews</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Intelligent Hospital System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Tender Management System TMS</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Virtual Learning Environment (VLE)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Loan Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Retail Purchase & Tracking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Opinion Mining For Social Networking Sites</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Project Information System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Friendly College Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Book Store</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Sentimental Analysis For Mobile Networks</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Report Generation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Feedback Information System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Health Prediction Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Book Review Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Suspicious Email Detection System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Monitoring System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online College magazine</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Sports Event Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Restaurant Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online House Rental Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Food Ordering & Service</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Course Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Cab Booking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online College Voting System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Cluster Analysis and Disease Mapping</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Feedback System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Result Analysis System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E Plastic System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E Banking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Assignments and Materials System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Vehicle Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Recipe Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Event Attendance</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Parking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Auction</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Telecom Services</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Airline Reservation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Waste Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Exam Invigilation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Library Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Patient Follow Up</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Event Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Career Information System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Gas Sewa Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Attendance Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Office Level Student Information System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Pharmacy System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Recruitment System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Credit Card Fraud Detection</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Smart General Library</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Venue Booking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">A Secure Two-Factor Authentication Scheme</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Selection of Effective Clouds for Data Hosting Services</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Career Analysis System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Performance with graph & Academic Project work Reporting System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Wedding Event Planner</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Travel Rating and Exploring System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Performance Evaluation System Adoption of Opinion Mining Information</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Marketplace</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Uni Watch - Web</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Training & Placement Cell</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">File Security System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Social Networking Site</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Campus Recruitment System (Training & Placement)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Farmers Buddy</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Event Organization System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Doctor Appointment</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Survey System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Secure Web Application for Managing Auction System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Identification of Diabetes</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Placements & Assistance</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online College Bus Record Supervising System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online E-Ticket System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online E-Voting System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student & Faculty Interaction Outside the Classroom</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automated Retail Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Dynamic Media Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Electronic Highway for Singers</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Election System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E Police Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Performance Forecasting</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Bus Tracking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Performance Monitoring in Virtual Organizations</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Review-Based Rating Prediction</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automation of Exam Invigilation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Fast Detection of Transformed Data Leaks</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Employee Tracking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Sentimental Analysis</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Personality Prediction System Through CV Analysis</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Analysis of Users Behaviour in Structured E-Commerce Websites</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Image Encryption and Decryption using BlowFish</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Resource Maintenance and Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Watermarking</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Monitoring Fake Product Reviews</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">College Bus Facility System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Software Piracy Prevention</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Tour Guide</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Local Vendor Review System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Multi-Level Marketing</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Secured File Sharing</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Water Distribution and Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Citizen Card System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Collaborative Online Tutorial System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Entertainment Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Secure Web Portal for Real Estate & Property Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Agile Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Book Repository Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Frame It</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Voice to Text Converter Java Project</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Purchasing Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Telangana Public Services</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Analysis of Persuasive Text Passwords</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Project Review Automation</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Easy Search Guide (Malls)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Food Wastage Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Food Ordering System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Stock Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Courier Service System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Campus Recruitment System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Vehicle Rental Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automation of Timetable Generation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Job Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Obsessive Compulsive Disorder</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Leave Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Image Steganography using LSB</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">File Tracking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Electronic Voting System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Dynamic Analysis vulnerability to Provide Security In Clouds</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Health Care Logistics System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Car Store System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E-Fuel – Online Fuel Booking</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Hour Wise Lecturers Tracking</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Multi-Hospital System – Online Doctor Appointment</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E - Voters Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Repository System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Information Chart board System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Help Desk</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Student Mentoring System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Placement Information System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Hostel Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">News Report</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Dance Studio</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Passenger Vehicle Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automatic Question paper Framer</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Development of Learning Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Bouquet Store</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E Approval System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online University Voting System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automatic Exam Seating Arrangement System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Advanced Query Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Urban Spoon</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Development of Online College Yearbook</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Predicting user behavior through sessions using the web Mining</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Digital WaterMarking Techniques</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Age Group Classification in Social Networks using Deep Learning</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Securing data in Image & Audio Files using Steganography Technique</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Computerized Examination Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Scalable Architecture for Multi-User Encrypted SQL Operations</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Mental Disorder Detection on Social Networks</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Resource-aware hybrid scheduling algorithm in the heterogeneous distributed computing</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Secure File Storage on Cloud using Hybrid Cryptography ( AES, DES, RSA)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Data Mining for Sales Prediction in Tourism Industry</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">A Secure Approach For Data Hiding Using Visual Cryptography (Image Split, Encryption and Decryption)</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Classification and Detection of Abusive and Insulting Content in Social Media</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Data Security In Cloud Computing Using Two Way Handshake Method Based On Token Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Web Application For Conducting University Examination</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Student Performance Prediction via Online Learning Behaviour Analytics</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Faculty Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Medicine Donation System Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Shopping System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Exam Center Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Stationary Management System in an Office</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Shopping for Departmental Store</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online College Election System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Construction Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Secure Cloud Storage based on RLWE Problem</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Table Booking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Knowledge Sharing</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">M- MUSTER Using Google maps</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Medical Store</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">University Fagito - Food Application</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E Resource Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Exam Center Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Project Activity Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Vantage Cooking System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Electronic Easy Repair</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Academic Project Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">National Web Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Century21 - Online Real Estate Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Automatic Exam Invigilation System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Noise Reduction - Automatic Ads Removal System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Veterinary Website</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Banking for Loan Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Paperless College</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Fat to Fit – Gym Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Training And Placement Cell Management</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Design and Implementation of an Online Pharmacy Delivery System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Online Food Review System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Bakesters Castle – Cake Shop Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Pet Care - Online Pet Shop System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Custom Stitch – Online Cloth Stitching website</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Know your BMI</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Passport Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Furniture Store Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Musical Journey – Got Music</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">MNREC Training Portal</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Lets Train – Placement Cell</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Complete College & School Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">E – Canteen System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Restaurant Table Order Management System</span> <span class="project-language">Java</span></li>
+                    <li><span class="project-title">Social Connect And Responsibilities - Follow-up and Evaluation</span> <span class="project-language">Java</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
+    </div>
+
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
+
+
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
+</body>
+</html>

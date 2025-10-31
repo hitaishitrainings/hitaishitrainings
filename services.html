@@ -3,47 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - Hitaishi Trainings</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="auth.js"></script>
+    <title>Professional Services Showcase</title>
+    <!-- Load Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* 1. Global Reset and Typography */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #f4f7f9; /* Soft background */
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* 2. Parallax Hero Section (NEW) */
+        .hero-section {
+            position: relative;
+            height: 60vh; /* Viewport height for a decent hero size */
+            min-height: 400px;
+            /* Placeholder image for career success. Change the URL to your preferred image. */
+            background-image: url('img/serviceshero.png');
+            background-size: cover;
+            background-position: center 30%; 
+            background-attachment: fixed; /* KEY for parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.342); /* Darkened overlay for better readability */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #f59e0b; /* Amber */
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            background-color: #d97706;
+        }
+
+        /* 3. Feature Section (Image + Content) (NEW) */
+        .feature-section {
+            padding: 80px 20px;
+            background-color: #ffffff;
+        }
+
+        .feature-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-image-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            min-height: 450px;
+        }
+
+        .feature-content {
+            flex: 1;
+            padding: 50px;
+        }
+
+        .feature-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        .feature-content ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .feature-content li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 17px;
+            color: #4b5563;
+        }
+
+        .feature-content li i {
+            color: #3b82f6; /* Violet checkmark */
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 4px;
+        }
+
+        .feature-content .feature-btn {
+            margin-top: 30px;
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-content .feature-btn:hover {
+            background-color: #3b82f6;
+        }
+
+        /* 4. Service Grid Header Styling (Existing) */
+        .services-section {
+            padding: 80px 20px;
+        }
+
+        .header-content {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-content .title {
+            font-size: 44px;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        
+        .header-content .subtitle {
+            font-size: 18px;
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 5. Grid Layout (Existing) */
+        .services-grid {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        /* 6. Card Styling (Enhanced for Professional Look) */
+        .service-card {
+            background: #ffffff;
+            border-radius: 12px;
+            /* Updated for a softer base shadow */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            /* Subtler lift */
+            transform: translateY(-4px); 
+            /* Updated for a cleaner hover shadow */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
+        }
+        
+        /* Accent Bar */
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .service-card:hover .accent-bar {
+            width: 12px;
+        }
+
+        /* Card Colors */
+        .card-1 .accent-bar { background-color: #3b82f6; }
+        .card-2 .accent-bar { background-color: #10b981; }
+        .card-3 .accent-bar { background-color: #f59e0b; }
+        .card-4 .accent-bar { background-color: #8b5cf6; }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+            transition: color 0.3s ease;
+            /* Icons now match card brand color */
+        }
+        
+        .card-1 .card-icon { color: #3b82f6; }
+        .card-2 .card-icon { color: #10b981; }
+        .card-3 .card-icon { color: #f59e0b; }
+        .card-4 .card-icon { color: #8b5cf6; }
+
+
+        .service-card h3 {
+            font-size: 24px;
+            color: #0f172a; /* Darker heading for professionalism */
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: #334155; /* Darker body text for readability */
+            line-height: 1.6; 
+            margin-bottom: 25px;
+        }
+        
+        .highlight-text {
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        /* 7. Button Styling (Existing) */
+        .learn-more-btn {
+            display: inline-block;
+            margin-top: auto;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .card-1 .learn-more-btn { background-color: #3b82f6; }
+        .card-1 .learn-more-btn:hover { background-color: #2563eb; }
+        
+        .card-2 .learn-more-btn { background-color: #10b981; }
+        .card-2 .learn-more-btn:hover { background-color: #059669; }
+
+        .card-3 .learn-more-btn { background-color: #f59e0b; }
+        .card-3 .learn-more-btn:hover { background-color: #d97706; }
+
+        .card-4 .learn-more-btn { background-color: #8b5cf6; }
+        .card-4 .learn-more-btn:hover { background-color: #7c3aed; }
+        
+        /* 8. Mobile Optimizations (Updated for new sections) */
+        @media (max-width: 900px) {
+            .feature-container {
+                flex-direction: column;
+            }
+            .feature-image-box {
+                width: 100%;
+                max-height: 300px;
+                min-height: 250px;
+            }
+            .feature-image {
+                min-height: unset;
+            }
+            .feature-content {
+                padding: 40px;
+            }
+            .feature-content h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-section {
+                padding: 50px 15px;
+            }
+            .header-content .title {
+                font-size: 32px;
+            }
+            .header-content .subtitle {
+                font-size: 16px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-content {
+                padding: 25px 20px;
+            }
+            /* Mobile adjustments for Hero */
+            .hero-content h1 {
+                font-size: 40px;
+            }
+            .hero-content p {
+                font-size: 18px;
+            }
+            .feature-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
-<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; color:#333; background-color:#f9f9f9;">
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; overflow-x: hidden;">
     <!-- Top Bar with Social and Search -->
     <div style="background-color: #1a2a3a; color: white; padding: 12px 0;">
         <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
             <!-- Main Container -->
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
-                <!-- Social Icons -->
-                 <div style="display: flex; gap: 12px; align-items: center; order: 1; flex-shrink: 0;">
-                    <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://twitter.com/@hitaishitrained" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/hitaishitrainings" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
+               
                 
                 <!-- Search Box - Fixed -->
-                <!-- <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
-                    <div style="display: flex; position: relative; width: 100%;">
-                        <input type="text" placeholder="Search courses..." style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;">
-                        <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;">
-                            <i class="fas fa-search"></i>
+                  <div style="position: relative; flex-grow: 1; min-width: 200px; max-width: 400px; margin: 0 15px; order: 2;">
+                    <form id="searchForm" style="display: flex; position: relative; width: 100%;">
+                        <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search trainers or courses..."
+                        style="padding: 8px 15px; padding-right: 40px; border: none; border-radius: 20px; width: 100%; font-size: 14px; box-sizing: border-box;"
+                        required
+                        />
+                        <button
+                        type="submit"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #1a2a3a; cursor: pointer; padding: 5px;"
+                        >
+                        <i class="fas fa-search"></i>
                         </button>
-                    </div>
-                </div> -->
+                    </form>
+                 </div>
+
+                    <script>
+                    document.getElementById("searchForm").addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const keyword = document.getElementById("searchInput").value.trim();
+                    if (!keyword) {
+                        alert("Please enter a search keyword.");
+                        return;
+                    }
+                    // Redirect to results page with keyword as a query parameter
+                    window.location.href = `search-results.html?keyword=${encodeURIComponent(keyword)}`;
+                    });
+                    </script>
+
+
 
                 <!-- Contact Info - Fixed -->
-                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 3; flex-shrink: 0;">
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap; order: 1; flex-shrink: 0;">
                     <!-- Call Link -->
                     <a href="tel:+918790170525" style="display: flex; align-items: center; color: white; text-decoration: none; gap: 5px; white-space: nowrap; font-size: 14px;">
                         <i class="fas fa-phone-alt" style="font-size: 14px;"></i>
@@ -62,7 +430,7 @@
                     <!-- Username (appears after login) -->
                     <span id="header-username" style="color: white; font-size: 14px;"></span>
 
-                    <!-- Login Icon -->
+                    <!-- Student Login Icon -->
                     <a href="login.html" id="login-link" style="text-decoration: none;">
                         <button style="display: flex; align-items: center; padding: 0; background: none; border: none; cursor: pointer;">
                         <svg style="width: 26px; height: 26px; fill: white;" viewBox="0 0 24 24">
@@ -71,14 +439,207 @@
                         </button>
                     </a>
 
-                    <!-- Logout Button (hidden by default) -->
-                    <button id="logout-button" style="display: none; background-color: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
-                        Logout
-                    </button>
+                    <!-- Trainer Login -->
+                    <a href="trainerlogin.html" id="trainer-login-link" style="text-decoration: none;">
+                        <button style="background-color: #007BFF; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        Login
+                        </button>
+                    </a>
+
+                    <!-- Profile Image (hidden until login) -->
+                    <div id="profile-dropdown" style="position: relative; display: none;">
+                        <img id="header-userimage" src="" 
+                            style="display:none; width:35px; height:35px; border-radius:50%; cursor:pointer;" />
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" style="display:none; position:absolute; top:45px; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-width:160px; z-index:1001;">
+                        <a href="profile.html" style="display:block; padding:10px; text-decoration:none; color:#333;">👤 Profile</a>
+                        <!-- Dynamic dashboard link -->
+                        <a id="dashboard-link" href="#" style="display:block; padding:10px; text-decoration:none; color:#333;">📊 Dashboard</a>
+                        <a href="#" id="logout-link" style="display:block; padding:10px; text-decoration:none; color:#e74c3c;">🚪 Logout</a>
+                        </div>
                     </div>
 
+                    </div>
+
+                    <script>
+                    // Fix dashboard link based on login type
+                    const dashboardLink = document.getElementById("dashboard-link");
+                    const student = JSON.parse(localStorage.getItem("loggedInUser"));
+                    const trainer = JSON.parse(localStorage.getItem("trainerUser"));
+
+                    if (dashboardLink) {
+                        if (student) {
+                        dashboardLink.href = "studentdashboard.html"; // 👈 student dashboard
+                        } else if (trainer) {
+                        dashboardLink.href = "trainerdashboard.html"; // 👈 trainer dashboard
+                        } else {
+                        dashboardLink.href = "#"; // no login
+                        }
+                    }
+                    </script>
+
+
+                    <script>
+                    // Toggle dropdown on profile image click
+                    const userImg = document.getElementById("header-userimage");
+                    const dropdownMenu = document.getElementById("dropdown-menu");
+                    if (userImg && dropdownMenu) {
+                        userImg.addEventListener("click", () => {
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                        });
+
+                        // Close when clicking outside
+                        document.addEventListener("click", (e) => {
+                        if (!userImg.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                            dropdownMenu.style.display = "none";
+                        }
+                        });
+                    }
+                    </script>
+
+                <!-- Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                    <style>
+                    .language-container {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #f8f9fa;
+                        border: 1px solid #ddd;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    }
+
+                    .language-container:hover {
+                        background: #e9ecef;
+                        border-color: #bbb;
+                    }
+
+                    .language-container i {
+                        font-size: 18px;
+                        color: #007bff;
+                    }
+
+                    #languageSwitcher {
+                        border: none;
+                        background: transparent;
+                        font-size: 16px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    #languageSwitcher option {
+                        font-size: 14px;
+                        padding: 6px;
+                    }
+                    </style>
+
+                    <!-- Language Selector -->
+                    <div class="language-container">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSwitcher">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="mr">मराठी</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="ur">اردو</option>
+                    </select>
+                    </div>
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                        new google.translate.TranslateElement(
+                            { pageLanguage: 'en' },
+                            'google_translate_element'
+                        );
+                        }
+
+                        // Function to trigger translation
+                        function translatePage(lang) {
+                        var selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            selectField.value = lang;
+                            selectField.dispatchEvent(new Event("change"));
+                        } else {
+                            setTimeout(() => translatePage(lang), 500); // retry until loaded
+                        }
+                        }
+
+                        // Handle dropdown change
+                        document.getElementById("languageSwitcher").addEventListener("change", function() {
+                        translatePage(this.value);
+                        });
+
+                        // Auto-detect country and set default language
+                        async function setDefaultLanguage() {
+                        try {
+                            let res = await fetch("https://ipapi.co/json/");
+                            let data = await res.json();
+                            console.log("Detected country:", data.country_name, "Language:", data.languages);
+
+                            let userLang = (data.languages || navigator.language || "en").split(",")[0].split("-")[0];
+
+                            if (document.querySelector(`#languageSwitcher option[value='${userLang}']`)) {
+                            document.getElementById("languageSwitcher").value = userLang;
+                            translatePage(userLang);
+                            }
+                        } catch (e) {
+                            console.error("Geo API error:", e);
+                        }
+                        }
+
+                        // Run auto-detect after Google Translate loads
+                        window.onload = () => {
+                        setTimeout(setDefaultLanguage, 1500);
+                        };
+                    </script>
+
+                    <!-- Load Google Translate Script -->
+                    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                 </div>
+                 <!-- Social Icons -->
+                <div style="display: flex; gap: 12px; align-items:center; order: 3; flex-shrink: 0;margin-left: auto;">
+ <a href="https://www.facebook.com/hitaishitrainings" target="_blank"
+     style="color: white; background:#3b5998; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/@hitaishitrained" target="_blank"
+     style="color:white; background:#1DA1F2; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#0077B5; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://www.instagram.com/hitaishitrainings" target="_blank"
+     style="color:white; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.youtube.com/hitaishitrainings" target="_blank"
+     style="color:white; background:#FF0000; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px; transition:0.3s;">
+    <i class="fab fa-youtube"></i>
+  </a>
+                </div>
+
             </div>
+            
         </div>
     </div>
 
@@ -134,7 +695,7 @@
                     </div>
                 </a>
             </div>
-            
+
             <div style="display: flex; align-items: center;">
                 <div id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 24px; color: white; margin-left: 15px;">
                     ☰
@@ -144,8 +705,19 @@
                         <li style="position: relative; margin-left: 20px;">
                             <a href="index.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Home</a>
                         </li>
-                        
                         <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="projects.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Projects<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="javawebprojects.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Web Applications</a>
+                                <a href="javaieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java IEEE Projects</a>
+                                <a href="pythonieee.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Python IEEE Projects</a>
+                                <a href="ai&ds.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">AI & DataScience Projects</a>
+                            </div>
+                        </li>
+                        
+                        <!-- <li class="dropdown" style="position: relative; margin-left: 0px;">
                             <a href="about_us.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
                                 About Us <span style="font-size: 12px; margin-left: 5px;">▾</span>
                             </a>
@@ -154,27 +726,49 @@
                                 <a href="about_us.html#team" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Our Team</a>
                                 <a href="about_us.html#success" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Success Stories</a>
                             </div>
-                        </li>
-                        
+                        </li> -->
                         <li class="dropdown" style="position: relative; margin-left: 0px;">
                             <a href="services.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
-                                Services <span style="font-size: 12px; margin-left: 5px;">▾</span>
+                                Services<span style="font-size: 12px; margin-left: 5px;">▾</span>
                             </a>
                             <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
-                                <a href="services.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
-                                <a href="services.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
-                                <a href="services.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
-                                <a href="services.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="resume_preparation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Resume Preparation</a>
+                                <a href="job_assistance.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Job Assistance/Job Guarantee</a>
+                                <a href="interview_qa.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Interview Preparation</a>
+                                <a href="careersupport.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Career Support</a>
+
                             </div>
                         </li>
                         
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="trainings.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainings<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                                <a href="trainings.html#classroom_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Classroom Training</a>
+                                <a href="trainings.html#online_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Online Training</a>
+                                <a href="trainings.html#corporate_training" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Corporate Training</a>
+                                <a href="trainings.html#project_support" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Project Support</a>
+                                <a href="" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">WeekEnd Training</a>
+                            </div>
+                        </li>
+                        <li class="dropdown" style="position: relative; margin-left: 0px;">
+                            <a href="nonprofit.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Non-Profit<span style="font-size: 12px; margin-left: 5px;">▾</span>
+                            </a>
+                            <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                               <a href="hprigister.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Register/Login</a>
+                                <a href="poorstudentstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Poor Students Training</a>
+                                <a href="adultstraining.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Adult Training</a>
+                                <a href="donation.html" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Donate For Training</a>
+                        </li>
                         <li style="position: relative; margin-left: 0px;">
                             <a href="software_tools.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Software Tools</a>
                         </li>
                         
                         <li  style="position: relative; margin-left: 0px;">
-                            <a href="courses.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
-                                Trainings <span style="font-size: 12px; margin-left: 5px;"></span>
+                            <a href="trainers.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">
+                                Trainers <span style="font-size: 12px; margin-left: 5px;"></span>
                             </a>
                             <!-- <div class="dropdown-menu" style="position: absolute; top: 100%; left: 0; background-color: #2c3e50; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; display: none;">
                                 <a href="trainings.html#java" style="color: white; padding: 12px 16px; text-decoration: none; display: block;">Java Training</a>
@@ -184,7 +778,7 @@
                             </div> -->
                         </li>
                         <li style="position: relative; margin-left: 0px;">
-                            <a href="" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">AI agent</a>
+                            <a href="coursefilter.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Courses</a>
                         </li>
                         <li style="position: relative; margin-left: 0px;">
                             <a href="overseas_education.html" style="color: white; text-decoration: none; padding: 10px 15px; display: block; font-weight: 500; transition: all 0.3s;">Overseas Education</a>
@@ -290,7 +884,7 @@
                 <div style="display: flex; gap: 20px; padding: 5px 0;">
                     <a href="resume_preparation.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Resume Prep</a>
                     <a href="interview_qa.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Interview Q&A</a>
-                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance</a>
+                    <a href="job_assistance.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Job Assistance/Job Guarantee</a>
                     <a href="certifications.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Certification</a>
                     <a href="corporate_plans.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Corporate Plans</a>
                     <a href="plans&pricing.html" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; transition: all 0.3s; white-space: nowrap;">Plans & Pricing</a>
@@ -298,638 +892,313 @@
             </div>
         </div>
 <!---------------------------------------------------------END OF THE HEADER--------------------------------------------------------- -->
-    
-    <!-- Hero Section -->
-    <section style="background: linear-gradient(135deg, #2b5876, #4e4376); color:white; padding:6rem 1rem; text-align:center; position:relative; overflow:hidden;">
-        <div style="max-width:1200px; margin:0 auto; position:relative; z-index:2;">
-            <h1 style="font-size:3rem; margin-bottom:1.5rem; animation:fadeInDown 1s ease-out;">Unlock Your Potential</h1>
-            <p style="font-size:1.3rem; max-width:800px; margin:0 auto 2rem; opacity:0; animation:fadeIn 1s ease-out 0.5s forwards;">Premium training solutions designed to accelerate your career and business growth 🚀</p>
-            <a href="#services" style="display:inline-block; padding:1rem 2rem; background-color:#f39c12; color:white; text-decoration:none; border-radius:50px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; animation:pulse 2s infinite;">Explore Services</a>
-        </div>
-        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg=='); opacity:0.3;"></div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services" style="padding:0rem 1rem; background-color:white;">
-        <div style="max-width:90%; margin:0 auto;">
-            <div style="text-align:center; margin-bottom:1rem;">
-                <h2 style="font-size:2.5rem; color:#2c3e50; margin-bottom:1rem; position:relative; display:inline-block;">
-                    <span style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:4px; background:linear-gradient(90deg, #f39c12, #e74c3c);"></span>
-                    Our Training Services
-                </h2>
-                <p style="font-size:1.1rem; color:#7f8c8d; max-width:700px; margin:0 auto;">Comprehensive learning solutions tailored to your needs 💡</p>
-            </div>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; margin-top:3rem;">
-                <!-- Classroom Training -->
-                <div style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
-                    <div style="height:200px; background:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80') center/cover; position:relative;">
-                        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(39, 169, 255, 0.575); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                            <i class="fas fa-chalkboard-teacher" style="font-size:3rem; color:white; margin-bottom:1rem;"></i>
-                            <h3 style="margin:0; color:white; font-size:1.6rem;">Classroom Training</h3>
-                        </div>
-                    </div>
-                    <div style="padding:1.5rem;">
-                        <p style="color:#7f8c8d;">Immersive in-person learning experience with industry experts 👨‍🏫</p>
-                        <ul style="padding-left:20px; margin-bottom:1.5rem; color:#34495e;">
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Hands-on practical sessions
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Personalized attention
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Networking opportunities
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Structured environment
-                            </li>
-                        </ul>
-                        <a href="#classroom_training" style="display:inline-block; padding:0.7rem 1.5rem; background:linear-gradient(90deg, #3498db, #2980b9); color:white; text-decoration:none; border-radius:50px; font-weight:500; transition:all 0.3s ease; text-align:center;">Explore Program <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
-                    </div>
-                </div>
-
-                <!-- Online Training -->
-                <div style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
-                    <div style="height:200px; background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80') center/cover; position:relative;">
-                        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(250, 104, 255, 0.459); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                            <i class="fas fa-laptop-code" style="font-size:3rem; color:white; margin-bottom:1rem;"></i>
-                            <h3 style="margin:0; color:white; font-size:1.6rem;">Online Training</h3>
-                        </div>
-                    </div>
-                    <div style="padding:1.5rem;">
-                        <p style="color:#7f8c8d;">Flexible learning from anywhere with our virtual classrooms 💻</p>
-                        <ul style="padding-left:20px; margin-bottom:1.5rem; color:#34495e;">
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Live instructor-led sessions
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Recorded lectures
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Interactive virtual labs
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> 24/7 learning access
-                            </li>
-                        </ul>
-                        <a href="#online_training" style="display:inline-block; padding:0.7rem 1.5rem; background:linear-gradient(90deg, #8b148b, #c0392b); color:white; text-decoration:none; border-radius:50px; font-weight:500; transition:all 0.3s ease; text-align:center;">Explore Program <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
-                    </div>
-                </div>
-
-                <!-- Corporate Training -->
-                <div style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
-                    <div style="height:200px; background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80') center/cover; position:relative;">
-                        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(10, 238, 105, 0.61); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                            <i class="fas fa-briefcase" style="font-size:3rem; color:white; margin-bottom:1rem;"></i>
-                            <h3 style="margin:0; color:white; font-size:1.6rem;">Corporate Training</h3>
-                        </div>
-                    </div>
-                    <div style="padding:1.5rem;">
-                        <p style="color:#7f8c8d;">Customized solutions for your organization's growth 📈</p>
-                        <ul style="padding-left:20px; margin-bottom:1.5rem; color:#34495e;">
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Needs assessment
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Custom curriculum
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Flexible delivery
-                            </li>
-                            <li style="margin-bottom:0.8rem; position:relative; padding-left:25px;">
-                                <span style="position:absolute; left:0; color:#2ecc71;">✓</span> Ongoing support
-                            </li>
-                        </ul>
-                        <a href="services.html#corporate_training" style="display:inline-block; padding:0.7rem 1.5rem; background:linear-gradient(90deg, #2ecc71, #27ae60); color:white; text-decoration:none; border-radius:50px; font-weight:500; transition:all 0.3s ease; text-align:center;">Explore Program <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Classroom Training Section -->
-    <section id="classroom_training" style="padding: 1rem 1rem; background-color: #f8f9fa; border-bottom: 1px solid #e0e0e0;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3rem;">
-        <div style="flex: 1; min-width: 300px;">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Classroom Training" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        </div>
-        <div style="flex: 1; min-width: 300px;">
-            <h2 style="font-size: 2.3rem; color: #2c3e50; margin-bottom: 1.5rem;">
-            <i class="fas fa-chalkboard-teacher" style="color: #3498db; margin-right: 10px;"></i>
-            Classroom Training
-            </h2>
-            <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 1.5rem;">
-            Immerse yourself in our state-of-the-art training facilities with face-to-face instruction from industry experts. 
-            Perfect for those who thrive in interactive, structured learning environments. 👨‍🏫
+    <!-- HERO SECTION (NEW) -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Your Future Starts Now</h1>
+            <p>
+                Unlock unprecedented career opportunities with our expert guidance and proven placement strategies.
             </p>
-            
-            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-            <h3 style="color: #3498db; margin-top: 0; font-size: 1.3rem;">
-                <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
-                Key Features
-            </h3>
-            <ul style="padding-left: 20px; color: #34495e;">
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> <strong>Hands-on labs:</strong> Real equipment and software for practical experience
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> <strong>Networking opportunities:</strong> Connect with peers and instructors
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> <strong>Structured schedule:</strong> Fixed timings for disciplined learning
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> <strong>Immediate feedback:</strong> Get questions answered in real-time
-                </li>
-            </ul>
-            </div>
-            
-            <a href="enroll.html" style="display: inline-block; padding: 0.8rem 1.8rem; background: linear-gradient(90deg, #3498db, #2980b9); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;">
-            <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> View Upcoming Batches
-            </a>
-        </div>
-        </div>
-    </div>
-    </section>
-    <!-- Online Training Section -->
-    <section id="online_training" style="padding: 1rem 1rem; background-color: white; border-bottom: 1px solid #e0e0e0;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        <div style="display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 3rem;">
-        <div style="flex: 1; min-width: 300px;">
-            <h2 style="font-size: 2.3rem; color: #2c3e50; margin-bottom: 1.5rem;">
-            <i class="fas fa-laptop-code" style="color: #e74c3c; margin-right: 10px;"></i>
-            Online Training
-            </h2>
-            <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 1.5rem;">
-            Learn anytime, anywhere with our flexible virtual training programs. 
-            Perfect for working professionals and remote learners who need quality education on their schedule. 🌐
-            </p>
-            
-            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #e74c3c;">
-            <h3 style="color: #e74c3c; margin-top: 0; font-size: 1.3rem;">
-                <i class="fas fa-star" style="margin-right: 8px;"></i>
-                Program Highlights
-            </h3>
-            <ul style="padding-left: 20px; color: #34495e;">
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> <strong>Live sessions:</strong> Interactive classes with Q&A
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> <strong>Recorded lectures:</strong> Access materials 24/7
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> <strong>Virtual labs:</strong> Cloud-based practice environments
-                </li>
-                <li style="margin-bottom: 0.8rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> <strong>Discussion forums:</strong> Connect with global peers
-                </li>
-            </ul>
-            </div>
-            
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <!-- <a href="https://youtube.com/hitaishitrainings" style="display: inline-block; padding: 0.8rem 1.8rem; background: linear-gradient(90deg, #e74c3c, #c0392b); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;">
-                <i class="fas fa-play-circle" style="margin-right: 8px;"></i> Demo Session
+            <!-- <a href="#services" class="hero-btn">
+                Explore All Services
             </a> -->
-            <a href="enroll.html" style="display: inline-block; padding: 0.8rem 1.8rem; background: white; color: #e74c3c; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; border: 2px solid #e74c3c;">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i> Course Details
-            </a>
-            </div>
         </div>
-        <div style="flex: 1; min-width: 300px;">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Online Training" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        </div>
-        </div>
-    </div>
-    </section>
-    <!-- Corporate Training Section -->
-    <section id="corporate_training" style="padding: 1rem 1rem; background-color: #f8f9fa;">
-    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h2 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 1rem;">
-        <i class="fas fa-briefcase" style="color: #2ecc71; margin-right: 10px;"></i>
-        Corporate Training Solutions
-        </h2>
-        <p style="font-size: 1.1rem; color: #7f8c8d; max-width: 800px; margin: 0 auto 3rem;">
-        Customized training programs designed to upskill your workforce and drive organizational growth 📈
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-        <!-- Onsite Training -->
-        <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-            <i class="fas fa-building" style="font-size: 1.5rem; color: white;"></i>
-            </div>
-            <h3 style="color: #2c3e50; margin-top: 0;">Onsite Training</h3>
-            <p style="color: #7f8c8d;">
-            We bring the training to your location with customized content tailored to your business needs.
-            </p>
-            <ul style="padding-left: 20px; color: #34495e; text-align: left;">
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> Minimum 10 participants
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> Flexible scheduling
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #3498db;">•</span> Company-specific case studies
-            </li>
-            </ul>
-        </div>
-        
-        <!-- Virtual Corporate -->
-        <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-            <i class="fas fa-video" style="font-size: 1.5rem; color: white;"></i>
-            </div>
-            <h3 style="color: #2c3e50; margin-top: 0;">Virtual Corporate</h3>
-            <p style="color: #7f8c8d;">
-            Remote training solutions for distributed teams with enterprise-grade platforms.
-            </p>
-            <ul style="padding-left: 20px; color: #34495e; text-align: left;">
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Secure LMS access
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Dedicated success manager
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Progress tracking
-            </li>
-            </ul>
-        </div>
-        
-        <!-- Custom Development -->
-        <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-            <i class="fas fa-cogs" style="font-size: 1.5rem; color: white;"></i>
-            </div>
-            <h3 style="color: #2c3e50; margin-top: 0;">Custom Development</h3>
-            <p style="color: #7f8c8d;">
-            Bespoke training programs built from scratch for your unique requirements.
-            </p>
-            <ul style="padding-left: 20px; color: #34495e; text-align: left;">
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #2ecc71;">•</span> Needs assessment
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #2ecc71;">•</span> Content creation
-            </li>
-            <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                <span style="position: absolute; left: 0; color: #2ecc71;">•</span> Ongoing maintenance
-            </li>
-            </ul>
-        </div>
-        </div>
-        
-        <a href="enroll.html" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(90deg, #2ecc71, #27ae60); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);">
-        <i class="fas fa-envelope-open-text" style="margin-right: 10px;"></i> Request Corporate Proposal
-        </a>
-    </div>
     </section>
 
-    <!-- Mobile Responsiveness -->
-    <style>
-    @media (max-width: 768px) {
-        section { padding: 3rem 1rem !important; }
-        .flex-container { flex-direction: column !important; }
-        h2 { font-size: 2rem !important; }
-        .grid-container { grid-template-columns: 1fr !important; }
-        .cta-button { width: 100%; text-align: center; }
-    }
-    </style>
-
-    <!-- Features Section -->
-    <section style="padding:1rem 1rem; background:linear-gradient(135deg, #f5f7fa, #e4e8eb);">
-        <div style="max-width:1200px; margin:0 auto;">
-            <div style="text-align:center; margin-bottom:2rem;">
-                <h2 style="font-size:2rem; color:#2c3e50; margin-bottom:1rem;">Why Choose Hitaishi Trainings? 🌟</h2>
-                <p style="font-size:1.1rem; color:#7f8c8d; max-width:700px; margin:0 auto;">We're committed to delivering exceptional learning experiences</p>
+    <!-- FEATURE SECTION: Side Image & Content (NEW) -->
+    <section class="feature-section">
+        <div class="feature-container">
+            <div class="feature-image-box">
+                <!-- Image for the feature section -->
+                <img src="img/personalizedconsulting.png" 
+                     alt="Dedicated Career Consulting" 
+                     class="feature-image">
             </div>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:2rem;">
-                <div style="background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; transition:all 0.3s ease;">
-                    <div style="width:80px; height:80px; background:linear-gradient(135deg, #3498db, #2980b9); border-radius:50%; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem;">
-                        <i class="fas fa-user-tie" style="font-size:2rem; color:white;"></i>
-                    </div>
-                    <h3 style="color:#2c3e50; margin-top:0;">Expert Instructors</h3>
-                    <p style="color:#7f8c8d;">Learn from industry veterans with 10+ years of real-world experience 👨‍💼</p>
-                </div>
-
-                <div style="background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; transition:all 0.3s ease;">
-                    <div style="width:80px; height:80px; background:linear-gradient(135deg, #e74c3c, #c0392b); border-radius:50%; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem;">
-                        <i class="fas fa-project-diagram" style="font-size:2rem; color:white;"></i>
-                    </div>
-                    <h3 style="color:#2c3e50; margin-top:0;">Practical Projects</h3>
-                    <p style="color:#7f8c8d;">Hands-on projects that mirror real workplace scenarios 🛠️</p>
-                </div>
-
-                <div style="background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; transition:all 0.3s ease;">
-                    <div style="width:80px; height:80px; background:linear-gradient(135deg, #2ecc71, #27ae60); border-radius:50%; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem;">
-                        <i class="fas fa-certificate" style="font-size:2rem; color:white;"></i>
-                    </div>
-                    <h3 style="color:#2c3e50; margin-top:0;">Certification</h3>
-                    <p style="color:#7f8c8d;">Industry-recognized certificates to boost your resume 📜</p>
-                </div>
-
-                <div style="background:white; padding:2rem; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; transition:all 0.3s ease;">
-                    <div style="width:80px; height:80px; background:linear-gradient(135deg, #9b59b6, #8e44ad); border-radius:50%; display:flex; justify-content:center; align-items:center; margin:0 auto 1.5rem;">
-                        <i class="fas fa-headset" style="font-size:2rem; color:white;"></i>
-                    </div>
-                    <h3 style="color:#2c3e50; margin-top:0;">Lifetime Support</h3>
-                    <p style="color:#7f8c8d;">Continued mentorship even after course completion 🤝</p>
-                </div>
+            <div class="feature-content">
+                <h2>Why Choose Our Personalized Consulting?</h2>
+                <p>
+                    We don't just offer services; we offer a partnership. Our consulting model is built on continuous feedback, skill refinement, and market knowledge to ensure you stay ahead of the curve.
+                </p>
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-check-circle"></i> 
+                        <div>**Dedicated 1-on-1 Mentorship:** Work directly with an industry veteran throughout your job search.</div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <div>**Market Intelligence:** Get real-time data on in-demand skills and high-growth roles in your sector.</div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <div>**24/7 Application Support:** Quick reviews of urgent applications and interview prep assistance.</div>
+                    </li>
+                </ul>
+                <a href="contact_us.html" class="feature-btn">
+                    Schedule a Free Consultation
+                </a>
             </div>
         </div>
     </section>
-    <!-- Project Support Section -->
-        <section id="project_support" style="padding: 1rem 1rem; background-color: #f8f9fa;">
-        <div style="max-width: 90%; margin: 0 auto;">
+
+
+    <!-- SERVICES SHOWCASE (EXISTING, MOVED DOWN) -->
+    <section class="services-section" id="services">
+        <div class="container">
+            
             <!-- Section Header -->
-            <div style="text-align: center; margin-bottom: 1rem;">
-            <h2 style="font-size: 2rem; color: #2c3e50; margin-bottom: 1rem;">
-                <i class="fas fa-project-diagram" style="color: #9b59b6; margin-right: 10px;"></i>
-                Project Support Services
-            </h2>
-            <p style="font-size: 1.1rem; color: #7f8c8d; max-width: 700px; margin: 0 auto;">
-                From concept to completion - we provide end-to-end guidance for your academic and professional projects 🛠️
-            </p>
+            <div class="header-content">
+                <h2 class="title">
+                    Accelerate Your Career Journey
+                </h2>
+                <p class="subtitle">
+                    We offer tailored, data-driven services designed to transition you into your dream role faster and secure your long-term professional growth.
+                </p>
             </div>
 
             <!-- Services Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
-            <!-- Project Planning -->
-            <div style="background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
-                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-                <i class="fas fa-map-marked-alt" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="color: #2c3e50; margin-top: 0;">Project Planning</h3>
-                <p style="color: #7f8c8d;">
-                Strategic roadmap development with milestones and deliverables to keep your project on track 📅
-                </p>
-                <ul style="padding-left: 20px; color: #34495e;">
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #3498db;">•</span> Scope definition
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #3498db;">•</span> Timeline creation
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #3498db;">•</span> Resource allocation
-                </li>
-                </ul>
-            </div>
-
-            <!-- Implementation Support -->
-            <div style="background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
-                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-                <i class="fas fa-code" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="color: #2c3e50; margin-top: 0;">Implementation Support</h3>
-                <p style="color: #7f8c8d;">
-                Hands-on assistance during development phase with code reviews and troubleshooting 💻
-                </p>
-                <ul style="padding-left: 20px; color: #34495e;">
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Technical guidance
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Best practices
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #e74c3c;">•</span> Debugging help
-                </li>
-                </ul>
-            </div>
-
-            <!-- Documentation -->
-            <div style="background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
-                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
-                <i class="fas fa-file-alt" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="color: #2c3e50; margin-top: 0;">Documentation</h3>
-                <p style="color: #7f8c8d;">
-                Professional documentation services including technical writing and formatting 📄
-                </p>
-                <ul style="padding-left: 20px; color: #34495e;">
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #2ecc71;">•</span> Technical manuals
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #2ecc71;">•</span> User guides
-                </li>
-                <li style="margin-bottom: 0.5rem; position: relative; padding-left: 25px;">
-                    <span style="position: absolute; left: 0; color: #2ecc71;">•</span> API documentation
-                </li>
-                </ul>
-            </div>
-            </div>
-
-            <!-- CTA Card -->
-            <!-- <div style="background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 12px; padding: 2.5rem; margin-top: 3rem; color: white; text-align: center; box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);">
-            <h3 style="font-size: 1.8rem; margin-top: 0; margin-bottom: 1rem;">
-                Need Expert Project Assistance?
-            </h3>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
-                Our specialists are ready to help you succeed with your current project
-            </p>
-            <a href="#" style="display: inline-block; padding: 0.8rem 2rem; background: white; color: #9b59b6; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;">
-                <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Request Support
-            </a>
-            </div>
-        </div> -->
-
-        <!-- Mobile Responsiveness -->
-        <style>
-            @media (max-width: 768px) {
-            section { padding: 3rem 1rem !important; }
-            h2 { font-size: 2rem !important; }
-            .services-grid { grid-template-columns: 1fr !important; }
-            .cta-card { padding: 1.5rem !important; }
-            }
-        </style>
-        </section>
-
-    <!-- Testimonials Section -->
-    <section style="padding:1rem 1rem; background-color:white;">
-        <div style="max-width:90%; margin:0 auto;">
-            <div style="text-align:center; margin-bottom:1rem;">
-                <h2 style="font-size:2rem; color:#2c3e50; margin-bottom:1rem;">What Our Students Say 💬</h2>
-                <p style="font-size:1rem; color:#7f8c8d; max-width:700px; margin:0 auto;">Hear from professionals who transformed their careers with us</p>
-            </div>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
-                <div style="background:#f9f9f9; padding:2rem; border-radius:10px; position:relative;">
-                    <div style="position:absolute; top:20px; right:20px; color:#f39c12; font-size:1.5rem;">
-                        <i class="fas fa-quote-right"></i>
+            <div class="services-grid">
+                
+                <!-- Card 1: Resume Preparation -->
+                <div class="service-card card-1">
+                    <div class="accent-bar"></div>
+                    <div class="card-image-wrapper">
+                        <img src="img/resume.png" 
+                             alt="Resume Preparation" 
+                             onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2016/11/29/03/53/resume-1868753_1280.jpg';"
+                             class="card-image">
                     </div>
-                    <p style="color:#34495e; font-style:italic; margin-bottom:1.5rem;">"The corporate training program completely transformed our team's skillset. We saw a 40% productivity increase within 3 months!"</p>
-                    <div style="display:flex; align-items:center;">
-                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" style="width:50px; height:50px; border-radius:50%; object-fit:cover; margin-right:1rem;">
-                        <div>
-                            <h4 style="margin:0; color:#2c3e50;">Sarah Johnson</h4>
-                            <p style="margin:0; color:#7f8c8d; font-size:0.9rem;">HR Director, TechSolutions Inc.</p>
-                        </div>
+                    <div class="card-content">
+                        <i class="fa-solid fa-file-pen card-icon"></i>
+                        <h3>Resume & Cover Letter Mastery</h3>
+                        <p>
+                            Don't let the Applicant Tracking System (ATS) reject you! Our experts craft **powerful, keyword-optimized resumes** and compelling cover letters that highlight measurable achievements, ensuring your application gets seen by human recruiters. Includes one round of revisions and a LinkedIn profile optimization guide.
+                        </p>
+                        <a href="resume_preparation.html" class="learn-more-btn">
+                            View Packages
+                        </a>
                     </div>
                 </div>
 
-                <div style="background:#f9f9f9; padding:2rem; border-radius:10px; position:relative;">
-                    <div style="position:absolute; top:20px; right:20px; color:#f39c12; font-size:1.5rem;">
-                        <i class="fas fa-quote-right"></i>
+                <!-- Card 2: Job Assistance / Job Guarantee -->
+                <div class="service-card card-2">
+                    <div class="accent-bar"></div>
+                    <div class="card-image-wrapper">
+                        <img src="img/jobguarentee.png" 
+                             alt="Job Guarantee" 
+                             onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2017/01/10/19/05/job-1968278_1280.jpg';"
+                             class="card-image">
                     </div>
-                    <p style="color:#34495e; font-style:italic; margin-bottom:1.5rem;">"The hands-on approach in classroom training helped me secure a promotion within 2 months of completing the course."</p>
-                    <div style="display:flex; align-items:center;">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" style="width:50px; height:50px; border-radius:50%; object-fit:cover; margin-right:1rem;">
-                        <div>
-                            <h4 style="margin:0; color:#2c3e50;">Michael Chen</h4>
-                            <p style="margin:0; color:#7f8c8d; font-size:0.9rem;">Senior Developer, DataSystems</p>
-                        </div>
+                    <div class="card-content">
+                        <i class="fa-solid fa-briefcase card-icon"></i>
+                        <h3>Guaranteed Placement Program</h3>
+                        <p>
+                            Access our exclusive network of hiring partners for expedited job interviews. This program includes dedicated support, application tracking, and networking introductions. **Commitment:** We stand by our service. <span class="highlight-text">If we cannot secure you a placement within 6 months, we refund 80% of your service fee.</span>
+                        </p>
+                        <a href="job_assistance.html" class="learn-more-btn">
+                            Get Placed Now
+                        </a>
                     </div>
                 </div>
 
-                <div style="background:#f9f9f9; padding:2rem; border-radius:10px; position:relative;">
-                    <div style="position:absolute; top:20px; right:20px; color:#f39c12; font-size:1.5rem;">
-                        <i class="fas fa-quote-right"></i>
+                <!-- Card 3: Interview Preparation -->
+                <div class="service-card card-3">
+                    <div class="accent-bar"></div>
+                    <div class="card-image-wrapper">
+                        <img src="img/interview.png" 
+                             alt="Interview Preparation" 
+                             onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2015/01/08/18/26/startup-593324_1280.jpg';"
+                             class="card-image">
                     </div>
-                    <p style="color:#34495e; font-style:italic; margin-bottom:1.5rem;">"The flexibility of online training allowed me to upskill while working full-time. The virtual labs were incredibly helpful."</p>
-                    <div style="display:flex; align-items:center;">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel" style="width:50px; height:50px; border-radius:50%; object-fit:cover; margin-right:1rem;">
-                        <div>
-                            <h4 style="margin:0; color:#2c3e50;">Priya Patel</h4>
-                            <p style="margin:0; color:#7f8c8d; font-size:0.9rem;">Project Manager, FinTech Global</p>
-                        </div>
+                    <div class="card-content">
+                        <i class="fa-solid fa-comments card-icon"></i>
+                        <h3>Technical & Behavioral Coaching</h3>
+                        <p>
+                            Eliminate interview anxiety. Our program features tailored mock interviews covering technical skills, STAR method behavioral questions, and salary negotiation tactics. You'll receive instant feedback and a detailed performance report after every session to focus your practice.
+                        </p>
+                        <a href="interview_qa.html" class="learn-more-btn">
+                            Book a Mock Interview
+                        </a>
                     </div>
                 </div>
+
+                <!-- Card 4: Career Support -->
+                <div class="service-card card-4">
+                    <div class="accent-bar"></div>
+                    <div class="card-image-wrapper">
+                        <img src="img/careermentorship.png" 
+                             alt="Career Support" 
+                             onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2016/11/29/08/38/adult-1868750_1280.jpg';"
+                             class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <i class="fa-solid fa-user-graduate card-icon"></i>
+                        <h3>Long-Term Career Mentorship</h3>
+                        <p>
+                            Invest in your future with continuous career support. This service includes personalized skill gap analysis, certification road-mapping, and quarterly 1-on-1 calls with a senior mentor to navigate promotions, salary reviews, and industry shifts effectively. Plan for a stable, high-growth career.
+                        </p>
+                        <a href="careersupport.html" class="learn-more-btn">
+                            Explore Mentorship
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
-    
-
-    <!-- CTA Section -->
-    <section style="padding:5rem 1rem; background:linear-gradient(135deg, #e74c3c, #c0392b); color:white; text-align:center;">
-        <div style="max-width:800px; margin:0 auto;">
-            <h2 style="font-size:2.5rem; margin-bottom:1.5rem;">Ready to Accelerate Your Career? 🚀</h2>
-            <p style="font-size:1.2rem; margin-bottom:2.5rem;">Join thousands of professionals who transformed their careers with Hitaishi Trainings</p>
-            <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-                <a href="contact_us.html" style="display:inline-block; padding:1rem 2rem; background:white; color:#e74c3c; text-decoration:none; border-radius:50px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-                    <i class="fas fa-phone-alt" style="margin-right:8px;"></i> Book a Consultation
-                </a>
-                <a href="contact_us.html" style="display:inline-block; padding:1rem 2rem; background:transparent; color:white; text-decoration:none; border-radius:50px; font-weight:600; font-size:1.1rem; transition:all 0.3s ease; border:2px solid white; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-                    <i class="fas fa-envelope" style="margin-right:8px;"></i> Contact Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mobile Responsiveness -->
-    <style>
-        @media (max-width: 768px) {
-            section { padding:3rem 1rem !important; }
-            h1 { font-size:2.2rem !important; }
-            h2 { font-size:2rem !important; }
-            .services-container { grid-template-columns:1fr !important; }
-            .features-container { grid-template-columns:1fr !important; }
-            .testimonials-container { grid-template-columns:1fr !important; }
-            .cta-buttons { flex-direction:column; align-items:center; }
-            .cta-buttons a { width:100%; margin-bottom:1rem; }
-        }
-        
-        @keyframes fadeInDown {
-            from { opacity:0; transform:translateY(-30px); }
-            to { opacity:1; transform:translateY(0); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity:0; }
-            to { opacity:1; }
-        }
-        
-        @keyframes pulse {
-            0% { transform:scale(1); }
-            50% { transform:scale(1.05); }
-            100% { transform:scale(1); }
-        }
-    </style>
     <!-- Footer -->
-<footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
-  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
-    
-    <!-- Brand Info -->
-    <div style="flex: 1 1 250px; min-width: 250px;">
-      <div style="display: flex; align-items: center; margin-bottom: 16px;">
-        <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
-        <div>
-          <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
-          <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+    <footer style="background: linear-gradient(145deg, #121d2c, #1e2e3e); color: #ecf0f1; padding: 60px 20px 20px; font-family: 'Segoe UI', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <!-- Brand Info -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="background-color: #3498db; width: 46px; height: 46px; display: flex; justify-content: center; align-items: center; color: white; font-size: 22px; font-weight: bold; border-radius: 10px; margin-right: 10px;">H</div>
+            <div>
+            <h2 style="margin: 0; font-size: 22px;">Hitaishi <span style="color: #3498db;">Trainings</span></h2>
+            <p style="margin: 0; font-size: 12px; color: #bdc3c7;">Knowledge Empowered</p>
+            </div>
         </div>
-      </div>
-      <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
-      <div style="display: flex; gap: 10px; margin-top: 12px;">
-        <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
-      </div>
+        <p style="font-size: 14px; line-height: 1.6;">Empowering your future through innovative learning, practical skills, and career-aligned training programs.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <a href="https://www.facebook.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@hitaishitrainings" target="_blank" style="width: 36px; height: 36px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1 1 160px; min-width: 160px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
+            <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
+            <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
+            <li><a href="nonprofit.html" style="color: #ecf0f1; text-decoration: none;">Non-Profit</a></li>
+            <li><a href="trainings.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
+            <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
+        </ul>
+        </div>
+
+        <!-- Explore Links -->
+        <div style="flex: 1 1 200px; min-width: 200px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+            <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
+            <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
+            <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
+            <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
+            <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
+            <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
+            <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
+            <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
+        <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
+        <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
+        <p style="margin: 0 0 10px;">📧 <a href="mailto:hitaishitrainings@gmail.com" style="color: #ecf0f1; text-decoration: none;">hitaishitrainings@gmail.com</a></p>
+        <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="flex: 1 1 250px; min-width: 250px;">
+        <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
+        <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
+        <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
+            <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </form>
+        <p id="responseMessage" style="color:#fff; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletterForm");
+            const emailInput = form.querySelector("input[type='email']");
+            const messageBox = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+                messageBox.textContent = result.message;
+                messageBox.style.color = "lightgreen";
+                form.reset();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                messageBox.textContent = "Something went wrong. Please try again later.";
+                messageBox.style.color = "red";
+            }
+            });
+        });
+        </script>
+
+
     </div>
 
-    <!-- Quick Links -->
-    <div style="flex: 1 1 160px; min-width: 160px;">
-      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Quick Links</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
-        <li><a href="home.html" style="color: #ecf0f1; text-decoration: none;">Home</a></li>
-        <li><a href="about_us.html" style="color: #ecf0f1; text-decoration: none;">About Us</a></li>
-        <li><a href="services.html" style="color: #ecf0f1; text-decoration: none;">Services</a></li>
-        <li><a href="courses.html" style="color: #ecf0f1; text-decoration: none;">Trainings</a></li>
-        <li><a href="contact_us.html" style="color: #ecf0f1; text-decoration: none;">Contact</a></li>
-      </ul>
+    <!-- Footer Bottom -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
+        © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
+        <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
+        <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
     </div>
 
-    <!-- Explore Links -->
-    <div style="flex: 1 1 200px; min-width: 200px;">
-      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Explore</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
-        <li><a href="#" style="color: #ecf0f1; text-decoration: none;">AI Agent</a></li>
-        <li><a href="software_tools.html" style="color: #ecf0f1; text-decoration: none;">Software Tools</a></li>
-        <li><a href="resume_preparation.html" style="color: #ecf0f1; text-decoration: none;">Resume Prep</a></li>
-        <li><a href="interview_qa.html" style="color: #ecf0f1; text-decoration: none;">Interview Q&A</a></li>
-        <li><a href="certifications.html" style="color: #ecf0f1; text-decoration: none;">Certification</a></li>
-        <li><a href="job_assistance.html" style="color: #ecf0f1; text-decoration: none;">Job Assistance</a></li>
-        <li><a href="corporate_plans.html" style="color: #ecf0f1; text-decoration: none;">Corporate Plans</a></li>
-        <li><a href="plans&pricing.html" style="color: #ecf0f1; text-decoration: none;">Plans & Pricing</a></li>
-      </ul>
-    </div>
+    <!-- Auto Year Script -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </footer>
 
-    <!-- Contact Details -->
-    <div style="flex: 1 1 250px; min-width: 250px;">
-      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Contact</h3>
-      <p style="margin: 0 0 10px;">📍 Plot 21, Flat 102, CVR Residency, Pragati Nagar, Hyderabad, Telangana</p>
-      <p style="margin: 0 0 10px;">📞 <a href="tel:+918790170525" style="color: #ecf0f1; text-decoration: none;">+91 87901 70525</a></p>
-      <p style="margin: 0 0 10px;">📧 <a href="mailto:info@hitaishitrainings.com" style="color: #ecf0f1; text-decoration: none;">info@hitaishitrainings.com</a></p>
-      <p style="margin: 0;">💬 <a href="https://wa.me/918790170525" target="_blank" style="color: #ecf0f1; text-decoration: none;">WhatsApp Us</a></p>
-    </div>
 
-    <!-- Newsletter -->
-    <div style="flex: 1 1 250px; min-width: 250px;">
-      <h3 style="color: #3498db; margin-bottom: 16px; font-size: 18px;">Newsletter</h3>
-      <p style="font-size: 14px;">Get updates on latest courses, tools, and job tips.</p>
-      <form style="display: flex; flex-direction: column; gap: 10px;">
-        <input type="email" placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: none; background-color: #2c3e50; color: #fff;">
-        <button style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Subscribe</button>
-      </form>
-    </div>
+    <script>
+    // Add current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 
-  </div>
-
-  <!-- Footer Bottom -->
-  <div style="text-align: center; margin-top: 40px; border-top: 1px solid #34495e; padding-top: 15px; font-size: 13px; color: #bdc3c7;">
-    © <span id="year"></span> Hitaishi Trainings. All Rights Reserved. |
-    <a href="privacy_policy.html" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> |
-    <a href="termsofservice.html" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a>
-  </div>
-
-  <!-- Auto Year Script -->
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+    <style media="screen and (max-width: 768px)">
+    /* Mobile Responsive Styles */
+    footer > div > div:first-child {
+        flex-direction: column;
+        gap: 30px !important;
+        padding-bottom: 20px !important;
+    }
+    footer h3 {
+        margin-bottom: 18px !important;
+    }
+    footer form {
+        max-width: 100% !important;
+    }
+    footer input, footer button {
+        width: 100% !important;
+    }
+    .footer-brand {
+        text-align: center;
+        justify-content: center !important;
+    }
+    .social-links {
+        justify-content: center !important;
+    }
+    </style>
 </body>
 </html>
